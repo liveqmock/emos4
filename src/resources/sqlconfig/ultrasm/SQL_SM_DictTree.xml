@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_DICT_DEP.query" >
+		<select>
+			<![CDATA[ 
+				select pid as id,pid as value,depname as text,depfullname fulltext,parentid pid from bs_t_sm_dep
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="loginname"  value="#loginname#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_DICT_USER.query" >
+		<select>
+			<![CDATA[ 
+				select loginname as id,loginname as value,fullname as text,fullname fulltext,0 pid from bs_t_sm_user
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="loginname"  value="#loginname#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_DICT_COMMONTREE.query" >
+		<select>
+			<![CDATA[ 
+				select id,id value,name as text,fullname fulltext,pid from bs_t_sm_commonTree where type = #type#
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="loginname"  value="#loginname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

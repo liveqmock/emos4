@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>孙海龙</author> 
+		<date>2010-6-24</date> 
+		<description>角色资源操作关系列表查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_RoleResOpList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ rro.pid, rro.roleid, r.rolename, rro.resid, rs.resname, rro.opid, op.opname, r.pid rolepid /*COUNT*/
+				  from bs_t_sm_role r,
+				       bs_t_sm_resource rs,
+				       bs_t_sm_operate op,
+				       bs_t_sm_roleresop rro
+				 where rro.roleid =  r.pid
+				   and rro.resid  = rs.pid
+				   and rro.opid   = op.pid
+				   and rs.status  = '1'
+				   and op.status  = '1'
+				   $customwhere$
+				   $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ r.rolename, rro.roleid, rs.resname, rro.resid, op.opname, rro.opid
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_roleName" name="rolename" />
+			<text displayname="sm_lb_resourceName" name="resname" />
+			<text displayname="sm_lb_operateName" name="opname" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="r.rolename"  value="#rolename#" />
+			<field prepend="and" operator="like"  colname="rs.resname"  value="#resname#" />
+			<field prepend="and" operator="like"  colname="op.opname"  value="#opname#" />
+			<field prepend="and" operator="leftlike" colname="r.roledns" value="#roledns#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_RoleResOpList.theRole_query" >
+		<select>
+			<![CDATA[ 
+					select /*COUNT*/ rro.pid, rro.roleid, r.rolename, rro.resid, rs.resname, rro.opid, op.opname /*COUNT*/
+					  from bs_t_sm_role r,
+					       bs_t_sm_resource rs,
+					       bs_t_sm_operate op,
+					       bs_t_sm_roleresop rro
+					 where rro.roleid =  r.pid
+					   and rro.resid  = rs.pid
+					   and rro.opid   = op.pid
+					   $customwhere$
+					 order by rro.roleid, rro.resid, rro.opid
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_resourceName" name="resname" />
+			<text displayname="sm_lb_operateName" name="opname" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="rs.resname"  value="#resname#" />
+			<field prepend="and" operator="like"  colname="op.opname"  value="#opname#" />
+			<field prepend="and" operator="=" colname="r.pid" value="#theroleid#"/>
+		</customwhere>
+	</sqlquery>
+</sql-group>

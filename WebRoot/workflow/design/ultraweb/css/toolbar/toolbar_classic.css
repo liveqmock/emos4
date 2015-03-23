@@ -1,0 +1,78 @@
+﻿.toolbar
+{
+	height:25px;
+	background-color:buttonface;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	padding:2px;
+	position:absolute;
+	z-index:90;
+	top:0px;
+	left:0px;
+}
+
+.toolbarbottom
+{
+	overflow:hidden;
+	height:2px;
+	background-color:buttonface;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+}
+
+.toolbarhand
+{
+	height:21px;
+	width:3px;
+	margin-left:1px;
+	margin-right:3px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	float:left;
+}
+
+.toolbarbutton
+{
+	height:21px;
+	width:21px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonface;
+	float:left;
+	padding:2px 2px 2px 2px;
+	margin:0px 1px 0px 1px;
+}
+.toolbarbutton_active
+{
+	height:21px;
+	width:21px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	display:inline;
+	padding:2px 2px 2px 2px;
+	margin:0px 1px 0px 1px;
+}
+.toolbarbutton_down
+{
+	height:21px;
+	width:21px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonshadow buttonhighlight buttonhighlight buttonshadow;
+	display:inline;
+	padding:3px 1px 1px 3px;
+	margin:0px 1px 0px 1px;
+}
+
+.toolbarcontainer
+{
+	-display:inline;
+	float:left;
+	margin-right:5px;
+}
+
+

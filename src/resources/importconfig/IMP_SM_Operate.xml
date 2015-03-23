@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<importxml>
+	<table name="bs_t_sm_operate" startrow="0" startcol="0" type="xml">
+		<field>
+			<fieldname>pid</fieldname>
+			<isunique>true</isunique>
+			<excelcolname>操作标识</excelcolname>
+			<datatype>1</datatype>
+			<datainfo></datainfo>
+			<datalength>20</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>opname</fieldname>
+			<isunique></isunique>
+			<excelcolname>操作名称</excelcolname>
+			<datatype>1</datatype>
+			<datainfo></datainfo>
+			<datalength>20</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>optype</fieldname>
+			<isunique></isunique>
+			<excelcolname>操作类型</excelcolname>
+			<datatype>4</datatype>
+			<datainfo>operatetype</datainfo>
+			<datalength>10</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>status</fieldname>
+			<isunique></isunique>
+			<excelcolname>状态</excelcolname>
+			<datatype>4</datatype>
+			<datainfo>status</datainfo>
+			<datalength>5</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>remark</fieldname>
+			<isunique></isunique>
+			<excelcolname>备注</excelcolname>
+			<datatype>1</datatype>
+			<datainfo></datainfo>
+			<datalength>100</datalength>
+			<isnull></isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+	</table>
+</importxml>

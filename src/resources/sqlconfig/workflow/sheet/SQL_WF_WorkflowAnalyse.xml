@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-12-21</date> 
+		<description>流程平台报表钻取报表</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_VersionUsedCount" >
+		<select>
+			<![CDATA[ 
+	 			 select
+                        /*COUNT*/ 
+                        C700000000      as baseid,              --工单编号
+                        C700000001      as baseschema,          --工单schema
+                        C700000002      as basename,            --工单名称
+                        C700000003      as basesn,              --流水号
+                        C700000018      as basedealouttime,     --处理时限
+                        C700000011      as basesummary,         --主题
+                        C700000004      as basecreatorfullname, --建单人名
+                        C700000005      as basecreatorloginName, --建单人登陆名
+                        C700000101      as basecreatorcorp,     --建单人单位
+                        C700000103      as basecreatordep,      --建单人部门
+                        C700000043      as basecategoryclasscode, --工单类别
+                        C700000042      as basecategoryclassname, --工单类别名
+                        C700000006      as basecreatedate,      --建单时间
+                        C700000009      as baseclosedate,       --关闭时间
+                        C700000010      as basestatus,          --状态名
+                        C700000008      as basefinishdate,      --完成时间
+                        C700000022      as basetplid            --模板ID
+                        /*COUNT*/
+                   from T359 base,bs_t_wf_entry workentry
+                        where  base.C710000001 (+)= workentry.id
+						       $text$
+						       and workentry.parententryid is null
+						       and base.C700000000 > '0'
+			       order by C700000006 desc
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<select displayname="wf_lb_workflowTmpl_name" name="defname"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+				<sql><![CDATA[ select code,name from bs_t_wf_version ]]></sql>
+			</select>
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+		</condition>
+		<customwhere name="text" prepend="and" >
+			<field prepend="and" operator="="  datatype="" colname="workentry.defname"  value="#defname#" />
+			<field prepend="and" operator=">="  datatype="7" colname="workentry.createtime"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="workentry.createtime"  value="#endtime#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_StepUsedCount" >
+		<select>
+			<![CDATA[ 
+	 			select
+					/*COUNT*/
+					 C700000000      as baseid, --工单编号
+					 C700000001      as baseschema, --工单schema
+					 C700000002      as basename, --工单名称
+					 C700000003      as basesn, --流水号
+					 C700000018      as basedealouttime, --处理时限
+					 C700000011      as basesummary, --主题
+					 C700000004      as basecreatorfullname, --建单人名
+					 C700000005      as basecreatorloginName, --建单人登陆名
+					 C700000101      as basecreatorcorp, --建单人单位
+					 C700000103      as basecreatordep, --建单人部门
+					 C700000043      as basecategoryclasscode, --工单类别
+					 C700000042      as basecategoryclassname, --工单类别名
+					 C700000006      as basecreatedate, --建单时间
+					 C700000009      as baseclosedate, --关闭时间
+					 C700000010      as basestatus, --状态名
+					 C700000008      as basefinishdate, --完成时间
+					 C700000022      as basetplid --模板ID
+					/*COUNT*/
+				from T359 base,
+					 (select distinct wentry.id
+					  from bs_t_wf_currentsteps step, bs_t_wf_entry wentry
+					 	where wentry.id(+) = step.entryid
+						   $text$
+						   and wentry.parententryid is null
+						union
+						select distinct wentry.id
+						  from bs_t_wf_historysteps step, bs_t_wf_entry wentry
+						 where wentry.id(+) = step.entryid
+						   $text$
+						   and wentry.parententryid is null) workentry
+				where base.C710000001 (+)= workentry.id
+				and base.C700000000 > '0'
+				order by C700000006 desc
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="wf_lb_step_name" name="stepcode"  colspan=""  rowspan=""  isnewline="" displaytype="4" />
+			<select displayname="wf_lb_workflowTmpl_name" name="defname"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+				<sql><![CDATA[ select code,name from bs_t_wf_version ]]></sql>
+			</select>
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+		</condition>
+		<customwhere name="text" prepend="and" >
+			<field prepend="and" operator="="  datatype="" colname="step.stepcode"  value="#stepcode#" />
+			<field prepend="and" operator="="  datatype="" colname="wentry.defname"  value="#defname#" />
+			<field prepend="and" operator=">="  datatype="7" colname="wentry.createtime"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="wentry.createtime"  value="#endtime#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_EntryDealTime" >
+		<select>
+			<![CDATA[ 
+	 			select
+					/*COUNT*/
+					 C700000000      as baseid, --工单编号
+					 C700000001      as baseschema, --工单schema
+					 C700000002      as basename, --工单名称
+					 C700000003      as basesn, --流水号
+					 C700000018      as basedealouttime, --处理时限
+					 C700000011      as basesummary, --主题
+					 C700000004      as basecreatorfullname, --建单人名
+					 C700000005      as basecreatorloginName, --建单人登陆名
+					 C700000101      as basecreatorcorp, --建单人单位
+					 C700000103      as basecreatordep, --建单人部门
+					 C700000043      as basecategoryclasscode, --工单类别
+					 C700000042      as basecategoryclassname, --工单类别名
+					 C700000006      as basecreatedate, --建单时间
+					 C700000009      as baseclosedate, --关闭时间
+					 C700000010      as basestatus, --状态名
+					 C700000008      as basefinishdate, --完成时间
+					 C700000022      as basetplid --模板ID
+					/*COUNT*/
+				from T359 base,
+					 (select workentry.id
+					    from bs_t_wf_entry workentry
+					  where workentry.closetime > '0'
+					        $text$
+					        and workentry.parententryid is null) workentry
+				where base.C710000001(+) = workentry.id
+				and base.C700000000 > '0'
+				order by C700000006 desc
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<select displayname="wf_lb_workflowTmpl_name" name="defname"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+				<sql><![CDATA[ select code,name from bs_t_wf_version ]]></sql>
+			</select>
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+		</condition>
+		<customwhere name="text" prepend="and" >
+			<field prepend="and" operator="="  datatype="" colname="workentry.defname"  value="#defname#" />
+			<field prepend="and" operator=">="  datatype="7" colname="workentry.createtime"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="workentry.createtime"  value="#endtime#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_EntryStepDealTime" >
+		<select>
+			<![CDATA[ 
+	 			select
+					/*COUNT*/
+					 C700000000      as baseid, --工单编号
+					 C700000001      as baseschema, --工单schema
+					 C700000002      as basename, --工单名称
+					 C700000003      as basesn, --流水号
+					 C700000018      as basedealouttime, --处理时限
+					 C700000011      as basesummary, --主题
+					 C700000004      as basecreatorfullname, --建单人名
+					 C700000005      as basecreatorloginName, --建单人登陆名
+					 C700000101      as basecreatorcorp, --建单人单位
+					 C700000103      as basecreatordep, --建单人部门
+					 C700000043      as basecategoryclasscode, --工单类别
+					 C700000042      as basecategoryclassname, --工单类别名
+					 C700000006      as basecreatedate, --建单时间
+					 C700000009      as baseclosedate, --关闭时间
+					 C700000010      as basestatus, --状态名
+					 C700000008      as basefinishdate, --完成时间
+					 C700000022      as basetplid --模板ID
+					/*COUNT*/
+				from T359 base,
+					 (select distinct workentry.id
+					 	 from bs_t_wf_historytask histask, bs_t_wf_entry workentry
+					  where workentry.id(+) = histask.entryid
+					           and histask.finishtime > '0'
+					           $text$
+					           and workentry.parententryid is null) workentry
+			     where base.C710000001(+) = workentry.id
+			     and base.C700000000 > '0'
+				 order by C700000006 desc
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="wf_lb_step_name" name="stepcode"  colspan=""  rowspan=""  isnewline="" displaytype="4" />
+			<select displayname="wf_lb_workflowTmpl_name" name="defname"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+				<sql><![CDATA[ select code,name from bs_t_wf_version ]]></sql>
+			</select>
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+		</condition>
+		<customwhere name="text" prepend="and" >
+			<field prepend="and" operator="="  datatype="" colname="histask.stepcode"  value="#stepcode#" />
+			<field prepend="and" operator="="  datatype="" colname="workentry.defname"  value="#defname#" />
+			<field prepend="and" operator=">="  datatype="7" colname="workentry.createtime"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="workentry.createtime"  value="#endtime#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_EntryDealPromptness" >
+		<select>
+			<![CDATA[ 
+	 			select
+					/*COUNT*/
+					 C700000000      as baseid, --工单编号
+					 C700000001      as baseschema, --工单schema
+					 C700000002      as basename, --工单名称
+					 C700000003      as basesn, --流水号
+					 C700000018      as basedealouttime, --处理时限
+					 C700000011      as basesummary, --主题
+					 C700000004      as basecreatorfullname, --建单人名
+					 C700000005      as basecreatorloginName, --建单人登陆名
+					 C700000101      as basecreatorcorp, --建单人单位
+					 C700000103      as basecreatordep, --建单人部门
+					 C700000043      as basecategoryclasscode, --工单类别
+					 C700000042      as basecategoryclassname, --工单类别名
+					 C700000006      as basecreatedate, --建单时间
+					 C700000009      as baseclosedate, --关闭时间
+					 C700000010      as basestatus, --状态名
+					 C700000008      as basefinishdate, --完成时间
+					 C700000022      as basetplid --模板ID
+					/*COUNT*/
+			    from T359 base,
+					 (select distinct entrywork.id
+					     from bs_t_wf_historytask histask, bs_t_wf_entry entrywork
+					  where entrywork.id (+)= histask.entryid
+					           $text$
+					           and entrywork.parententryid is null) workentry
+				where base.C710000001(+) = workentry.id
+				and base.C700000000 > '0'
+				order by C700000006 desc
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="wf_lb_step_name" name="stepcode"  colspan=""  rowspan=""  isnewline="" displaytype="4" />
+			<select displayname="wf_lb_workflowTmpl_name" name="defname"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+				<sql><![CDATA[ select code,name from bs_t_wf_version ]]></sql>
+			</select>
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+		</condition>
+		<customwhere name="text" prepend="and" >
+			<field prepend="and" operator="="  datatype="" colname="histask.stepcode"  value="#stepcode#" />
+			<field prepend="and" operator="="  datatype="" colname="histask.defname"  value="#defname#" />
+			<field prepend="and" operator=">="  datatype="7" colname="entrywork.createtime"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="entrywork.createtime"  value="#endtime#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

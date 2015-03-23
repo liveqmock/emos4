@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workflow> 
+  <start to="dp_7" statusId="s_1"/>  
+  <steps> 
+    <step id="dp_7" stepNo="step4" stepGroup="" statusId="s_2" desc="处理子流程" taskPolicy="SHARE" auto="false" acceptOver="0" dealOver="0" type="DEAL"> 
+      <prefuncs> 
+        <func id="0">defaultDefInFunction</func> 
+      </prefuncs>  
+      <actor id="actor" roleID="UBP_USER_handle_SUB" roleName="内部处理人" actorType="1" conditionsDesc="">roleKey:$CreateUser$</actor>  
+      <actions> 
+        <action id="0" name="提交" actionNo="subSubmit" linkpri="1" assignTree="" remap="0"> 
+          <to stepId="dp_9"/> 
+        </action> 
+      </actions>  
+      <metas> 
+        <meta id="0" name="CUSTOMACTIONS"/>  
+        <meta id="1" name="FLAGASSIGN">0</meta>  
+        <meta id="2" name="FLAGCANCEL">0</meta>  
+        <meta id="3" name="FLAGCLOSE">0</meta>  
+        <meta id="4" name="FLAGCOPY">0</meta>  
+        <meta id="5" name="FLAGRECALL">0</meta>  
+        <meta id="6" name="FLAGSAVE">0</meta>  
+        <meta id="7" name="FLAGTOASSISTAUDITING">0</meta>  
+        <meta id="8" name="FLAGTOAUDITING">0</meta>  
+        <meta id="9" name="FLAGTRANSFER">0</meta>  
+        <meta id="10" name="FLAGTURNUP">0</meta> 
+      </metas>  
+      <subflows> 
+        <condition/> 
+      </subflows>  
+      <postfuncs> 
+        <func id="0">defaultDefOutFunction</func> 
+      </postfuncs> 
+    </step>  
+    <step id="dp_9" stepNo="step3" stepGroup="" statusId="s_3" desc="审批子流程" taskPolicy="SHARE" auto="false" acceptOver="0" dealOver="0" type="DEAL"> 
+      <prefuncs> 
+        <func id="0">defaultDefInFunction</func> 
+      </prefuncs>  
+      <actor id="actor" roleID="UBP_USER_APPROVE_SUB" roleName="审批人" actorType="5" conditionsDesc=""/>  
+      <actions> 
+        <action id="0" name="审批通过" actionNo="subPass" linkpri="1" assignTree="" remap="0"> 
+          <to endId="dp_2"/> 
+        </action>  
+        <action id="1" name="审批不通过" actionNo="subNoPass" linkpri="1" assignTree="" remap="0"> 
+          <to stepId="dp_7"/> 
+        </action> 
+      </actions>  
+      <metas> 
+        <meta id="0" name="CUSTOMACTIONS"/>  
+        <meta id="1" name="FLAGASSIGN">0</meta>  
+        <meta id="2" name="FLAGCANCEL">0</meta>  
+        <meta id="3" name="FLAGCLOSE">0</meta>  
+        <meta id="4" name="FLAGCOPY">0</meta>  
+        <meta id="5" name="FLAGRECALL">0</meta>  
+        <meta id="6" name="FLAGSAVE">0</meta>  
+        <meta id="7" name="FLAGTOASSISTAUDITING">0</meta>  
+        <meta id="8" name="FLAGTOAUDITING">0</meta>  
+        <meta id="9" name="FLAGTRANSFER">0</meta>  
+        <meta id="10" name="FLAGTURNUP">0</meta> 
+      </metas>  
+      <subflows> 
+        <condition/> 
+      </subflows>  
+      <postfuncs> 
+        <func id="0">defaultDefOutFunction</func> 
+      </postfuncs> 
+    </step> 
+  </steps>  
+  <splits/>  
+  <joins/>  
+  <ends> 
+    <end id="dp_2" statusId="s_5"/> 
+  </ends>  
+  <statuses> 
+    <status id="s_1" name="草稿"/>  
+    <status id="s_2" name="处理中"/>  
+    <status id="s_3" name="审批中"/>  
+    <status id="s_5" name="已完成"/>  
+    <status id="s_4" name="已关闭"/> 
+  </statuses> 
+</workflow>

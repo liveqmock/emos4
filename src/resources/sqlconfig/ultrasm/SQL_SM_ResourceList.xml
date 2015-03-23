@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-06-24</date> 
+		<description>资源维护列表页面</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_Resource.queryList" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, systemtype, definetype, resname, ordernum, status /*COUNT*/
+				  from bs_t_sm_resource  
+				 where 1=1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ ordernum
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_resourceName" name="resourceName" value="" />
+			<text displayname="sm_lb_resourceSystemType" name="resourceSystemType" value=""/>
+			<text displayname="sm_lb_resourceDefineType" name="resourceDefineType" value=""/>
+			<select displayname="com_lb_status" name="status"  dictype="status" />
+			
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="resname"  value="#resourceName#" />
+			<field prepend="and" operator="like"  colname="systemtype"  value="#resourceSystemType#" />
+			<field prepend="and" operator="like"  colname="definetype"  value="#resourceDefineType#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

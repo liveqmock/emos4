@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>wxdong</author> 
+		<date>2009年8月15日</date> 
+		<description>工单模板查询</description> 		
+	</doc>
+	<sqlquery name="SQL_ModelSelect.queryModelList">
+		<select>
+		<![CDATA[ 
+		select
+			/*COUNT*/ 
+			C1 as modelID
+			, C650000001 as modelname
+			, C650000002 as modelversion
+			, C650000003 as modelbasename
+			, C650000004 as modelbaseschema
+			, C650000005 as modeltplname
+			, C650000006 as modeltplID
+			, C650000007 as modelsummary
+			, C650000008 as modelactive
+			, C650000009 as modelauthor
+			, C650000010 as modelauthorID
+			, C650000011 as modelmodifier
+			, C650000012 as modelmodifierID
+			, C650000013 as modelcreatedate
+			, C650000014 as modelmodifydate
+			, C650000015 as modelstartdate
+			, C650000016 as modelenddate
+			, C650000017 as modeldesc
+			/*COUNT*/		
+		from {WF4:App_Base_Model_Info} modelinfo
+		where 
+		C650000008 = 1
+		$customwhere1$ 
+		  ]]> 
+		</select>
+		<customwhere name="customwhere1" prepend="and" >
+				<field prepend="and" operator="="  colname="C650000004"  value="#baseschema#"/><!-- 工单类型 -->
+		</customwhere>
+	</sqlquery>
+	
+	<sqlquery name="query.ModelFieldList">
+		<select>
+		<![CDATA[ 
+		select 
+			/*COUNT*/
+			*
+			/*COUNT*/
+			 from(
+		select C650000007 as fieldID
+			, C650000008 as fielddbname
+			, C650000009 as fieldtype
+			, C650000010 as fieldtypevalue
+			, C650000011 as fieldshowname
+			, C650000012 as fieldisshow
+			, C650000013 as fieldshoworder
+			, C650000014 as fieldshowoneline
+			, C650000015 as fieldvalue	
+		from {WF4:App_Base_Model_Field} modelfield
+		where 
+		C650000012 = 1
+		$basepara$ 
+		) result 
+		order by fieldshoworder asc
+		  ]]> 
+		</select>
+		<customwhere>
+			<parameterMap prepend="AND" name="basepara">
+				<mapingFiled  prepend="AND" fieldName="modelID"  fieldType="4">
+					<mapsql value="isnotnull">
+						<![CDATA[
+							 C650000000 = '#modelID#'
+						 ]]>
+					</mapsql>
+				</mapingFiled>
+			</parameterMap>
+		</customwhere>
+	</sqlquery>
+	
+</sql-group>
+

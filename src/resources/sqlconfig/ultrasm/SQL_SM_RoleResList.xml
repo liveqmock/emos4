@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_ResourceList.query_ByRoleId" >
+		<select>
+			<![CDATA[ 
+	 			select /*COUNT*/pid,systemtype,definetype,resname /*COUNT*/ from
+	 			(
+	 				select 
+					 distinct l.pid pid,l.systemtype systemtype,l.definetype definetype,l.resname resname
+					 from bs_t_sm_resource l, bs_t_sm_roleresop r 
+					 where l.pid=r.resid $customwhere$
+	 			)
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_resourceSystemType" name="definetype" />
+			<text displayname="sm_lb_resourceName" name="resname"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="definetype"  value="#definetype#" />
+			<field prepend="and" operator="like"  colname="resname"  value="#resname#" />
+			<field prepend="and" operator="="  colname="r.roleid"  value="#role_id#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_ResourceList.query" >
+		<select>
+			<![CDATA[ 
+	 			select 
+				 /*COUNT*/ pid,systemtype,definetype,resname /*COUNT*/ 
+				 from bs_t_sm_resource  
+				 where 1=1 $customwhere$
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_resourceSystemType" name="definetype" />
+			<text displayname="sm_lb_resourceName" name="resname"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="definetype"  value="#definetype#" />
+			<field prepend="and" operator="like"  colname="resname"  value="#resname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

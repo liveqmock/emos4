@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<diskStore path="java.io.tmpdir" />
+
+	<!-- automatic
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic, multicastGroupAddress=230.0.0.1,multicastGroupPort=4446, timeToLive=32" />
+	-->
+	
+	<!-- manual
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=manual,rmiUrls=//server2:40001/sampleCache11|//server2:40001/sampleCache12" />
+    -->
+
+	<!-- 
+	<cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"    
+			properties="hostName=localhost, port=40001,socketTimeoutMillis=2000" />   
+    -->
+    
+	<defaultCache maxElementsInMemory="10000" overflowToDisk="true"
+		eternal="false" memoryStoreEvictionPolicy="LRU"
+		maxElementsOnDisk="10000000" diskExpiryThreadIntervalSeconds="600"
+		timeToIdleSeconds="3600" timeToLiveSeconds="100000"
+		diskPersistent="false" />
+
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		maxElementsInMemory="10000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="3600" timeToLiveSeconds="7200"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+		maxElementsInMemory="10000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="3600" timeToLiveSeconds="7200"
+		memoryStoreEvictionPolicy="LRU" />
+		
+	<cache name="userprivilege"
+		maxElementsInMemory="2000" eternal="true" overflowToDisk="true" >
+	</cache>
+		
+	<cache name="dictype"
+		maxElementsInMemory="2000" eternal="true" overflowToDisk="true" >
+	</cache>
+
+	<cache name="pwdManageCfg"
+		maxElementsInMemory="1" eternal="true" overflowToDisk="true" >
+	</cache>
+
+	<cache name="useronline" maxElementsInMemory="2000" eternal="false"
+		overflowToDisk="false">
+	</cache>
+	<cache name="querysql" maxElementsInMemory="100" eternal="false"
+		overflowToDisk="false">
+	</cache>
+	
+	<cache name="repositoryMap"
+		maxElementsInMemory="2000" eternal="true" overflowToDisk="true" >
+	</cache>
+	
+	<cache name="repositoryFlag"
+		maxElementsInMemory="2000" eternal="true" overflowToDisk="true" >
+	</cache>
+	
+	<cache name="WFVersion"
+		maxElementsInMemory="2000" eternal="true" overflowToDisk="true" >
+	</cache>
+		
+	<cache name="WFInterface"
+		maxElementsInMemory="2000" eternal="true" overflowToDisk="true" >
+	</cache>
+
+	<cache name="WFType" maxElementsInMemory="2000" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	<cache name="WFDefine" maxElementsInMemory="2000" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	
+	<cache name="bppWorksheetMap" maxElementsInMemory="2000" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	
+	
+	<cache name="bppFreeActionMap" maxElementsInMemory="2000" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	
+	<cache name="bppFieldInfoMap" maxElementsInMemory="2000" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	
+	<cache name="bppThemeInfoMap" maxElementsInMemory="2000" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	
+	<cache name="bppExtendFunc" maxElementsInMemory="50" eternal="true"
+		overflowToDisk="true">
+	</cache>
+	
+	<cache name="ciclasses" maxElementsInMemory="2000" eternal="true" overflowToDisk="true"></cache>
+	
+	<!-- 
+	<cache name="UserCache" maxElementsInMemory="1000" eternal="false"       
+        timeToIdleSeconds="100000" timeToLiveSeconds="100000"       
+        overflowToDisk="false">     
+         <cacheEventListenerFactory
+		 	class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+		 	properties="replicateAsynchronously=true,replicatePuts=true,replicateUpdates=true,replicateUpdatesViaCopy=false,replicateRemovals=true" />       
+    </cache>    
+     --> 
+</ehcache>

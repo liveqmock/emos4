@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" default-autowire="byName"
+	default-lazy-init="true">
+
+	<!-- 流程定义action -->
+	<bean id="designAction" class="com.ultrapower.eoms.workflow.design.servlet.DesignAction" scope="prototype" />
+
+	<!-- 流程版本控制action -->
+	<bean id="wfVersionManagerAction" class="com.ultrapower.eoms.workflow.version.web.WfVersionManagerAction" scope="prototype" />
+
+
+	<!-- 流程自定义模型action -->
+	<bean id="wfCustomManagerAction" class="com.ultrapower.eoms.workflow.custom.web.WfCustomManagerAction" scope="prototype" />
+
+
+	<!-- 流程自定义接口action -->
+	<bean id="wfInterfaceManagerAction" class="com.ultrapower.eoms.workflow.interfaces.web.WfInterfaceManagerAction" scope="prototype" />
+
+	<!-- 流程分类action -->
+	<bean id="wfSortManagerAction" class="com.ultrapower.eoms.workflow.sort.web.WfSortManagerAction" scope="prototype" />
+
+	<!-- 流程分类树管理类 -->
+	<bean id="wfSortTreeImpl" class="com.ultrapower.eoms.workflow.sort.web.WfSortTreeImpl" scope="prototype" />
+	
+	<!-- 流程分类菜单树管理类 -->
+	<bean id="wfSortMenuFree" class="com.ultrapower.eoms.workflow.sort.manager.WfSortMenuFreeManagerImpl" scope="prototype" />
+	<bean id="wfSortMenuFix" class="com.ultrapower.eoms.workflow.sort.manager.WfSortMenuFixManagerImpl" scope="prototype" />
+	
+	<!--**************************************** 工单管理类(start) *************************************** -->
+	<!-- 工单查询(action) -->
+	<bean id="sheetQueryAction" class="com.ultrapower.eoms.workflow.sheet.query.web.SheetQueryAction" scope="prototype" />
+
+	<!-- 工单查询(service) -->
+	<bean id="sheetQueryServiceImpl" class="com.ultrapower.eoms.workflow.sheet.query.manager.SheetQueryServiceImpl" scope="prototype" />
+	
+	<!-- 工单导出(action) -->
+	<bean id="sheetExportAction" class="com.ultrapower.eoms.workflow.sheet.export.web.SheetExportAction" scope="prototype" />
+	
+	<!-- 工单导出(service) -->
+	<bean id="sheetExportServiceImpl" class="com.ultrapower.eoms.workflow.sheet.export.manager.SheetExportServiceImpl" scope="prototype" />
+
+	<!-- 工单角色维度类 -->
+	<bean id="sheetRoleAction" class="com.ultrapower.eoms.workflow.sheet.role.web.SheetRoleAction" scope="prototype" />
+
+	<!-- 工单角色维度管理类(service) -->
+	<bean id="sheetRoleTreeImpl" class="com.ultrapower.eoms.workflow.sheet.role.web.SheetRoleTreeImpl" scope="prototype" />
+
+
+	<!-- 角色细分导入 -->
+	<bean id="childRoleExtendAction" class="com.ultrapower.eoms.workflow.sheet.role.web.ChildRoleExtendAction" />
+	<!-- 工单删除 -->
+	<bean id="formDeleteAction" class="com.ultrapower.eoms.workflow.managetools.web.FormDeleteAction" />
+
+	<!-- 工单导入 -->
+	<bean id="formImportAction" class="com.ultrapower.eoms.workflow.managetools.web.FormImportAction" />
+	<bean id="entryManagerServiceImpl" class="com.ultrapower.eoms.workflow.managetools.model.EntryManagerServiceImpl" scope="prototype" />
+	<bean id="dealProcessManagerServiceImpl" class="com.ultrapower.eoms.workflow.managetools.model.DealProcessManagerServiceImpl" scope="prototype" />
+	<bean id="dpLogManagerServiceImpl" class="com.ultrapower.eoms.workflow.managetools.model.DealProcessLogManagerServiceImpl" scope="prototype" />
+
+	<bean id="entryManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.workflow.managetools.model.Entry</value>
+		</property>
+	</bean>
+	<bean id="dpLogManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.workflow.managetools.model.DealProcessLog</value>
+		</property>
+	</bean>
+	<bean id="dealProcessManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.workflow.managetools.model.DealProcess</value>
+		</property>
+	</bean>
+
+
+	<!-- 角色维度值配置 -->
+	<bean id="sheetChildRoleSettingAction" class="com.ultrapower.eoms.workflow.sheet.role.web.SheetChildRoleSettingAction" scope="prototype" />
+
+	<!-- 工单代办 -->
+	<bean id="agencyAction" class="com.ultrapower.eoms.workflow.sheet.agent.web.AgencyAction" scope="prototype"></bean>
+
+
+
+	<!-- 流程事件定义 start -->
+	<bean id="eventDefineAction" class="com.ultrapower.eoms.workflow.event.web.EventDefineAction" scope="prototype"></bean>
+	<!-- 流程事件定义 end -->
+
+	<!-- 同组关单 -->
+	<bean id="dealGroupAction" class="com.ultrapower.eoms.workflow.sheet.dealgroup.web.DealGroupAction" scope="prototype"></bean>
+
+	<!-- 工单字段配置 -->
+	<bean id="ownFieldsDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.workflow.sheet.ownfields.model.OwnFields</value>
+		</property>
+	</bean>
+	<bean id="ownFieldsAction" class="com.ultrapower.eoms.workflow.sheet.ownfields.web.OwnFieldsAction" scope="prototype"></bean>
+	<bean id="ownFieldsService" class="com.ultrapower.eoms.workflow.sheet.ownfields.manager.OwnFieldsImpl"></bean>
+
+	<!-- 工单附件 -->
+	<bean id="wfAttachAction" class="com.ultrapower.eoms.workflow.sheet.attachment.web.WfAttachmentAction" scope="prototype"></bean>
+	<bean id="wfAttachmentImpl" class="com.ultrapower.eoms.workflow.sheet.attachment.manager.WfAttachmentImpl"></bean>
+	<bean id="wfAttDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.workflow.sheet.attachment.model.WfAttachment</value>
+		</property>
+	</bean>
+
+	<!-- 工单批量审批-->
+	<bean id="batchReviewAction" class="com.ultrapower.eoms.workflow.sheet.batchReview.web.BatchReviewAction" scope="prototype" />
+	
+	<bean id="batchReviewService" class="com.ultrapower.eoms.workflow.sheet.batchReview.manager.BatchReviewServiceImpl" scope="prototype" />
+	
+	<!--**************************************** 工单管理类(end) *************************************** -->
+
+	<!--**************************************** Remedy接口类(start) *************************************** -->
+	<bean id="remedyUserManager" class="com.ultrapower.remedy4j.common.RemedyUserManagerImpl"></bean>
+	<!--**************************************** Remedy接口类(end) *************************************** -->
+	
+	<bean id="wfRecordDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.workflow.model.WfRecord</value>
+		</property>
+	</bean>
+	
+	<!-- 工作流扩展功能 -->
+	<bean id="workflowServiceEx" class="com.ultrapower.eoms.msextend.workflow.manager.WorkflowServiceImpl"></bean>
+	<bean id="workflowAction" class="com.ultrapower.eoms.msextend.workflow.web.WorkFlowAction" scope="prototype"></bean>
+	<bean id="queryExtendAction" class="com.ultrapower.eoms.msextend.query.web.QueryExtendAction" scope="prototype"></bean>
+	
+</beans>

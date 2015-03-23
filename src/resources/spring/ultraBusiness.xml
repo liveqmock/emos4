@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	<!-- 首页 -->
+	<bean id="homeAction" class="com.ultrapower.eoms.msextend.home.web.HomeAction" scope="prototype"></bean>
+	
+	<!-- 事件流程相关 -->
+	<bean id="incidentAction" class="com.ultrapower.eoms.msextend.incident.web.IncidentAction"></bean>
+	<bean id="incidentService" class="com.ultrapower.eoms.msextend.incident.service.IncidentServiceImpl"></bean>
+	<bean id="incidentUserInfoService" class="com.ultrapower.eoms.msextend.incident.service.IncidentUserInfoServiceImpl"></bean>
+	
+	<!-- 服务请求相关 -->
+	<bean id="serverQuestAction" class="com.ultrapower.eoms.msextend.serverQuest.web.ServerQuestAction"></bean>
+	<bean id="serverQuestModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value> com.ultrapower.eoms.msextend.serverQuest.model.ServerQuestModel</value>
+		</property>
+	</bean>
+	<bean id="serverQuestService" class="com.ultrapower.eoms.msextend.serverQuest.manager.ServerQuestServiceImpl"></bean>
+	<bean id="serverQuestWorkFlow" class="com.ultrapower.eoms.msextend.serverQuest.manager.ServerQuestWorkFlowImpl"></bean>
+	<bean id="serviceCategorySelect" class="com.ultrapower.eoms.cdbBusiness.service.ServiceCategorySelect"></bean>
+	<bean id="serviceCategorySelectExternal" class="com.ultrapower.eoms.cdbBusiness.service.ServiceCategorySelectExternal"></bean>
+	
+	<!-- 获取人员或部门相关信息 -->
+	<bean id="userOrDeptAction" class="com.ultrapower.eoms.cdbBusiness.UserOrDeptAction"></bean>
+	
+	<!-- 国开行零碎小功能 -->
+	<bean id="businessAction" class="com.ultrapower.eoms.cdbBusiness.BusinessAction"></bean>
+	
+	<!--工单删除 -->
+	<bean id="operateFormService" class="com.ultrapower.eoms.msextend.operateform.manager.OperateFormImpl" />
+	<bean id="operateFormAction" class="com.ultrapower.eoms.msextend.operateform.web.OperateFormAction" />
+	<!-- 工单修改 -->
+	<bean id="userManagerService" class="com.ultrapower.eoms.ultrasm.manager.UserManagerImpl" />
+	<bean id="depManagerService" class="com.ultrapower.eoms.ultrasm.manager.DepManagerImpl" />
+	
+	
+	
+	<!-- 工单模板附件管理 -->
+	<bean id="tempAttachmentAction" class="com.ultrapower.eoms.msextend.tempAttachment.web.TempAttachmentAction" scope="prototype"/>
+	<bean id="tempAttachmentService" class="com.ultrapower.eoms.msextend.tempAttachment.manager.TempAttachmentImpl" />
+		
+	<bean id="tempAttachmentDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.tempAttachment.model.TempAttachment</value>
+		</property>
+	</bean>
+	
+	<!-- 变更关联配置项 -->
+	<bean id="ciRelevanceAction" class="com.ultrapower.eoms.msextend.change.web.CIRelevanceAction"></bean>
+	<bean id="ciclassDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.change.model.CIClass</value>
+		</property>
+	</bean>
+	<bean id="ciRelevanceService" class="com.ultrapower.eoms.msextend.change.manager.CIRelevanceServiceImpl" />
+	<bean id="ucmdbciService" class="com.ultrapower.eoms.msextend.change.manager.UCMDBCIServiceImpl"></bean>
+</beans>

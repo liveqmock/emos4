@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-configs>
+	<schema id="UBP_TEST_FIX">
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.ultrabpp.runtime.extend.UBP_TEST_FIX.Test2FixExtendFunction" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+			<operate src="com.ultrapower.eoms.ultrabpp.runtime.extend.UBP_TEST_FIX.Test2FixExtendFunction" />
+		</extendopts-commit>
+		<entryattributes clear="true">
+			<attr name="RECHECK_RESULT"/>
+			<attr name="MONEY_RESULT"/>
+			<attr name="ATT_CHECKPERSON" /> <!-- 复核人 -->
+		</entryattributes>
+	</schema>
+</workflow-configs>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-08-31</date> 
+		<description>值班短信订阅情况查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SmOrderDutyList.query" >
+		<select>
+			<![CDATA[
+					select /*COUNT*/
+				 pid, dutyroomid, dutyroomname, aheaddaynum, starttime, endtime, isholiday, status /*COUNT*/
+				  from bs_t_sm_smsorderduty  where 1=1 $customwhere$ and loginname = #sys_loginname#
+			]]>
+		</select>
+		<condition cols="2" labprecent="11" textprecent="22" >
+			<select displayname="sm_lb_dutyRoom" name="dutyroomid" value="">
+				<sql><![CDATA[select pid, organizationname from bs_t_Duty_Organization where organizationname >'0' and state = '1']]></sql>
+			</select>
+			<select displayname="sm_lb_isholidayactive" name="isholiday" dictype="isHoliday"  value="" />
+			<text displayname="sm_lb_aheaddaynum" name="aheaddaynum" />
+			<select displayname="com_lb_status" name="status" dictype="status"  value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="dutyroomid"  value="#dutyroomid#" />
+			<field prepend="and" operator="="  colname="isholiday"  value="#isholiday#" />
+			<field prepend="and" operator="=" colname="aheaddaynum" value="#aheaddaynum#" />
+			<field prepend="and" operator="=" colname="status" value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

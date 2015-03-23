@@ -1,0 +1,555 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0px;
+	padding:0px;
+	font-size:14px;
+	font-family: arial, "宋体";
+	}
+/*
+a,a:link{	
+	color:#00c;
+	font:12px;
+	text-decoration: underline;
+	}
+a:visited {	color: #00c;text-decoration: underline}	
+a:hover {color: #000; text-decoration:none}
+a:active{color:#000; font-weight:bold; text-decoration: none}
+*/
+td{
+ word-break: break-all;
+ word-wrap:break-word;
+}
+.content{
+	background:url(../images/search_bj.png) left top repeat-x;
+	margin:0px;
+	padding:0px;
+	position:relative;
+}
+.content2{
+	background:url(../images/search_bj2.png) left top repeat-x;
+	margin:0px;
+	padding:0px;
+	/**overflow-x: hidden; 
+	overflow-y: auto;**/
+	height:100%;
+}
+.search{
+	width:1000px;
+	height:189px;
+	background:url(../images/search_bj_title.png) left top;
+	margin:0px auto;
+}
+.search_content{
+	width:442px;
+	height:200px;
+	margin:0px auto;
+	font-size:14px;
+	position:relative;
+}
+.search_content td,.search_content2 td{
+	height:28px;
+	padding-top:5px;
+}
+.search_content a,.search_content2 a{
+	margin-right:0px;
+}
+
+.search_content2{
+	width:442px;
+	height:80px;
+	font-size:14px;
+	position:relative;
+	background:url(../images/search_bj_title2.gif) no-repeat 40px 25px  transparent;
+	background:url(../images/search_bj_title2.gif) no-repeat 40px 31px  transparent\9;
+	padding-left:209px;
+	padding-top:18px; 
+}
+.search_portcont{
+	height:33px;
+	width:442px;
+	background:url(../images/search_1.png) no-repeat;
+	position:relative;
+}
+#txtKeyword{
+	border:0px solid;
+	margin:2px;
+	margin:7px\9;
+	height:24px;
+	width:328px;
+	float:left;
+	font-size:14px;
+	height:26px;
+	height:20px\9;
+}
+#cmbCondition{
+	display:block;
+	width:28px;
+	height:30px;
+	margin:2px 0px;
+	cursor:pointer;
+	float:left;
+}
+#btnSearch{
+	display:block;
+	width:80px;
+	height:33px;
+	cursor:pointer;
+	position:absolute;
+	right:-0px;
+}
+#btnAdvancedSearch{
+	display:block;
+	width:89px;
+	/*background:url(../images/search_2.png) no-repeat;*/
+	height:32px;
+	cursor:pointer;
+	position:absolute;
+	right:-95px;
+	font-size:9pt;
+}
+.lstCondition{
+	width:359px;
+	_width:327px;
+	border:1px solid #92A2B0;
+	position:absolute;
+	top:64px;/*FF*/
+	top:69px\9;/*IE*/
+	left:0px;
+	z-index:999;
+	background:#fff;
+}
+.lstCondition2{
+	width:359px;
+	_width:329px;
+	border:1px solid #92A2B0;
+	position:absolute;
+	top:87px;
+	/*top:119px\9;IE*/
+	left:209px;
+	background:#fff;
+}
+.lstCondition a,.lstCondition2 a{
+	_background:#ffffff;
+	height:24px;
+	width:98%;
+	_width:109%;
+	display:block;
+	text-decoration:none;
+	color:#000;
+	padding:3px 3px 0px 3px;
+	_padding:6px 0px 0px 3px;
+}
+#lstCondition a:hover,#lstCondition2 a:hover{
+	_background:#E5F2F4;
+	text-decoration:none;
+}
+.workSheet{
+	width:300px;
+	height:19px;
+}
+.search_port{
+	width:300px;
+	height:33px;
+	font:14px;
+	/*border:none;*/
+}
+.footer{
+	color:#18538A;
+	font-size:12px;
+	font-weight:bold;
+}
+.popupcontent{
+	font:14px;
+	/*width:442px;*/
+}
+.popu{
+	padding-left:10px;
+}
+.portal_title_right span a{
+	color:#000;
+	text-decoration:none;
+    }
+.portal_title_right span a:hover{
+	color:#000;
+	text-decoration:underline;
+    }
+.portal_title_right span a{
+	color:#000;
+	text-decoration:none;
+    }
+.portal_title_right span a:hover{
+	color:#000;
+	text-decoration:underline;
+    }
+.portal_title{
+	background:url(../images/portal_title_right.png) repeat-x;
+	height:27px;
+	line-height:27px;
+	}
+.portal_title_left{
+	/*background:url(../images/portal_title_left.png) no-repeat top left;*/
+	float:left;
+	display:block;
+	padding:0px 10px;
+	padding:0px 10px\0;
+	color:#015caa;
+	font-weight:bold;
+    }
+.portal_title_right{
+	float:right;
+    }
+.portal_title_right span{
+	padding-right:10px;
+    }
+.middle_norm{
+	display:block;
+	font-size:14px;
+	padding-left:30px;	
+	background:url(../images/ico_search.gif) left top no-repeat;
+	}
+.middle_conten{
+	background:#EFF8FF;
+	border-top:1px dashed #cad7e0;
+	border-left:1px solid #cad7e0;
+	border-right:1px solid #cad7e0;
+	border-bottom:1px solid #cad7e0;
+}
+.middle_conten table{
+	margin-left:20px;
+}
+.middle_conten td{
+	line-height:28px;
+	padding:4px 0px; 
+}
+.button{
+	background:url(../images/search_3.png) no-repeat;
+	width:95px;
+	height:31px;
+	color:#fff;
+	font-weight:bold;
+	cursor:pointer;
+	display:block;
+}
+.buttonhover{
+	background:url(../images/search_3.png) no-repeat 0px 1px;
+	width:95px;
+	height:31px;
+	color:#fff;
+	font-weight:bold;
+	cursor:pointer;
+	display:block;
+}
+.bottom a{
+	color:#fff;
+	text-decoration:none;
+}
+.close{
+	overflow:hidden;
+	width:15px;
+	height:15px;
+	float:right;
+	cursor:pointer;
+	background:transparent url(../images/tool-sprites.gif) no-repeat;
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+.close1{
+	overflow:hidden;
+	width:15px;
+	height:15px;
+	float:right;
+	cursor:pointer;
+	background:transparent url(../images/tool-sprites.gif) no-repeat;
+	background-position:-15px 0px;
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+.point{
+	font-size:12px;
+	height:24px;
+	background:#E5F2F4;
+	border-bottom:1px solid #B1CCED;
+	border-top:1px solid #B1CCED;
+	margin-top:4px;
+	padding-right:20px;	
+	line-height:200%;
+	}
+.point span{
+	margin-right:70px;	
+	}
+.point2{
+	height:29px;
+	background:#E5F2F4;	
+	margin-top:8px;
+	padding-left:50px;	
+	padding-top:3px;
+	padding-bottom:3px; 
+	line-height:200%
+	}
+.point2 span{
+	display:block;
+	color:#999B9A;
+	margin-left:30px;
+	margin-top:-25px;
+	margin-top:-23px\9;
+	}
+.point2Img{
+	background:url(../images/ico_search2.png) no-repeat;
+	width:28px;
+	height:24px;
+}
+.result{
+	margin-left:40px;
+}
+.f {
+    font-size: 100%;
+    line-height: 115%;
+    padding-left: 15px;
+    word-wrap: break-word;
+}
+.page_conten{
+	width:100%;
+	_width:100%;
+	font-size:14px;
+}
+.page_conten table {
+	margin-top:30px;
+}
+.page_conten td {
+    font-size:12px;
+    line-height: 22px;
+}
+em{
+	color:#CC0033;
+}
+.m {
+	background:#EEF5FD;
+    font-size: 10px;
+    line-height: 22px;
+	margin-top:6px;
+	color:#008000;
+}
+.m span{
+	color:#999B9A;
+	margin-left:10px;
+}
+.right_container{
+	margin-left:15px;
+	margin-bottom:30px;
+	width:330px;
+	}
+.port1{
+	width:60px;
+}
+/**相关搜索**/
+.relakwd {
+	PADDING-RIGHT: 3px; 
+	PADDING-LEFT: 50px; 
+	PADDING-BOTTOM: 3px; 
+	MARGIN:30px 0px; 
+	PADDING-TOP: 3px; 
+	TEXT-ALIGN:left;
+}
+.relakwd a{
+	color:#004B97;
+}
+.relakwd a:hover,{
+	color: #000;
+}
+/** 翻页**/
+.flickr {
+	PADDING-RIGHT: 3px; 
+	PADDING-LEFT: 50px; 
+	PADDING-BOTTOM: 3px; 
+	MARGIN:30px 0px; 
+	PADDING-TOP: 3px; 
+	TEXT-ALIGN:left;
+}
+.flickr A ,.flickr a:link{
+	BORDER: #B5CEE7 1px solid; 
+	PADDING-RIGHT: 7px; 
+	BACKGROUND-POSITION: 50% bottom; 
+	PADDING-LEFT: 7px; 
+	PADDING-BOTTOM: 4px; 
+	COLOR: #261CDC; 
+	MARGIN-RIGHT: 3px; 
+	PADDING-TOP: 4px; 
+	TEXT-DECORATION: none;
+}
+.flickr A:hover {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; BACKGROUND-IMAGE: none; BORDER-LEFT: #000 1px solid; COLOR: #fff; BORDER-BOTTOM: #000 1px solid; BACKGROUND-COLOR: #0061de;
+}
+.meneame A:active {
+	BORDER-RIGHT: #000 1px solid; BORDER-TOP: #000 1px solid; BACKGROUND-IMAGE: none; BORDER-LEFT: #000 1px solid; COLOR: #fff; BORDER-BOTTOM: #000 1px solid; BACKGROUND-COLOR: #0061de;
+}
+.flickr SPAN.current {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; FONT-WEIGHT: bold; PADDING-BOTTOM: 2px; COLOR: #000; MARGIN-RIGHT: 3px; PADDING-TOP: 2px
+}
+.flickr SPAN.disabled {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 2px; COLOR: #adaaad; MARGIN-RIGHT: 3px; PADDING-TOP: 2px
+}
+/** * POPUP CONTAINER STYLES */
+#popupMask {
+	position: absolute;
+	z-index: 200;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: .8;
+	filter: alpha(opacity=80);
+	/* this hack is so it works in IE
+	 * I find setting the color in the css gives me more flexibility 
+	 * than the PNG solution.
+	 */
+	background-color:transparent !important;
+	background-color: #333333;
+	/* this hack is for opera support
+	 * you can uncomment the background-image if you don't care about opera.
+	 * this gives you the flexibility to use any bg color that you want, instead of the png
+	 */
+	background-image/**/: url("../images/maskBG.png") !important; // For browsers Moz, Opera, etc.
+	background-image:none;
+	background-repeat: repeat;
+	display:none;
+}
+#popupContainer {
+	position: absolute;
+	z-index: 201;
+	top: 0px;
+	left: 0px;
+	display:none;
+	padding: 0px;
+}
+#popupInner {
+	border: 0px solid #0251c6;	
+}
+#popupFrame {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 202;
+}
+#popupTitleBar {
+	position: relative;
+	z-index: 203;
+}
+#popupTitle {
+	float:left;
+	font-size: 1.1em;
+}
+#popupControls {
+	position:absolute;
+	z-index:1000;
+	right:10px;
+	top:8px;
+	display:none;
+	cursor: pointer;	
+}
+.footer2{
+	color:#18538A;
+	font-size:12px;
+	font-weight:bold;
+}
+.hr1_line{
+	background:url(../images/search_footer.png) no-repeat;
+	width:460px;
+	height:13px;
+	margin-top:200px;
+}
+.hr1_line2{
+	border-bottom:1px solid #E0E7ED;
+	width:100%;
+	lheight:1px;
+	margin-top:50px;
+}
+.category_name{
+	text-decoration:underline;
+	color:#0072E3;
+	margin-right:5px;
+	cursor:pointer;
+}
+.category_name_selected{
+	text-decoration:none;
+	color:black;
+	font-weight:bold;
+	margin-right:5px;
+	cursor:pointer;
+}
+.category_name_more{
+	color:#0072E3;
+	margin-right:5px;
+	cursor:pointer;
+}
+.preview_lbtd {
+    font-size: 10px;
+    line-height: 22px;
+	color:#008000;
+	text-align:left;
+}
+.preview_contd {
+    font-size: 10px;
+    line-height: 22px;
+	color:black;
+}
+.mustItem {
+	background:#EEF5FD;
+    font-size: 11px;
+    line-height: 22px;
+	color:#008000;
+}
+/*索引类别名称在检索页面的展示方式（层级或是平铺）所需要的样式*/
+.selectDiv {
+	background:white;
+	border-right: 1px solid #999999;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #DBDBDB;
+	border-left: 1px solid #999999;
+	cursor: default;
+	position:absolute;
+	width:160px;
+	/*height:160px;
+	overflow: scroll; 
+	overflow-x:hidden;*/
+	z-index: 100;	
+}
+.selectOptionTrNoSeled {
+	border-bottom: 1px solid #DBDBDB;
+	cursor: default;
+	padding:3px;
+	font-size:12px;
+}
+.selectOptionTrNoSeled_rightSel{
+	border-bottom: 1px solid #DBDBDB;
+	cursor: default;
+	padding:3px;
+	font-size:12px;
+	width:10px;
+	cursor:pointer;
+}
+.selectOptionTrNoSeled_disabled{
+	border-bottom: 1px solid #DBDBDB;
+	cursor: default;
+	padding:3px;
+	font-size:12px;
+	width:10px;
+}
+.selectOptionTrYesSeled {
+	border-bottom: 1px solid #DBDBDB;
+	cursor: default;
+	color: #FFFFFF;
+	background: #0A246A;
+	padding:3px;
+	font-size:12px;
+}
+.selectedValue {
+	font-size:12px;
+	border:0px; 
+	text-align:right; 
+	cursor: pointer;
+	margin-right:-3px;
+}

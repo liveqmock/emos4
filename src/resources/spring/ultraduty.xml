@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName" default-lazy-init="true">
+	<!-- 节假日配置 START magl -->
+	<bean id="holidayAction" class="com.ultrapower.eoms.ultraduty.web.HolidayAction" />
+	<bean id="holidayService" class="com.ultrapower.eoms.ultraduty.manager.HolidayImpl" />
+	<bean id="theDutyHolidayDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultraduty.model.DutyHoliday</value>
+		</property>
+	</bean>
+ 	<!-- 节假日配置 END magl -->
+</beans>

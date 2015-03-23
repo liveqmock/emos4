@@ -1,0 +1,3 @@
+function bpp_init() {
+
+}

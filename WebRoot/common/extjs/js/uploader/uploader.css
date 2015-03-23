@@ -1,0 +1,17 @@
+.add{   
+    background-image: url(./drop-add.gif);   
+}   
+.up{   
+    background-image: url(./up.png);   
+}   
+  
+.delete{   
+    background-image: url(./drop-no.gif);   
+}   
+.delete2{   
+    background-image: url(./cancel.png);   
+}
+
+.ok{   
+    background-image: url(./drop-yes.gif);   
+}

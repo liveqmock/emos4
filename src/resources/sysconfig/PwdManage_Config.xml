@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	PwdManage：萨班斯密码管理配置文件
+	属性说明：
+		status : 是否启用萨班斯密码管理 true or false
+	配置说明：（若对以下任意一属性不做限制，则配置为空或不配置该属性）
+		RecordCount : 记录密码次数，即为几次以内密码不能一致 注意：此属性定义后，在系统正常使用以后，如果修改，请将值修改为大于原来的值（避免造成数据库的垃圾数据）
+		MustUpdate  : 强制修改密码时限此值根据单位unit而定  其属性unit取值范围（year、month、week、day）含义你懂的 默认为day
+		UserInfo    : 是否对用户信息相关进行验证 true or false 提供的验证内容有：用户登录名（loginName）、用户全名（fullName）、手机（mobile）、固话（phone）、传真（fax）、腾讯QQ号（qq）
+		              detail属性：为对哪些信息进行验证，若配置为空则对所提供的所有信息进行验证 配置如：loginName,fullName,mobile
+		PwdLength   : 密码长度验证 格式为 min-max 取值范围 3 <= min < max <= 30 若超出范围，则按照上限和下限验证
+		SameWord    : 连续字符验证 true or false
+		WordType    : 字符类型验证 字母(word)、数字(number)、符号(symbol) WordType值的说明：分为必须包含的字符类型 和 可包含的字符类型
+				       例如<WordType>word,number,[symbol]</WordType>  即为密码必须包含字母和数字，可以包含符号
+	配置建议：
+		1、任何属性建议不要删除，如果不对该属性验证，可以不填对应值，以免以后维护起来方便
+		2、系统正式使用以后，最好不要修改此配置
+ -->
+<PwdManage>
+	<RecordCount>6</RecordCount>
+	<MustUpdate unit="day">90</MustUpdate>
+	<UserInfo detail="">true</UserInfo>
+	<PwdLength>6-30</PwdLength>
+	<SameWord>true</SameWord>
+	<WordType>word,number,[symbol]</WordType>
+</PwdManage>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.07.02</date> 
+		<description>角色细分</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_SheetDimension123.query" >
+		<select>
+			<![CDATA[ 
+	 		select t.childroleid   as id,
+		       t.childrolename as name,			--角色细分名称
+		       t.rolecode      as rolecode,		--角色名称
+		       t.matchcount    as matchcount,	--维度数量
+		       t.childroledesc as roledesc,		--角色细分描述
+		       t.dimensionvalue as dimensionvalue --值
+		       from bs_t_wf_childrole t
+		        where 1=1 $customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="t.rolecode"  value="#roleCode#"/><!-- 工单类型 -->
+		</customwhere>
+	</sqlquery>
+</sql-group>

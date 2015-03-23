@@ -1,0 +1,31 @@
+.checkedItem{
+	/*background-color: grey;*/
+	list-style: none;
+	margin: 0;
+	height: 24px;
+}
+
+.checkedItem li{
+	float: left;
+	line-height: 24px;
+	/*background-color: #eee;*/
+	width: auto;
+	margin-left: 10px;
+	padding: 0 5px;
+	white-space: nowrap;
+}
+
+.checkedItem span,a{
+	display: block;
+	float:left;
+}
+
+.checkedItem a{
+	margin-left: 5px;
+	background-image: url(../images/del_user.jpg);
+	background-repeat:no-repeat;
+	height: 12px;
+	width: 12px;
+	margin-top: 6px;
+}
+

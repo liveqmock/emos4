@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+
+	<bean id="workSheetService"
+	name = "wroksheet,sheet" class="com.ultrapower.eoms.ultrabpp.runtime.manage.WorkSheetManagerImpl"></bean>
+    <bean id="workflowService" class="com.ultrapower.eoms.ultrabpp.runtime.manage.WorkflowManagerImpl"></bean>
+    <bean id="workflowRoleService" class="com.ultrapower.eoms.ultrabpp.runtime.manage.WorkflowRoleManagerImpl"></bean>
+    <bean id="processService" class="com.ultrapower.eoms.ultrabpp.runtime.manage.ProcessManagerImpl"></bean>
+	<!-- 流程定义action -->
+	<bean id="formAction" class="com.ultrapower.eoms.ultrabpp.runtime.web.BaseProcessAction" scope="prototype" />
+	<bean id="clientOpt" class="com.ultrapower.eoms.ultrabpp.runtime.web.ClientOperateAction" scope="prototype" />
+	<bean id="templateAction" class="com.ultrapower.eoms.ultrabpp.develop.web.TemplateAction" scope="prototype" />
+	<bean id="exportAction" class="com.ultrapower.eoms.ultrabpp.cache.web.ExportAction" scope="prototype" />
+	<bean id="assignTreeConfigAction" class="com.ultrapower.eoms.ultrabpp.develop.web.AssignTreeConfigAction" scope="prototype" />
+	<bean id="selectFieldAction" class="com.ultrapower.eoms.ultrabpp.develop.web.SelectFieldAction" scope="prototype" />
+	<!-- 表单布局管理 Service-->
+	<bean id="templateService"
+		class="com.ultrapower.eoms.ultrabpp.develop.manager.TemplateManagerImpl" />
+	<!-- 表单缓存管理 Service-->
+	<bean id="metaCacheService"
+		class="com.ultrapower.eoms.ultrabpp.cache.manager.MetaCacheDBImpl" />
+		<!-- 样式缓存管理 Service-->
+	<bean id="themeCacheService"
+		class="com.ultrapower.eoms.ultrabpp.cache.manager.ThemeCacheXmlImpl" />
+	<!-- 客户化扩展管理 Service-->
+	<bean id="extendFuncCacheService"
+		class="com.ultrapower.eoms.ultrabpp.cache.manager.ExtendFunctionCacheXmlImpl" />
+	<bean id="entryAttributeService"
+		class="com.ultrapower.eoms.ultrabpp.runtime.manage.EntryAttributeDBImpl" />
+	<!-- 表单部署 -->
+	<bean id="deployService"
+		class="com.ultrapower.eoms.ultrabpp.develop.manager.DeployManagerImpl" />
+	<!-- 表单配置导出导入 -->
+	<bean id="exportService" class="com.ultrapower.eoms.ultrabpp.cache.manager.ExportXmlImpl"/> 	
+	<bean id="bppFormClientCall" class="com.ultrapower.eoms.ultrabpp.runtime.manage.FormClientCallManagerImpl" scope="prototype" />
+	
+	<!-- Excel工单导入补单 -->
+	<bean id="impExcelExtend" class="com.ultrapower.eoms.workflow.sheet.importexcel.manager.ExcelImportServiceImpl"/>
+	
+	<bean id="stepDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.StepModel</value>
+		</property>
+	</bean>
+	
+	<!-- 工单关联 -->
+	<bean id="relateSheet" class="com.ultrapower.eoms.ultrabpp.runtime.web.RelateProcessAction" scope="prototype"></bean>
+	<!-- 建立关联关系 -->
+	<bean id="rSheet" class="com.ultrapower.eoms.ultrabpp.runtime.web.RelateSheetAction" scope="prototype"></bean>
+	<!-- 满意度调查 -->
+	<bean id="satisfaction" class="com.ultrapower.eoms.msextend.serverQuest.web.SatisfactionAction" scope="prototype"></bean>
+	<!-- 关联创建工单，表单数据客户化封装 -->
+	<bean id="relationSheetService" class="com.ultrapower.eoms.ultrabpp.runtime.manage.RelationSheetServiceImpl" scope="prototype" />
+	<!-- 知识库关联创建知识 -->
+	<bean id="kmAction" class="com.ultrapower.eoms.ultrabpp.runtime.web.KMAction" scope="prototype"></bean>
+	<bean id="stepFieldDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.StepFieldRelationModel</value>
+		</property>
+	</bean>
+	
+	<bean id="actionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.ActionModel</value>
+		</property>
+	</bean>	
+	
+	<bean id="actionFieldDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.ActionFieldRelationModel</value>
+		</property>
+	</bean>
+	
+	<bean id="freeActionFieldDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.FreeActionFieldRelationModel</value>
+		</property>
+	</bean>
+	
+	<bean id="entryAttrModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.runtime.model.EntryAttributeModel</value>
+		</property>
+	</bean>
+	
+	<!-- 派发树配置  begin-->
+	<bean id="assignTreeConfigModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.AssignTreeConfigModel</value>
+		</property>
+	</bean>
+	<bean id="assignTreeOrganizeModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrabpp.cache.model.AssignTreeOrganizeModel</value>
+		</property>
+	</bean>
+	
+	<!-- 派发树配置  end-->
+	
+	<bean id="jdbcDao" class="com.ultrapower.eoms.common.core.dao.SimpleJdbcDaoImpl"></bean>
+	<bean id="mapDao" class="com.ultrapower.eoms.common.core.dao.HibernateMapDaoImpl"></bean>
+	<bean id="hibernateDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl"></bean>
+	<bean id="baseApiAction" class="com.ultrapower.eoms.ultrabpp.api.BaseAction" scope="prototype" />
+	<bean id="assignTreeConfigService" class="com.ultrapower.eoms.ultrabpp.develop.manager.AssignTreeConfigImpl" /> 
+		
+	<!-- 工单显示知识信息 -->
+	<bean id="extractKnowledgeAction" class="com.ultrapower.eoms.ultrabpp.runtime.web.ExtractKnowledgeAction" />
+	
+</beans>

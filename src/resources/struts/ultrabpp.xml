@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ultrabpp" extends="eoms" namespace="/ultrabpp">
+		<action name="view" method="view" class="formAction">
+			<result name="custom">/ultrabpp/runtime/theme/${target}.jsp</result>
+		</action>
+		<action name="previewMain" method="view" class="formAction">
+			<result name="custom">/ultrabpp/runtime/theme/${target}.jsp</result>
+		</action>
+		<action name="previewAction" method="previewAction" class="formAction">
+			<result name="custom">/ultrabpp/runtime/theme/${displayCxt.theme.name}/${target}.jsp</result>
+		</action>
+		<action name="deployMain" method="deployMain" class="formAction">
+			<result name="custom">/ultrabpp/develop/deployResult.jsp</result>
+			<result name="refresh">/common/core/close.jsp</result>
+		</action>
+		<action name="deployAction" method="deployAction" class="formAction">
+			<result name="custom">/ultrabpp/develop/deployResult.jsp</result>
+		</action>
+		<action name="deployAll" method="deployAll" class="formAction">
+			<result name="custom">/ultrabpp/develop/deployResult.jsp</result>
+			<result name="refresh">/common/core/close.jsp</result>
+		</action>
+		<action name="save" method="save" class="formAction">
+			<result name="success">/ultrabpp/runtime/theme/{1}.jsp</result>
+			<result name="custom">/ultrabpp/runtime/theme/${target}.jsp</result>
+		</action>
+		<action name="showStep" method="showStep" class="formAction">
+			<result name="success">/ultrabpp/runtime/theme/{1}.jsp</result>
+			<result name="custom">/ultrabpp/runtime/forms/${target}.jsp?type=action</result>
+		</action>
+		<action name="getRollbackList" method="getRollbackList" class="clientOpt">
+			<result name="success">/ultrabpp/runtime/theme/{1}.jsp</result>
+		</action>
+		<action name="callService" method="callService" class="clientOpt">
+			<result name="success">/ultrabpp/runtime/theme/{1}.jsp</result>
+		</action>
+	</package>
+
+	<package name="ultrabpp_develop" extends="eoms" namespace="/ultrabpp/develop">
+		<action name="*" method="{1}" class="templateAction">
+			<result name="success">/ultrabpp/develop/{1}/deploy.jsp</result>
+			<result name="custom">/ultrabpp/develop/component/${target}/edit.jsp</result>
+			<result name="developform">/ultrabpp/develop/form/{1}.jsp</result>
+			<result name="developfree">/ultrabpp/develop/free/{1}.jsp</result>
+			<result name="developfix">/ultrabpp/develop/fix/{1}.jsp</result>
+			<result name="refresh">/common/core/close.jsp</result>
+			<result name="deployMainFree">/ultrabpp/develop/free/deployMainFree.jsp</result>
+			<result name="formSendTreeRight">/ultrabpp/develop/form/formSendTree_right.jsp</result>
+		</action> 
+	</package> 
+	<package name="ultrabpp_cache" extends="eoms" namespace="/ultrabpp/cache">
+		<action name="*" method="{1}" class="exportAction">
+			<result name="success">/ultrabpp/cache/{1}.jsp</result> 
+			<result name="custom">/ultrabpp/cache/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+			<result name="importFieldSql">/ultrabpp/cache/importFieldSql.jsp</result>
+		</action>
+	</package>
+	<package name="ultrabpp_assigntree" extends="eoms" namespace="/ultrabpp/assigntree">
+		<action name="*" method="{1}" class="assignTreeConfigAction">
+			<result name="success">/ultrabpp/develop/form/{1}.jsp</result>
+			<result name="custom">/ultrabpp/develop/form/${target}.jsp</result>
+			<result name="refresh">/common/core/close.jsp</result>
+		</action>
+	</package>
+	<package name="ultrabpp_select" extends="eoms" namespace="/ultrabpp/select">
+		<action name="*" method="{1}" class="selectFieldAction">
+			<result name="success">/ultrabpp/develop/form/{1}.jsp</result>
+			<result name="custom">/ultrabpp/develop/form/${target}.jsp</result>
+			<result name="refresh">/common/core/close.jsp</result>
+		</action>
+	</package>
+	<package name="relatesheet" extends="eoms" namespace="/relatesheet">
+		<action name="list" method="list" class="relateSheet">
+			<result name="custom">/workflow/sheet/query/relateWorkSheets.jsp</result>
+		</action>
+	</package>
+	<package name="rsheet" extends="eoms" namespace="/rsheet">
+		<action name="*" method="{1}" class="rSheet">
+			<result name="relatesheet">/workflow/sheet/query/relateSheets.jsp</result>
+		</action>
+	</package>
+	<!-- 满意度调查对应action -->
+	<package name="satisfaction" extends="eoms" namespace="/satisfaction">
+		<action name="*" method="{1}" class="satisfaction">
+			<result name="custom">/serverQuest/satiSheet.jsp</result>
+		</action>
+	</package>
+	<package name="relatekm" extends="eoms" namespace="/relatekm">
+		<action name="*" method="{1}" class="kmAction">
+			<result name="success">/ultrabpp/runtime/theme/{1}.jsp</result>
+		</action>
+	</package>
+	<!-- 工单提取知识字段 -->
+	<package name="ultrabpp_runtime" extends="eoms" namespace="/extractKnowledge">
+		<action name="*" method="{1}" class="extractKnowledgeAction">
+			<result name="success">/ultrabpp/runtime/theme/{1}.jsp</result>
+		</action>
+		
+	</package>
+</struts>

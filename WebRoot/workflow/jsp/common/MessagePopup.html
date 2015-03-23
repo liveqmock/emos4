@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<!--<link href="${ctx}/common/style/${skintype}/css/newgongdan.css"  rel="stylesheet" type="text/css" />-->
+<link href="../../../common/style/blue/css/newgongdan.css"  rel="stylesheet" type="text/css" />
+<script>// JavaScript Document
+function check_browser() {
+   Opera = (navigator.userAgent.indexOf("Opera",0) != -1)?1:0;
+   MSIE = (navigator.userAgent.indexOf("MSIE",0) != -1)?1:0;
+   FX = (navigator.userAgent.indexOf("Firefox",0) != -1)?1:0;
+   if ( Opera ) brow_type = "Opera";
+   else if ( FX )brow_type = "Firefox";
+   else if ( MSIE )brow_type = "MSIE";
+   return brow_type;
+}
+function getWindowHeight() {
+	var windowHeight = 0;
+	if (typeof(window.innerHeight) == 'number') {
+		windowHeight = window.innerHeight;
+	}
+	else {
+		if (document.documentElement && document.documentElement.clientHeight) {
+			windowHeight = document.documentElement.clientHeight;
+		}
+		else {
+			if (document.body && document.body.clientHeight) {
+				windowHeight = document.body.clientHeight;
+			}
+		}
+	}
+	return windowHeight;
+}
+function getWindowWidth() {
+	var windowWidth = 0;
+	if (typeof(window.innerWidth) == 'number') {
+		windowWidth = window.innerWidth;
+	}
+	else {
+		if (document.documentElement && document.documentElement.clientWidth) {
+			windowWidth = document.documentElement.clientWidth;
+		}
+		else {
+			if (document.body && document.body.clientWidth) {
+				windowWidth = document.body.clientWidth;
+			}
+		}
+	}
+	return windowWidth;
+}
+
+function setCenter(x,y) {
+	if (document.getElementById) {
+		var windowHeight = getWindowHeight();
+		var windowWidth = getWindowWidth();
+		var brow_type = check_browser(); 
+		if (windowHeight > 0) {
+			var centerElement = document.getElementById('newtable');
+			if(centerElement != null){
+				if (windowHeight - (88) >= 0) {
+					if (brow_type == "MSIE") {						
+						centerElement.style.height = (windowHeight - y) + 'px';
+						centerElement.style.width = (windowWidth - x) + 'px';
+						centerElement.style.overflowX='hidden';
+					}
+					else
+					{
+						centerElement.style.height = (windowHeight - y) + 'px';
+						centerElement.style.width = (windowWidth - x) + 'px';
+					}
+				}
+			}
+		}
+	}
+}
+
+	window.onresize = function(){
+		  setCenter(0,70);
+		}
+		
+		window.onload = function(){
+		    setCenter(0,70);
+		}
+		
+	var type = dialogArguments[0];
+	var msg = dialogArguments[1];
+</script>
+</head>
+<body  class="PopupMsg" style="overflow-x:hidden;overflow-y:auto;">
+<table id="newtable">
+  <tr>
+    <td width="60" align="center">
+    	<script>
+    		if(type == 1) {
+    			document.write("<img src='images/info.gif'>");
+    		} else {
+    			document.write("<img src='images/error.gif'>");
+    		}
+    	</script>
+    </td>
+    <td align="left"><div id="msg" style="border:1px solid #717375;background-color:white;margin-left:5%;height:90%;margin-top:5%;  margin-right:5%; mpadding:10px;overflow:auto;font-size: 10pt;">
+        <script>document.write(msg)</script>
+      </div></td>
+  </tr>
+</table>
+<div style="text-align:center;width:100%;padding-top:10px;border-top:1px dashed #A1A1A1;">
+  <input type="button" value="确定" class="gd_button" onclick="window.close()">
+</div>
+</body>
+</html>

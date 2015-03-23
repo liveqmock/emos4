@@ -1,0 +1,80 @@
+body { margin: 0px; background-color: #fff; font-family: 宋体; font-size: 12px; padding-bottom: 10px; }
+#bpp_WorksheetForm { margin: 0px; padding: 0px; }
+#bpp_FormContainer { width: 960px; margin: 0 auto; border: 0px solid #d0d0d0; border-top: none; }
+.bpp_White_Block { height: 3px; background-color: #ffffff; background: #ffffff url(../images/panel-border.png) repeat-y; clear: both; }
+/* Header START */
+#bpp_Header { background: none repeat 0 0 #4c9ee5; clear: both; padding: 0; }
+#bpp_Header #bpp_BaseStatus { color: #eee; float: left; font-size: 12px; font-weight: bold; height: 36px; line-height: 36px; padding-left: 15px; margin-right: 20px; }
+#bpp_Header #bpp_BaseName { color: #ffffff; float: left; font-size: 14px; font-weight: bold; line-height: 36px; margin-left: 10px; }
+#bpp_Header #bpp_BaseSN { color: #ffffff; float: left; font-size: 14px; line-height: 36px; margin-left: 15px; }
+#bpp_Header #bpp_ExtendLinks { margin-top: 10px; margin-right: 15px; float: right; }
+#bpp_Header #bpp_ExtendLinks span { text-decoration: underline; margin-right: 20px; }
+#bpp_Header #bpp_ExtendLinks span a { color: #ffffff; font-weight: bold; text-decoration: underline; }
+#bpp_Header #bpp_BasicInfor { background: url(../images/bpp_BasicInfor.png) repeat-x left top; border-left: 1px solid #efefef; border-right: 1px solid #efefef; clear: both; height: 26px; line-height: 26px; padding-top: 9px; /*width: 100%;*/ }
+#bpp_Header #bpp_BasicInfor span { color: #333333; margin-right: 20px; }
+#bpp_TaskInfor { background: url(../images/bpp_BasicInfor.png) repeat-x bottom left; border-bottom: 1px solid #efefef; border-left: 1px solid #efefef; border-right: 1px solid #efefef; clear: both; height: 26px; line-height: 26px; padding-bottom: 9px; }
+#bpp_TaskInfor div { margin: 0; }
+#bpp_TaskInfor #bpp_TaskName { margin: 0px0; }
+#bpp_TaskInfor span { color: black; margin-right: 20px; }
+/* Header END */
+
+/* Body START */
+#bpp_Body { clear: both; margin-bottom: 5px; }
+/* Body END */
+
+/* Button panel START */
+#bpp_BtnPanel { clear: both; margin-bottom: 5px; }
+#bpp_BtnPanel .bpp_BtnTip { height: 20px; line-height: 150%; float: left; padding: 3px 5px 0px 5px; border-bottom: solid #666666 1px; color: #666666; }
+#bpp_BtnPanel ul { list-style: none; margin: 0px; padding: 0px; float: left; clear: left; width: 960px; }
+#bpp_BtnPanel ul li { margin: 5px; margin-left: 0px; float: left; }
+#bpp_BtnPanel ul li input { border: none; background: url(../images/btn.png) no-repeat left center; width: 97px; text-align: center; height: 27px; line-height: 25px; font-size: 12px; font-weight: bold; color: #fff; margin-left: 20px; margin-top: 12px; }
+#bpp_BtnPanel ul li div { margin-top: 20px; float: left; }
+#bpp_BtnPanel ul li div a { color: #666666; }
+#bpp_BtnPanel ul li .bpp_MainBtn { height: 35px; border: solid #777777 1px; background-color: #ffddbb; }
+/* Button panel END */
+
+/* Button panel START */
+#bpp_ActPanel { display: none; clear: both; margin-bottom: 5px; }
+#bpp_ActPanel #bpp_ActComment { background-color: #eee; color: #000; font-weight: bold; height: 30px; line-height: 30px; padding: 0 15px; }
+#bpp_ActPanel #bpp_ActBody { background-color: #ffffff; border-bottom: solid #cccccc 1px; background: #ffffff url(../images/panel-border.png) repeat-y; }
+#bpp_ActPanel #bpp_ActBody #bpp_ActFields { }
+#bpp_ActPanel #bpp_ActPanel_BtnPanel { height: 36px; background-color: #fff; clear: both; padding-left: 3px; margin-left: 1px; margin-right: 1px; }
+#bpp_ActPanel #bpp_ActPanel_BtnPanel input { border: none; background: url(../images/btnred.png) no-repeat left center; width: 105px; text-align: center; height: 25px; line-height: 26px; font-size: 12px; font-weight: bold; color: #fff; margin-left: 66px; margin-top: 12px; }
+/* Button panel END */
+
+/* Hidden panel START */
+#bpp_HiddenPanel { display: none; }
+/* Hidden panel END */
+
+/* 控件 */
+.bpp_Field { float: left; }
+.bpp_Field table { margin-left: 1px; background-color: #ffffff; margin-bottom: 1px; }
+.bpp_Field .bpp_Field_Label { width: 95px; /*background: url(../images/field-label.png) no-repeat right bottom;*/ overflow: hidden; }
+.bpp_Field .bpp_Field_Label div { overflow: hidden; margin-left: 3px; }
+.bpp_Field .bpp_Field_Label div div { margin: 9px 1px 0px 0px; }
+.bpp_Field .bpp_Field_Label div span { color: #333333; }
+.bpp_Field .bpp_Field_Label div .bpp_Require { font-weight: bold; color: #993300; }
+.bpp_Field .bpp_Field_Label div .bpp_Require font { color: ff0000; font-size: 10px; }
+.bpp_Field .bpp_Field_Label_Large { width: 95px; /*background: url(../images/field-label.png) no-repeat right bottom;*/ overflow: hidden; }
+.bpp_Field .bpp_Field_Label_Large div { overflow: hidden; margin-left: 5px; }
+.bpp_Field .bpp_Field_Label_Large div div { margin: 1px 6px 0px 0px; }
+.bpp_Field .bpp_Field_Label_Large div span { color: #333333; /*line-height: 110%;line-height: 29px;*/ }
+.bpp_Field .bpp_Field_Label_Large div .bpp_Require { font-weight: bold; color: #993300; line-height: 110%; }
+.bpp_Field .bpp_Field_Label_Large div .bpp_Require font { color: ff0000; font-size: 10px; line-height: 110%; }
+.bpp_Field_RO table td input { border: solid #999999 0px !important; background-color:#f8f8f8;}
+.bpp_Field_RO table td textarea { border: solid #999999 0px !important; overflow: hidden; background-color:#f8f8f8;}
+.bpp_Field_Extend { background: url(../images/field_extend_more.gif) #eeeeee no-repeat center center; border: medium none; cursor: pointer; float: left; height: 24px; margin-left: 2px; margin-top: 3px; width: 24px; }
+.bpp_TimeField_Extend { background: url(../images/field_extend_time.gif) #eeeeee no-repeat center center; border: medium none; cursor: pointer; float: left; height: 24px; margin-left: 2px; margin-top: 3px; width: 24px; }
+.bpp_Field_RO .bpp_Field_SelectExtend { height: 22px; width: 22px; background: center; background-color:#f8f8f8; border: solid #999999 0px !important; cursor: default; margin: 0px !important; margin-left: -1px !important; margin-top: 3px !important; }
+.bpp_MessageTip_Require { position: absolute; height: 23px; width: 35px; background: url(../images/msg-req.png) right bottom; }
+.bpp_MessageTip_OverLength { position: absolute; height: 23px; width: 35px; background: url(../images/msg-max.png) right bottom; }
+#bpp_MessageExtendBox { position: absolute; top: 300px; left: 700px; width: 400px; border: solid #3399cc 2px; background-color: #ffffff; }
+#bpp_MessageExtendBox #bpp_MessageExtendBox_Title { height: 25px; line-height: 200%; font-size: 12px; font-weight: bold; background-color: #3399cc; color: white; padding-left: 5px; }
+#bpp_MessageExtendBox #bpp_MessageExtendBox_Content { height: 200px; width: 398px; font-family: 宋体; font-size: 13px; border: 0px; }
+#bpp_MessageExtendBox #bpp_MessageExtendBox_Button { height: 30px; background-color: #eeeeee; text-align: center; }
+#bpp_MessageExtendBox #bpp_MessageExtendBox_Button input { border: solid #cccccc 1px; height: 22px; margin-top: 4px; background-color: #cccccc; }
+#bpp_MaskLayer { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; background-color: #eeeeee; z-index: 999; opacity: 0.40; filter: alpha(opacity=40); -moz-opacity: 0.4; }
+.per20 { float: left; width: 24.5%; color: #666; }
+.per20 em { float: left; font-style: normal; font-weight: bold; padding-right: 1%; width: 35%; text-align: right; }
+#bpp_Header #bpp_BasicInfor .per20 span, .per20 span, #bpp_TaskInfor .per20 span { color: #666; float: left; height: 26px; margin: 0; overflow: hidden; width: 55%; }
+table,td,th{ border-collapse:collapse;}

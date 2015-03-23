@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+  <doc>
+    <author>liuchuanzu</author> 
+    <date>2014.12.24</date> 
+    <description>事件工单查询</description>     
+  </doc>
+  <sqlquery name="SQL_WF_SQIncident.query" >
+    <select>
+      <![CDATA[ 
+      select /*COUNT*/*/*COUNT*/ from(
+      select
+          t.*,
+          (case acceptTimeout
+          when '是' then 1
+          else 0
+          end) as acceptTimeoutSign,
+          (case dealTimeout
+          when '是' then 1
+          else 0
+          end) as dealTimeoutSign,
+          --(select dep.depname from bs_t_sm_userdep userdep,bs_t_sm_dep dep where userdep.depid = dep.pid and userdep.loginname = t.dealuserloginname and dep.deptype = '4' and rownum = 1) dealuserteam,
+          (select fullname from bs_t_sm_user where loginname = dealuserloginname) dealuser,
+          (select substr(depfullname,instr(depfullname,'.',1,2)+1,length(depfullname)) from( select depfullname,loginname from bs_t_sm_dep dep,bs_t_sm_user usr where dep.pid = usr.depid) where loginname = dealuserloginname) dealuserdept,
+          (select dep.depname from bs_t_sm_userdep userdep,bs_t_sm_dep dep where userdep.depid = dep.pid and userdep.loginname = t.basecreatorloginName and dep.deptype = '4' and rownum = 1) basecreatorteam          from
+          (
+            select
+              base.baseid,              --工单编号
+              base.baseschema,          --工单schema
+              base.basename,            --工单名称
+              base.basesn,              --流水号
+              base.basesummary,         --主题
+              base.basecreatorfullname, --建单人名
+              base.basecreatorloginName, --建单人登陆名
+              base.basecreatorcorp,     --建单人单位
+              base.basecreatordep,      --建单人部门
+              base.basecreatordepid,      --建单人部门id
+              base.basecreatedate,      --建单时间
+              base.baseclosedate,       --关闭时间
+              base.basestatus,          --状态名
+              (case when base.basestatus='已作废' then '已作废工单' else '未作废工单' end) sheetstatus, --是否作废工单
+              base.baseentryid,    --工单实例id
+              base.basetplid,            --模板ID
+              assigneeid,assigneedepid,
+              contactoa, -- OA (loginname)
+              (case when dealer is not null then dealer || '(已受理)' when assignee is not null then assignee || '(未受理)' when assigngroup is not null then assigngroup || '(未受理)' else '' end)  deal,  --当前处理人
+              base.BASEACCEPTDATE,--受理时间
+              base.BASEACCEPTOUTTIME,--受理时限
+              Get_StrArrayStrOfIndex(inc.incidentphenoclass,'.',0) as PhenoClass1,--现象分类
+              Get_StrArrayStrOfIndex(inc.incidentphenoclass,'.',1) as PhenoClass2,
+              Get_StrArrayStrOfIndex(inc.incidentphenoclass,'.',2) as PhenoClass3,
+              Get_StrArrayStrOfIndex(inc.incidentsourceclass,'.',0) as SourceClass1,--原因分类
+              Get_StrArrayStrOfIndex(inc.incidentsourceclass,'.',1) as SourceClass2,
+              Get_StrArrayStrOfIndex(inc.incidentsourceclass,'.',2) as SourceClass3,
+              Get_StrArrayStrOfIndex(inc.incidentsourceclass,'.',3) as SourceClass4,
+              inc.contactperson,
+              inc.ContactPersonSite,
+              inc.ContactDepartment, --联系人部门
+              (select diname from bs_t_sm_dicitem where dtcode = 'userisVip' and divalue = viplevel) isvip,
+              viplevel,
+              inc.ContactStation,
+              inc.ContactTel,
+              inc.IcidentSource,
+              inc.IncidentDes,
+              inc.OccurrenceTime,
+              inc.Incident_UrgentDgree,
+              inc.Incident_EffectDgree,
+              inc.Priority,
+              inc.IncidentPropertie,
+              inc.RecoveryTime,
+              inc.ServiceInterruptionTime,
+              inc.IncidentSolutionType,
+              inc.IncidentReason,
+              inc.ProcedureProcessing,
+              inc.Solution,
+              inc.closecode,
+              inc.submit_time,
+              inc.timeout_reason, --超时原因
+              inc.IncidentIdentification,
+              inc.cdbTeamName, --建单人团队名
+              inc.cdbTeamId,  --建单人团队id
+              inc.cdbDealTeamName, --处理人团队名
+              inc.cdbDealTeamId,   --处理人团队Id
+              inc.satisfaction_level,  --满意度
+              inc.satisfaction_content, --满意度评价
+              inc.reqRepairStartTime,   --报修开始时间
+              inc.repairedEndTime,   --维修结束时间
+              --(select dealerid from (select dealerid,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_INCIDENT' and stepno = 'step02' order by stdate desc) r where r.baseid = base.baseid and rownum = 1) as dealuserloginname,
+              case when base.basestatus = '已关闭' and (select stepno from (select stepno,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_INCIDENT' order by stdate desc) r where r.baseid = base.baseid and rownum = 1) = 'step01'
+              then (select dealerid from (select dealerid,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_INCIDENT' and stepno = 'step01' order by stdate desc) r where r.baseid = base.baseid and rownum = 1)
+                else
+              (select dealerid from (select dealerid,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_INCIDENT' and stepno = 'step02' order by stdate desc) r where r.baseid = base.baseid and rownum = 1) 
+              end  as dealuserloginname,--解决人登录名
+              case when (case
+                 when base.BASEACCEPTDATE = '0' then
+                   case 	
+                     when base.BASEACCEPTOUTTIME = '0' then
+                       0
+                     else
+                       DATE_TO_SEC( TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+                   end
+                 else
+                  to_number(base.BASEACCEPTDATE)
+               end) -
+               decode(base.BASEACCEPTOUTTIME,null,0,TO_NUMBER(base.BASEACCEPTOUTTIME))>0 then '是'
+              else '否'
+              end as acceptTimeout,
+              base.BASEFINISHDATE,--处理时间
+              base.BASEDEALOUTTIME,--处理时限
+              case when (case
+                 when base.BASEFINISHDATE = '0' then
+                   case
+                     when base.BASEDEALOUTTIME = '0' then
+                       0
+                     else
+                       DATE_TO_SEC( TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+                   end
+                 else
+                  to_number(base.BASEFINISHDATE)
+               end) -
+               decode(base.BASEDEALOUTTIME,null,0,TO_NUMBER(base.BASEDEALOUTTIME))>0 then '是'
+              else '否'
+              end as dealTimeout
+            from BS_T_BPP_BASEINFOR base,bs_t_wf_currenttask ct,bs_f_cbd_incident inc where base.baseSchema = 'CBD_INCIDENT' and base.baseid=ct.baseid(+) and base.baseschema = ct.baseschema(+) and base.baseid = inc.baseid(+)
+            /*ORDERBY*/ order by base.basecreatedate desc/*ORDERBY*/
+          ) t
+          ) where 1=1  $customwhere$
+     
+      ]]> 
+    </select>
+    <condition  cols="3" labprecent="11" textprecent="22" >
+      <text displayname="wf_sheet_creator" name="creator" id="creator_name" />
+      <text displayname="建单团队" name="cdbTeamName" id="cdbTeamName" />
+      <text displayname="建单处室" name="creator_dep" id="creator_dep"/>
+       
+      <text displayname="wf_sheet_dealer" name="dealername" id="dealername" />
+      <text displayname="处理团队" name="cdbDealTeamName" id="cdbDealTeamName"/>
+      <text displayname="处理处室" name="dealGroup" id="dealGroup" />
+      <text displayname="联系人" name="contactperson" id="contactperson"/>
+      <text displayname="联系人OA" name="contactoa" id="contactoa"/>
+     <!--  <text displayname="联系部门" name="ContactDepartment" id="ContactDepartment"/> -->
+      
+      <select displayname="联系人VIP标识" name="vipsign"  dictype="userisVip" value="DINAME"/>
+       <text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+       <text displayname="wf_sheet_title" name="workSheetTitle" />
+       <text displayname="工单状态" name="basestatus" id="basestatus" onclick="selectStatus()"/>
+        <select displayname="二线响应超时" name="acceptTimeoutSign" id="acceptTimeoutSign" dictype="sheetTimeout" value="DINAME"></select>
+          <select displayname="二线处理超时" name="dealTimeoutSign" id="dealTimeoutSign" dictype="sheetTimeout" value="DINAME"></select>
+      <text displayname="现象分类" name="incidentphenoclass" id="incidentphenoclass" onclick="openPhenoClassTree(false,'incidentphenoclass')"/>
+       
+      <date displayname="wf_sheet_createstarttime" name="createstarttime" />
+      <date displayname="wf_sheet_createendtime" name="createendtime" />
+      <text displayname="原因分类" name="IncidentSourceClass" id="IncidentSourceClass" onclick="openCauseClassTree(false,'IncidentSourceClass')"/>
+     <select displayname="工单是否作废" name="sheetstatus" id="sheetstatus" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '已作废工单' ID, '已作废工单' NAME   FROM DUAL UNION ALL SELECT '未作废工单' ID, '未作废工单' NAME   FROM DUAL ]]></sql>
+	 </select>
+       
+      <hidden name="baseSchema" />
+      
+      <hidden name="creator_loginname" id="creator_loginname" />
+      <hidden name="dealer_loginname" id="dealer_loginname" />
+      <hidden name="dealGroup_id" id="dealGroup_id" /> 
+      <hidden name="creator_dep_id" id="creator_dep_id" /> 
+      <hidden name="cdbTeamId" id="cdbTeamId" /> 
+      <hidden name="cdbDealTeamId" id="cdbDealTeamId" /> 
+    </condition>
+    <customwhere name="customwhere" prepend="and" >
+      <if prepend="and" exp="'#selectstatus#'>''">
+        <success>
+          <sql prepend="and" >
+            <![CDATA[ basestatus = #selectstatus# ]]>
+          </sql>
+        </success>
+      </if>
+      <field prepend="and" operator="=" colname="sheetstatus" value="#sheetstatus#"/> <!--工单是否作废 -->
+        <field prepend="and" operator="=" colname="basestatus" value="#basestatus#"/> <!--工单状态 -->
+        <field prepend="and" operator="like"  colname="baseCreatorLoginName"  value="#creator_loginname#"/><!-- 建单人 -->
+        <field prepend="and" operator="like"  colname="cdbTeamId"  value="#cdbTeamId#"/><!-- 建单人团队 -->   
+        <field prepend="and" operator="like"  colname="basecreatordepid"  value="#creator_dep_id#"/><!-- 建单部门 --> 
+        <field prepend="and" operator="like"  colname="dealuserloginname"  value="#dealer_loginname#"/><!-- 处理人 --> 
+        <field prepend="and" operator="like"  colname="dealuserdept"  value="#dealGroup#"/><!-- 处理部门 --> 
+        <field prepend="and" operator="like"  colname="contactperson"  value="#contactperson#"/><!-- 联系人--> 
+        <field prepend="and" operator="like"  colname="upper(contactoa)"  value="#contactoa#"/><!-- 联系人OA --> 
+        <!--<field prepend="and" operator="like"  colname="ContactDepartment"  value="#ContactDepartment#"/> 联系人部门--> 
+        <field prepend="and" operator="like"  colname="viplevel"  value="#vipsign#"/><!-- vipsign --> 
+        <field prepend="and" operator="like"  colname="incidentphenoclass"  value="#incidentphenoclass#"/><!-- 现象分类 --> 
+        <field prepend="and" operator="like"  colname="IncidentSourceClass"  value="#IncidentSourceClass#"/><!-- 原因分类 --> 
+        <field prepend="and" operator="="  colname="acceptTimeoutSign"  value="#acceptTimeoutSign#"/><!-- 二线响应超时 --> 
+            <field prepend="and" operator="="  colname="dealTimeoutSign"  value="#dealTimeoutSign#"/><!-- 二线处理超时 --> 
+        <field prepend="and" operator=">="  colname="baseCreateDate"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+        <field prepend="and" operator="&lt;="  colname="baseCreateDate"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+        <field prepend="and" operator="like"  colname="baseSn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+        <field prepend="and" operator="like"  colname="upper(baseSummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+        <field prepend="and" operator="="  colname="cdbDealTeamId"  value="#cdbDealTeamId#"/><!--处理人团队 -->
+      <if prepend="and" exp="'#wfTypeStr#'>''">
+        <success>
+          <field prepend="or" operator="="  colname="baseSchema"  value="#wfTypeStr#"/>
+        </success>
+      </if>
+    </customwhere>
+    <export>
+      <field colname="basesn" title="wf_sheet_serialnum" type="string" />
+      <field colname="basestatus" title="wf_dealgroup_entrystate" type="string" />
+      <field colname="basecreatedate" title="wf_sheet_createtime" type="date" />
+      <field colname="basecreatorfullname" title="wf_sheet_creator" type="string" />
+      <field colname="basecreatordep" title="wf_baseinfoview_creatorDep" type="string" />
+      <field colname="basecreatorteam" title="wf_sheet_creator_team" type="string" />
+      <field colname="contactperson" title="wf_sheet_contact" type="string" />
+      <field colname="ContactPersonSite" title="wf_sheet_contact_site" type="string" />
+      <field colname="ContactDepartment" title="wf_sheet_contact_dept" type="string" />
+      <field colname="IsVIP" title="wf_sheet_vipsign" type="string" />
+      <field colname="ContactStation" title="wf_sheet_contact_station" type="string" />
+      <field colname="ContactTel" title="wf_sheet_contact_phone" type="string" />
+      <field colname="IcidentSource" title="wf_sheet_in_source" type="string" />
+      <field colname="BaseSummary" title="wf_sheet_in_summary" type="string" />
+      <field colname="IncidentDes" title="wf_sheet_in_desc" type="string" />
+      <field colname="OccurrenceTime" title="wf_sheet_in_happen_time" type="date" /><!--事件发生时间 -->
+      <field colname="Incident_UrgentDgree" title="wf_sheet_in_UrgentDgree" type="string" />
+      <field colname="Incident_EffectDgree" title="wf_sheet_in_EffectDgree" type="string" />
+      <field colname="Priority" title="wf_sheet_in_Priority" type="string" />
+      <field colname="PhenoClass1" title="wf_sheet_in_PhenoClass1" type="string" />
+      <field colname="PhenoClass2" title="wf_sheet_in_PhenoClass2" type="string" />
+      <field colname="PhenoClass3" title="wf_sheet_in_PhenoClass3" type="string" />
+      <field colname="IncidentIdentification" title="wf_sheet_in_Identification" type="string" />
+      <field colname="submit_time" title="wf_sheet_inc_sendtime" type="date" /><!-- 事件派单时间 --><!-- 提交请求的时间 -->
+      <field colname="BASEACCEPTDATE" title="wf_sheet_BASEACCEPTDATE" type="date" />
+      <field colname="BASEFINISHDATE" title="wf_sheet_BASEFINISHDATE" type="date" />
+      <field colname="IncidentPropertie" title="wf_sheet_Propertie" type="string" />
+      <field colname="SourceClass1" title="wf_sheet_SourceClass1" type="string" />
+      <field colname="SourceClass2" title="wf_sheet_SourceClass2" type="string" />
+      <field colname="SourceClass3" title="wf_sheet_SourceClass3" type="string" />
+      <field colname="SourceClass4" title="wf_sheet_SourceClass4" type="string" />
+      <field colname="RecoveryTime" title="wf_sheet_RecoveryTime" type="date" />
+      <field colname="ServiceInterruptionTime" title="wf_sheet_ServiceInterruptionTime" type="string" />
+      <field colname="IncidentSolutionType" title="wf_sheet_SolutionType" type="string" />
+      <field colname="IncidentReason" title="wf_sheet_IncidentReason" type="string" />
+      <field colname="ProcedureProcessing" title="wf_sheet_in_ProcedureProcessing" type="string" />
+      <field colname="Solution" title="wf_sheet_in_Solution" type="string" />
+      <field colname="closecode" title="wf_sheet_in_closecode" type="string" />
+      <field colname="dealuser" title="wf_sheet_deal_user" type="string" />
+      <field colname="dealuserdept" title="wf_sheet_deal_user_dept" type="string" />
+       <field colname="cdbDealTeamName" title="wf_sheet_cdbDealTeamName" type="string" /><!-- 处理人团队 -->
+      <field colname="acceptTimeout" title="wf_sheet_accept_timeout" type="string" /><!-- 受理超时 -->
+      <field colname="dealTimeout" title="wf_sheet_deal_timeout" type="string" /><!-- 处理超时 -->
+      <field colname="timeout_reason" title="wf_sheet_timeout_reason" type="string" />
+      <field colname="satisfaction_level" title="wf_sheet_satisfaction_level" type="string" /><!--满意度 -->
+      <field colname="satisfaction_content" title="wf_sheet_satisfaction_content" type="string" /><!--满意度评价 -->
+      <field colname="reqRepairStartTime" title="wf_sheet_reqRepairStartTime" type="date" /><!-- 报修开始时间-->
+      <field colname="repairedEndTime" title="wf_sheet_repairedEndTime" type="date" /><!-- 维修结束时间-->
+    </export>
+  </sqlquery>
+</sql-group>

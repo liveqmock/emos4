@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_Config_EL_IT_CM_NetSupportSystemList.query" >
+		<select>
+			<![CDATA[
+				 select /*COUNT*/ distinct c650000001 as sysname /*COUNT*/ from {WF4:Config_EL_IT_CM_NetSupportSystem}
+			]]>
+		</select>
+		
+	</sqlquery>
+</sql-group>

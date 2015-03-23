@@ -1,0 +1,112 @@
+.suckerdiv ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+/* Width of Menu Items */
+border-bottom: 0px solid #ccc;
+}
+	
+.suckerdiv ul li{
+position: relative;
+}
+	
+/*1st level sub menu style */
+.suckerdiv ul li ul{
+left: -107px; /* Parent menu width - 1*/
+position: absolute;
+width: 180px; /*sub menu width*/
+top: 30;
+display: none;
+background:url(../images/index/tag_rightbg.png) repeat-x;
+}
+.suckerdiv ul li ul li ul{
+	background:url(../images/index/second_bg.png) repeat-x;
+	border-bottom:1px #748290 solid;
+	border-top:1px #7695bc solid;
+	border-left:1px #7695bc solid;
+	border-right:1px #748290 solid;
+	width:150px;
+	}
+.suckerdiv ul li ul li ul li a:hover{
+	background:url(../images/index/second_item_bg.png) no-repeat left top;
+    height:29px;
+	width:150px;
+	}
+/*All subsequent sub menu levels offset */
+.suckerdiv ul li ul li ul{ 
+left: -152px;
+top:0px;/* Parent menu width - 1*/
+}
+.mymenu_first_item{
+	background:#000000;
+	}
+/* menu links style */
+.suckerdiv ul li a{
+display: block;
+color: black;
+text-decoration: none;
+font:12px ËÎÌו;
+border: 0px solid #ccc;
+border-bottom: 0;
+height:31px;
+line-height:31px;
+}
+
+.suckerdiv ul li a:visited{
+color: black;
+}
+
+.suckerdiv ul li a:hover{
+background:url(../images/index/mymenu_first_item_over.png) no-repeat left top;
+width:192px;
+height:31px;
+line-height:31px;
+}
+
+.suckerdiv .subfolderstyle{
+background: url(../images/index/icon_mymenu.png) no-repeat;
+
+}
+
+
+	
+/* Holly Hack for IE \*/
+* html .suckerdiv ul li { float: left; height: 1%; }
+* html .suckerdiv ul li a { height: 1%; }
+/* End */
+
+
+.first_item_li{
+	background:url(../images/index/mymenu_first_bg.png) repeat-y;width:192px;
+	height:31px;line-height:31px;
+	
+	}
+.second_item_li{
+	width:152px;
+	height:31px;line-height:31px;
+	
+	}
+.first_item_aSpan{
+	padding-left:10px;
+	}
+.mymenutitle{
+	background:url(../images/index/mymenutitle.png) no-repeat;
+	height:33px;
+	display:block;
+	margin-left:15px;
+	padding-left:24px;
+	color:#dfecff;
+	line-height:33px;
+	}
+.mymenu_icon{
+	display:block;background: url(../images/index/exit.png) no-repeat left center;height:31px;line-height:31px;width:16px;float:left;margin-left:30px;*margin-left:40px;_margin-left:10px;margin-left:30px\0;
+	}
+.mymenu_icon2{
+	display:block;background: url(../images/index/exit.png) no-repeat left center;height:31px;line-height:31px;width:16px;float:left;margin-left:30px;*margin-left:30px;_margin-left:10px;margin-left:30px\0;
+	}
+.mymenu_title{
+	background:url(../images/index/mymenu_first_top.png) repeat-x;width:192px;height:33px;
+	}
+.mymenu_bottom{
+	background:url(../images/index/mymenu_first_bottom.png) no-repeat bottom;width:192px;height:13px;
+	}

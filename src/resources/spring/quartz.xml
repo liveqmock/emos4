@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-lazy-init="false">
+	<bean id="slaRollCheckerThread"
+		class="com.ultrapower.eoms.ultrasla.manager.RollCheckerThread" >
+		<property name="eventActionRollChecker" ref="eventActionRollChecker"/>
+	</bean>
+	
+	<bean id="rollCheckerThreadMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="slaRollCheckerThread"></property>
+		<property name="targetMethod" value="rollChecker"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>	
+	<bean id="slaRollCheckerRule"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="rollCheckerThreadMethod" />
+		</property>
+		<property name="startDelay">
+		<!-- 服务启动一分钟后执行 -->
+		<value>60000</value>
+		</property> 
+		<property name="repeatInterval">
+			<!-- 每隔30秒执行一次 -->
+			<value>30000</value>
+		</property>
+	</bean>
+	
+	<bean id="slaEventScanThread"
+		class="com.ultrapower.eoms.ultrasla.manager.EventScanThread" >
+		<property name="eventScanTrigger" ref="eventScanTrigger"/>
+	</bean>
+	
+	<bean id="slaEventScanThreadMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="slaEventScanThread"></property>
+		<property name="targetMethod" value="eventScan"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>	
+	<bean id="slaEventScanRule"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="slaEventScanThreadMethod" />
+		</property>
+		<property name="startDelay">
+		<!-- 服务启动一分钟后执行 -->
+		<value>60000</value>
+		</property> 
+		<property name="repeatInterval">
+			<!-- 每隔60秒执行一次 -->
+			<value>60000</value>
+		</property>
+	</bean>
+	
+	<!-- 自动关单 -->
+	<bean id="closeSheet" class="com.ultrapower.eoms.cdbBusiness.service.CloseSheet" >
+		<property name="dicManagerService" ref="dicManagerService"></property>
+	</bean>
+	<bean id="closeSheetMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="closeSheet"></property>
+		<property name="targetMethod" value="closeSheet"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>	
+	<bean id="closeSheetRule" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="closeSheetMethod" />
+		</property>
+		<property name="startDelay">
+			<value>${sheet.autoCloseCheckTime}</value>
+		</property>
+		<property name="repeatInterval">
+			<value>${sheet.autoCloseCheckTime}</value>
+		</property>
+	</bean>
+	
+	<!-- 短信和邮件线程触发START -->
+	<bean id="sendSmServerAction" 
+		class="com.ultrapower.eoms.common.core.component.sms.web.SmSendServerMainAction">
+	</bean>
+	<bean id="sendMailServerAction" 
+		class="com.ultrapower.eoms.common.core.component.sms.web.MailSendServerMainAction">
+	</bean>
+	<!-- 工单与其它系统同步线程触发 -->
+	<bean id="syncStausToOtherSysAction" 
+		class ="com.ultrapower.wfinterface.core.web.SyncStausToOtherSysAction">
+	</bean>
+	
+	<bean id="sendSmServerMethod" 
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="sendSmServerAction"></property>
+		<property name="targetMethod" value="send"></property>
+		<property name="concurrent" value="true"></property>
+	</bean>
+	
+	<bean id="sendMailServerMethod" 
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="sendMailServerAction"></property>
+		<property name="targetMethod" value="send"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<bean id="syncReSheetToOtherSysMethod"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="syncStausToOtherSysAction"></property>
+		<property name="targetMethod" value="syncReSheetToOtherSys"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>
+	
+	<bean id="sendSmsRule"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="sendSmServerMethod" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动3分钟后执行 -->
+			<value>60000</value>
+		</property> 
+		<property name="repeatInterval">
+			<!--每隔3分钟执行一次 -->
+			<value>60000</value>
+		</property>
+	</bean>
+	<bean id="sendMailRule"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="sendMailServerMethod" />
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动3分钟后执行 -->
+			<value>60000</value>
+		</property> 
+		<property name="repeatInterval">
+			<!--每隔3分钟执行一次 -->
+			<value>60000</value>
+		</property>
+	</bean>
+	
+	<bean id="syncReSheetToOtherSysRule"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="syncReSheetToOtherSysMethod"/>
+		</property>
+		<property name="startDelay">
+			<!-- 服务启动1分钟后执行 -->
+			<value>20000</value>
+		</property> 
+		<property name="repeatInterval">
+			<!--每隔0.5分钟执行一次 -->
+			<value>10000</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 容器：将触发器注册进来 -->
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<!-- 注册触发器(Trigger) -->
+			<list>
+			<!-- 
+				<ref bean="slaEventScanRule"/>
+				<ref bean="slaRollCheckerRule"/>
+			 	<ref bean="sendSmsRule"/>
+			 	<ref bean="sendMailRule"/>
+			 	<ref bean ="syncReSheetToOtherSysRule"/>
+			 	<ref bean ="closeSheetRule"/>
+			 -->
+			 	
+			</list>
+		</property>
+		<property name="quartzProperties">
+			<props>
+				<!-- 随机存储，非持久化 -->
+				<prop key="org.quartz.jobStore.class">
+					org.quartz.simpl.RAMJobStore
+				</prop>
+				<!-- 线程池 -->
+				<prop key="org.quartz.threadPool.class">
+					org.quartz.simpl.SimpleThreadPool
+				</prop>
+				<prop key="org.quartz.threadPool.threadCount">10</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

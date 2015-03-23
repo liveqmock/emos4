@@ -1,0 +1,57 @@
+/* Simple Theme */
+
+body { background:#fff;color:#555}
+
+/* Grid */
+.grid-s230m0 .col-sub { margin-left: -100%;width: 230px}
+.grid-s230m0 .main-wrap { margin-left:234px;height:100%}
+
+/* Top Bar */
+.topbar { background:url(img/hbg.gif) repeat-x;height:26px}
+.topbar h2 { float:left;font-size:12px; color:#555;font-weight:normal;padding:2px 10px;*padding-top:4px;}
+.topbar h2.hd { background:#afcbf9 url(img/hdr.gif) no-repeat right top;padding:0 30px 0 5px;margin:1px 0;height:22px;color:#555;*padding-top:2px}
+.topbar em { background-repeat:no-repeat;background-position: left center;padding-left:20px;display:block}
+.topbar em.hot { background-image:url(img/hot.png)}
+.topbar em.pro { background-image:url(img/pro.png)}
+.topbar em.usr { background-image:url(img/user.png)}
+.topbar em.fav { background-image:url(img/fav.png)}
+.topbar em.map { background-image:url(img/map.png)}
+.topbar em.new { background-image:url(img/new.png)}
+.topbar em.my { background-image:url(img/my.png)}
+.topbar em.feed { background-image:url(img/feed.png)}
+.topbar em.myadd { background-image:url(img/note_add.png)}
+.topbar em.recent { background-image:url(img/recent.png)}
+.toolbar { float:right;}
+.toolbar .btn-switch { background:url(img/switch.gif) no-repeat;width:16px;height:16px;cursor:pointer;margin:3px;}
+.max .toolbar .btn-switch { background-position:-3px -16px;width:12px;margin:3px 0;}
+
+/* Layout Switch */
+.max .col-sub { width:12px}
+.max .main-wrap { margin-left:12px}
+.max #common,
+.max #treenav,
+.max .topbar h2 { display:none}
+.max #nav { overflow:hidden;background:#fff}
+
+/* Tabs */
+.tabs { position:relative;margin:40px 0 30px;}
+.ks-switchable-nav { left: 5px; margin-top: -29px; position: absolute; z-index: 99;}
+.ks-switchable-nav li { background: url(img/tabs-sprite.gif) no-repeat scroll 0 6px;cursor: pointer;float: left;height: 27px;line-height: 21px;margin-right: 3px;padding-top: 8px;text-align: center; width: 130px;}
+.ks-switchable-nav li.ks-active { background-position: 0 -40px; cursor: default;}
+.ks-switchable-content { border-top: 1px solid #AEC7E5;height: 140px;padding: 10px;position: relative;width:600px;}
+
+/* Repository */
+.rep-fault { width:90px;height:90px;background: url(img/rep-fault.gif) no-repeat;}
+
+.rep-fault1 { width:90px;height:90px;background: url(img/rep-fault1.gif) no-repeat;}
+.rep-fault2 { width:90px;height:90px;background: url(img/rep-fault2.gif) no-repeat;}
+.rep-fault3 { width:90px;height:90px;background: url(img/rep-fault3.gif) no-repeat;}
+.rep-fault4 { width:90px;height:90px;background: url(img/rep-fault4.gif) no-repeat;}
+.rep-fault5 { width:90px;height:90px;background: url(img/rep-fault5.gif) no-repeat;}
+.rep-fault6 { width:90px;height:90px;background: url(img/rep-fault6.gif) no-repeat;}
+.rep-fault7 { width:90px;height:90px;background: url(img/rep-fault7.gif) no-repeat;}
+.doc-background { width:90px;height:90px;background: url(img/doc-background.gif) no-repeat;}
+
+.rep-warn { width:90px;height:90px;background: url(img/rep-warn.gif) no-repeat;}
+.rep-client { width:90px;height:90px;background: url(img/rep-client.gif) no-repeat;}
+.rep-alert { width:90px;height:90px;background: url(img/rep-alert.gif) no-repeat;}

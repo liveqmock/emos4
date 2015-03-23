@@ -1,0 +1,204 @@
+/* CSS file */
+.designCanvasBackground
+{
+	backgroundImage: Embed(source="../images/background.gif"); 
+ 	border-skin:ClassReference("design.style.RepeatBackground");
+ 	background-attachment: fixed;
+	backgroundColor: #FFFFFF;
+}
+.designCanvasBackground1
+{
+	backgroundImage: Embed(source="../images/background.gif"); 
+	border-skin:ClassReference("design.style.RepeatBackground");
+	background-attachment: fixed;
+	backgroundColor: #FFFFFF;
+}
+.horizontalGradientBackground
+{
+    border-skin: ClassReference("design.style.HorizontalGradientBackground");
+    fill-colors: #EEEEEE, #CCCCCC;
+}
+.verticalGradientBackground
+{
+    border-skin: ClassReference("design.style.VerticalGradientBackground");
+    fill-colors: #EEEEEE, #CCCCCC;
+}
+.statusStyle
+{
+	borderColor:#050505;
+	borderStyle:solid;
+	borderThickness:1;
+}
+.statusTitle
+{
+   backgroundAlpha:0.8;
+   borderColor:#B7BABC;
+   borderStyle:outset;
+   border-skin: ClassReference("design.style.VerticalGradientBackground");
+   fill-colors: #EEEEEE, #CCCCCC;
+}
+.statusTitleFocus
+{
+   backgroundAlpha:0.8;
+   borderColor:#B7BABC;
+   borderStyle:outset;
+   border-skin: ClassReference("design.style.VerticalGradientBackground");
+   fill-colors: #EEEEEE, #FFCCCC;
+}
+.statusLabel
+{
+    horizontalCenter:0;
+    verticalCenter:0;
+    fontSize:12;
+    fontFamily:Verdana;
+}
+.statusResize
+{
+	border-skin: ClassReference("design.style.VerticalGradientBackground");
+    fill-colors: #EEEEEE, #CCCCCC;
+	right:0;
+}
+.infoBar
+{
+	border-skin: ClassReference("design.style.VerticalGradientBackground");
+    fill-colors: #E1E6FA, #ABC8E2;
+	right:0;
+}
+.statusResizeMoveOver
+{
+	
+	backgroundImage: Embed(source="../images/dd.jpg"); 
+ 	border-skin:ClassReference("design.style.RepeatBackground");
+ 	background-attachment: fixed;
+	backgroundColor: #FFFFFF;
+	right:0;
+}
+.processSubFlow
+{
+	borderStyle:solid;
+	borderThickness:1;
+	borderColor:#666666;
+	backgroundImage: Embed(source="../images/free.gif"); 
+}
+.processFocus
+{
+	backgroundColor:#4704F1;
+	borderStyle:solid;
+	borderThickness:1.5;
+}
+.processUnFocus
+{
+	backgroundColor:#666666;
+	borderStyle:solid;
+	borderThickness:1;
+}
+.selectBox
+{
+	borderColor:#4C5396;
+	borderStyle:solid;
+	borderThickness:1;
+	backgroundColor:#4442AB;
+	backgroundAlpha:0.05;
+}
+
+.ddCanvasBackground
+{
+	backgroundImage: Embed(source="../images/dd.jpg"); 
+ 	border-skin:ClassReference("design.style.RepeatBackground");
+ 	background-attachment: fixed;
+	backgroundColor: #FFFFFF;
+}
+.processinfolabel
+{
+	color:#CC0000;
+	fontWeight:bold;
+	fontSize:12;
+	width:80;
+}
+.processinfovalue1
+{
+	fontSize:12;
+	fontWeight:bold;
+}
+.processinfovalue
+{
+	fontSize:12;
+}
+.processinfoCanvas
+{
+	x:0;
+	y:0;
+	visible:false;
+	backgroundColor:#ffffaa;
+	backgroundAlpha:0.8;
+	
+	borderStyle:solid;
+	borderThickness:1;
+	borderColor:#CCCCCC;
+}
+.processinfoOuterVB
+{
+	top:5;
+	left:3;
+	bottom:5;
+	right:3;
+	verticalGap: 0;
+}
+.processinfoOuterVB1
+{
+	top:25;
+	left:3;
+	bottom:5;
+	right:3;
+	verticalGap: 0;
+}
+.fieldlabelcanvas
+{
+	background-color:#DCFFA8;
+	borderStyle:solid;
+	borderThickness:1;
+	borderColor:#C1DAD7;
+}
+.fieldvaluecanvas
+{
+   background-color:#E9FFCC;
+   borderStyle:solid;
+   borderThickness:1;
+   borderColor:#C1DAD7;
+}
+.processinfoHB
+{
+	horizontalGap:0;
+}
+.infoBarLabelCanvas
+{
+   border-skin: ClassReference("design.style.VerticalGradientBackground");
+   fill-colors: #EEEEEE, #bbaaff;
+}
+.infoBarProcessInfoTitle
+{
+	fontSize:14;
+	fontWeight:bold;
+	color:#090299;
+}
+.infoBarProcessinfolabel
+{
+	color:#000000;
+	fontWeight:bold;
+	fontSize:12;
+}
+.infoBarProcessinfoField
+{
+	horizontalGap:0;
+	background-color:#E9FFCC;
+    borderStyle:solid;
+    borderThickness:1;
+    borderColor:#C1DAD7;
+}
+.infoBarProcessinfoFieldlabel
+{
+	color:#090299;
+	fontWeight:bold;
+	fontSize:12;
+}
+

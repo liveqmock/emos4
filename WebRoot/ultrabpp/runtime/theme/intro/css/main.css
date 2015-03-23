@@ -1,0 +1,368 @@
+body
+{
+	margin:0px;
+	background-color:#f8fbfc;
+	font-family:宋体;
+	font-size:12px;
+	padding-bottom:10px;
+}
+
+#bpp_WorksheetForm
+{
+	margin:0px;
+	padding:0px;
+}
+#bpp_FormContainer
+{
+	width:960px;
+	margin:0 auto;
+}
+.bpp_White_Block
+{
+	height:3px;
+	background-color:#ffffff;
+	background:#ffffff url(../images/panel-border.png) repeat-y;
+	clear:both;
+}
+
+/* Header START */
+#bpp_Header
+{
+	clear:both;
+	height:65px;
+	background-color:#ff9933;
+	padding:0px 5px 0px 5px;
+	background:url(../images/top-bg.gif) repeat-x;
+	border-bottom: solid #bfe4f2 1px;
+}
+#bpp_Header #bpp_BaseStatus
+{
+	float:left;
+	background-color:#ff9933;
+	background:url(../images/status-bg.gif);
+	font-family:黑体;
+	font-size:16px;
+	height:20px;
+	padding:10px 5px 2px 30px;
+	color:#003366;
+	/*border-left:solid #68afc2 1px;*/
+	/*border-right:solid #68afc2 1px;*/
+}
+#bpp_Header #bpp_BaseName
+{
+	font-size:20px;
+	font-weight:bold;
+	color:#ffffff;
+	font-family:黑体;
+	margin-top:8px;
+	margin-bottom:2px;
+	margin-left:5px;
+	float:left;
+}
+#bpp_Header #bpp_BaseSN
+{
+	font-size:20px;
+	color:#ffffff;
+	margin-top:8px;
+	margin-bottom:2px;
+	margin-left:5px;
+	float:left;
+}
+#bpp_Header #bpp_ExtendLinks
+{
+	margin-top:10px;
+	float:right;
+}
+#bpp_Header #bpp_ExtendLinks span
+{
+	text-decoration:underline;
+	margin-left:10px;
+}
+#bpp_Header #bpp_ExtendLinks span a
+{
+	color:#ffffff;
+	text-decoration:underline;
+	margin-left:10px;
+}
+#bpp_Header #bpp_BasicInfor
+{
+	padding-top:16px;
+	padding-bottom:5px;
+	clear:both;
+}
+#bpp_Header #bpp_BasicInfor span
+{
+	color:#333333;
+	margin-right:20px;
+}
+#bpp_TaskInfor
+{
+	clear:both;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-bottom:5px;
+	background-color:#e4f1f7;
+	border-bottom:solid #228cba 1px;
+}
+#bpp_TaskInfor div
+{
+	margin:10px 10px 0px 5px;
+}
+#bpp_TaskInfor #bpp_TaskName
+{
+	margin:0px 10px 10px 5px;
+}
+#bpp_TaskInfor span
+{
+	color:black;
+	margin-right:20px;
+}
+/* Header END */
+
+/* Body START */
+#bpp_Body
+{
+	clear:both;
+	margin-bottom:5px;
+}
+/* Body END */
+
+/* Button panel START */
+#bpp_BtnPanel
+{
+	clear:both;
+	margin-bottom:5px;
+}
+#bpp_BtnPanel .bpp_BtnTip
+{
+	background-color:#2094c1;
+	padding:5px;
+	color:white;
+	font-weight:bold;
+	margin-bottom:3px;
+}
+#bpp_BtnPanel #bpp_BtnPanelBody
+{
+	background:#ffffff url(../images/actpanel-border.png) repeat-y;
+	border-bottom:solid #cccccc 1px;
+}
+#bpp_BtnPanel ul
+{
+	list-style:none;
+	margin:5px 10px 5px 10px;
+	padding:0px;
+}
+#bpp_BtnPanel ul li
+{
+	height:25px;
+	font-size:14px;
+	cursor:pointer;
+}
+#bpp_BtnPanel ul li:hover
+{
+	height:25px;
+	font-size:14px;
+	cursor:pointer;
+	color:#3399CC;
+}
+#bpp_BtnPanel #bpp_BtnPanelBody #bpp_BtnPanel_Action
+{
+	height:36px;
+	background-color:#cccccc;
+	clear:both;
+	padding-left:3px;
+	margin-left:1px;
+	margin-right:1px;
+	background:#fbfad5 url(../images/actionpanel-bg.png) repeat-x;
+	border-top:solid #cccccc 1px;
+}
+#bpp_BtnPanel #bpp_BtnPanelBody #bpp_BtnPanel_Action input
+{
+	height:30px;
+	width:80px;
+	margin:3px 2px 3px 0px;
+	border:solid #e6e68a 1px;
+	background:#fbfad5 url(../images/actionbtn-bg.png) repeat-x;
+}
+/* Button panel END */
+
+/* Button panel START */
+#bpp_ActPanel
+{
+	display:none;
+	clear:both;
+	margin-bottom:5px;
+}
+#bpp_ActPanel #bpp_ActBody #bpp_ActComment
+{
+	background-color:#2094c1;
+	padding:5px;
+	color:white;
+	font-weight:bold;
+}
+#bpp_ActPanel #bpp_ActBody
+{
+	background-color:#ffffff;
+	border-bottom:solid #cccccc 1px;
+	background:#ffffff url(../images/panel-border.png) repeat-y;
+}
+#bpp_ActPanel #bpp_ActPanel_BtnPanel
+{
+	height:36px;
+	background-color:#cccccc;
+	clear:both;
+	padding-left:3px;
+	margin-left:1px;
+	margin-right:1px;
+	background:#fbfad5 url(../images/actionpanel-bg.png) repeat-x;
+}
+#bpp_ActPanel #bpp_ActPanel_BtnPanel input
+{
+	height:30px;
+	width:80px;
+	margin:2px 2px 3px 0px;
+	border:solid #e6e68a 1px;
+	background:#fbfad5 url(../images/actionbtn-bg.png) repeat-x;
+}
+/* Button panel END */
+
+/* Hidden panel START */
+#bpp_HiddenPanel
+{
+	display:none;
+}
+/* Hidden panel END */
+
+/* 控件 */
+.bpp_Field
+{
+	float:left;
+}
+.bpp_Field table
+{
+	margin-left:1px;
+	background-color:#ffffff;
+	margin-bottom:1px;
+}
+.bpp_Field .bpp_Field_Label
+{
+	width:95px;
+	background:url(../images/field-label.png) no-repeat right bottom;
+	overflow:hidden;
+}
+
+.bpp_Field .bpp_Field_Label div
+{
+	overflow:hidden;
+	margin-left:3px;
+}
+.bpp_Field .bpp_Field_Label div div
+{
+	margin:9px 1px 0px 0px;
+}
+.bpp_Field .bpp_Field_Label div span
+{
+	color:#333333;
+}
+.bpp_Field .bpp_Field_Label div .bpp_Require
+{
+	font-weight:bold;
+	color:#993300;
+}
+.bpp_Field .bpp_Field_Label div .bpp_Require font
+{
+	color:ff0000;
+	font-size:10px;
+}
+
+.bpp_Field .bpp_Field_Label_Large
+{
+	width:95px;
+	background:url(../images/field-label.png) no-repeat right bottom;
+	overflow:hidden;
+}
+.bpp_Field .bpp_Field_Label_Large div
+{
+	overflow:hidden;
+	margin-left:5px;
+}
+.bpp_Field .bpp_Field_Label_Large div div
+{
+	margin:1px 6px 0px 0px;
+}
+.bpp_Field .bpp_Field_Label_Large div span
+{
+	color:#333333;
+	line-height:110%;
+}
+.bpp_Field .bpp_Field_Label_Large div .bpp_Require
+{
+	font-weight:bold;
+	color:#993300;
+	line-height:110%;
+}
+.bpp_Field .bpp_Field_Label_Large div .bpp_Require font
+{
+	color:ff0000;
+	font-size:10px;
+	line-height:110%;
+}
+
+.bpp_Field_RO table td input
+{
+	margin-top:1px;
+	border:solid #999999 0px !important;
+}
+.bpp_Field_RO table td textarea
+{
+	margin-top:1px;
+	border:solid #999999 0px !important;
+	overflow:hidden;
+}
+.bpp_Field_Extend
+{
+	float:left;
+	height:22px;
+	width:6px;
+	background-color:#eeeeee;
+	border:solid #cccccc 1px;
+	cursor:pointer;
+	margin-left:2px;
+	margin-top:3px;
+}
+.bpp_Field_RO .bpp_Field_Extend
+{
+	height:22px;
+	width:6px;
+	cursor:default;
+	background-color:transparent !important;
+	border:solid #999999 0px !important;
+	margin:0px !important;
+	margin-top:3px !important;
+}
+.bpp_Field_RO .bpp_Field_SelectExtend
+{
+	height:22px;
+	width:22px;
+	background:center;
+	border:solid #999999 0px !important;
+	cursor:default;
+	margin:0px !important;
+	margin-left:-1px !important;
+	margin-top:3px !important;
+}
+
+.bpp_msgtip_require
+{
+	position:absolute;
+	height:23px;
+	width:35px;
+	background:url(../images/msg-req.png) right bottom;
+}
+.bpp_msgtip_overlength
+{
+	position:absolute;
+	height:23px;
+	width:35px;
+	background:url(../images/msg-max.png) right bottom;
+}

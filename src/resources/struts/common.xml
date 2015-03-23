@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="common" extends="eoms" namespace="/common">
+		<action name="businessOrgTree" method="getBusinessOrgTree"
+			class="businessOrgTreeAction" />
+		<action name="leftTree" method="getLeftMenuTree"
+			class="leftMenuTree" />
+		<action name="depTree" method="getDepTree" class="userDepTree" />
+		<action name="customDepUserTree" method="getCustomDepUserTree"
+			class="userDepTree" />
+		<action name="customOrgnized" method="customOrgnized"
+			class="userDepTree" />
+		<action name="getMyMenuFolderTree" method="getMyMenuFolderTree"
+			class="myMenuTreeAction" />
+		<action name="myMenuTree" method="getMyMenuTree"
+			class="myMenuTreeAction" />
+		<action name="changeItemParentidAction" method="changeParentid"
+			class="myMenuTreeAction" />
+		<action name="menuTree" method="getMenuTree" class="menuTree" />
+		<action name="allMenuTree" method="getAllMenuTree"
+			class="menuTree" />
+		<action name="dicTree" method="getDicTree" class="dicTree" />
+		<action name="dicItemTree" method="getAllDicItemTree"
+			class="dicTree" />
+		<action name="tableTree" method="getTableTree"
+			class="tableTree" />
+		<action name="tableFldTree" method="getTableFldTree"
+			class="tableTree" />
+		<action name="depuserTree" method="getDepUserTree"
+			class="userDepTree" />
+		<action name="getViewData" method="getViewData"
+			class="userDepTree" />
+		<action name="roleTree" method="getRoleTree" class="roleTree" />
+		<action name="roleChildrenTree" method="getRoleChildrenTree"
+			class="roleTree" />
+		<action name="roleMenuTree" method="getRoleMenuTree"
+			class="roleTree" />
+		<action name="getParaSelectTree" method="getParaSelectTree"
+			class="bidirectSelectTree">
+			<result name="listDataTree">
+				/common/tools/SelectListData.jsp
+			</result>
+		</action>
+		<action name="getParaSelectDepUserTree"
+			method="getParaSelectDepUserTree" class="bidirectSelectTree">
+			<result name="depUserDataTree">
+				/common/tools/SelectTreeData.jsp
+			</result>
+		</action>
+		<action name="*" method="{1}" class="leftMenuTree">
+			<result name="custom">/common/portal/${target}.jsp</result>
+		</action>
+	</package>
+
+	<package name="privilegeTree" extends="eoms"
+		namespace="/privilegeTree">
+		<action name="*" method="{1}" class="privilegeTreeAction">
+			<result name="success">
+				/common/tools/orgtree/{1}.jsp
+			</result>
+			<result name="custom">
+				/common/tools/orgtree/${target}.jsp
+			</result>
+		</action>
+	</package>
+	
+	<package name="dictTreeAction" extends="eoms" namespace="/dictTreeAction">
+		<action name="*" method="{1}" class="dictTreeAction">
+			<result name="success">/common/tools/orgtree/{1}.jsp</result>
+			<result name="custom">/common/tools/orgtree/${target}.jsp</result>
+			<result name="redirect" type="chain">/common/tools/orgtree/${target}.jsp</result>
+		</action>
+	</package>
+
+	<package name="organizaTree" extends="eoms"
+		namespace="/organizaTree">
+		<action name="*" method="{1}" class="organizaTreeAction">
+			<result name="success">
+				/common/tools/orgtree/{1}.jsp
+			</result>
+			<result name="custom">
+				/common/tools/orgtree/${target}.jsp
+			</result>
+		</action>
+	</package>
+
+	<package name="organizaTreeV2" extends="eoms"
+		namespace="/organizaTreeV2">
+		<action name="*" method="{1}" class="organizaTreeV2Action">
+			<result name="success">
+				/common/tools/orgtreev2/{1}.jsp
+			</result>
+			<result name="custom">
+				/common/tools/orgtreev2/${target}.jsp
+			</result>
+		</action>
+	</package>
+
+	<package name="cache" extends="eoms" namespace="/cache">
+		<action name="*" method="{1}" class="cacheAction">
+			<result name="success">/ultrasm/common/{1}.jsp</result>
+			<result name="custom">/ultrasm/common/${target}.jsp</result>
+			<!-- <result name="cacheList">/ultrasm/common/cachelist.jsp</result> -->
+		</action>
+	</package>
+
+	<package name="attachmentupload" extends="json-default"
+		namespace="/attachment">
+		<action name="upload" method="upload"
+			class="attachmentManagerAction">
+			<result type="json">
+				<param name="root">returnValue</param>
+			</result>
+		</action>
+		<action name="download" method="downloadAttachment"
+			class="attachmentManagerAction">
+		</action>
+		<action name="queryDownList" method="queryDownList"
+			class="attachmentManagerAction">
+			<result type="json">
+				<param name="root">items</param>
+			</result>
+		</action>
+		<action name="deleteAttachment" method="deleteAttachment"
+			class="attachmentManagerAction">
+		</action>
+		<action name="queryAttachType" method="queryAttachType"
+			class="attachmentManagerAction">
+			<result type="json">
+				<param name="root">items</param>
+			</result>
+		</action>
+		<action name="getAttachmentByRelation" method="getAttachmentByRelation"
+			class="attachmentManagerAction">
+		</action>
+	</package>
+
+	<!-- 短信发送 begin -->
+	<package name="insidesms" extends="eoms" namespace="/insidesms">
+		<action name="*" method="{1}" class="insideSmsAction">
+			<result name="success">/sms/{1}.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+		</action>
+	</package>
+	<package name="sendsm" extends="eoms" namespace="/sms">
+		<action name="*" method="{1}" class="sendsmAction">
+			<result name="success">/sms/SmsManager.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+		</action>
+	</package>
+	<package name="orderSmDuty" extends="eoms"
+		namespace="/smOrderDuty">
+		<action name="*" method="{1}" class="orderDutyAction">
+			<result name="success">/sms/{1}.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="orderSmForm" extends="eoms"
+		namespace="/smOrderForm">
+		<action name="*" method="{1}" class="orderFormAction">
+			<result name="success">/sms/{1}.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="orderSmPlan" extends="eoms"
+		namespace="/smOrderPlan">
+		<action name="*" method="{1}" class="orderPlanAction">
+			<result name="success">/sms/{1}.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="smsModel" extends="eoms"	namespace="/smsModel">
+		<action name="*" method="{1}" class="smsModelAction">
+			<result name="success">/sms/{1}.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 短信发送 end -->
+	<!-- mail send begin -->
+	<package name="sendmail" extends="eoms" namespace="/mail">
+		<action name="*" method="{1}" class="sendmailAction">
+			<result name="success">/sms/MailManager.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+		</action>
+	</package>
+	<package name="mailModel" extends="eoms"	namespace="/mailModel">
+		<action name="*" method="{1}" class="mailModelAction">
+			<result name="success">/sms/{1}.jsp</result>
+			<result name="custom">/sms/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- mail send end -->
+	<!-- SLA begin -->
+	<package name="slaRuleTpl" extends="eoms" namespace="/slaRuleTpl">
+		<action name="*" method="{1}" class="slaRuleTplAction">
+			<result name="success">/sla/{1}.jsp</result>
+			<result name="custom">/sla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="slaActionManager" extends="eoms"
+		namespace="/slaActionManager">
+		<action name="*" method="{1}" class="slaActionManagerAction">
+			<result name="success">/sla/{1}.jsp</result>
+			<result name="custom">/sla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="slaMail" extends="eoms" namespace="/slaMail">
+		<action name="*" method="{1}" class="slaMailDealAction">
+			<result name="success">/sla/{1}.jsp</result>
+			<result name="custom">/sla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- SLA end -->
+	<package name="dataSynch" extends="eoms" namespace="/dataSynch">
+		<action name="*" method="{1}" class="dataSynchAction">
+			<result name="success">/ultrasm/common/{1}.jsp</result>
+			<result name="custom">/ultrasm/common/${target}.jsp</result>
+			<result name="refresh">
+				/ultrasm/common/core/freshParent.jsp
+			</result>
+		</action>
+	</package>
+	
+	<package name="autosearch" extends="eoms" namespace="/autosearch">
+		<action name="*" method="{1}" class="autoInputAction"/>
+	</package>
+   </struts>

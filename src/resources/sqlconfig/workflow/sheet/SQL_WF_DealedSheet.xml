@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.29</date> 
+		<description>已办工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_DealedSheet.query" >
+		<select>
+			<![CDATA[ 
+		select 
+			/*COUNT*/
+			*
+			/*COUNT*/
+			from (
+			select 
+			x.baseid  as baseid,            --工单编号
+			x.baseworkflowflag as baseworkflowflag,  --工单流程标识
+			x.baseschema as baseschema,        --工单schema
+			x.basename as basename,          --工单名称
+			x.basesn as basesn,            --流水号
+			x.basedealouttime as basedealouttime,   --处理时限
+			x.basecreatedate as basecreatedate,    --建单时间
+			x.basecreatorfullname as basecreatorfullname,--建单人名
+			x.basestatus as basestatus,          --状态名
+			x.basepriority as basepriority,       --紧急程度
+			x.basesummary as basesummary,        --工单主题
+			x.basefinishdate as basefinishdate,     --工单完成时间
+			x.baseclosedate as baseclosedate,      --关闭时间
+			x.baseentryid as baseentryid,     --工单实例id
+			x.basetpliD as basetpliD,          --模板ID
+			y.assignee as assignee,
+			(case when n.dealer is not null then n.dealer || '(已受理)' when n.assignee is not null then n.assignee || '(未受理)' when n.assigngroup is not null then n.assigngroup || '(未受理)' else '' end ) deal  --当前处理人
+			from (
+		     select m.baseid, n.assignee from (select baseid,max(processid) processid  from bs_t_wf_dealprocess  where dealerid = #sys_loginname#  group by baseid ) m 
+		     left join (select baseid,assignee,processid from bs_t_wf_dealprocess where dealerid = #sys_loginname# )n
+          	 on  m.processid = n.processid
+			) y
+			left join BS_T_BPP_BASEINFOR x 
+			on y.baseid = x.baseid
+			left join bs_t_wf_currenttask n
+			on   y.baseid = n.baseid
+			)
+			where 1=1  and baseid is not null 
+			$customwhere1$
+			/*ORDERBY*/ order by basecreatedate desc /*ORDERBY*/
+				 ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<hidden name="baseSchema" />
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator=">="  colname="basecreatedate" datatype="7" value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="basecreatedate" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="basesn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="upper(basesummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+		</customwhere>
+		<export>
+			<field colname="basesn" title="wf_sheet_serialnum" type="string" />
+			<field colname="assignee" title="wf_sheet_dearuser" type="string" />
+			<field colname="basedealouttime" title="wf_sheet_dealtime" type="string" />
+			<field colname="basestatus" title="wf_sheet_currentstatus" type="string" />
+			<field colname="basename" title="wf_ownfield_basename" type="string" />
+			<field colname="basesummary" title="wf_type_basecategoryschama" type="string" />
+		</export>
+	</sqlquery>
+	
+	<sqlquery name="SQL_WF_DealedSheet.myCreated" >
+		<select>
+			<![CDATA[ 
+				select
+					/*COUNT*/
+		 		  		*
+	                 /*COUNT*/
+           		from (
+						select
+				 			  distinct
+									baseid,            --工单编号
+									baseworkflowflag,  --工单流程标识
+									baseschema,        --工单schema
+									basename,          --工单名称
+									basesn,            --流水号
+									basedealouttime,   --处理时限
+									basecreatedate,    --建单时间
+									basecreatorfullname,--建单人名
+									basestatus,         --状态名
+									basepriority,       --紧急程度
+									basesummary,        --工单主题
+									basefinishdate,     --工单完成时间
+									baseclosedate,      --关闭时间
+									baseentryid,		 --工单实例id
+									deal,  --当前处理人,  --当前处理人
+									basetpliD           --模板ID
+			              from 
+							BS_T_BPP_BASEINFOR base,
+						  	(select en_concat(case when dealer is not null then dealer || '(已受理)' when assignee is not null then assignee || '(未受理)' else assigngroup || '(未受理)' end ) deal  --当前处理人
+									,baseid ct_baseid
+									,baseschema ct_baseschema
+								from bs_t_wf_currenttask ct group by baseid,baseschema
+							) d
+							where base.baseid=d.ct_baseid(+) and base.baseschema = d.ct_baseschema(+)
+							and base.baseCreatorLoginName = #sys_loginname#
+						)
+						where 1=1 
+						$customwhere1$
+						/*ORDERBY*/ order by basecreatedate desc/*ORDERBY*/
+				 ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<hidden name="baseSchema" />
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator=">="  colname="basecreatedate" datatype="7" value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="basecreatedate" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="basesn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="upper(basesummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+		</customwhere>
+		<export>
+			<field colname="basesn" title="wf_sheet_serialnum" type="string" />
+			<field colname="basecreatorfullname" title="wf_sheet_creator" type="string" />
+			<field colname="basestatus" title="wf_sheet_currentstatus" type="string" />
+			<field colname="basename" title="wf_ownfield_basename" type="string" />
+			<field colname="basesummary" title="wf_type_basecategoryschama" type="string" />
+		</export>
+	</sqlquery>
+</sql-group>

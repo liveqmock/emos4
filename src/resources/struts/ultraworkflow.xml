@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 流程版本控制 liuchuanzu 20100601 -->
+	<package name="wfdesign" extends="eoms" namespace="/wfdesign">
+	
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="designAction">
+			<result name="custom">/workflow/wfVersion/${target}.jsp</result>
+		</action>
+	</package>
+	
+	
+	<!-- 流程版本控制 liuchuanzu 20100601 -->
+	<package name="wfversion" extends="eoms" namespace="/wfversion">
+	
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="wfVersionManagerAction">
+			<result name="success">/workflow/wfVersion/{1}.jsp</result>
+			<result name="custom">/workflow/wfVersion/${target}.jsp</result>
+			<result name="close">/workflow/wfVersion/close.jsp</result>
+			<result name="toList" type="redirectAction">
+				<param name="actionName">list</param>
+			    <param name="baseCode">${baseCode}</param>
+		    </result>
+		</action>
+	</package>
+	
+	
+	<!-- 流程自定义模型 liuchuanzu 20100602 -->
+	<package name="wfcustom" extends="eoms" namespace="/wfcustom">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="wfCustomManagerAction">
+			<result name="success">/workflow/wfCustom/{1}.jsp</result>
+			<result name="custom">/workflow/wfCustom/${target}.jsp</result>
+			<result name="close">/workflow/wfCustom/close.jsp</result>
+			<result name="getModelList" type="redirectAction">
+				<param name="actionName">getAllModelList</param>
+		    </result>
+		</action>
+	</package>
+	
+		<!-- 流程自定义接口 liuchuanzu 20100607 -->
+	<package name="wfinterface" extends="eoms" namespace="/wfinterface">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="wfInterfaceManagerAction">
+			<result name="success">/workflow/wfInterface/{1}.jsp</result>
+			<result name="custom">/workflow/wfInterface/${target}.jsp</result>
+			<result name="close">/workflow/wfInterface/close.jsp</result>
+			<result name="getInterfaceList" type="redirectAction">
+				<param name="actionName">getAllInterfaceList</param>
+		    </result>
+		</action>
+	</package>
+	
+	<!-- 流程分类 liuchuanzu 20100609 -->
+	<package name="wfsort" extends="eoms" namespace="/wfsort">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="wfSortManagerAction">
+			<result name="success">/workflow/wfSort/{1}.jsp</result>
+			<result name="custom">/workflow/wfSort/${target}.jsp</result>
+			<result name="close">/workflow/wfInterface/close.jsp</result>
+			<result name="getWfTypeList" type="redirectAction">
+				<param name="actionName">wfTypeList</param>
+				<param name="wfSortId">${wfSortId}</param>
+		    </result>
+		</action>
+		
+	</package>
+	
+	
+	<!-- 工单查询 liuchuanzu 20100624 -->
+	<package name="sheet" extends="eoms" namespace="/sheet">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*Export" method="{1}Export" class="sheetExportAction">
+			<result name="custom">/workflow/sheet/export/{1}.jsp</result>
+		</action>
+		
+		<action name="*Review" method="{1}Review" class="batchReviewAction">
+			<result name="custom">/workflow/sheet/batchReview/${target}.jsp</result>
+		</action>
+		
+		<action name="*" method="{1}" class="sheetQueryAction">
+			<result name="custom">/workflow/sheet/query/${target}.jsp</result>
+		</action>
+	</package>
+	
+	
+	<!-- 工单角色 liuchuanzu 20100630 -->
+	<package name="sheetrole" extends="eoms" namespace="/sheetrole">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="sheetRoleAction">
+			<result name="custom">/workflow/sheet/role/${target}.jsp</result>
+			<result name="getDimensionList" type="redirectAction">
+				<param name="actionName">sheetDimensionQuery</param>
+				<param name="baseSchema">${baseSchema}</param>
+				<param name="baseName">${baseName}</param>
+		    </result>
+		    
+		    <result name="queryChildRoleViewList" type="redirectAction">
+				<param name="actionName">getChildRoleByRoleCode</param>
+				<param name="roleCode">${roleCode}</param>
+				<param name="baseSchema">${baseSchema}</param>
+				<param name="baseVersion">${baseVersion}</param>
+		    </result>
+		</action>
+		
+	</package>
+	
+	
+	<!-- 工单角色(角色细分配置) liuchuanzu 20100707 -->
+	<package name="childrole" extends="eoms" namespace="/childrole">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="sheetChildRoleSettingAction">
+			<result name="custom">/workflow/sheet/role/${target}.jsp</result>
+			<result name="getDimensionList" type="redirectAction">
+				<param name="actionName">sheetDimensionQuery</param>
+				<param name="baseSchema">${baseSchema}</param>
+				<param name="baseName">${baseName}</param>
+		    </result>
+		    
+		    <result name="queryChildRoleViewList" type="redirectAction">
+				<param name="actionName">getChildRoleByRoleCode</param>
+				<param name="roleCode">${roleCode}</param>
+				<param name="baseSchema">${baseSchema}</param>
+		    </result>
+		</action>
+	</package>
+	
+	<package name="childroleextend" extends="eoms" namespace="/childroleextend">
+		<action name="*" method="{1}" class="childRoleExtendAction">
+			<result name="success">/workflow/sheet/role/childRoleImport.jsp?result=1</result>
+			<result name="custom">/workflow/sheet/role/${target}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="formDelete" extends="eoms" namespace="/formDelete">
+		<action name="*" method="{1}" class="formDeleteAction">
+			<result name="success">/workflow/manageTools/formDelete.jsp?result=1</result>
+			<result name="custom">/workflow/manageTools/${target}.jsp?result=1</result>
+		</action>
+	</package>
+	
+	<package name="formImport" extends="eoms" namespace="/formImport">
+		<action name="*" method="{1}" class="formImportAction">
+			<result name="success">/workflow/manageTools/formImport.jsp?result=1</result>
+			<result name="custom">/workflow/manageTools/${target}.jsp?result=1</result>
+		</action>
+	</package>
+	
+	<!-- 工单代办 -->
+	<package name="agency" extends="eoms" namespace="/agency">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="agencyAction">
+			<result name="custom">/workflow/agency/${target}.jsp</result>
+		</action>	
+	</package>	
+		
+	<!-- 流程事件定义_start -->
+	<package name="eventDefine" extends="eoms" namespace="/eventDefine">
+		<action name="*" method="{1}" class="eventDefineAction">
+			<result name="success">/workflow/event/{1}.jsp</result>
+			<result name="custom">/workflow/event/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 流程事件定义_end -->		
+	<!-- 同组归档 -->
+	<package name="dealGroup" extends="eoms" namespace="/dealGroup">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="dealGroupAction">
+			<result name="custom">/workflow/dealgroup/${target}.jsp</result>
+		</action>	
+	</package>
+	
+	<!-- 工单字段配置 -->
+	<package name="ownFields" extends="eoms" namespace="/ownFields">
+		<global-results>
+			<result name="result">/workflow/result.jsp</result>
+		</global-results>
+		
+		<action name="*" method="{1}" class="ownFieldsAction">
+			<result name="custom">/workflow/ownfields/${target}.jsp</result>
+		</action>	
+	</package>
+		
+	<!-- 工单附件 -->
+	<package name="wfAttach" extends="json-default" namespace="/wfAttach">
+		<action name="upload" method="upload" class="wfAttachAction">
+			<result type="json">
+				<param name="root">attachmentId</param>
+			</result>
+		</action>
+		<action name="download" method="downloadAttachment" class="wfAttachAction">
+		</action>
+		<action name="queryDownList" method="queryDownList" class="wfAttachAction">
+			<result type="json">
+				<param name="root">items</param>
+			</result>
+		</action>
+		<action name="deleteAttachment" method="deleteAttachment" class="wfAttachAction"></action>
+		<action name="dealModelAttach" method="dealModelAttach" class="wfAttachAction"></action>
+		<action name="copyWfAttachmentAjax" method="copyWfAttachmentAjax" class="wfAttachAction"></action>
+		<action name="copyWfAttachment" method="copyWfAttachment" class="wfAttachAction"></action>
+	</package>
+	
+	<!-- 处理记录 -->
+	<package name="wfrecord" extends="eoms" namespace="/wfrecord">
+		<action name="*" method="{1}" class="workflowAction">
+			<result name="success">/workflow/wfrecord/{1}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="queryExtend" extends="eoms" namespace="/queryExtend">
+		<action name="*" method="{1}" class="queryExtendAction">
+			<result name="custom">/workflow/sheet/query/${target}.jsp</result>
+		</action>
+	</package>
+</struts>

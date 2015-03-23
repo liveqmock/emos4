@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>孙海龙</author> 
+		<date>2010-6-24</date> 
+		<description>人员目录树关系列表查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_MyMenu.query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/ um.pid, um.userid, u.fullname, um.menuid, m.nodename, m.nodemark, m.nodeurl /*COUNT*/
+				  from bs_t_sm_user u,
+				       bs_t_sm_menutree m,
+				       bs_t_sm_usermenutree um
+				 where 1=1
+				   and um.userid = u.pid
+				   and um.menuid = m.pid
+				   $customwhere$
+				   $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ um.userid, um.menuid
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_userFullName" name="fullname" />
+			<text displayname="sm_lb_nodename" name="nodename" />
+			<text displayname="sm_lb_nodemark" name="nodemark" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like" colname="u.fullname" value="#fullname#" />
+			<field prepend="and" operator="like" colname="m.nodename" value="#nodename#" />
+			<field prepend="and" operator="like" colname="m.nodemark" value="#nodemark#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

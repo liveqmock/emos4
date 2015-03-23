@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<bean id="bizDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.bizform.model.DealProcessModel</value>
+		</property>
+	</bean>
+	<bean id="dpLogDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.bizform.model.DealProcessLogModel</value>
+		</property>
+	</bean>
+	<bean id="noticeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.bizform.model.Notice</value>
+		</property>
+	</bean>
+	<bean id="dealProcessLogHandler" class="com.ultrapower.workflow.bizform.DealProcessLogHandler"></bean>
+	<bean id="canActiveStep" class="com.ultrapower.workflow.bizform.dpfunction.free.CanActiveStep"></bean>
+	
+	<!-- free -->
+	<bean id="saveInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.SaveInFunction"></bean>
+	<bean id="newInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.NewInFunction"></bean>
+	<bean id="chaseInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ChaseInFunction"></bean>
+	<bean id="chaseallInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ChaseAllInFunction"></bean>
+	<bean id="chaseOutFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ChaseOutFunction"></bean>
+	<bean id="assignInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AssignInFunction"></bean>
+	<bean id="appendassignInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AppendAssignInFunction"></bean>
+	<bean id="reassignInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ReAssignInFunction"></bean>
+	<bean id="finishInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.FinishInFunction"></bean>
+	<bean id="finishOutFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.FinishOutFunction"></bean>
+	<bean id="auditInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AuditInFunction"></bean>
+	<bean id="reauditInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ReAuditInFunction"></bean>
+	<bean id="auditingpassInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AuditingPassInFunction"></bean>
+	<bean id="auditingnopassInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AuditingNoPassInFunction"></bean>
+	<bean id="organizeauditingpassInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.OrganizeAuditingPassInFunction"></bean>
+	<bean id="organizeauditingnopassInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.OrganizeAuditingNoPassInFunction"></bean>
+	<bean id="makecopyInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.MakeCopyInFunction"></bean>
+	<bean id="sendmoreclassicInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.SendMoreClassicInFunction"></bean>
+	<bean id="sendmoreinsideInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.SendMoreInsideInFunction"></bean>
+	<bean id="activeparentInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ActiveParentInFunction"></bean>
+	<bean id="acceptInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AcceptInFunction"></bean>
+	<bean id="noticeInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.NoticeInFunction"></bean>
+	<bean id="cancelauditdpInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.CancelAuditDpInFunction"></bean>
+	<bean id="closeInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.CloseInFunction"></bean>
+	<bean id="cancelInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.CancelInFunction"></bean>
+	<bean id="activeOutFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.ActiveOutFunction"></bean>
+	<bean id="suspendOutFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.SuspendOutFunction"></bean>
+	<bean id="terminateInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.TerminateInFunction"></bean>
+	<bean id="defaultFreeInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.DefaultFreeInFunction"></bean>
+	<bean id="defaultFreeOutFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.DefaultFreeOutFunction"></bean>
+	<bean id="assistInFunction" class="com.ultrapower.workflow.bizform.dpfunction.free.AssistInFunction"></bean>
+	
+	<!-- define -->
+	<bean id="defaultDefInFunction" class="com.ultrapower.workflow.bizform.dpfunction.define.DefaultDefInFunction"></bean>
+	<bean id="defaultDefOutFunction" class="com.ultrapower.workflow.bizform.dpfunction.define.DefaultDefOutFunction"></bean>
+	
+	<!-- extend function -->
+	<bean id="wf_sys_stepGroups_Function" class="com.ultrapower.workflow.bizform.dpfunction.define.PreDeineOranAuditFunction"></bean>
+	
+	<!-- 工单代办 -->
+	<bean id="agencyDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.bizservice.model.Agency</value>
+		</property>
+	</bean>
+	<bean id="agencyService" class="com.ultrapower.workflow.bizservice.impl.AgencyImpl"></bean>
+	<bean id="arService" class="com.ultrapower.workflow.bizservice.impl.ARServiceImpl"></bean>
+	
+	<!-- 同组关单 -->
+	<bean id="dealGroupDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.DealGroup</value>
+		</property>
+	</bean>
+	<bean id="dealGroupService" class="com.ultrapower.eoms.ultrasm.manager.DealGroupImpl"></bean>
+	
+	<bean id="bizCheck" class="com.ultrapower.workflow.bizservice.impl.BizCheckImpl"></bean>
+	<bean id="bizFacade" class="com.ultrapower.workflow.bizworkflow.facade.impl.BizFacadeImpl"></bean>
+	<bean id="bizWorkFlow" class="com.ultrapower.workflow.bizworkflow.bizinterface.impl.BizWorkFlowImpl"></bean>
+	<bean id="taskManager" class="com.ultrapower.workflow.engineImpl.ProcessTaskManager"></bean>
+	<bean id="ultraWorkflow" class="com.ultrapower.workflow.engineImpl.ProcessUltraWorkflow"></bean>
+	<bean id="engine" class="com.ultrapower.workflow.engineImpl.ProcessWorkflowEngine"></bean>
+	
+	<!-- 工单关联 -->
+	<bean id="relaDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.relate.model.RelateModel</value>
+		</property>
+	</bean>
+	<bean id="relateService" class="com.ultrapower.workflow.relate.impl.RelateManagerImpl"></bean>
+</beans>

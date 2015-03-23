@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+.title{
+	margin:10px auto;
+	width:400px;
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif,"宋体";
+	font-size:14px;
+	font-weight:bold;
+	}
+.peocess{
+	margin-left:20px;
+	}
+.close{
+	background:url(../images/close.png) no-repeat left top;
+	width:16px;
+	height:16px;
+	display:inline-block;
+	margin-left:20px;
+	cursor:pointer;
+	}
+html{
+  overflow:auto !important;
+  }

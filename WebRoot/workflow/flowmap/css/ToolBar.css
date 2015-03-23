@@ -1,0 +1,75 @@
+#toolbar
+{
+	height:25px;
+	background-color:buttonface;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	padding:2px;
+}
+
+.toolbarbottom
+{
+	margin-top:1px;
+	height:2px;
+	width:100%;
+	background-color:buttonface;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	overflow:hidden;
+}
+
+.toolbarhand
+{
+	height:21px;
+	width:3px;
+	margin-left:1px;
+	margin-right:3px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	display:inline;
+}
+
+.toolbarbutton
+{
+	height:21px;
+	width:21px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonface;
+	display:inline;
+	padding:2px 2px 2px 2px;
+	margin:0px 1px 0px 1px;
+}
+.toolbarbutton_active
+{
+	height:21px;
+	width:21px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonhighlight buttonshadow buttonshadow buttonhighlight;
+	display:inline;
+	padding:2px 2px 2px 2px;
+	margin:0px 1px 0px 1px;
+}
+.toolbarbutton_down
+{
+	height:21px;
+	width:21px;
+	border-width:1px;
+	border-style:solid;
+	border-color:buttonshadow buttonhighlight buttonhighlight buttonshadow;
+	display:inline;
+	padding:3px 1px 1px 3px;
+	margin:0px 1px 0px 1px;
+}
+
+.toolbarcontainer
+{
+	display:inline;
+	margin-right:5px;
+}
+
+

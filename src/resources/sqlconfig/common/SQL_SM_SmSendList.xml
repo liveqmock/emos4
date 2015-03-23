@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-08-04</date> 
+		<description>短信发送情况查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SMSendList.query" >
+		<select>
+			<![CDATA[
+					select /*COUNT*/ pid,content,systemtype,goal,sendflag,sendnum,sendtime /*COUNT*/
+			  from (select pid,
+			               content,
+			               systemtype,
+			               goal,
+			               sendflag,
+			               sendnum,
+			               sendtime
+			          from bs_t_sm_smsmonitor
+			         where 1=1 $customwhere2$
+			        union all
+			        select smsmonitorpid pid,
+			               content,
+			               systemtype,
+			               goal,
+			               sendflag,
+			               sendnum,
+			               sendtime
+			          from bs_t_sm_smsmonitorlog)
+			           where 1=1 $customwhere$ 
+				  order by sendtime desc
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<date displayname="sm_lb_sendstarttime" name="starttime" />
+			<date displayname="sm_lb_sendendtime" name="endtime" />
+			<text displayname="sm_lb_smgoal" name="goal" />
+			<text displayname="sm_lb_smcontent" name="content" />
+			<text displayname="sm_lb_smsystemtype" name="systemtype" />
+			<select displayname="sm_lb_smsenfflag" name="sendflag"  dictype="sendstatus" value="" />
+		</condition>
+		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  datatype="7" colname="sendtime"  value="#starttime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="sendtime"  value="#endtime#" />
+			<field prepend="and" operator="=" colname="goal" value="#goal#" />
+			<field prepend="and" operator="like" colname="content" value="#content#" />
+			<field prepend="and" operator="like" colname="systemtype" value="#systemtype#" />
+			<field prepend="and" operator="=" colname="sendflag" value="#sendflag#" />
+		</customwhere>
+		<customwhere name="customwhere2" prepend="and" >
+			<field prepend="and" operator="=" colname="sendflag" value="#sendflag#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+.bpp_View
+{
+	overflow:hidden;
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_View table iframe
+{
+	margin:5px 0px 1px 0px;
+}

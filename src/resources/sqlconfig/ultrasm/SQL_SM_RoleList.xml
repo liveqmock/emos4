@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_RoleList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, definetype, rolename, remark, roledns, parentid,
+				       (select rolename from bs_t_sm_role r_in where r_out.parentid = r_in.pid) parentname /*COUNT*/
+				  from bs_t_sm_role r_out
+				 where 1=1 $customwhere$ $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ roledns
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_roleType" name="definetype" />
+			<text displayname="sm_lb_roleName" name="rolename"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="r_out.definetype"  value="#definetype#" />
+			<field prepend="and" operator="like"  colname="r_out.rolename"  value="#rolename#" />
+			<field prepend="and" operator="leftlike" colname="r_out.roledns" value="#roledns#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_RoleList.notNullOrgId_query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+		           /*COUNT*/ pid,definetype,rolename,remark,roledns /*COUNT*/ 
+		           from bs_t_sm_role  
+		           where pid not in(
+		                 select i.roleid from bs_t_sm_roleorg i where 1=1 $orgidtype$
+		           ) $customwhere$ 
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_roleType" name="definetype" />
+			<text displayname="sm_lb_roleName" name="rolename"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="definetype"  value="#definetype#" />
+			<field prepend="and" operator="like"  colname="rolename"  value="#rolename#" />
+			<field prepend="and" operator="leftlike" colname="roledns" value="#roledns#"/>
+		</customwhere>
+		<customwhere name="orgidtype" prepend="and" >
+			<field prepend="and" operator="="  colname="i.orgtype"  value="#orgtype#" />
+			<field prepend="and" operator="="  colname="i.orgid"  value="#orgid#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../../../theme/taglibs.jsp" %>
+<ubf:CollectField name="auditAgain" label="是否升级" type="collect" showtype="checkbox" resource="是:是" paras="" row="1" cell="1" visiable="1"  />
+<ubf:CharacterField name="view_dealGroup" label="处理组" row="1" cell="1" visiable="1" length="1000" />
+<ubf:CharacterField name="dealGroup" label="处理组ID" row="1" cell="1" visiable="1" length="100" />
+<ubf:AssignTreeField name="auditAgainUser" label="审批人" row="1" cell="1" single="1" action="RENEXT" stepno="step_4" selectType="2"  actionName="auditPassed" next="0" visiable="1" />
+<ubf:SelectField name="view_dealUser" label="处理人" type="collect" resource=" " paras="" cell="1" visiable="1"  />
+<ubf:CharacterField name="dealUser" label="处理人ID" row="1" cell="1" visiable="0" length="100" />
+<ubf:CharacterField name="dealDesc" label="处理意见" row="5" cell="4" visiable="1" length="1000" />
+<ubf:CollectField name="notify" label="通知" type="collect" showtype="checkbox" resource="短信:短信,邮件:邮件" paras="" row="1" cell="4" visiable="1" defaultValue="短信" />

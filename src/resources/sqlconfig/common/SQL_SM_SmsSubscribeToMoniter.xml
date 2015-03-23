@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>徐发球</author> 
+		<date>2011-7-21</date> 
+		<description>查询工单订阅的信息插入到Moniter</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SmsSubscribeToMoniter.person" >
+		<select>
+			<![CDATA[
+				--派发给人的订阅查询
+		      select n.noticeid,n.taskid,n.baseid,n.baseschema,n.noticeuserloginname loginname,u.mobile,n.content,1 isfilter
+		        from bs_t_wf_notice n,
+		             bs_t_sm_user u
+		           where 
+		             n.noticeuserloginname= u.loginname 
+		             and n.issent = 0 
+				   and n.createtime>(#sys_datetime#-600)
+			]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_SmsSubscribeToMoniter.person_bak" >
+		<select>
+			<![CDATA[
+				--派发给人的订阅查询
+			select n.noticeid,n.taskid,n.baseid,n.baseschema,n.noticeuserloginname loginname,u.mobile,n.content,sm.starttime,sm.endtime        
+			  from bs_t_wf_notice n,
+						   bs_t_sm_smsorderform sm,
+						   bs_t_sm_user u
+					 where n.baseaction = sm.formaction
+					   and n.noticeuserloginname=sm.loginname
+					   and n.baseschema=sm.formschema
+					   and n.noticeuserloginname= u.loginname 
+					   and sm.status=1 
+					   and n.issent = 0 
+				   and n.createtime>(#sys_datetime#-600)
+				   --and n.baseschema='WF4:TJ_EOMS_Task_Province'
+			]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_SmsSubscribeToMoniter.group" >
+		<select>
+			<![CDATA[
+				--派给组的订阅查询
+		        select n.noticeid,n.taskid,n.baseid,n.baseschema ,u.loginname,u.mobile, n.content,sm.starttime,sm.endtime
+		          from bs_t_wf_notice       n,
+		               bs_t_sm_smsorderform sm,
+		               bs_t_sm_user         u,
+		               bs_t_sm_userdep      dp
+		         where n.noticegroupid = dp.depid
+		           and dp.userid = u.pid 
+		           and u.loginname=sm.loginname
+		           and n.baseaction = sm.formaction
+		           and n.baseschema=sm.formschema
+		           and n.issent = 0
+		           and sm.status=1
+				   and n.createtime>#sys_datetime#-600
+			]]>
+		</select>
+	</sqlquery>	
+	<sqlquery name="SQL_SM_SmsSubscribeToMoniter.role" >
+		<select>
+			<![CDATA[
+					--派给角色
+           
+            select n.noticeid,n.taskid,n.baseid,n.baseschema ,u.loginname,u.mobile, n.content,sm.starttime,sm.endtime from
+            bs_t_wf_notice       n,
+            bs_t_wf_roleuser     ru
+            ,bs_t_sm_user         u
+            ,bs_t_sm_smsorderform sm
+            where n.noticegroupid = ru.childroleid
+                 and ru.Loginname=u.loginname
+                  and n.baseschema=sm.formschema
+                  and n.baseaction=sm.formaction
+                  and ru.loginname=sm.loginname
+			   and n.noticetype='ROLE' 
+			   and n.issent = 0
+			   and sm.status=1
+				and n.createtime>#sys_datetime#-600
+			]]>
+		</select>
+	</sqlquery>	
+</sql-group>

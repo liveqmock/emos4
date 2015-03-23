@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true" >
+	<bean id="verDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.version.model.WfVersion</value>
+		</property>
+	</bean>
+	<bean id="sortDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.sort.model.WfSort</value>
+		</property>
+	</bean>
+	<bean id="typeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.sort.model.WfType</value>
+		</property>
+	</bean>
+	<bean id="molDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.custom.model.WfModel</value>
+		</property>
+	</bean>
+	<bean id="proDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.custom.model.WfModelProperties</value>
+		</property>
+	</bean>
+	
+	<bean id="infDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.interfaces.model.WfInterface</value>
+		</property>
+	</bean>
+	<bean id="setDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.configuration.interfaces.model.WfInterSetting</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 工单角色 -->
+	<bean id="dimensionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.role.model.Dimension</value>
+		</property>
+	</bean>
+	
+	<bean id="childRoleDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.role.model.ChildRole</value>
+		</property>
+	</bean>
+	
+	<bean id="wfRoleDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.role.model.WorkflowRole</value>
+		</property>
+	</bean>
+	
+	<bean id="roleMatchDemensionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>	com.ultrapower.workflow.role.model.RoleMatchDimension</value>
+		</property>
+	</bean>
+	
+	<bean id="roleUserDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.role.model.RoleUser</value>
+		</property>
+	</bean>
+	
+	<bean id="userRoleDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.role.model.UserRole</value>
+		</property>
+	</bean>
+	
+	<bean id="verServiceImpl" class="com.ultrapower.workflow.configuration.version.service.impl.XMLWfVersionService" init-method="init"></bean>
+	<bean id="sortServiceImpl" class="com.ultrapower.workflow.configuration.sort.service.impl.WfSortServiceImpl"></bean>
+	<bean id="modelServiceImpl" class="com.ultrapower.workflow.configuration.custom.service.impl.ModelServiceImpl"></bean>
+	<bean id="interServiceImpl" class="com.ultrapower.workflow.configuration.interfaces.service.impl.InterfaceManagerServiceImpl" init-method="init"></bean>
+	<bean id="roleService" class="com.ultrapower.workflow.role.service.impl.RoleServiceImpl"></bean>
+	
+	<!-- rmi 包装 -->
+	<bean id="rmiVerServiceImpl" class="com.ultrapower.workflow.bizconfig.version.impl.WfVersionManagerImpl"></bean>
+	<bean id="rmiSortServiceImpl" class="com.ultrapower.workflow.bizconfig.sort.impl.WfSortManagerImpl"></bean>
+	<bean id="rmiModelServiceImpl" class="com.ultrapower.workflow.bizconfig.custom.impl.ModelManagerImpl"></bean>
+	<bean id="rmiInterServiceImpl" class="com.ultrapower.workflow.bizconfig.interfaces.impl.InterfaceManagerImpl"></bean>
+	
+</beans>

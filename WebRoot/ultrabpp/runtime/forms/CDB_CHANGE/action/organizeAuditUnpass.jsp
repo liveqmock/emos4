@@ -1,0 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../../../theme/taglibs.jsp" %>
+<ubf:SelectField name="step_cmdbupload" label="通知CMDB更新" type="collect" resource="是:是,否:否" paras="" cell="1" visiable="1" defaultValue="是" />
+<ubf:SelectField name="step_baseresult" label="基本结论" type="collect" resource="成功:成功,部分成功:部分成功,失败:失败,取消:取消" paras="" cell="1" visiable="1" defaultValue="取消" />
+<ubf:CharacterField name="dealDesc" label="处理意见" row="5" cell="4" visiable="1" length="1000" />
+<ubf:CollectField name="notify" label="通知" type="collect" showtype="checkbox" resource="短信:短信,邮件:邮件" paras="" row="1" cell="4" visiable="1" defaultValue="短信" />

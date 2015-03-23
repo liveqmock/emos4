@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+/* Tab panel START */
+.bpp_TabPanelGroup { }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header
+{
+	width:100%;
+	background: url(../images/tabpanel-header-bg.png) bottom;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header_front
+{
+	float:left;
+	height:30px;
+	width:5px;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul
+{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	height:30px;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li
+{
+	float:left;
+	height:100%;
+	line-height:250%;
+	background: url(../images/tabpanel-header-bg.png) bottom;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li a
+{
+	margin:0px 15px 0px 15px;
+	text-decoration:none;
+	color:#ffffff;
+	font-weight:bold;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li a:hover
+{
+	margin:0px 15px 0px 15px;
+	color:#ffffff;
+	font-weight:bold;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active
+{
+	background: url(../images/panelheader-bg.png) bottom;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active a
+{
+	margin:0px 15px 0px 15px;
+	text-decoration:none;
+	color:#3399cc;
+	font-weight:bold;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active a:hover
+{
+	margin:0px 15px 0px 15px;
+	color:#3399cc;
+	font-weight:bold;
+}
+.bpp_TabPanelGroup_Body
+{
+	float:left;
+	width:100%;
+	border-top:solid #cccccc 1px;
+	border-bottom:solid #999999 1px;
+	background:#ffffff url(../images/panel-border.png) bottom repeat-y;
+}
+/* Tab panel END */
+
+/* Box panel START */
+.bpp_BoxPanelGroup
+{
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item
+{
+	float:left;
+	width:100%;
+	background:#ffffff url(../images/panel-border.png) bottom repeat-y;
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header
+{
+	height:30px;
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header div
+{
+	font-size:12px;
+	font-weight:bold;
+	color:#555555;
+	line-height:230%;
+	margin-left:1px;
+	padding-left:5px;
+	height:30px;
+	background:#fafafa url(../images/field-border.png) right bottom;
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Body
+{
+}
+/* Box panel END */

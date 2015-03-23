@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action actionType="ASSIGN"  actionLabel="派　发" hasNext="1" isClose="1" desc="通过选择处理人，并将工单派发给他们进行处理。"/>
+	<action actionType="APPENDASSIGN" actionLabel="补　派" hasNext="1" isClose="1" desc="进行补派操作。"/>
+	<action actionType="REASSIGN" actionLabel="转　派" hasNext="1" isClose="1" desc="通过选择处理人，并将工单派发给他们进行处理。处理人处理完成后将不会回到您。"/>
+	<action actionType="FINISH" actionLabel="完　成"  hasNext="1" isClose="1" desc="完成处理一张工单，填写处理信息并回复给派发人。"/>
+	<action actionType="CONFIRM" actionLabel="确　认"   hasNext="1" isClose="1" desc="动作说明"/>
+	<action actionType="AUDIT" actionLabel="提交审批"   hasNext="1" isClose="1" desc="通过审批书选择一个或多个审批人，然后将工单提交给他们进行审批。"/>
+	<action actionType="REAUDIT" actionLabel="转　审"   hasNext="1" isClose="1" desc="动作说明"/>
+	<action actionType="AUDITINGPASS" actionLabel="审批通过"   hasNext="1" isClose="1" desc="动作说明"/>
+	<action actionType="AUDITINGNOPASS" actionLabel="审批不通过"   hasNext="1" isClose="1" desc="动作说明"/>
+	<action actionType="ORGANIZEAUDIT" actionLabel="组织会审"  hasNext="1" isClose="1" desc="动作说明"/>
+	<action actionType="ORGANIZEAUDITINGPASS" actionLabel="会审通过"   isClose="1" hasNext="1" desc="动作说明"/>
+	<action actionType="ORGANIZEAUDITINGNOPASS" actionLabel="会审不通过"   isClose="1" hasNext="1" desc="动作说明"/>
+	<action actionType="CLOSE" actionLabel="归　档"   hasNext="1" isClose="1" desc="填写归档满意度并将工单归档。"/>
+	<action actionType="REJECT" actionLabel="驳　回"   hasNext="1" isClose="1"  desc="如果工单任务不应该您处理，可以驳回给派发人。"/>
+	<action actionType="SENDBACK" actionLabel="退　回"   hasNext="1" isClose="1"  desc="如果认为工单处理人需要重新处理，可以退回给处理人。"/>
+	<action actionType="ASSIST" actionLabel="协　办"   hasNext="1" isClose="1"  desc="动作说明"/>
+	<action actionType="MAKECOPY" actionLabel="抄　送"   hasNext="1" isClose="1" desc="抄送给其他人知晓该工单，此人的操作不会影响工单流转。"/>
+	<action actionType="HASTEN" actionLabel="催　办"   hasNext="1" isClose="1" desc="动作说明"/>
+	<action actionType="NOTICE" actionLabel="阶段处理"   hasNext="1" isClose="0" desc="当任务完成到一定程度时可以填写部分信息进行阶段性的处理。"/>
+	<action actionType="SUGGEST" actionLabel="阶段建议"   hasNext="1"  isClose="1" desc="动作说明"/>
+	<action actionType="SAVE" actionLabel="保存草稿"   hasNext="0" isClose="0" desc="保存草稿"/>
+	<action actionType="ACCEPT" actionLabel="受　理"   hasNext="0" isClose="0" desc="受理"/>
+	<action actionType="CHASE" actionLabel="追  回"   hasNext="1" isClose="1" desc="追回"/>
+	<action actionType="CANCEL" actionLabel="作  废"   hasNext="1" isClose="1" desc="作废"/>
+	<action actionType="APPENDASSIGN" actionLabel="追  派"   hasNext="1" isClose="1" desc="追派"/>
+	<action actionType="ACTIVE" actionLabel="激活"   hasNext="0" isClose="1" desc="激活"/>
+	<action actionType="SUSPEND" actionLabel="挂起"   hasNext="0" isClose="1" desc="挂起"/>
+</actions>

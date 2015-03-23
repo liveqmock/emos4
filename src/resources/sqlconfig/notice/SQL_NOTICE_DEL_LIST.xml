@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_NOTICE_DEL_List.query" >
+		<select>
+			<![CDATA[
+				SELECT /*COUNT*/
+					   PID               noticeid,
+				       CREATOR_NAME 	 creatorname,
+				       NOTICE_TITLE      noticetitle,
+				       NOTICE_CREATETIME noticecreatetime,
+				       NOTICE_STARTTIME  noticestarttime,
+				       NOTICE_LOSTTIME   noticelosttime,
+				       NOTICE_LEVEL      noticelevel,
+				       BASESN            noitcebasesn,
+				       noticetype        noticetype,
+				       NOTICESCOPE	     noticescope,	
+				       NOTICESCOPGROUP	 noticescopegroup,	
+				       notice_status as noticestatus
+				       /*COUNT*/
+				  FROM BS_T_NOTICE_INFO T
+				 WHERE 1 = 1 and NOTICE_STATUS = '4'
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ NOTICE_CREATETIME desc
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="发布人" name="creatorName" />
+			<text displayname="公告主题" name="noticeTitle"  />
+			<date displayname="发布时间起" name="createtime"/>
+			<date displayname="至" name="endtime"/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="CREATOR_NAME"  value="#creatorName#" />
+			<field prepend="and" operator="like"  colname="NOTICE_TITLE"  value="#noticeTitle#" />
+			<field prepend="and" operator=">="  datatype="7" colname="NOTICE_STARTTIME"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="NOTICE_STARTTIME"  value="#endtime#" />
+			<field prepend="and" operator="="  colname="CREATOR_ID"  value="#creatorid#" />
+			<field prepend="and" operator="="  colname="noticetype"  value="#noticetype#" />
+			<if prepend="and" exp="'#noticeStatus#' = '1'">
+				<success>
+					<field prepend="and" operator="&lt;="  datatype="7" colname="NOTICE_STARTTIME"  value="#sys_datetime#" />
+					<field prepend="and" operator=">="  datatype="7" colname="NOTICE_LOSTTIME"  value="#sys_datetime#" />
+					<field prepend="and" operator="&lt;>"  datatype="4" colname="NOTICE_STATUS"  value="4" />
+				</success>
+			</if>
+			<if prepend="and" exp="'#noticeStatus#' = '2'">
+				<success>
+					<field prepend="and" operator=">"  datatype="7" colname="NOTICE_STARTTIME"  value="#sys_datetime#" />
+				</success>
+			</if>
+			<if prepend="and" exp="'#noticeStatus#' = '3'">
+				<success>
+					<field prepend="and" operator="&lt;"  datatype="7" colname="NOTICE_LOSTTIME"  value="#sys_datetime#" />
+				</success>
+			</if>
+			<if prepend="and" exp="'#noticeStatus#' = '4'">
+				<success>
+					<field prepend="and" operator="="  colname="NOTICE_STATUS"  value="#noticeStatus#" />
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+</sql-group>

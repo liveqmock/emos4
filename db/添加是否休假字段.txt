@@ -1,0 +1,1 @@
+alter table  BS_T_SM_USER add HolidayState varchar(20);

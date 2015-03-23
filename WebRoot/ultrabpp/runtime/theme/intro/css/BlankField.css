@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+.bpp_Blank
+{
+	overflow:hidden;
+	background:url(../images/field-border.png) right bottom;
+}

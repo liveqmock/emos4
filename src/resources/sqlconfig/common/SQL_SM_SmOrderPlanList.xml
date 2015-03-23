@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-09-01</date> 
+		<description>计划短信订阅情况查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SmOrderPlanList.query" >
+		<select>
+			<![CDATA[
+					select /*COUNT*/
+ 							pid, starttime, endtime, status, isholiday /*COUNT*/
+  					from bs_t_sm_smsorderplan  where 1=1 $customwhere$ and loginname = #sys_loginname#
+			]]>
+		</select>
+		<condition cols="2" labprecent="11" textprecent="22" >
+			<select displayname="sm_lb_isholidayactive" name="isholiday" dictype="isHoliday"  value="" />
+			<select displayname="com_lb_status" name="status" dictype="status"  value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="isholiday"  value="#isholiday#" />
+			<field prepend="and" operator="=" colname="status" value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

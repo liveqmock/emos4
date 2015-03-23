@@ -1,0 +1,197 @@
+.quickBar
+{
+	position:absolute;
+	top:60px;
+	left:0;
+	width:100%;
+	background:url(../images/quickBarBackground.jpg) repeat;
+	border-top:#cdcecf solid 1px;
+	border-left:#cdcecf solid 1px;
+	border-right:#cdcecf solid 1px;
+	border-bottom:#4089b9 solid 3px;
+	margin:0px;
+	height:100px;
+	cursor:default;
+	overflow:hidden;
+}
+.quickBarItem
+{
+	float:left;
+	text-align:center;
+	height:100px;
+}
+.quickBarItemBtnBox
+{
+	height:80px;
+}
+.quickBarDesc
+{
+	height:20px;
+	padding-top:2px;
+	clear:left;
+	white-space:nowrap;
+}
+.quickBarSplit
+{
+	float:left;
+	width:3px;
+	height:100px;
+	background:url(../images/quickBarSplit.png);
+}
+
+/*item type style*/
+.quickBarItemBtn
+{
+	float:left;
+	width:80px;
+	height:75px;
+	text-align:center;
+	padding-top:5px;
+}
+.quickBarItemBtn_hover
+{
+	float:left;
+	width:80px;
+	height:75px;
+	text-align:center;
+	padding-top:5px;
+	background:url(../images/quickBarBtnHover.png);
+}
+.quickBarItemBtn_active
+{
+	float:left;
+	width:80px;
+	height:75px;
+	text-align:center;
+	padding-top:5px;
+	background:url(../images/quickBarBtnActive.png);
+}
+.quickBarItemBtnImgBox
+{
+	width:80px;
+	height:40px;
+	float:left;
+	text-align:cneter;
+	
+}
+.quickBarItemBtnImgBox img
+{
+	width:36px;
+	height:37px;
+}
+.quickBarItemBtnText
+{
+	width:80px;
+	heght:30px;
+	float:left;
+}
+
+
+/*small item type style*/
+.quickBarItemSmallBtn
+{
+	float:left;
+	padding:3px 2px 1px 2px;
+	height:18px;
+	width:135px;
+	margin:1px 3px 1px 3px;
+	text-align:left;
+}
+.quickBarItemSmallBtn_hover
+{
+	float:left;
+	padding:3px 2px 1px 2px;
+	height:18px;
+	width:135px;
+	margin:1px 3px 1px 3px;
+	text-align:left;
+	background:url(../images/quickBarListHover.png);
+}
+.quickBarItemSmallBtn_active
+{
+	float:left;
+	padding:3px 2px 1px 2px;
+	height:18px;
+	width:135px;
+	margin:1px 3px 1px 3px;
+	text-align:left;
+	background:url(../images/quickBarListActive.png);
+}
+.quickBarItemSmallBtnImgBox
+{
+	height:18px;
+	float:left;
+	padding-left:4px;
+	padding-right:4px;
+	
+}
+.quickBarItemSmallBtnText
+{
+	heght:18px;
+	float:left;
+	word-break:keep-all;
+}
+
+/*list item type style*/
+.quickBarListBox
+{
+	float:center;
+	height:75px;
+	padding:5px 3px 0px 3px;
+}
+.quickBarListTable
+{
+	float:center;
+	height:67px;
+	border:#6fb4e1 solid 1px;
+	background-color:#e1eef8;
+	text-align:left;
+	padding:3px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+.quickBarListItem
+{
+	float:left;
+	padding:3px 2px 1px 2px;
+	width:135px;
+	height:18px;
+	text-align:left;
+}
+.quickBarListItem_hover
+{
+	float:left;
+	padding:3px 2px 1px 2px;
+	width:135px;
+	height:18px;
+	text-align:left;
+	background:url(../images/quickBarListHover.png);
+}
+.quickBarListItem_active
+{
+	float:left;
+	padding:3px 2px 1px 2px;
+	width:135px;
+	height:18px;
+	text-align:left;
+	background:url(../images/quickBarListActive.png);
+}
+.quickBarListItemImg
+{
+	margin-bottom:-2px;
+	margin-left:5px;
+	--width:12px;
+	height:12px;
+}
+
+/*top menu style*/
+.menu_onquick {
+	line-height:28px;
+	height:28px;
+	background:url(../images/menu_quick_right.png) no-repeat center bottom;
+	cursor: pointer;
+}
+.menu_onquick span {
+	font-size:12px;
+	padding:0 10px;
+}

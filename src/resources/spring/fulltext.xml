@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName" default-lazy-init="true">
+	<!-- 全文检索_start -->
+	<bean id="indexCategoryAction" class="com.ultrapower.eoms.ftrmaintain.web.CategoryManagerAction"/>
+	<bean id="indexFieldAction" class="com.ultrapower.eoms.ftrmaintain.web.FieldManagerAction"/>
+	<bean id="indexManagerAction" class="com.ultrapower.eoms.ftrmaintain.web.IndexManagerAction"/>
+	<bean id="indexDisplayModelAction" class="com.ultrapower.eoms.ftrmaintain.web.IndexDisplayModelAction"/>
+	<bean id="indexCategoryService" class="com.ultrapower.eoms.ftrmaintain.manager.IndexCategoryManager"/>
+	<bean id="indexFieldService" class="com.ultrapower.eoms.ftrmaintain.manager.IndexFieldManager"/>
+	<bean id="indexManagerService" class="com.ultrapower.eoms.ftrmaintain.manager.IndexManagerImpl"/>
+	<bean id="indexDisplayModelService" class="com.ultrapower.eoms.ftrmaintain.manager.IndexDisplayModelManager"/>
+	<bean id="indexCategoryDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.IndexCategory</value>
+		</property>
+	</bean>
+	<bean id="indexPathDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.IndexPath</value>
+		</property>
+	</bean>
+	<bean id="dbSourceDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.DBIndexSource</value>
+		</property>
+	</bean>
+	<bean id="fileSourceDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.FileIndexSource</value>
+		</property>
+	</bean>
+	<bean id="indexFieldDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.IndexFieldCfg</value>
+		</property>
+	</bean>
+	<bean id="displayModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.DisplayModel</value>
+		</property>
+	</bean>
+	<bean id="fieldSpanInfoDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ftrmaintain.model.FieldSpanInfo</value>
+		</property>
+	</bean>
+	<!-- 全文检索_end -->
+</beans>

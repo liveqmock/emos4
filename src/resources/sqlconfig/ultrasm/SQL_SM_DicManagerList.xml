@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>孙海龙</author> 
+		<date>2010-06-30</date> 
+		<description>字段管理SQL配置文件</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_DicTypeList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, dtname, dtcode, dictype, status, remark /*COUNT*/
+				  from bs_t_sm_dictype
+				 where 1=1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ dtcode
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="20" textprecent="30" >
+			<text displayname="sm_lb_dtname" name="dtname" />
+			<text displayname="sm_lb_dtcode" name="dtcode"  />
+			<select displayname="sm_lb_dictype" name="dictype"  dictype="dictype" value="" />
+			<select displayname="com_lb_status" name="status"  dictype="status" value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="dtname"  value="#dtname#" />
+			<field prepend="and" operator="like"  colname="dtcode"  value="#dtcode#" />
+			<field prepend="and" operator="="  colname="dictype"  value="#dictype#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DicItemList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ di.pid, dt.dtname, di.dtcode, di.diname, di.divalue, di.status, di.remark /*COUNT*/
+				  from bs_t_sm_dictype dt, bs_t_sm_dicitem di
+				 where 1=1
+				   and dt.pid = di.dtid
+				   $customwhere$
+				   $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ di.dtcode, di.ordernum
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_dtname" name="dtname" />
+			<text displayname="sm_lb_dtcode" name="dtcode"  />
+			<text displayname="sm_lb_diname" name="diname" />
+			<text displayname="sm_lb_divalue" name="divalue"  />
+			<select displayname="com_lb_status" name="status"  dictype="status" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="dt.dtname"  value="#dtname#" />
+			<field prepend="and" operator="like"  colname="di.dtcode"  value="#dtcode#" />
+			<field prepend="and" operator="like"  colname="di.diname"  value="#diname#" />
+			<field prepend="and" operator="like"  colname="di.divalue"  value="#divalue#" />
+			<field prepend="and" operator="="  colname="di.status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

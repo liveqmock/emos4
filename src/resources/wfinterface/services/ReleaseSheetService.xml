@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="ReleaseProcessSheet">
+	<method name="newWorkSheet" class="com.ultrapower.wfinterface.core.extend.ReleaseServiceImpl" baseschema="CDB_RELEASE">
+		<operate code="NEXT" actionid="submit" creator="Demo">提交</operate>
+		<fields>
+			<field name="baseSummary" text="标题">
+				<xml-colname>baseSummary</xml-colname>
+				<db-colname>baseSummary</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>2000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="requestOA" text="建单人OA号">
+				<xml-colname>requestOA</xml-colname>
+				<db-colname>requestOA</db-colname>
+				<datatype>4</datatype> 
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="connBusSystemID" text="应用系统">
+				<xml-colname>connBusSystem</xml-colname>
+				<db-colname>connBusSystemID</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="releaseType" text="发布类型">
+				<xml-colname>releaseType</xml-colname>
+				<db-colname>releaseType</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="releaseState" text="发布状态">
+				<xml-colname>releaseState</xml-colname>
+				<db-colname>releaseState</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="expectationTime" text="期望上线日期">
+				<xml-colname>expectationTime</xml-colname>
+				<db-colname>expectationTime</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="connBaseId" text="关联变更单号">
+				<xml-colname>connBaseId</xml-colname>
+				<db-colname>connBaseId</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="connChangeDesc" text="配置相关信息变更说明">
+				<xml-colname>connChangeDesc</xml-colname>
+				<db-colname>connChangeDesc</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="buildCase" text="发布部署方案">
+				<xml-colname>buildCase</xml-colname>
+				<db-colname>buildCase</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="release_type" text="发布类别">
+				<xml-colname>release_type</xml-colname>
+				<db-colname>release_type</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>2000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="risk_level" text="风险程度">
+				<xml-colname>risk_level</xml-colname>
+				<db-colname>risk_level</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="affect_udstream_system" text="对上下游系统影响">
+				<xml-colname>affect_udstream_system</xml-colname>
+				<db-colname>affect_udstream_system</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="affect_system" text="影响系统列表">
+				<xml-colname>affect_system</xml-colname>
+				<db-colname>affect_system</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>2000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="affect_user_end" text="对终端用户的影响">
+				<xml-colname>affect_user_end</xml-colname>
+				<db-colname>affect_user_end</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>2000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="affect_user_end_desc" text="对终端用户影响说明">
+				<xml-colname>affect_user_end_desc</xml-colname>
+				<db-colname>affect_user_end_desc</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="impt_contact" text="实施联系人OA号">
+				<xml-colname>impt_contact</xml-colname>
+				<db-colname>impt_contact</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="last_chg_time" text="上次变更时间">
+				<xml-colname>last_chg_time</xml-colname>
+				<db-colname>last_chg_time</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		
+			<!-- 列表显示 -->
+			<field name="pid" text="关键字">
+				<xml-colname>pid</xml-colname>
+				<db-colname>pid</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="baseid" text="发布工单关键字">
+				<xml-colname>baseid</xml-colname>
+				<db-colname>baseid</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="chgType" text="变更类型">
+				<xml-colname>chgType</xml-colname>
+				<db-colname>chgType</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="chgName" text="变更名称">
+				<xml-colname>chgName</xml-colname>
+				<db-colname>chgName</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="chgNum" text="变更个数">
+				<xml-colname>chgNum</xml-colname>
+				<db-colname>chgNum</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="chgContent" text="变更内容说明">
+				<xml-colname>chgContent</xml-colname>
+				<db-colname>chgContent</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="chgModule" text="涉及模块">
+				<xml-colname>chgModule</xml-colname>
+				<db-colname>chgModule</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</fields>
+	</method>
+</service>

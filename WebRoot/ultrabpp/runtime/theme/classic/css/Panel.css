@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+/* Tab panel START */table,td,th{ border-collapse:collapse;}
+.bpp_TabPanelGroup { margin:8px 0px 10px}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header { width: 100%; }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header_front { float: left; height: 31px; width: 0px; }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul { list-style: none; margin: 0px; padding: 0px; height: 28px;background:url(../images/tabbg.png) repeat-x left bottom;border-left:1px solid #c2c2c2; }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li {   float: left;
+    height: 28px;
+    line-height: 28px;
+   background:url(../images/tablibg.png) no-repeat left bottom; }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li a {text-decoration: none; color: #333; font-size:14px; font-weight:bold; float:left; width:104px; text-align:center; height:28px; line-height:28px;  }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li a:hover {color: #4c9ee5}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active {background:url(../images/tabsel.png) no-repeat left bottom; padding-top: 3px; margin-top:-3px; }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active a {color: #fff }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active a:hover { color: #333; }
+.bpp_TabPanelGroup_Body { float: left; width: 100%; border-top: solid #cccccc 1px; border-bottom: solid #999999 1px;background: #ffffff url(../images/panel-border.png) bottom repeat-y; }
+/* Tab panel END */
+
+/* Box panel START */
+.bpp_BoxPanelGroup { /*margin-top:10px;*/ }
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item { float: left; width: 100%; background: #ffffff url(../images/panel-border.png) bottom repeat-y; }
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header { background: #eeeeee; height: 30px;  }
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header div { background: #eeeeee url(../images/minus.gif) no-repeat -5px 4px; font-size: 12px; font-weight: bold; color: #000000; line-height: 30px; margin-left: 6px; margin-right: 1px; padding-left: 15px; cursor: pointer; }
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header .div_minus { background: #eeeeee url(../images/plus.gif) no-repeat -5px 4px; font-size: 12px; font-weight: bold; color: #555555; line-height: 230%; margin-left: 6px; padding-left: 15px; cursor: pointer; }
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Body { }
+/* Box panel END */

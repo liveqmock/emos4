@@ -1,0 +1,39 @@
+calendar时间控件说明文档
+--------------------------------------------------------------------------------------------------------------------------
+
+在页面中，引入date文件夹下面的WdatePicker.js。
+
+--------------------------------------------------------------------------------------------------------------------------
+date文件夹目录介绍
+
+date目录是一个整体,不可破坏里面的目录结构,也不可对里面的文件改名,可以改目录名 
+other.htm是必须文件,不可删除 
+各目录及文件的用途: 
+WdatePicker.js 配置文件,在调用的地方仅需使用该文件 
+config.js 语言和皮肤配置文件 
+calendar.js 日期库主文件
+other.htm 临时页面文件,不可删除
+目录lang 存放语言文件 
+目录skin 存放皮肤的相关文件 
+
+
+--------------------------------------------------------------------------------------------------------------------------
+calendar.htm页面中
+
+1、第一种时间形式（常规日期显示年月日）所需代码为
+	<input id="d11" type="text" onClick="WdatePicker()"/>
+在input里加上class="Wdate"就会在选择框右边出现日期图标,如果您不喜欢这个样式,可以把class="Wdate"去掉,另外也可以通过修改skin目录下的WdatePicker.css文件来修改样式 
+
+2、第二种时间形式（显示年月日时分秒）的代码为
+	<input type="text" id="d241" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true})" />
+
+3、第3种时间形式代码（图标触发）为：
+	<input id="d12" type="text" />
+	<img onclick="WdatePicker({el:$dp.$('d12')});" src="js/skin/datePicker.gif" width="16" height="22" align="absmiddle">
+
+4、第4种时间形式（平面触发）：
+	<script>
+	WdatePicker({eCont:'div1',onpicked:function(dp){alert('你选择的日期是:'+dp.cal.getDateStr())}})
+	</script>
+
+

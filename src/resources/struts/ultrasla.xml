@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+        
+<struts>
+	<!-- ULTRASLA事件规则_start -->
+	<package name="eventRule" extends="eoms" namespace="/eventRule">
+		<action name="*" method="{1}" class="eventRuleAction">
+			<result name="success">/ultrasla/{1}.jsp</result>
+			<result name="custom">/ultrasla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- ULTRASLA事件规则_end -->
+	
+	<!-- 事件主体组件_start -->
+	<package name="eventHandlerComp" extends="eoms" namespace="/eventHandlerComp">
+		<action name="*" method="{1}" class="eventHandlerCompAction">
+			<result name="success">/ultrasla/{1}.jsp</result>
+			<result name="custom">/ultrasla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 事件主体组件_end -->	
+	
+	<!-- ULTRASLA SLA定义_start -->
+	<package name="slaDefine" extends="eoms" namespace="/slaDefine">
+		<action name="*" method="{1}" class="slaDefineAction">
+			<result name="success">/ultrasla/{1}.jsp</result>
+			<result name="custom">/ultrasla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- ULTRASLA SLA定义_end -->
+	<!-- ULTRASLA MQ监控_start -->
+	<package name="MQMonitor" extends="eoms" namespace="/mqMonitor">
+		<action name="*" method="{1}" class="mqMonitorAction">
+			<result name="success">/ultrasla/mq/admin/{1}.jsp</result>
+			<result name="custom">/ultrasla/mq/admin/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- ULTRASLA MQ监控_end -->
+	<!-- ULTRASLA 事件监控_start -->
+	<package name="eventMonitor" extends="eoms" namespace="/eventMonitor">
+		<action name="*" method="{1}" class="eventMonitorAction">
+			<result name="success">/ultrasla/{1}.jsp</result>
+			<result name="custom">/ultrasla/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- ULTRASLA 事件监控_end -->
+</struts>

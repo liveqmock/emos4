@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<description>对工单公用字段的查询</description> 		
+	</doc>
+	<sqlquery name="SQL_API_BASEINFO.query">
+		<select>
+		<![CDATA[ 
+   			  select 
+				Base.C700000000	as	BaseID,
+				Base.C700000001	as	BaseSchema,
+				Base.C700000002	as	BaseName,
+				Base.C700000003	as	BaseSN,
+				Base.C700000004	as	BaseCreatorFullName,
+				Base.C700000005	as	BaseCreatorLoginName,
+				Base.C700000006	as	BaseCreateDate,
+				Base.C700000007	as	BaseSendDate,
+				Base.C700000008	as	BaseFinishDate,
+				Base.C700000009	as	BaseCloseDate,
+				Base.C700000010	as	BaseStatus,
+				Base.C700000011	as	BaseSummary,
+				Base.C700000014	as	BaseItems,
+				Base.C700000015	as	BasePriority,
+				
+				Base.C700000017	as	BaseAcceptOutTime,
+				Base.C700000018	as	BaseDealOutTime,
+				Base.C700000019	as	BaseDescrption,
+				Base.C700000020	as	BaseResult,
+				Base.C700000021	as	BaseCloseSatisfy,
+				Base.C700000022	as	BaseTplID,
+				Base.C700000023	as	BaseIsArchive,
+				Base.C700000030	as	BaseIsTrueClose,
+				Base.C700000041	as	BaseWorkFlowFlag,
+				Base.C700000044	as	BaseFlagCreated,
+				Base.C700000045	as	BaseFlagSended,
+				Base.C700000046	as	BaseFlagFinished,
+				Base.C700000047	as	BaseFlagCloseed,
+				Base.C700000048	as	BaseStatusCode,
+				Base.C700000049	as	BaseAcceptOutFlag,
+				Base.C700000050	as	BaseDealOutFlag,
+				Base.C700000053	as	BaseFieldLogName,
+				Base.C700000054	as	BaseFlagIsMotherCreated,
+				Base.C700000055	as	BaseFlowDrawDesc,
+				Base.C700000056	as	BaseFlagIsCreateChild,
+				Base.C700000057	as	BaseOpenDateTime,
+				Base.C700000059	as	BaseAtteptTime,
+				Base.C700000060	as	BaseIsHasAcceptTime,
+				
+				Base.C700000100	as	BaseCreatorConnectWay,
+				Base.C700000101	as	BaseCreatorCorp,
+				Base.C700000102	as	BaseCreatorCorpID,
+				Base.C700000103	as	BaseCreatorDep,
+				Base.C700000104	as	BaseCreatorDepID,
+				Base.C700000105	as	BaseCreatorDN,
+				Base.C700000106	as	BaseCreatorDNID,
+				
+				Base.C710000010	as	tmp_Begin_PhaseNo,
+				Base.C710000009	as	tmp_Begin_ProcessID,
+				Base.C710000012	as	BaseAttachGUID,
+				Base.C710000001	as	BaseEntryID
+              from {WF4:App_Base_Infor} Base
+			  where C700000000  =#baseid# and  C700000001  =#baseschema#
+		  ]]> 
+		</select>
+	</sqlquery>	
+</sql-group>

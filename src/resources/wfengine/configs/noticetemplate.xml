@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notice-config>
+	<action name="*">
+		<notice schema="*" key="">通知动作：{actionName}；&#xA;通知对象：{actorName}；&#xA;通知内容：{userName}{actionName}工单；&#xA;工单类别：{BaseName}；&#xA;工单主题：{BaseSummary}；&#xA;工单流水号：{serialNum}；&#xA;&#xA;</notice>
+		<notice schema="WF4:TEST" key="BaseDealOutTime,NetType">通知动作：{actionName}；&#xA;通知对象：{actorName}；&#xA;通知内容：{userName}{actionName}工单；&#xA;工单类别：{BaseName}；&#xA;工单主题：{BaseSummary}；&#xA;工单流水号：{serialNum}；&#xA;网络分类：{NetType}；&#xA;处理时限：{BaseDealOutTime}；&#xA;&#xA;</notice>
+	</action>
+</notice-config>
+
+<!--换行符(&#xA;)-->

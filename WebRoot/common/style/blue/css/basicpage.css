@@ -1,0 +1,467 @@
+@charset "utf-8";
+/* ButtonBox */
+.buttonbar_content{
+	border:solid 1px #eee097;
+	border-collapse:collapse;
+	font-size:12px;
+	}
+.buttonbar_content td{ 
+	border:solid 1px #eee097;
+	border-collapse:collapse;
+	height:20px;
+	padding-left:3px;
+	padding-right:5px;
+	background:#fffedf ;
+	font-family:"宋体", "幼圆";
+}
+.buttonbar_content td img{
+	cursor:pointer;
+}
+.searchbar{
+	border:#99BBE8 1px solid;
+	width:100%;
+	background:url(../images/searchbarbg.png) repeat-x left top;
+	height:90px;
+	margin:5px 0;
+	}
+.pagefirst{
+	background:url(../images/navleft.png) no-repeat left top;
+	width:14px;
+	height:16px;
+	display:inline-block;
+	margin-left:5px;
+	cursor:pointer;
+	}
+.pagepre{
+	background:url(../images/left.png) no-repeat left top;
+	width:14px;
+	height:16px;
+	display:inline-block;
+	margin-left:5px;
+	cursor:pointer;
+	}
+.pagenext{
+	background:url(../images/right.png) no-repeat left top;
+	width:14px;
+	height:16px;
+	display:inline-block;
+	margin-left:5px;
+	cursor:pointer;
+	}
+.pagelast{
+	background:url(../images/navright.png) no-repeat left top;
+	width:14px;
+	height:16px;
+	display:inline-block;
+	margin:0 5px;
+	cursor:pointer;
+	}
+.zoomsearch{
+	background:url(../images/zoom.png) no-repeat left top;
+	height:16px;
+	display:inline-block;
+	margin:0 5px;
+	cursor:pointer;
+	width:16px;
+	}
+.refresh{
+	background:url(../images/refresh.png) no-repeat left top;
+	height:16px;
+	display:inline-block;
+	margin:0 5px;
+	cursor:pointer;
+	width:16px;
+	}
+.toolbar{
+	border-top:solid 1px #eee097;
+	border-bottom:solid 1px #eee097;
+	height:23px;
+	padding:2px 0;
+	background:#fffedf ;
+	font-family:"宋体", "幼圆";
+	width:100%;
+	margin:5px auto;
+	text-align:right;
+	}
+.leftbar{
+	float:left;
+	}
+.rightbar{
+	float:right;
+	margin-right:10px;
+	}
+
+/*************portal begin*******************/
+.portal{
+	width:100%;
+	height:200px;
+	border:#99BBE8 1px solid;
+	border-top:none;
+	margin:0;
+	float:left;
+	}
+.portaltitle{
+	background:url(../images/content_title_bg.png) repeat-x;
+	height:26px;
+	font-family:'宋体';
+	font-size:12px;
+	padding-left:5px;
+	color:#184D97;
+	font-weight:bold;
+	line-height:26px;
+	}
+.portalcontent{
+	width:100%;
+	font-family:"Times New Roman", Times, serif,'宋体';
+	font-size:12px;
+	padding:10px;
+	}
+.more{
+	float:right;
+	margin-right:10px;
+	cursor:pointer;
+	background:url(../images/more.png) no-repeat;
+	display:block;
+	margin-top:-20px;
+	width:44px;
+	height:13px;
+	}
+/*************portal end*******************/
+/*****************New**************************/
+.form_main{
+	margin:0 auto;
+	padding-left:10px;
+	padding-top:20px;	
+	font:12px/25px "宋体" ;
+	text-align:left;
+	overflow:hidden;
+}
+.form_main td{
+    line-height:28px;
+	padding:0;
+	margin:0;
+	border-right:none;
+	border-left:none;
+	border-bottom:1px #eeecf2 solid;
+}
+.tips{
+	font-family:"宋体";
+	font-size: 12px;
+	font-weight: bold;
+	color: #333333;
+	padding-left:25px;
+	line-height:26px;
+}
+.label{
+   text-align:right;
+   margin-right:10px;
+}
+.label span,.tips span{
+    color:#ff0000;
+}
+.desc{
+}
+.button_bar{
+    height:28px;
+	line-height:28px;
+	overflow:hidden;
+	margin-top:15px;
+	padding-top:5px;
+	border-top: 1px dashed #a1a1a1;
+	text-align:center;
+}
+/*****************New End**************************/
+/************************************ search css *************************************/
+.search_sitebg {	
+	height:100px;
+	margin:0;
+	padding:0;
+	clear:both;
+}
+.serach_main{
+	margin:0;
+	padding:0;
+}
+.search_main td{
+    border:none;
+	margin:0px;
+	padding:0px;
+	line-height:30px;
+}
+.search_main td.label{
+    text-align:right;
+	padding-right:10px;
+}
+.search_main td.label span{
+    color:#f00;
+}
+.search_main td.input{
+    text-align:left;
+}
+.searchTitle{
+	width:100%;
+	background:#f8f9ed;
+	font-weight: bold;
+	color: #333333;
+	text-indent: 10px;
+	border-bottom:1px dotted #757575;
+	text-align:left;
+	line-height:26px;
+}
+.search_close {
+   height:20px;
+   width:20px;
+   cursor:pointer;
+   margin-top:-20px;
+   float:right;
+   background:url(../images/close.png) no-repeat left top;
+}
+/********************************* search css ********************************/
+/******************************** portal Css start****************************/
+.portal_div {
+	background:url(../images/div_bg.png) repeat-x;
+	border:1px #E4E4E4 solid;
+	padding:5px 4px 4px 4px;
+	margin:3px 4px 5px 0;
+}
+.portal_div_text_title {
+	font-family:'宋体';
+	font-size:12px;
+	color:#2a62b0;
+	font-weight:bold;
+	line-height:23px;
+	text-align:left;
+	padding-left:6px;
+	border-bottom:1px #E4E4E4 solid;
+}
+.portal_div_text_title .morethan{
+	font-weight:normal;
+	color:#000000;
+	line-height:20px;
+	float:right;
+	margin-top:-20px;
+	background:url(../images/morethan.png) no-repeat left center;
+	padding-left:18px;
+}
+.portal_div ul{
+	list-style:none;
+	margin:5px;
+	padding:0px;
+	}
+.portal_div ul li{
+	background:url(../images/newsbg.png) no-repeat left top;
+	padding-left:18px;
+	margin-top:3px;
+	}
+.portal_div ul li a:hover{
+	text-decoration:underline;
+}
+/************************************** portal Css end*****************************/
+
+.logout_main{
+   margin:0px; 
+   font:12px/70px "宋体", "幼圆";
+   overflow:hidden;
+   padding:0px; 
+   text-align:center; 
+}
+
+/***********************Default page*************************/
+.defaultpage{
+	padding:15px 0 0 30px;
+	overflow:auto;
+	margin:0px;
+	}
+.defaultpage ul{
+	list-style:none;
+	margin:0px;
+	}
+.defaultpage ul li{
+	padding:10px 0;
+	font-size:12px;
+	font-family:Verdana, Geneva, sans-serif,"宋体";
+	letter-spacing:1px;
+	}
+.defaultpage ul li.titlea{
+	font-weight:bold;
+	}
+.defaultpage ul li img{
+	margin-right:8px;
+	vertical-align:middle;
+	}
+/***********************Default page End*************************/
+
+/**************************Gong Dan***********************************/
+.gongdan_info{
+	width:98%;
+	border:solid 1px #eee097;
+	background:#fffedf ;
+	margin:10px auto;
+	padding:2px;
+	}
+.gongdan_text{
+	font-weight:bold;
+	text-align:right;
+	margin-right:5px;
+	}
+/**************************Gong Dan End***********************************/
+/*****searchbox tree******/
+.searchcontent{
+	padding:5px 0 0 10px;
+	}
+.searchcontent img{
+	margin:0px;
+	vertical-align:middle;
+	cursor:pointer;
+	}
+.searchinput{
+	border:1px solid #99BBE8;
+	background:#FFFFFF; 
+	height:20px;
+	color:#CCC;
+	width:100px;
+	background:url(../images/zoom.png) right top no-repeat;
+	}
+.searchinput2{
+	border:1px solid #99BBE8;
+	background:#FFFFFF; 
+	height:20px;
+	color:#333;
+	width:100px;
+	background:url(../images/zoom.png) right top no-repeat;
+	}
+/*****searchbox tree End******/
+/********************Popup End****************************/
+	/**************************Duty************************/ /* 日程表格样式 */
+#calTable {
+	border-collapse: collapse;
+	border: 0px solid #C3D9FF;
+}
+
+/* 每日单元格样式 */
+td.calBox {
+	border: 1px solid #CCDDEE;
+	width: 150px;
+	height: 120px;
+	vertical-align: top;
+}
+
+/* 每日单元格内日期样式 */
+td.calBox div.date {
+	background: #E8EEF7;
+	font-size: 11px;
+	padding: 2px;
+	cursor: pointer;
+}
+
+/* 每日单元格内周六周日样式 */
+td.sat div.date,td.sun div.date {
+	color: red;
+}
+
+/* 今日样式 */
+td.calBox div.today {
+	background: #f9d346 url("../images/time.png") no-repeat top 5px;
+	padding-left: 24px;
+}
+
+/* 周标识样式 */
+td.day {
+	text-align: center;
+	background: #aecdff url("../images/dutybg.png") repeat-x top left;
+	border: 0px solid #CCDDEE;
+	color: #003366;
+	font-weight: bold;
+	height: 22px;
+}
+
+.weekbg {
+	background: url("../images/date.png") no-repeat top left;
+	padding-left: 20px;
+	height: 20px;
+	display: inline-block;
+}
+
+.dutyworktime {
+	background: url("../images/green.png") no-repeat top 5px;
+	padding: 0 0 0 25px;
+	margin: 0px;
+	color: #039;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.dutyworktable {
+	border: solid 2px #1786ff;
+	border-top: none;
+}
+
+/* 当前显示的年月样式 */
+#dateInfo {
+	font-weight: bold;
+	margin: 3px;
+}
+
+/* 添加任务div样式 */
+#addBox {
+	display: none;
+	position: absolute;
+	width: 500px;
+	height: 300px;
+	left: 50%;
+	top: 70%;
+	margin-left: -250px;
+	margin-top: -200px;
+	border: 1px solid #000;
+	background: #FFFF99;
+	padding: 10px;
+	z-index: 99;
+}
+
+/* 添加日期时间快速查询div样式 */
+#fastSearch {
+	display: none;
+	position: absolute;
+	width: 180px;
+	height: 100px;
+	border: 1px solid #000;
+	background: #FFFF66;
+	padding: 10px;
+	z-index: 99;
+}
+
+/* 添加任务内日期样式 */
+#taskDate {
+	height: 30px;
+	font-weight: bold;
+	padding: 3px;
+}
+
+/* 按钮样式 */
+.taskBtn {
+	margin: 10px;
+}
+
+/* 编辑任务div样式 */
+#editBox {
+	display: none;
+	position: absolute;
+	width: 300px;
+	border: 1px solid #000;
+	height: 60px;
+	background: #99FF99;
+	padding: 10px;
+}
+
+/* 任务样式 */
+div.task {
+	width: 150px;
+	height: 110px;
+	overflow: hidden;
+	white-space: nowrap;
+	background: #fcf8e7;
+	border: 1px solid #FFF;
+	color: #FFF;
+	padding: 1 2 1 3;
+	cursor: pointer;
+}

@@ -1,0 +1,65 @@
+/** 大星星*/
+/**
+* 亮的星星
+*
+*/
+.star1 {
+	background:url(../images/star/star1.png) no-repeat;
+	width: 30px;
+	height: 30px;
+	display:inline-block;
+}
+/**
+* 灰的星星
+*
+*/
+.star2 {
+	background:url(../images/star/star2.png) no-repeat;
+	width: 30px;
+	height: 30px;
+	display:inline-block;
+}
+/**
+* 一半亮的星星
+*
+*/
+.star3 {
+	background:url(../images/star/star3.png) no-repeat;
+	width: 30px;
+	height: 30px;
+}
+
+/** 小星星*/
+/**
+* 亮的星星
+*
+*/
+.star1_ {
+	background:url(../images/star/star1_.png) no-repeat;
+	width: 16px;
+	height: 16px;
+}
+/**
+* 灰的星星
+*
+*/
+.star2_ {
+	background:url(../images/star/star2_.png) no-repeat;
+	width: 16px;
+	height: 16px;
+}
+/**
+* 一半亮的星星
+*
+*/
+.star3_ {
+	background:url(../images/star/star3_.png) no-repeat;
+	width: 16px;
+	height: 16px;
+}
+
+.star_text{
+	width: 120px;
+	height: 30px;
+	text-align: center;
+}

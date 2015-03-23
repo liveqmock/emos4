@@ -1,0 +1,31 @@
+/* CSS Document */
+
+* { margin: 0; padding: 0; }
+body { background: #fff; font-family: Verdana, Arial, Helvetica, sans-serif, "ËÎÌו"; font-size: 12px; color: #340d0d; margin-left: auto; margin-right: auto; scroll: none; }
+a { color: #441010; text-decoration: none; margin: 0px; padding: 0px; }
+a:hover { color: #441010; text-decoration: underline; }
+.center { background: #fff url(../images/logon/middle.png) no-repeat center 152px; }
+.top { background: url(../images/logon/topic.png) no-repeat top center; height: 152px; }
+.middle { height: 381px; width: 1000px; margin: 0 auto; }
+.middle ul { background: url(../images/logon/loginbox.png) no-repeat 0 0; list-style: none; float: right; margin-top: 38px; margin-right: 25px; padding: 66px 24px 45px; width: 247px; height: 193px; position: relative; }
+.middle ul li { margin-bottom: 13px; background: url(../images/logon/libg.png) no-repeat left top; padding-left: 11px; line-height: 21px; padding-top: 13px; padding-bottom: 10px; }
+.middle ul li:hover { background: url(../images/logon/libghover.png) no-repeat left top; }
+.middle ul li.login_memory { background: none; height: 14px; margin-bottom: 18px; padding: 13px 0 0; }
+.middle ul li.login_memory:hover { background: none; }
+.login_memory input { float: left; margin-right: 5px; margin-top: 2px; }
+.login_memory label { float: left; line-height: 14px; }
+.middle ul li.button_position, .middle ul li.button_position:hover { background: none; margin: 0; padding: 0; }
+.lable { text-align: left;/* width: 55px; */ display: block; float: left; clear: left; line-height: 18px; color: #d3d3d3; font-size: 14px; }
+input.focus { border: none; background: #fff; height: 21px; line-height: 21px; margin-top: 0px; color: #666; font-size: 14px; }
+input.blur { border: none; background: #FFFFFF; height: 21px; line-height: 21px; margin-top: 0px; color: #666; font-size: 14px; }
+.text { float: left; width: 140px; margin-top: 4px!important; margin-top: 0; }
+.verify { background-color: #c9caca; width: 100px; padding: 2px 8px; line-height: 20px; }
+.download { margin-left: 20px; margin-right: 20px; padding-top: 10px; background: url(../images/logon/dotline.png) repeat-x; text-align: right; height: 40px; }
+.copyright { /*height:48px;*/ text-align: center; color: #616060; padding-top: 55px; background-image: url(../images/logon/bottom.png); background-repeat: no-repeat; }
+.button, .buttonhover { border: medium none; color: #ffffff; font-size: 14px; font-weight: bold; height: 40px; line-height: 40px; margin: 0; padding: 0; text-align: center; width: 100%; }
+.button { background: #4b84be; }
+.buttonhover { background: #5396da; }
+.middle ul li.errorli { background: none; height: 21px; margin: 0; padding: 0 0 5px; position: absolute; text-align: left; top: 170px; }
+.middle ul li.errorli:hover { background: none; }
+.error { background: none; border: 0px solid #ff7200; padding: 0 14px; }
+.error span { background: none; padding-left: 0px; line-height: 21x; color: #dd4b39; }

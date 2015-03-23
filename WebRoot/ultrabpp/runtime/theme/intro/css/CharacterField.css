@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+.bpp_CharField
+{
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_CharField table td input
+{
+	float:left;
+	margin-top:3px;
+	border:solid #aaaaaa 1px;
+	line-height:150%;
+	height:20px;
+	font-family:宋体;
+}
+.bpp_CharField table td textarea
+{
+	float:left;
+	margin-top:3px;
+	border:solid #aaaaaa 1px;
+	line-height:150%;
+	padding:0px;
+	font-family:宋体;
+}

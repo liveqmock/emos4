@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.24</date> 
+		<description>工单查询</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_BaseViewAll_Repository.query" >
+		<select>
+			<![CDATA[ 
+	 		select
+			/*COUNT*/ 
+			base.C700000000 as baseid,              --工单编号
+			C700000001      as baseschema,          --工单schema
+			C700000002      as basename,            --工单名称
+			C700000003      as basesn,              --流水号
+			C700000018      as basedealouttime,     --处理时限
+			C700000011      as basesummary,         --主题
+			C700000004      as basecreatorfullname, --建单人名
+			C700000005      as basecreatorloginName, --建单人登陆名
+			C700000101      as basecreatorcorp,     --建单人单位
+			C700000103      as basecreatordep,      --建单人部门
+			C700000043		as basecategoryclasscode, --工单类别
+			C700000042		as basecategoryclassname, --工单类别名
+			C700000006      as basecreatedate,      --建单时间
+			C700000009      as baseclosedate,       --关闭时间
+			C700000010      as basestatus,          --状态名
+			C700000008      as basefinishdate,      --完成时间
+			C700000022      as basetplid            --模板ID
+			/*COUNT*/
+			from {WF4:App_Base_Infor} base
+			where 1=1 
+			$customwhere$
+			
+			order by C700000006 desc
+			]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_creator" name="creator" id="creator_name" onclick="toSelectActor();" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			
+			<select displayname="wf_sheet_type" name="baseSchema">
+				<sql>select code as baseSchema,name from bs_t_wf_type t </sql>
+			</select>
+			
+			<hidden name="creator_loginname" id="creator_loginname" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<if prepend="and" exp="'#selectstatus#'>''">
+				<success>
+					<sql prepend="and" >
+						<![CDATA[ base.C700000010 = #selectstatus# ]]>
+					</sql>
+				</success>
+			</if>
+			<field prepend="and" operator="="  colname="C700000005"  value="#creator_loginname#"/><!-- 建单人 -->
+			<field prepend="and" operator=">="  colname="C700000006"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;="  colname="C700000006"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="C700000003"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="C700000011"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="C700000001"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="C700000001"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+			
+			<if prepend="and" exp="'#orderby#'>''">
+				<success>
+					<sql prepend="EXTEND" >
+						<![CDATA[ order by #orderby#]]>
+					</sql>
+				</success>
+			</if>
+			
+		</customwhere>
+	</sqlquery>
+
+</sql-group>

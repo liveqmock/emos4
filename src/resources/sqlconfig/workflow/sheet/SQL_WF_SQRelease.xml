@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+  <doc>
+    <author>suyi</author> 
+    <date>2015.1.22</date> 
+    <description>发布工单查询</description>     
+  </doc>
+  <sqlquery name="SQL_WF_SQRelease.query" >
+    <select>
+      <![CDATA[ 
+      select /*COUNT*/*/*COUNT*/ from(
+      select
+          t.*,
+          (case acceptTimeout
+          when '是' then 1
+          else 0
+          end) as acceptTimeoutSign,
+          (case dealTimeout
+          when '是' then 1
+          else 0
+          end) as dealTimeoutSign,
+          (select dep.depname from bs_t_sm_userdep userdep,bs_t_sm_dep dep where userdep.depid = dep.pid and userdep.loginname = t.dealuserloginname and dep.deptype = '4' and rownum = 1) dealuserteam,
+          (select fullname from bs_t_sm_user where loginname = dealuserloginname) dealuser,
+          (select substr(depfullname,instr(depfullname,'.',1,2)+1,length(depfullname)) from( select depfullname,loginname from bs_t_sm_dep dep,bs_t_sm_user usr where dep.pid = usr.depid) where loginname = dealuserloginname) dealuserdept,
+          (select dep.depname from bs_t_sm_userdep userdep,bs_t_sm_dep dep where userdep.depid = dep.pid and userdep.loginname = t.basecreatorloginName and dep.deptype = '4' and rownum = 1) basecreatorteam          from
+          (
+            select
+              base.baseid,              --工单编号
+              base.baseschema,          --工单schema
+              base.basename,            --工单名称
+              base.basesn,              --流水号
+              base.basesummary,         --主题
+              base.basecreatorfullname, --建单人名
+              base.basecreatorloginName, --建单人登陆名
+              base.basecreatorcorp,     --建单人单位
+              base.basecreatordep,      --建单人部门
+              base.basecreatordepid,      --建单人部门id
+              base.basecreatedate,      --建单时间
+              base.baseclosedate,       --关闭时间
+              base.basestatus,          --状态名
+              (case when base.basestatus='已作废' then '已作废工单' else '未作废工单' end) sheetstatus, --是否作废工单
+              base.baseentryid,    --工单实例id
+              base.basetplid,            --模板ID
+              assigneeid,assigneedepid,
+              rel.releaseState,		--发布状态
+              rel.step_baseresult,	--基本结论
+              
+              rel.connBusSystem,--应用系统
+              rel.releaseType,--发布类型
+              rel.release_reason,--发布原因
+              rel.release_type,--发布类别
+              rel.affect_udstream_system,--对上下游系统影响
+              rel.affect_user_end,--对终端用户影响
+              rel.is_sync_backup,--是否需要灾备变更同步
+              rel.batch_info,--变更批次
+              rel.risk_level,--风险程度
+              rel.releasereason  ,--发布说明
+              rel.affect_user_end_desc  ,-- 对终端用户影响说明 
+              rel.buildcase  ,--发布部署方案
+ 			  rel.checkresult,--验证结果
+ 			  rel.requestgroup,-- 请求人单位
+			  rel.connchangedesc  ,--配置相关信息变更说明
+ 			  rel.realstarttime    ,--实际开始时间
+  			  rel.backup_env_chg_time ,--灾备环境变更时间
+ 			  rel.planfinishtime ,-- 计划完成时间
+ 			  rel.planstarttime ,-- 计划开始时间
+              rel.requestdept    ,-- 请求人部门
+ 			  rel.expectationtime ,--期望上线日期
+ 		      rel.closeuser , --关闭人
+  		      rel.last_chg_time ,-- 上次变更时间
+  		      rel.impl_contact ,--实施联系人
+		      rel.realfinishtime      ,--实际完成时间
+		 	  rel.requestuser       , --请求人
+              
+              (case when dealer is not null then dealer || '(已受理)' when assignee is not null then assignee || '(未受理)' when assigngroup is not null then assigngroup || '(未受理)' else '' end)  deal,  --当前处理人
+              base.BASEACCEPTDATE,--受理时间
+              base.BASEACCEPTOUTTIME,--受理时限
+              case when base.basestatus = '已关闭' and (select stepno from (select stepno,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_RELEASE' order by stdate desc) r where r.baseid = base.baseid and rownum = 1) = 'step01'
+              then (select dealerid from (select dealerid,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_RELEASE' and stepno = 'step01' order by stdate desc) r where r.baseid = base.baseid and rownum = 1)
+                else
+              (select dealerid from (select dealerid,baseid from bs_t_wf_dealprocess where baseschema = 'CBD_RELEASE' and stepno = 'step02' order by stdate desc) r where r.baseid = base.baseid and rownum = 1) 
+              end  as dealuserloginname,--解决人登录名
+              case when (case
+                 when base.BASEACCEPTDATE = '0' then
+                   case
+                     when base.BASEACCEPTOUTTIME = '0' then
+                       0
+                     else
+                       DATE_TO_SEC( TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+                   end
+                 else
+                  to_number(base.BASEACCEPTDATE)
+               end) -
+               decode(base.BASEACCEPTOUTTIME,null,0,TO_NUMBER(base.BASEACCEPTOUTTIME))>0 then '是'
+              else '否'
+              end as acceptTimeout,
+              base.BASEFINISHDATE,--处理时间
+              base.BASEDEALOUTTIME,--处理时限
+              case when (case
+                 when base.BASEFINISHDATE = '0' then
+                   case
+                     when base.BASEDEALOUTTIME = '0' then
+                       0
+                     else
+                       DATE_TO_SEC( TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+                   end
+                 else
+                  to_number(base.BASEFINISHDATE)
+               end) -
+               decode(base.BASEDEALOUTTIME,null,0,TO_NUMBER(base.BASEDEALOUTTIME))>0 then '是'
+              else '否'
+              end as dealTimeout
+            from BS_T_BPP_BASEINFOR base,bs_t_wf_currenttask ct,bs_f_cdb_release rel where base.baseSchema = 'CDB_RELEASE' and base.baseid=ct.baseid(+) and base.baseschema = ct.baseschema(+) and base.baseid = rel.baseid(+)
+            /*ORDERBY*/ order by base.basecreatedate desc/*ORDERBY*/
+          ) t
+          ) where 1=1 $customwhere$
+     
+      ]]> 
+    </select>
+    <condition  cols="3" labprecent="11" textprecent="22" >
+     <text displayname="wf_sheet_creator" name="creator" id="creator_name" />
+	 
+	 <text displayname="建单团队" name="basecreatorteam" id="basecreatorteam" />
+	 <text displayname="建单处室" name="basecreatordep" id="basecreatordep"  />
+	 
+	 <text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+	 <text displayname="wf_sheet_title" name="workSheetTitle" />
+	  <text displayname="工单状态" name="basestatus" id="basestatus" onclick="selectStatus()"/>
+	 <date displayname="wf_sheet_createstarttime" name="createstarttime" />
+	 <date displayname="wf_sheet_createendtime" name="createendtime" />
+	
+	 <text displayname="应用系统" name="connBusSystem" id="connBusSystem"  onclick="openConnBusSystemTree(false,'connBusSystem')" />
+     <text displayname="发布类型" name="releaseType" id="releaseType" />
+      <text displayname="发布原因" name="release_reason" id="release_reason" />
+       <text displayname="发布类别" name="release_type" id="release_type" onclick="openRelease_typeTree(false,'release_type')" />
+     <select displayname="发布状态" name="releaseState" id="releaseState" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT T.DINAME ID, T.DINAME NAME FROM BS_T_SM_DICITEM T WHERE T.DTCODE = 'Release' AND T.DICFULLNAME LIKE '发布状态.%' ]]></sql>
+	 </select>
+      	 <select displayname="基本结论" name="step_baseresult" id="step_baseresult">
+	 	<sql><![CDATA[ SELECT '成功' ID, '成功' NAME FROM DUAL UNION ALL SELECT '部分成功' ID, '部分成功' NAME FROM DUAL UNION ALL SELECT '失败' ID, '失败' NAME FROM DUAL UNION ALL SELECT '取消' ID, '取消' NAME FROM DUAL ]]></sql>
+	 </select>
+	 
+       <select displayname="对上下游系统影响" name="affect_udstream_system" id="affect_udstream_system" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '是' ID, '是' NAME   FROM DUAL UNION ALL SELECT '否' ID, '否' NAME   FROM DUAL ]]></sql>
+	 </select>      
+      <select displayname="对终端用户影响" name="affect_user_end" id="affect_user_end" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '是' ID, '是' NAME   FROM DUAL UNION ALL SELECT '否' ID, '否' NAME   FROM DUAL ]]></sql>
+	 </select>
+      <select displayname="是否需要灾备变更同步" name="is_sync_backup" id="is_sync_backup" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '是' ID, '是' NAME   FROM DUAL UNION ALL SELECT '否' ID, '否' NAME   FROM DUAL ]]></sql>
+	 </select>
+          <text displayname="变更批次" name="batch_info" id="batch_info" />
+         <select displayname="风险程度" name="risk_level" id="risk_level" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '高' ID, '高' NAME   FROM DUAL UNION ALL SELECT '中' ID, '中' NAME   FROM DUAL UNION ALL SELECT '低' ID, '低' NAME   FROM DUAL ]]></sql>
+	 </select>
+	 <select displayname="工单是否作废" name="sheetstatus" id="sheetstatus" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '已作废工单' ID, '已作废工单' NAME   FROM DUAL UNION ALL SELECT '未作废工单' ID, '未作废工单' NAME   FROM DUAL ]]></sql>
+	</select>
+	 <hidden name="baseSchema" />
+	 <hidden name="creator_loginname" id="creator_loginname" />
+    </condition>
+    <customwhere name="customwhere" prepend="and" >
+      <if prepend="and" exp="'#selectstatus#'>''">
+        <success>
+          <sql prepend="and" >
+            <![CDATA[ basestatus = #selectstatus# ]]>
+          </sql>
+        </success>
+      </if>
+        <field prepend="and" operator="like"  colname="connBusSystem"  value="#connBusSystem#"/><!-- 应用系统 -->
+        <field prepend="and" operator="like"  colname="releaseType"  value="#releaseType#"/><!-- 发布类型 -->
+         <field prepend="and" operator="like"  colname="release_reason"  value="#release_reason#"/><!-- 发布原因 -->
+        <field prepend="and" operator="like"  colname="release_type"  value="#release_type#"/><!-- 发布类别-->
+        <field prepend="and" operator="="  colname="affect_udstream_system"  value="#affect_udstream_system#"/><!-- 对上下游系统影响-->
+        <field prepend="and" operator="="  colname="affect_user_end"  value="#affect_user_end#"/><!-- 对终端用户影响-->
+         <field prepend="and" operator="="  colname="is_sync_backup"  value="#is_sync_backup#"/><!-- 是否需要灾备变更同步-->
+         <field prepend="and" operator="="  colname="batch_info"  value="#batch_info#"/><!-- 变更批次-->
+        <field prepend="and" operator="="  colname="risk_level"  value="#risk_level#"/><!-- 风险程度-->
+        
+        <field prepend="and" operator="like"  colname="baseCreatorLoginName"  value="#creator_loginname#"/><!-- 建单人 -->
+		<field prepend="and" operator=">="  colname="baseCreateDate"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+		<field prepend="and" operator="&lt;="  colname="baseCreateDate"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+		<field prepend="and" operator="like"  colname="baseSn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+		<field prepend="and" operator="like"  colname="upper(baseSummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+		<field prepend="and" operator="="  colname="baseSchema"  value="#baseSchema#"/><!-- 工单类型 -->
+		<field prepend="and" operator="=" colname="sheetstatus" value="#sheetstatus#"/> <!--工单是否作废 -->
+		<field prepend="and" operator="=" colname="basestatus" value="#basestatus#"/> <!--工单状态 -->
+		<field prepend="and" operator="like"  colname="basecreatordep"  value="#basecreatordep#"/><!-- 建单部门 --> 
+		<field prepend="and" operator="like" colname="basecreatorteam" value="#basecreatorteam#"/> <!--建单人团队-->
+        <field prepend="and" operator="="  colname="releaseState"  value="#releaseState#"/><!-- 发布状态 -->
+        <field prepend="and" operator="="  colname="step_baseresult"  value="#step_baseresult#"/><!-- 发布状态 -->
+      <if prepend="and" exp="'#wfTypeStr#'>''">
+        <success>
+          <field prepend="or" operator="="  colname="baseSchema"  value="#wfTypeStr#"/>
+        </success>
+      </if>
+    </customwhere>
+    <export>
+    		<field colname="basesn" title="wf_sheet_serialnum" type="string" />
+			<field colname="basesummary" title="wf_sheet_in_summary" type="string" />
+			<field colname="basecreatordep" title="wf_sheet_release_basecreatordep" type="string" />
+			<field colname="basecreatedate" title="wf_sheet_release_basecreatedate" type="date" />
+			<field colname="baseclosedate" title="wf_sheet_release_baseclosedate" type="date" />
+			<field colname="basestatus" title="wf_sheet_release_basestatus" type="string" />
+			
+			<field colname="releasereason" title="wf_sheet_release_releasereason" type="string" />
+			<field colname="connbussystem" title="wf_sheet_release_connbussystem" type="string" />
+			<field colname="affect_user_end_desc" title="wf_sheet_release_affect" type="string" />
+			<field colname="releasetype" title="wf_sheet_release_releasetype" type="string" />
+			<field colname="releasestate" title="wf_sheet_release_releasestate" type="string" />
+			<field colname="buildcase" title="wf_sheet_release_buildcase" type="string" />
+			<field colname="checkresult" title="wf_sheet_release_checkresult" type="string" />
+			<field colname="requestgroup" title="wf_sheet_release_requestgroup" type="string" />
+			<field colname="connchangedesc" title="wf_sheet_release_connchangedesc" type="string" />
+			<field colname="risk_level" title="wf_sheet_release_risklevel" type="string" />
+			<field colname="affect_udstream_system" title="wf_sheet_release_udstream" type="string" />
+			<field colname="realstarttime" title="wf_sheet_release_realstarttime" type="date" />
+			<field colname="affect_user_end" title="wf_sheet_release_user_end" type="string" />
+			<field colname="backup_env_chg_time" title="wf_sheet_release_backup" type="date" />
+			<field colname="planfinishtime" title="wf_sheet_release_planfinishtime" type="date" />
+			<field colname="planstarttime" title="wf_sheet_release_planstarttime" type="date" />
+			<field colname="requestdept" title="wf_sheet_release_requestdept" type="string" />
+			<field colname="expectationtime" title="wf_sheet_release_expectationtime" type="date" />
+			<field colname="is_sync_backup" title="wf_sheet_release_is_sync_backup" type="string" />
+			<field colname="closeuser" title="wf_sheet_release_closeuser" type="string" />
+			<field colname="release_reason" title="wf_sheet_release_release_reason" type="string" />
+			<field colname="last_chg_time" title="wf_sheet_release_last_chg_time" type="date" />
+			<field colname="batch_info" title="wf_sheet_release_batch_info" type="string" />
+			<field colname="release_type" title="wf_sheet_release_release_type" type="string" />
+			<field colname="impl_contact" title="wf_sheet_release_impl_contact" type="string" />
+			<field colname="realfinishtime" title="wf_sheet_release_realfinishtime" type="date" />
+			<field colname="requestuser" title="wf_sheet_release_requestuser" type="string" />
+
+    </export>
+  </sqlquery>
+</sql-group>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_EL_00_ComplaintTypeList.query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/*/*COUNT*/
+				  from (select distinct decode(#complaintTypeFlag#,
+				                               '1',
+				                               base.C650000001,
+				                               '2',
+				                               c650000001||'.'||c650000002,
+				                               '3',
+				                               c650000001||'.'||c650000002||'.'||c650000003,
+				                               '') as item,
+				                        decode(#complaintTypeFlag#,
+				                               '1',
+				                               base.C650000011,
+				                               '2',
+				                               C650000011||C650000012,
+				                               '3',
+				                               C650000011||C650000012||C650000013,
+				                               '') ccode
+				          from {WF4:Config_EL_TTM_CCH_ComplaintType} base where 1=1 $customwhere$)
+				/*ORDERBY*/ order by /*ORDERBY*/ ccode
+				
+				
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="base.C650000011"  value="#item1#" />
+			<field prepend="and" operator="="  colname="(C650000011||C650000012)"  value="#item2#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

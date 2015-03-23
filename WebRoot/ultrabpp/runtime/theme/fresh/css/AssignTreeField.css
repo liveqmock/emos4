@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+.bpp_AssignTreeField
+{
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_AssignTreeField table td .bpp_AssignTreeBtn_single
+{
+	border:solid #ffffff 1px;
+	background-color:white;
+	text-decoration:underline;
+	width:24px;
+	height:24px;
+	margin-right:2px;
+	background:url(../images/tree_single.png) center center;
+}
+.bpp_AssignTreeField table td .bpp_AssignTreeBtn_multi
+{
+	border:solid #ffffff 1px;
+	background-color:white;
+	text-decoration:underline;
+	width:24px;
+	height:24px;
+	margin-right:2px;
+	background:url(../images/tree_multi.png) center center;
+}
+.bpp_AssignTreeField table td .bpp_AssignTreeText
+{
+	margin-top:2px;
+	border:solid #999999 1px;
+	line-height:150%;
+	height:20px;
+	font-family:宋体;
+}

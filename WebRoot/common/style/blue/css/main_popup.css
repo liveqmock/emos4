@@ -1,0 +1,132 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{
+	overflow:hidden;
+	}
+.popup{
+	margin:30px;
+	line-height:30px;
+	}
+
+.popup ol{
+	margin:20px 0 0 40px;
+	}
+.popup ol li{ 
+	list-style:none;
+	height:30px;
+	}
+.popup ol li a:link,.popup ol li a:visited{	
+	font-size:14px;
+	font-family:Verdana, Geneva, sans-serif,'微软雅黑';
+	color:#333;
+}
+.popup ol li a:hover{
+	color:#F60;
+	text-decoration:underline;
+}
+img{border:none;}
+.popup ol li img{padding-right:8px;}
+
+.border {
+	border:1px #99bbe8 solid;
+	background:#f8fbfc;
+	padding:1px;
+}
+.border1 {
+	background:#dfe8f6;
+	width:100%;
+	height:100%;
+}
+.lefttop {
+	position: absolute;
+	left:0px;
+	top:0px;
+}
+.leftbottom {
+	position: absolute;
+	left:0px;
+	bottom:0px;
+}
+.righttop {
+	position: absolute;
+	right:0px;
+	top:0px;
+}
+.rightbottom {
+	position: absolute;
+	right:0px;
+	bottom:0px;
+}
+.title {
+	background:url(../images/titlebg.png) repeat-x top;
+	height:22px;
+}
+.title .title1 {
+	overflow:hidden;
+	color:#15428b;
+	font-weight:bold;
+	font-size:12px;
+	padding-left:12px;
+	margin-top:3px;
+	float:left;
+}
+.close{
+	overflow:hidden;
+	width:15px;
+	height:15px;
+	float:right;
+	cursor:pointer;
+	background:transparent url(../images/tool-sprites.gif) no-repeat;
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+.close1{
+	overflow:hidden;
+	width:15px;
+	height:15px;
+	float:right;
+	cursor:pointer;
+	background:transparent url(../images/tool-sprites.gif) no-repeat;
+	background-position:-15px 0px;
+	position:absolute;
+	top:5px;
+	right:10px;
+}
+.popupcontainer{
+	border-left:#99BBE8 1px solid; 
+	border-right:#99BBE8 1px solid; 
+	border-bottom:#99BBE8 1px solid; 
+	height:100%;
+	margin:0px;
+	background:#dfe8f6;
+	position:relative;
+	
+}
+.popupcontent {	
+	color:#333333;
+	font-size:12px;
+	margin:20px 25px;
+	text-align:center;
+}
+.popupcontent img {
+	margin-right:15px;
+}
+.popupcontent p {
+	line-height:30px;
+	text-align:left;
+}
+.popupcontent input {
+	width:95%;
+}
+
+.bottom {
+	height:30px;
+	text-align:center;
+	vertical-align:middle;
+	padding-top:7px;
+	position:absolute;
+	bottom:10px;
+	right:1px;
+	width:97%;
+}

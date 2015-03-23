@@ -1,0 +1,77 @@
+.fieldset_style{
+	border:1px #d2e5fe solid;
+	width:96%;
+	margin:0 auto;
+	font-weight:bold;
+	padding-right:10px;
+	padding-left:10px;
+	padding-bottom:10px;
+	margin-bottom:5px;
+	}
+
+.tabContent{
+	background:#ffffff;clear:both;border:1px #d2e5fe solid;padding:10px;border-top:none;
+	}
+.add_scroll_div{
+	height:100%;
+	overflow:auto;
+	width:100%;
+	padding:10px 0 0 0;
+	background:#ffffff;
+    }
+.add_scroll_div2{
+	height:100%;
+	overflow:scroll;
+	width:100%;
+	padding:10px 0 0 0;
+	background:#ffffff;
+    }
+.add_table{
+	width:100%;
+	border-collapse:collapse;
+	border:0px;
+	}
+.add_table td{font-weight:normal;}
+
+.add_table_left{
+	width:20%;
+	text-align:right;
+	}
+.add_table_right{
+	width:30%;
+	text-align:left;
+	}
+
+input{width:60%;font-size:12px;}
+textarea{width:98%;font-size:12px;}
+select{width:97%;font-size:12px;}
+
+
+.blank_tr{height:5px;}
+.add_bottom{background:url(../images/add/add_buttonbg.png);height:29px;text-align:right;padding:6px 10px 0 0;}
+.zhiban{
+width:50px}
+.fangshi{
+	width:75px
+}
+.time_zhixing{
+width:80px}
+
+.role_zhixing{
+	width:70px
+}
+.zhouqiri{
+width:20px}
+.now{
+width:50px}
+
+.zhouqizhi{
+	word-wrap:nowrap;
+	word-break:keep-all;
+	width:120px;
+}
+.role_choose{
+	word-wrap:nowrap;
+	word-break:keep-all;
+	width:120px;
+}

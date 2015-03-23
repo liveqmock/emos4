@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/right.css" />
+<script src="js/main.js"></script>
+<script>
+function changediv(id_num, id,n)
+{
+		for(var i=1;i<=n;i++)
+		{
+			var divName=document.getElementById("div1_" + id_num + i);
+			var divObj=document.getElementById("div" + id_num + i);
+			if(i == id)
+			{
+				divName.className='on';
+				divObj.style.display = '';
+			}
+			else
+			{
+				divName.className='off';
+				divObj.style.display = 'none';
+			}
+		}
+ 
+}
+
+function hideBar()
+{
+	document.getElementById('hideBtn').style.display = '';
+	document.getElementById('slide1').style.display = 'none';
+	document.getElementById('slide2').style.display = 'none';
+	document.getElementById('slide3').style.display = 'none';
+	document.getElementById('slide4').style.display = 'none';
+	document.getElementById('slide5').style.display = 'none';
+	document.getElementById('slide6').style.display = 'none';
+	parent.hideSlidBar();
+}
+
+function showBar()
+{
+	document.getElementById('hideBtn').style.display = 'none';
+	document.getElementById('slide1').style.display = '';
+	document.getElementById('slide2').style.display = '';
+	document.getElementById('slide3').style.display = '';
+	document.getElementById('slide4').style.display = '';
+	document.getElementById('slide5').style.display = '';
+	document.getElementById('slide6').style.display = '';
+	parent.reShowSlidBar();
+}
+
+</script>
+<title>无标题文档</title>
+</head>
+
+<body style="overflow:hidden;">
+      <div id="hideBtn" style="margin:5px; padding-top:2px; display:none;">
+      	<a href="javascript:" onclick="showBar()"><<</a>
+      </div>
+  <div id="slide1" class="title_right" style="display:block;">
+    <div class="title_left">
+      <span class="title_bg">
+        <span class="title_icon2">相关内容</span>
+      </span>
+      <span class="title_xieline">
+      </span>
+      <div align="right" style="float:righht; margin-right:5px; padding-top:2px;">
+      	<a href="javascript:" onclick="hideBar()">>></a>
+      </div>
+    </div>
+  </div>
+  <div id="slide2" class="serach_div_bg" style="display:block;">
+    <div>
+    <table style="width:100%;">
+    	<tr>
+    		<td><input name="" type="text" style="width:99%;height:16px;"></td>
+    		<td width="60" align="left"><input name="" type="button" value="搜索" class="page_search_button" style="height:22px;" onmouseover="this.className='page_search_button_hover'" onmouseout="this.className='page_search_button'"></td>
+    	</tr>
+    </table>
+    <table style="width:100%;">
+    	<tr>
+    		<td width="60">网络分类：</td>
+    		<td  align="left"><select name="" style="width:99%;">
+              <option>交换网.TDM省内汇接网.TMSC2</option>
+              </select></td>
+    	</tr>
+    </table>	
+     <table style="width:100%;">
+    	<tr>
+    		<td width="60">故障地市：</td>
+    		<td  align="left"><select name="" style="width:99%;">
+      			<option>中卫</option>
+    			</select></td>
+    	</tr>
+    </table>
+    <table style="width:100%;">
+    	<tr>
+    		<td width="60">故障厂商：</td>
+    		<td  align="left"><select name="" style="width:99%;">
+      		<option>华为</option>
+    		</select></td>
+    	</tr>
+    </table>
+    </div>
+    
+     <table style="width:100%;">
+    	<tr>
+    		<td align="center">隐藏搜索条件</td>
+    	</tr>
+    </table>
+   
+  </div>
+  
+  <div id="slide3" class="knowleage_bg" style="display:block;">
+    <li class="left">相关知识</li>
+    <li class="right">..更多</li>
+  </div>
+  <div id="slide4" class="table_div_bg" style="height:200px; display:block;">
+    <table class="tableborder" id="tab">
+	  <tr>
+	    <th>知识标题</th>
+		<th>相关度</th>
+		<th>评分</th>
+      </tr>
+	  <tr>
+        <td>华为的一个故障处理方案</td>
+		<td>非常高</td>
+		<td>8.6</td>
+	  </tr>
+	  <tr>
+	    <td>华为的一个故障处理方案</td>
+	    <td>非常高</td>
+	    <td>8.6</td>
+      </tr>
+	</table>
+  </div>
+   
+   <div id="slide5" class="knowleage_bg" style="display:block;">
+    <li class="left">相关工单</li>
+    <li class="right">..更多</li>
+   </div>
+   <div id="slide6" class="table_div_bg" style="display:block;">
+      <div class="tablabel">
+       <div id="div1_11" class="on" onClick="changediv(1,1,2);"><span>故障处理工单</span></div>
+       <div id="div1_12" class="off"  onclick="changediv(1,2,2)"><span>个人投诉工单</span></div>
+     </div>
+     <div class="tab_content" style="height:200px;">
+       <div id="div11" class="info_content">
+       <table class="tableborder" id="tab">
+	  <tr>
+	    <th>工单主题</th>
+	   </tr>
+	  <tr>
+        <td>ID00204032-224</td>
+	   </tr>
+	  <tr>
+	    <td>网络覆盖2009-07-30 18:42:44测试，请勿操作</td>
+       </tr>
+	  <tr>
+        <td>ID00204032323-224</td>
+	   </tr>
+	  <tr>
+	    <td>2009-09-24号测试工单bl-001</td>
+       </tr>
+	</table>
+       </div>
+      
+      <div id="div12" class="info_content" style="display:none;">
+       <table class="tableborder" id="tab">
+	  <tr>
+	    <th>工单主题</th>
+	   </tr>
+	  <tr>
+        <td>ID00204032-324</td>
+	   </tr>
+	  <tr>
+	    <td>这是一个投诉类工单的测试工单1</td>
+       </tr>
+	  <tr>
+        <td>ID00204032323-325</td>
+	   </tr>
+	  <tr>
+	    <td>这是一个投诉类工单的测试工单2</td>
+       </tr>
+	</table>
+    </div>
+    </div>
+    
+   </div>
+</body>
+</html>

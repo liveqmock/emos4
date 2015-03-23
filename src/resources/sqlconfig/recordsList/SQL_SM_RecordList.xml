@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_RecordList.query" >
+		<select>
+			<![CDATA[ 
+				  select /*COUNT*/ t.rid,
+			       t.dutytime,
+			       t.record,
+			       t.checkpeople,
+			       t.checktime,
+			       t.shift,
+			       t.createpeople,
+			       t.createtime,
+			       t.remarks /*COUNT*/
+			  from bs_f_ubp_mscc_records t
+				 where t.checkpeople is null $customwhere$
+				 /*ORDERBY*/ order by t.dutytime desc/*ORDERBY*/
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<date displayname="opt_lb_startTime" name="StDate" />
+			<date displayname="opt_lb_endTime" name="Endate"  />
+			<select displayname="bpp_benci" name="banci" dictype="banci"  value="" >
+				<!--<sql><![CDATA[ select '白班' as id, '白班' as text from dual union all select '夜班' as id, '夜班' as text from dual ]]></sql>-->
+			</select>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  colname="t.dutytime"  datatype="7" value="#StDate#" />
+			<field prepend="and" operator="&lt;="  colname="t.dutytime" datatype="7"  value="#Endate#" />
+			<field prepend="and" operator="=" colname="t.shift" value="#banci#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_RecordCheckList.query" >
+		<select>
+			<![CDATA[ 
+				  select /*COUNT*/ t.rid,
+			       t.dutytime,
+			       t.record,
+			       t.checkpeople,
+			       t.checktime,
+			       t.shift,
+			       t.createpeople,
+			       t.createtime,
+			       t.remarks /*COUNT*/
+			  from bs_f_ubp_mscc_records t
+				 where t.checkpeople is null $customwhere$
+				 /*ORDERBY*/ order by t.dutytime desc/*ORDERBY*/
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<date displayname="opt_lb_startTime" name="StDate" />
+			<date displayname="opt_lb_endTime" name="Endate"  />
+			<select displayname="bpp_benci" name="banci" dictype="banci"  value="" >
+				<!--<sql><![CDATA[ select '白班' as id, '白班' as text from dual union all select '夜班' as id, '夜班' as text from dual ]]></sql>-->
+			</select>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  colname="t.dutytime"  datatype="7" value="#StDate#" />
+			<field prepend="and" operator="&lt;="  colname="t.dutytime" datatype="7"  value="#Endate#" />
+			<field prepend="and" operator="=" colname="t.shift" value="#banci#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_RecordQueryList.query" >
+		<select>
+			<![CDATA[ 
+				  select /*COUNT*/ t.rid,
+			       t.dutytime,
+			       t.record,
+			       sysuser.fullname checkpeople,
+			       t.checktime,
+			       t.shift,
+			       t.createpeople,
+			       t.createtime,
+			       t.remarks /*COUNT*/
+			  from bs_f_ubp_mscc_records t,bs_t_sm_user sysuser
+				 where t.checkpeople = sysuser.loginname(+) and t.checkpeople > '0' $customwhere$
+				 /*ORDERBY*/ order by t.dutytime desc/*ORDERBY*/
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<date displayname="opt_lb_startTime" name="StDate" />
+			<date displayname="opt_lb_endTime" name="Endate"  />
+			<select displayname="bpp_benci" name="banci" dictype="banci"  value="" >
+				<!--<sql><![CDATA[ select '白班' as id, '白班' as text from dual union all select '夜班' as id, '夜班' as text from dual ]]></sql>-->
+			</select>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  colname="t.dutytime"  datatype="7" value="#StDate#" />
+			<field prepend="and" operator="&lt;="  colname="t.dutytime" datatype="7"  value="#Endate#" />
+			<field prepend="and" operator="=" colname="t.shift" value="#banci#"/>
+		</customwhere>
+	</sqlquery>
+</sql-group>

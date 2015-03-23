@@ -1,0 +1,22 @@
+﻿@charset "utf-8";
+table,td,th{ border-collapse:collapse;}
+.treediv { }
+.treetitlehead { border: #aaaaaa solid 0px; background-color: #ffffff; height: 40px; padding: 1px 0px 0px 1px;/*filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#339cde', endColorStr='#0a6ead', gradientType='0');*/ }
+.treecharhead { font-weight: bold; color: #000000; font-size: 14px;/*filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#339cde', endColorStr='#0a6ead', gradientType='0');*/ }
+.treetitle { border: #aaaaaa solid 1px; background-color: #ffffff; height: 30px; padding: 1px 0px 0px 1px; font-weight: bold; color: #ffffff; font-size: 12px; filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#A2D0FB', endColorStr='#C7ECFC', gradientType='0');
+}
+.treechar { /*filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#339cde', endColorStr='#0a6ead', gradientType='0');*/ height: 20px; color: #666; padding-left: 15px; font-size: 14px; }
+.titleline { background-color: #fff; border: 0 solid #cccccc; border-collapse: collapse; margin-top: 3px; }
+.title { /*background-color: #D2EBFD;*/ background-color: #f9f9f9; border-bottom: 1 solid #e1e1e1; border-top: 1 solid #e1e1e1; font-size: 12px; height: 28px; line-height: 28px; padding: 1px 0 0 1px; }
+.title img { display: none; }
+.tdline { FONT-SIZE: 1px; background-color: #EFFAFF; height: 1px; }
+.tableline { background-color: #AAAAAA; border: #CCCCCC solid 0px; }
+.ColumntableTD_LookProcess { background-color: #f9f9f9; border: 1px solid #ddd; border-collapse: collapse; font-size: 12px; height: 25px; padding-left: 3px; }
+.ColumntableTD { background-color: #ffffff; border: 1px solid #ddd; color: #006699; font-size: 12px; height: 25px; }
+.ColumntableTD_1 { border-spacing: 1px; FONT-SIZE: 12px; }
+.ChildBaseColumntableTD_LookProcess { BORDER-RIGHT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-BOTTOM: #aaaaaa 1px solid; BACKGROUND-COLOR: #f3f3f3; border-spacing: 1px; FONT-SIZE: 12px; height: 25px; }
+.ChildBaseColumntableTD { BORDER-RIGHT: #aaaaaa 1px solid; BORDER-TOP: #aaaaaa 1px solid; BORDER-LEFT: #aaaaaa 1px solid; BORDER-BOTTOM: #aaaaaa 1px solid; border-spacing: 1px; FONT-SIZE: 12px; height: 25px; }
+.treespan { border: #aaaaaa solid 1px; background-color: #ffffff; padding: 2px 0px 0px 2px; --font-weight:bold;
+color: #000000; font-size: 12px; cursor: hand; filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ffffff', endColorStr='#ffffff', gradientType='0');
+}
+input.button { font-size: 12px; border-top: solid 1px #666666; border-left: solid 1px #666666; border-right: solid 1px #AAAAAA; border-bottom: solid 1px #AAAAAA; margin-left: 10px; }

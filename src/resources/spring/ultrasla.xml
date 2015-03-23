@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName">
+
+	<!-- 事件规则 -->
+	<bean id="eventRuleDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.model.EventRule</value>
+		</property>
+	</bean>
+	<bean id="eventRuleAction" class="com.ultrapower.eoms.ultrasla.web.EventRuleAction" scope="prototype"/>
+	<bean id="eventRuleService" class="com.ultrapower.eoms.ultrasla.manager.EventRuleManager"/>
+	
+	<!-- 时限规则 -->
+	<bean id="duetimeRuleDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.model.DuetimeRule</value>
+		</property>
+	</bean>
+	<bean id="duetimeRuleService" class="com.ultrapower.eoms.ultrasla.manager.DuetimeRuleManager"/>
+	<!-- 事件动作 -->
+	<bean id="eventActionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.model.EventAction</value>
+		</property>
+	</bean>
+	<bean id="eventActionService" class="com.ultrapower.eoms.ultrasla.manager.EventActionManager"/>
+	<!-- 事件主体组件 -->
+	<bean id="eventHandlerCompDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.model.EventHandlerComp</value>
+		</property>
+	</bean>
+	<bean id="eventHandlerCompService" class="com.ultrapower.eoms.ultrasla.manager.EventHandlerCompManager"/>
+	<bean id="eventHandlerCompAction" class="com.ultrapower.eoms.ultrasla.web.EventHandlerCompAction"/>
+	<!-- 事件参数 -->
+	<bean id="eventParamDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.model.EventParam</value>
+		</property>
+	</bean>
+	<bean id="eventParamService" class="com.ultrapower.eoms.ultrasla.manager.EventParamManager"/>
+	
+	<!-- 事件扫描触发器接口 -->
+	<bean id="eventScanTrigger" class="com.ultrapower.eoms.ultrasla.manager.EventScanTriggerImpl"/>
+	<!-- 事件动作处理服务 -->
+	<bean id="eventActionProcessor" class="com.ultrapower.eoms.ultrasla.manager.EventActionProcessorImpl"/>
+	<!-- 事件动作轮询 -->
+	<bean id="eventActionRollChecker" class="com.ultrapower.eoms.ultrasla.manager.EventActionRollCheckerImpl"/>
+	<!-- 事件规则解析 -->
+	<bean id="eventRuleParser" class="com.ultrapower.eoms.ultrasla.manager.EventRuleParserImpl"/>
+	<!-- 事件规则触发 -->
+	<bean id="eventRuleTrigger" class="com.ultrapower.eoms.ultrasla.manager.EventRuleTriggerImpl"/>
+	<!-- 通知发送服务 -->
+	<bean id="noticeService" class="com.ultrapower.eoms.ultrasla.manager.NoticeImpl"/>
+	<!-- 组织结构服务 -->
+	<bean id="slaOrganizationService" class="com.ultrapower.eoms.ultrasla.manager.OrganizationImpl"/>
+	<!-- 事件监控 -->
+	<bean id="eventMonitorAction" class="com.ultrapower.eoms.ultrasla.web.EventMonitorAction"/>
+	
+	<!-- 通知 -->
+	<bean id="smSendService" class="com.ultrapower.eoms.common.core.component.sms.manager.InsideSmsImpl"/>
+	<bean id="emailSendService" class="com.ultrapower.eoms.common.core.component.email.MailApi"/>
+	
+	<!-- SLA定义 -->
+	<bean id="slaDefineDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.model.SlaDefine</value>
+		</property>
+	</bean>
+	<bean id="slaDefineService" class="com.ultrapower.eoms.ultrasla.manager.SalDefineManager"/>
+	<bean id="slaDefineAction" class="com.ultrapower.eoms.ultrasla.web.SlaDefineAction" scope="prototype"/>
+	
+	<!-- SLA自定义接口实现实例 建议实例id设置为sla+类名-->
+	<bean id="slaDefaultDealerImpl" class="com.ultrapower.eoms.ultrasla.custom.DefaultDealerImpl"/>
+	<bean id="slaFormCustomParamImpl" class="com.ultrapower.eoms.ultrasla.custom.FormCustomParamImpl"/>
+	
+	<!-- UltraSla测试开始 -->
+	<bean id="eventTempDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasla.test.model.EventTemp</value>
+		</property>
+	</bean>
+	<bean id="eventTempService" class="com.ultrapower.eoms.ultrasla.test.manager.EventTempManager"/>
+	<bean id="ultraSlaTestAction" class="com.ultrapower.eoms.ultrasla.test.web.UltraSlaTestAction"/>
+	<!-- UltraSla测试结束 -->
+	
+	<!-- UltraSla MQ监控开始 -->
+	<bean id="mqMonitorService" class="com.ultrapower.eoms.ultrasla.mq.admin.manager.MqMonitorManager"/>
+	<bean id="mqMonitorAction" class="com.ultrapower.eoms.ultrasla.mq.admin.web.MqMonitorAction"/>
+	<!-- UltraSla MQ监控结束 -->
+</beans>

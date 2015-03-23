@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-09-02</date> 
+		<description>SLA服务管理</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SlaOperationActionList.queryList" >
+		<select>
+			<![CDATA[ 		 
+			  select /*COUNT*/ actiontype, actionname, rulename, pri, ordernum, status /*COUNT*/
+				     from (select action.actiontype,
+						          action.actionname,
+						          slarule.rulename,
+						          slarule.pri,
+						          slarule.ordernum,
+						          slarule.status
+						    from bs_t_sm_slasmaction action, bs_t_sm_slarule slarule
+						    where  action.status = '1' and action.pid = slarule.actionid(+)
+						     union all
+						   select action.actiontype,
+						          action.actionname,
+						          slarule.rulename,
+						          slarule.pri,
+						          slarule.ordernum,
+						          slarule.status
+						    from bs_t_sm_slamailaction action, bs_t_sm_slarule slarule
+						    where action.status = '1' and action.pid = slarule.actionid(+))
+					where 1=1 $customwhere$ order by ordernum
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_operationName" name="actionname" value="" />
+			<select displayname="sm_lb_actionType" name="actiontype" value="" dictype="SlaActionType"/>
+			<text displayname="sm_lb_ruleName" name="rulename" value="" />
+			<select displayname="com_lb_status" name="status"  dictype="status" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="action.actionname"  value="#actionname#" />
+			<field prepend="and" operator="="  colname="action.actiontype"  value="#actiontype#" />
+			<field prepend="and" operator="like"  colname="slarule.rulename"  value="#rulename#" />
+			<field prepend="and" operator="="  colname="slarule.status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

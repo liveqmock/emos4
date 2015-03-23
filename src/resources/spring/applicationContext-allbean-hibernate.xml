@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="true" default-autowire="byName">
+	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource"
+		destroy-method="close">
+		<property name="driver" value="${jdbc.driverClassName}" />
+		<property name="driverUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="maximumConnectionCount" value="500"></property>
+		<property name="minimumConnectionCount" value="20"></property>
+		<property name="simultaneousBuildThrottle" value="500"></property><!-- 同时最大连接数  -->
+		<property name="maximumActiveTime" value="600000" /><!-- 最大激活时间600秒 -->
+		<property name="houseKeepingTestSql" value="select CURRENT_DATE from dual"></property>
+		<property name="prototypeCount" value="5"></property>
+		<property name="trace" value="true"></property>
+		<property name="verbose" value="true"></property>
+		<property name="alias" value="${jdbc.alias}" />
+	</bean>
+	
+	<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+		lazy-init="true"></bean>
+		
+	<!--Hibernate SessionFatory-->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props merge="default">
+				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+				</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.connection.SetBigStringTryClob">true</prop> 
+			</props>
+		</property>
+
+		<property name="mappingLocations">
+			<list>
+				<value>
+					classpath:/com/ultrapower/eoms/ultrabpp/runtime/model/*.hbm.xml
+				</value>
+			</list>
+		</property>
+		
+		<property name="packagesToScan">
+			<list>
+				<value>com.ultrapower.eoms.*.*</value>
+				<value>com.ultrapower.eoms.*.*.*</value>
+				<value>com.ultrapower.eoms.*.*.*.*</value>
+				<value>com.ultrapower.eoms.*.*.*.*.*</value>
+				<value>com.ultrapower.wfinterface.*.*</value>
+				<value>com.ultrapower.wfinterface.*.*.*</value>
+			</list>
+		</property>
+		
+		<property name="annotatedClasses">
+			<list>
+				<value>com.ultrapower.workflow.engine.store.model.WfEntry</value>
+				<value>com.ultrapower.workflow.engine.store.model.WfCurrentStep</value>
+				<value>com.ultrapower.workflow.engine.store.model.WfHistoryStep</value>
+				<value>com.ultrapower.workflow.engine.task.model.CurrentProcessTask</value>
+				<value>com.ultrapower.workflow.engine.task.model.HistoryProcessTask</value>
+				<value>com.ultrapower.workflow.bizform.model.DealProcessModel</value>
+				<value>com.ultrapower.workflow.bizform.model.DealProcessLogModel</value>
+				<value>com.ultrapower.workflow.bizform.model.Notice</value>
+				<value>com.ultrapower.workflow.configuration.custom.model.WfModel</value>
+				<value>com.ultrapower.workflow.configuration.custom.model.WfModelProperties</value>
+				<value>com.ultrapower.workflow.configuration.interfaces.model.WfInterface</value>
+				<value>com.ultrapower.workflow.configuration.interfaces.model.WfInterSetting</value>
+				<value>com.ultrapower.workflow.configuration.sort.model.WfSort</value>
+				<value>com.ultrapower.workflow.configuration.sort.model.WfType</value>
+				<value>com.ultrapower.workflow.configuration.version.model.WfVersion</value>
+				<value>com.ultrapower.workflow.relate.model.RelateModel</value>
+				<value>com.ultrapower.workflow.role.model.ChildRole</value>				
+				<value>com.ultrapower.workflow.role.model.Dimension</value>
+				<value>com.ultrapower.workflow.role.model.RoleMatchDimension</value>
+				<value>com.ultrapower.workflow.role.model.WorkflowRole</value>
+				<value>com.ultrapower.workflow.role.model.RoleUser</value>
+				<value>com.ultrapower.workflow.role.model.UserRole</value>
+				<value>com.ultrapower.eoms.ultrasm.model.DealGroup</value>
+				<value>com.ultrapower.workflow.bizservice.model.Agency</value>
+				<value>com.ultrapower.workflow.event.model.EventDefine</value>
+				<value>com.ultrapower.workflow.event.model.EventInstance</value>
+				<value>com.ultrapower.eoms.msextend.tempAttachment.model.TempAttachment</value>
+				
+			</list>
+		</property>
+		<property name="lobHandler" ref="oracleLobHandler" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

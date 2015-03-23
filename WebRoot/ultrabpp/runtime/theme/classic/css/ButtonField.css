@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+.bpp_BtnField
+{
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_BtnField table td input
+{
+	/*  border: medium none;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 86px; margin:3px;
+	background:#ffffff url(../images/guanglian.png) no-repeat left top;
+	*/
+}

@@ -1,0 +1,542 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Knowledge Base Index</title>
+<link rel="stylesheet" href="../../plugin/kissy/cssbase/base-min.css"/>
+<link rel="stylesheet" href="../../style/simple/theme.css"/>
+<style>
+html, body {overflow:hidden;}
+body { background:#f6f9fa;}
+a { color:#336699}
+#header { width:100%;}
+#header h2 { font-size:12px; color:#555;font-weight:normal;padding:2px 10px;*padding-top:4px;}
+#content { position: relative;width:100%;overflow:auto;}
+.col-main { margin:0;width:1024px;}
+.inner-col-main { width:100%;float:left}
+.inner-main-wrap { margin-left:240px;}
+.inner-col-sub { width:240px;float:left;margin-left:-100%}
+
+.box { border: 1px solid #AEC7E5;overflow:hidden;}
+.box-wrap { padding:8px}
+.box h3 { font-weight:normal;}
+
+.tabs { margin:0}
+.tabs .ks-switchable-nav { margin:0;left:0}
+.tabs .ks-switchable-nav li { background: url(../../style/simple/img/tabs-eoms.gif) no-repeat right top;height:23px;margin-top:1px;padding:0;}
+.tabs em { width:50px;margin-left:5px;}
+.tabs .ks-switchable-nav li.ks-active { background-position: right -26px;}
+.ks-switchable-content { width:600px;border:0}
+#usr .ks-switchable-nav li{ width:100px}
+.news { width:100%;}
+.news td,
+.list td { border-bottom: 1px dashed #DDDDDD;padding: 3px 3px 3px 0;}
+.avatar { background:url(../../style/simple/img/avatar.gif) no-repeat;padding-left:100px;height:80px;margin:10px}
+.myinfo, .newrep { margin:10px}
+.myinfo span {float:left;margin:0 3px;padding-top:20px;text-align:center;width:65px;height:25px;}
+.mypoint { background:url(../../style/simple/img/mypoint.gif) no-repeat;}
+.myrep { background:url(../../style/simple/img/myrep.gif) no-repeat;}
+.mycmt { background:url(../../style/simple/img/mycmt.gif) no-repeat;}
+.newrep a { background:url(../../style/simple/img/newrep.gif) no-repeat;width:218px;height:31px;display:block;}
+.portrait { padding:8px;}
+.portrait .avatar-min{ float:left}
+.portrait p { margin:0 0 0 50px;}
+
+.pagemap { border-bottom: 8px solid #cdebf6; padding:10px 0 10px 10px;}
+.pagemap:after { content:'\20';display:block;clear:both;height:0; }
+.pagemap .icon { width:100px;height:100px;float:left;}
+.pagemap .word-list { margin-left:110px;}
+.pagemap .word-list td { padding:5px 0;}
+.pagemap h4 { font-size:14px;color:#f85c00}
+.pagemap .word-list .category { float:left;}
+.pagemap .word-list ul { margin-left:40px;}
+.pagemap .word-list li { float:left;margin:2px 4px}
+.pagemap .word-list a { padding:3px;white-space:nowrap;color:#666}
+.pagemap .separator td { background:#c5e7f4;padding:1px 0 0 0}
+</style>
+<script src="../../plugin/kissy/kissy-min.js"></script>
+<script>
+KISSY.ready(function(S){
+	var D = S.DOM, E = S.Event, 
+	header = D.get('#header'), footer = D.get('#footer'), content = D.get('#content'),
+	h = D.viewportHeight();
+	
+	if(D.hasClass('body', 'fit') && header && content && footer) {
+		E.on(window, 'load resize', function(){
+			D.height(content, h - D.height(header) - D.height(footer));
+		});
+	}
+});
+</script>
+</head>
+<body class="fit">
+<div id="header" class="topbar"><h2>知识库首页</h2></div>
+<div id="content">
+	<div class="col-main">
+		<div class="inner-col-main">
+		  <div class="inner-main-wrap">
+		  
+		  <!-- 选项卡方式呈现我的相关信息部分 -->
+		   <div id="tabs" class="box tabs" style="height:230px;position:relative">
+		    <div class="topbar">
+				<ul class="ks-switchable-nav">
+					<li class="ks-active"><em class="fav">我的收藏</em></li>
+					<li><em class="feed">我的订阅</em></li>
+					<li><em class="myadd">我的知识</em></li>
+					<li><em class="recent">最近浏览</em></li>
+				</ul>
+		    </div>
+			<div class="ks-switchable-content">
+					<div>
+						<table class="news">
+							<tr>
+								<td>标题</td>
+								<td>分类</td>
+								<td>作者</td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td>飞信号定义及注意事项</td>
+								<td>新业务</td>
+								<td>吴长江</td>
+								<td>2010-04-10</td>
+							</tr>
+							<tr>
+								<td>移动打长途优惠方案</td>
+								<td>移动</td>
+								<td>admin</td>
+								<td>2010-12-10</td>
+							</tr>
+						</table>
+					</div>
+					<div style="display: none">
+						<table class="news">
+							<tr>
+								<td>标题</td>
+								<td>分类</td>
+								<td>作者</td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td>飞信号定义及注意事项</td>
+								<td>新业务</td>
+								<td>吴长江</td>
+								<td>2010-04-10</td>
+							</tr>
+						</table>
+					</div>
+					<div style="display: none">
+						<table class="news">
+							<tr>
+								<td>标题</td>
+								<td>分类</td>
+								<td>作者</td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td>飞信号定义及注意事项</td>
+								<td>新业务</td>
+								<td>吴长江</td>
+								<td>2010-04-10</td>
+							</tr>
+							<tr>
+								<td>移动打长途优惠方案</td>
+								<td>移动</td>
+								<td>admin</td>
+								<td>2010-12-10</td>
+							</tr>
+							<tr>
+								<td>变更套餐及转网用户积分策略分析</td>
+								<td>业务平台</td>
+								<td>刘新</td>
+								<td>2010-01-02</td>
+							</tr>
+						</table>
+					</div>
+					<div style="display: none">
+						<table class="news">
+							<tr>
+								<td>标题</td>
+								<td>分类</td>
+								<td>作者</td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td>移动打长途优惠方案</td>
+								<td>移动</td>
+								<td>admin</td>
+								<td>2010-12-10</td>
+							</tr>
+							<tr>
+								<td>变更套餐及转网用户积分策略分析</td>
+								<td>业务平台</td>
+								<td>刘新</td>
+								<td>2010-01-02</td>
+							</tr>
+						</table>
+					</div>
+			</div>
+		   </div>
+		   
+		   <div>
+		     <!-- 热门案例box -->
+			 <div class="box" style="width:380px;float:left;height:190px">
+		       <div class="topbar"><h2 class="hd"><em class="hot">热门案例</em></h2></div>
+		         <div class="box-wrap">
+						<table class="list">
+							<tr>
+								<td>标题</td>
+								<td>分类</td>
+								<td>作者</td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td>飞信号定义及注意事项</td>
+								<td>新业务</td>
+								<td>吴长江</td>
+								<td>2010-04-10</td>
+							</tr>
+							<tr>
+								<td>移动打长途优惠方案</td>
+								<td>移动</td>
+								<td>admin</td>
+								<td>2010-12-10</td>
+							</tr>
+							<tr>
+								<td>变更套餐及转网用户积分策略分析</td>
+								<td>业务平台</td>
+								<td>刘新</td>
+								<td>2010-01-02</td>
+							</tr>
+						</table>
+					</div>
+			 </div>
+			 
+			 <!-- 最新案例box -->
+			 <div class="box" style="margin-left:-380px;height:190px">
+		       <div class="topbar"><h2 class="hd"><em class="new">最新案例</em></h2></div>
+		         <div class="box-wrap">
+						<table class="list">
+							<tr>
+								<td>标题</td>
+								<td>分类</td>
+								<td>作者</td>
+								<td>时间</td>
+							</tr>
+							<tr>
+								<td>飞信号定义及注意事项</td>
+								<td>新业务</td>
+								<td>吴长江</td>
+								<td>2010-04-10</td>
+							</tr>
+							<tr>
+								<td>移动打长途优惠方案</td>
+								<td>移动</td>
+								<td>admin</td>
+								<td>2010-12-10</td>
+							</tr>
+							<tr>
+								<td>变更套餐及转网用户积分策略分析</td>
+								<td>业务平台</td>
+								<td>刘新</td>
+								<td>2010-01-02</td>
+							</tr>
+						</table>
+				 </div>
+			 </div>
+		   </div>
+		  </div>
+		</div>
+		
+		<div class="inner-col-sub">
+				<div class="box" style="height:230px">
+		    	  <div class="topbar"><h2 class="hd"><em class="my">个人中心</em></h2></div>
+		    	  <div class="avatar">名称</div>
+		    	  <div class="myinfo ks-clear"><span class="mypoint">2300</span><span class="myrep">8</span><span class="mycmt">25</span></div>
+		    	  <div class="newrep"><a href="javascript:;"></a></div>
+				</div>
+				<div id="usr" class="box tabs" style="height:190px">
+		    	    <div class="topbar">		    	    
+						<ul class="ks-switchable-nav">
+							<li class="ks-active"><em class="pro">专家库</em></li>
+							<li><em class="usr">用户排行</em></li>
+						</ul>	    	    
+		    	    </div>
+		    	    <div class="ks-switchable-content">
+		    	    
+		    	      <!-- 专家库内容部分 -->
+		    	      <div>
+		    	        <div class="portrait">
+		    	          <div class="avatar-min"><a href="#"><img src="avatar-min.gif" alt="" /></a></div>
+		    	          <p>张三(移动集团 网络部)<br/>擅长领域：无线</p>
+		    	        </div>
+		    	        <div class="portrait">
+		    	          <div class="avatar-min"><a href="#"><img src="avatar-min.gif" alt="" /></a></div>
+		    	          <p>张三(移动集团 网络部)<br/>擅长领域：无线</p>
+		    	        </div>
+		    	        <div class="portrait">
+		    	          <div class="avatar-min"><a href="#"><img src="avatar-min.gif" alt="" /></a></div>
+		    	      	  <p>张三(移动集团 网络部)<br/>擅长领域：无线</p>
+		    	        </div>
+		    	      </div>
+		    	      
+		    	      <!-- 用户排行内容部分 -->
+		    	      <div style="display:none">
+		    	      	<div>用户排行</div>
+		    	      </div>
+		    	    </div>
+				</div>
+		</div>
+		
+		<div class="inner-col-main">
+		  <div class="box">
+		    <div class="topbar"><h2 class="hd"><em class="map">案例导航</em></h2></div>
+		    
+		    <!-- 故障 start -->
+			<div class="pagemap">
+			  <div class="icon rep-fault"></div>
+			  <div class="word-list">
+				<table style="width:95%">
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+					<tr class="separator"><td></td><td></td></tr>
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>			
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>	
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+					<tr class="separator"><td></td><td></td></tr>
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>			
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+					<tr class="separator"><td></td><td></td></tr>
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>			
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>	
+						  <ul class="ks-clear">
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+				</table>
+			  </div>
+			</div> <!-- 故障 end -->
+
+		    <!-- 投诉 start -->
+			<div class="pagemap">
+			  <div class="icon rep-warn"></div>
+			  <div class="word-list">
+				<table style="width:100%">
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>			
+						  <ul>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>
+						  <ul>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+				</table>
+			  </div>
+			</div> <!-- 投诉 end -->
+
+		    <!-- 终端 start -->
+			<div class="pagemap">
+			  <div class="icon rep-client"></div>
+			  <div class="word-list">
+				<table style="width:100%">
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>			
+						  <ul>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>
+						  <ul>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+				</table>
+			  </div>
+			</div> <!-- 终端 end -->
+
+		    <!-- 告警 start -->
+			<div class="pagemap">
+			  <div class="icon rep-alert"></div>
+			  <div class="word-list">
+				<table style="width:100%">
+					<tr>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>				
+						  <ul>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+						</td>
+						<td>
+						  <div class="category"><h4>交换</h4><em>(174)</em></div>
+						  <ul>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+							<li><a href="#">智能网</a></li>
+							<li><a href="#">本地网</a></li>
+							<li><a href="#">国际交换网</a></li>
+							<li><a href="#">国际信令网</a></li>
+						  </ul>
+					  </td>
+					</tr>
+				</table>
+			  </div>
+			</div> <!-- 告警 end -->
+			
+		  </div>
+		</div>
+	</div>
+</div>
+<div id="footer"></div>
+<script>
+KISSY.use('switchable', function(S){
+	var tabs = new S.Tabs('#tabs');
+	var usr_tabs = new S.Tabs('#usr');
+});
+</script>
+</body>
+</html>

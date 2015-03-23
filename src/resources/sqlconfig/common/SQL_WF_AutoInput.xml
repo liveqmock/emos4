@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>duanpengjie</author> 
+		<date>2012.11.15</date> 
+		<description>自动补全测试</description>
+	</doc>
+	
+	<sqlquery name="SQL_TEST_SearchUser.query" >
+		<select>
+			<![CDATA[
+			   select 
+			      /*COUNT*/ 
+			        fullname as value,loginname as key,substr(t2.depfullname,instr(t2.depfullname,'.',1,1)+1) as depfullname
+			      /*COUNT*/ 
+			   from  bs_t_sm_user t1 left join bs_t_sm_dep t2 on t1.depid = t2.pid
+			   where 1=1 $customwhere$
+			   /*ORDERBY*/ order by loginname/*ORDERBY*/
+	]]>
+		</select>
+		
+		<condition  cols="3" labprecent="14" textprecent="18" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+<!--输入的字符串到后台为paramKey-->
+
+		    <field prepend="or" operator="like"  colname="lower(fullname)"  value="#paramKey#"/>
+		    <field prepend="or" operator="like"  colname="lower(loginname)"  value="#paramKey#"/>
+		    <field prepend="or" operator="like"  colname="lower(pyname)"  value="#paramKey#"/>
+		</customwhere>
+	</sqlquery>
+	
+	<!--部门-->
+	<sqlquery name="SQL_TEST_SearchDept.query" >
+		<select>
+			<![CDATA[
+			   select 
+			      /*COUNT*/ 
+			         pid as key,depname as value,substr(depfullname,instr(depfullname,'.',1,1)+1) as depfullname  
+			      /*COUNT*/ 
+			  		from BS_T_SM_DEP d   
+			   where  deptype!=4 $customwhere$
+			   /*ORDERBY*/ order by depname/*ORDERBY*/
+			]]>
+		</select>
+		<condition  cols="3" labprecent="14" textprecent="18" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="or" operator="like"  colname="lower(depname)"  value="#paramKey#"/>
+		</customwhere>
+	</sqlquery>
+	
+	
+	<!-- 团队 -->
+	<sqlquery name="SQL_TEST_SearchTeam.query" >
+		<select>
+			<![CDATA[
+			   select 
+			      /*COUNT*/ 
+			         pid as key,depname as value,substr(depfullname,instr(depfullname,'.',1,1)+1) as depfullname  
+			      /*COUNT*/ 
+			  		from BS_T_SM_DEP d   
+			   where  deptype=4 $customwhere$
+			   /*ORDERBY*/ order by depname/*ORDERBY*/
+			]]>
+		</select>
+		
+		<condition  cols="3" labprecent="14" textprecent="18" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="or" operator="like"  colname="lower(depname)"  value="#paramKey#"/>
+		</customwhere>
+	</sqlquery>
+	
+	
+	
+	<!-- 批次信息-->
+	<sqlquery name="SQL_TEST_SearchBatchInfo.query" >
+		<select>
+			<![CDATA[
+			  select info,batch_no from(
+				select batch_no||'['||max(reviewtime)||']' info ,batch_no from BS_T_SM_BATCHCONF where active= '1' 
+				group by batch_no)
+				where 1=1 $customwhere$
+			]]>
+		</select>
+		
+		<condition  cols="3" labprecent="14" textprecent="18" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="or" operator="like"  colname="info"  value="#paramKey#"/>
+		</customwhere>
+	</sqlquery>
+	
+</sql-group>
+
+
+
+
+
+
+
+
+
+

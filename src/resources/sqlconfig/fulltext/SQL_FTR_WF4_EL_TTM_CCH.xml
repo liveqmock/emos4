@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2011-01-24</date> 
+		<description>个人投诉处理工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF4_EL_TTM_CCH.query" >
+		<select>
+			<![CDATA[
+			select
+			  --base info
+			  /*COUNT*/
+              C1||C700000001  as field_id                                               --docId 
+			  ,C1 			  as baseid                                                 --工单编号
+			  ,C3             as doc_createtime                                         --创建时间
+			  ,C6             as doc_lastmodifytime                                     --最后修改时间
+			  ,C700000002||'('||C700000003||')'||': '||C700000011  as doc_title         --标题
+              ,C700000001     as baseschema                                             --工单schema
+			  ,C700000002     as basename                                               --工单名称
+			  ,C700000003     as basesn                                                 --流水号
+			  ,C700000004     as basecreatorfullname                                    --建单人名
+			  ,C700000005     as basecreatorloginName                                   --建单人登陆名
+			  ,C700000006     as basecreatedate                                         --建单时间
+			  ,C700000008     as basefinishdate                                         --完成时间
+			  ,C700000009     as baseclosedate                                          --关闭时间
+			  ,C700000010     as basestatus                                             --状态名
+			  ,C700000011     as basesummary                                            --主题       
+			--,C700000018     as basedealouttime                                        --处理时限
+			  ,C700000019     as BaseDescrption                                         --工单描述
+			  ,C700000022     as basetplid                                              --模板ID     
+			  ,C700000042     as basecategoryclassname                                  --工单类别名
+			  ,C700000043     as basecategoryclasscode                                  --工单类别
+			  ,C700000100     as BaseCreatorConnectWay                                  --建单人电话
+			  ,C700000101     as basecreatorcorp                                        --建单人单位
+			  ,C700000103     as formattachrelation                                     --工单附件关系字段
+			  --工单信息
+	          ,c800020001     as CCH_ComplainType                                       --投诉分类
+	          ,c700000017     as BaseAcceptOutTime                                      --受理时限
+	          ,c700000018     as BaseDealOutTime                                        --处理时限
+	          ,c800080002     as CRM_BaseSN                                             --CRM工单编号
+	          ,c700000015     as BasePriority                                           --紧急程度
+	          ,c800020016     as CCH_LinkMan                                            --派发联系人
+	          ,c800020017     as CCH_LinkManTel                                         --派发人电话
+	          ,c800020002     as CCH_ComplainTime                                       --投诉时间
+	          ,c800020009     as CCH_IsLargeNumbersComplain                             --是否大面积投诉
+	          ,c800020003     as CCH_IncidentStartTime                                  --故障时间
+	          ,c800020028     as ComplaintNum                                           --故障号码
+	          ,c800020018     as CCH_ConsumerName                                       --客户姓名
+	          ,c800020019     as CCH_ConsumerTel                                        --客户电话
+	          ,c800020006     as CCH_ClientBrand                                        --客户品牌
+	          ,c800020007     as CCH_ClientLevel                                        --客户级别
+	          ,c800020010     as CCH_IteranceNumber                                     --重复投诉次数
+	          ,c800020004     as CCH_AcceptCtiy                                         --受理省份
+	          ,c800020008     as CCH_ClientArea                                         --用户归属地
+	          ,c800020013     as CCH_Complain_AreaDesc                                  --故障地点
+	          ,c800020020     as CCH_IncidentDesc                                       --终端描述
+	          ,c800020014     as CCH_ComplainDesc                                       --投诉内容
+	          ,c800020015     as CCH_PretreatmentDesc                                   --预处理情况
+			/*COUNT*/
+			from {WF4:EL_TTM_CCH}
+			where 1=1
+			$customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend=""><![CDATA[ (C3>=#startTime# and C3<#endTime#) or (C6 >=#startTime# and C6<#endTime#)]]></sql>
+		</customwhere>
+	</sqlquery>
+</sql-group>

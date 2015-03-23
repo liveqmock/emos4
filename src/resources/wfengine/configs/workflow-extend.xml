@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow-configs>
+	<schema id="UBP_TEST_FREE">
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.ultrabpp.runtime.extend.UBP_TEST_FREE.TestFreeExtendFunction" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+		</extendopts-commit>
+		<entryattributes clear="true">
+		</entryattributes>
+	</schema>
+	<schema id="CDB_SERVICEREQUEST">
+	<relation-schema relatype="0">关联类型,0:异步，1:同步
+			<include schema="CDB_CHANGE"/>关联变更工单
+			<include schema="CDB_RELEASE"/>关联发布工单
+			<include schema="CDB_SERVICEREQUEST"/>关联服务请求工单
+			<include schema="CBD_INCIDENT"/>关联事件工单
+		</relation-schema>
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.msextend.serverQuest.web.ServerQuestCustom" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+			<operate src="com.ultrapower.eoms.msextend.serverQuest.web.ServerQuestCustom" />
+		</extendopts-commit>
+		<entryattributes clear="true">
+			<attr name="has_accept_person" /><!-- 是否有处理人 -->
+			<attr name="current_audit_sequence" /><!-- 当前受理，审批人的位置 -->
+			<attr name ="reback_flag"></attr><!--退回标示 -->
+		</entryattributes>
+	</schema>
+	<schema id="CBD_INCIDENT">
+		<relation-schema relatype="0">关联类型,0:异步，1:同步
+			<include schema="CDB_CHANGE"/>关联变更工单
+			<include schema="CDB_RELEASE"/>关联发布工单
+			<include schema="CDB_SERVICEREQUEST"/>关联服务请求工单
+			<include schema="CBD_INCIDENT"/>关联事件工单
+		</relation-schema>
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.msextend.incident.web.IncidentManageExtendFunction" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+			<operate src="com.ultrapower.eoms.msextend.incident.web.IncidentManageExtendFunction" />
+		</extendopts-commit>
+		<entryattributes clear="true">
+		</entryattributes>
+	</schema>
+	<schema id="CDB_CHANGE">
+	<relation-schema relatype="0">关联类型,0:异步，1:同步
+			<include schema="CDB_CHANGE"/>关联变更工单
+			<include schema="CDB_RELEASE"/>关联发布工单
+			<include schema="CDB_SERVICEREQUEST"/>关联服务请求工单
+			<include schema="CBD_INCIDENT"/>关联事件工单
+		</relation-schema>
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.msextend.change.ChangeManageExtendFunction" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+			<operate src="com.ultrapower.eoms.msextend.change.ChangeManageExtendFunction" />
+		</extendopts-commit>
+		<entryattributes clear="true">
+		</entryattributes>
+	</schema>
+	<schema id="CDB_RELEASE">
+	<relation-schema relatype="0">关联类型,0:异步，1:同步
+			<include schema="CDB_CHANGE"/>关联变更工单
+			<include schema="CDB_RELEASE"/>关联发布工单
+			<include schema="CDB_SERVICEREQUEST"/>关联服务请求工单
+			<include schema="CBD_INCIDENT"/>关联事件工单
+		</relation-schema>
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.msextend.release.ReleaseManageExtendFunction" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+			<operate src="com.ultrapower.eoms.msextend.release.ReleaseManageExtendFunction" />
+		</extendopts-commit>
+		<entryattributes clear="true">
+		</entryattributes>
+	</schema>
+	
+	<schema id="CBD_PROBLEM">
+	<relation-schema relatype="0">关联类型,0:异步，1:同步
+			<include schema="CDB_CHANGE"/>关联变更工单
+			<include schema="CDB_RELEASE"/>关联发布工单
+			<include schema="CDB_SERVICEREQUEST"/>关联服务请求工单
+			<include schema="CBD_INCIDENT"/>关联事件工单
+			<include schema="CBD_PROBLEM"/>关联问题工单
+		</relation-schema>
+		<extendopts-open>
+			<operate src="com.ultrapower.eoms.msextend.problem.ProblemManageExtendFunction" />
+		</extendopts-open>
+		<extendopts-client>
+		</extendopts-client>
+		<extendopts-commit>
+			<operate src="com.ultrapower.eoms.msextend.problem.ProblemManageExtendFunction" />
+		</extendopts-commit>
+		<entryattributes clear="true">
+		<!-- 	<attr name ="EVENT_MAKECOPY"></attr>   -->
+		</entryattributes>
+	</schema>
+</workflow-configs>

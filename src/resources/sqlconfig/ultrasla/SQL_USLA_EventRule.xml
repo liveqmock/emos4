@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>SunHailong</author> 
+		<date>2011-11-16</date> 
+		<description>UltraSla事件扫描</description> 		
+	</doc>
+	<!-- 事件扫描-eoms表 -->
+	<sqlquery name="SQL_USLA_EventRule.query" >
+		<select>
+			<![CDATA[ 
+				select 
+					/*COUNT*/ 
+						pid
+						,rulename
+						,ruletype
+						,noticetype
+						,timespan/60  as timespan
+						,validstarttime
+						,validendtime
+						,status
+					/*COUNT*/
+				from bs_t_usla_eventrule
+				where 1=1
+				 $customwhere$
+				/*ORDERBY*/ order by /*ORDERBY*/ ruletype,rulename
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >		
+			<text displayname="wf_ruleName" name="rulename" />
+			<select displayname="wf_ruleType" name="ruletype" dictype="ruletype" value=""/>
+			<select displayname="wf_noticeType" name="noticetype" dictype="noticetype"  value=""/>
+			<date displayname="wf_validStartTime" name="validstarttime"/>
+			<date displayname="wf_validEndTime" name="validendtime"  />
+			
+			<select displayname="wf_status" name="status" dictype="startstatus" value=""/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="and" operator="like" colname="rulename" value="#rulename#"/>
+			<field prepend="and" operator="="  colname="ruletype"  value="#ruletype#" />			
+			<field prepend="and" operator="=" colname="noticetype"  value="#noticetype#"/>
+			<field prepend="and" operator=">=" colname="validstarttime" value="#validstarttime#" datatype="7"/>
+			<field prepend="and" operator="&lt;=" colname="validendtime" value="#validendtime#" datatype="7"/>
+			
+			<field prepend="and" operator="=" colname="status" value="#status#"/>
+		</customwhere>
+	</sqlquery>
+</sql-group>

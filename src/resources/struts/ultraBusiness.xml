@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- 首页 -->
+	<package name="home" extends="eoms" namespace="/home">
+		<action name="*" method="{1}" class="homeAction">
+			<result name="success">/home/{1}.jsp</result>
+			<result name="custom">/home/${target}.jsp</result>
+		</action>
+	</package>
+
+	<!-- 服务请求 -->
+	<package name="serverQuest" extends="eoms" namespace="/serverQuest">
+		<action name="*" method="{1}" class="serverQuestAction">
+			<result name="success">/serverQuest/{1}.jsp</result>
+			<result name="custom">/serverQuest/${target}.jsp</result>
+		</action>
+	</package>
+	
+	
+	<!-- 获取用户和部门相关信息 -->
+	<package name="userOrDept" extends="eoms" namespace="/userOrDept">
+		<action name="*" method="{1}" class="userOrDeptAction">
+			<result name="success">/{1}.jsp</result>
+			<result name="custom">/${target}.jsp</result>
+		</action>
+	</package>
+	
+		<!-- 获取用户和部门相关信息 -->
+	<package name="business" extends="eoms" namespace="/business">
+		<action name="*" method="{1}" class="businessAction">
+			<result name="success">/cdbBusiness/{1}.jsp</result>
+			<result name="custom">/cdbBusiness/${target}.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 事件问题 -->
+	<package name="incident" extends="eoms" namespace="/incident">
+		<action name="*" method="{1}" class="incidentAction">
+			<result name="success">/incident/{1}.jsp</result>
+			<result name="custom">/incident/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+			<result name ="redirect" type="chain">${target}</result>
+		</action>
+	</package>
+	
+	<!-- 删除工单 -->
+	<package name="operateform" extends="eoms" namespace="/operateform">
+		<action name="*" method="{1}" class="operateFormAction">
+			<result name="success">/operateform/{1}.jsp</result>
+			<result name="custom">/operateform/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+			<result name ="redirect" type="chain">${target}</result>
+		</action>
+	</package>
+	
+	<!-- 工单模板附件管理 -->
+	<package name="tempAttachment" extends="eoms" namespace="/tempAttachment">
+		<action name="uploadAttatch" method="uploadAttatch" class="tempAttachmentAction">
+			<result name="success">/workflow/sheet/query/uploadAttatch.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 变更关联配置项 -->
+	<package name="ciRelevance" extends="eoms" namespace="/ciRelevance">
+		<action name="*" method="{1}" class="ciRelevanceAction">
+			<exception-mapping result="errorMessage" exception="java.lang.NullPointerException"></exception-mapping>
+			<result name="success">/change/ciRelevance/{1}.jsp</result>
+		</action>
+	</package>
+	
+</struts>

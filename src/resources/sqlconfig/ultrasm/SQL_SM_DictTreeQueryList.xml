@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>刘传族</author> 
+		<date>2012-08-26</date> 
+		<description>dicttree组件下拉框数据</description> 		
+	</doc>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.businessSystem" >
+		<!-- 业务系统 -->
+		<select><![CDATA[SELECT pid id,divalue value,diname text,diname fullname,parentid FROM BS_T_SM_DICITEM WHERE dtcode = 'cdb_system']]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_inf" >
+		<!-- 影响度 -->
+		<select><![CDATA[select b.c800051026 id,b.c800051026 value,b.c800051026 text,b.c800051026 fullname,'0'  from {WF4:GDITSM_INCIDENT-1} b  where b.c800051026 is not null  group by c800051026]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_affected" >
+		<!-- 受影响系统 -->
+		<select><![CDATA[
+					   select distinct t.C800051017 || '.' || t.C800051021 id,
+								       t.C800051021 value,
+								       t.C800051017 || '.' || t.C800051021 text,
+								       t.C800051021 fullname,
+								       '0' pid
+							  from {WF4:Config_Base_AffectSystem} t
+				]]>
+			</select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_affected_xxx" >
+		<!-- 受影响系统 -->
+		<select>
+		<![CDATA[
+		select * from 
+			(
+				select 
+					t.C800051017 || '.' || t.C800051021 id,
+					t.C800051021 value,
+					t.C800051017 || '.' || t.C800051021 text,
+					t.C800051021 fullname,
+					'0' pid  
+				from {WF4:Config_Base_AffectSystem} t group by t.C800051017,t.C800051021 
+					union
+				 select
+                    '总行系统.系统工具' id,
+                    '系统工具' value,
+                    '总行系统.系统工具' text,
+                    '系统工具' fullname,
+                    '0' pid
+                  from dual
+                 union
+				 select
+                    '总行系统.网络工具' id,
+                    '网络工具' value,
+                    '总行系统.网络工具' text,
+                    '网络工具' fullname,
+                    '0' pid
+                  from dual
+			)
+			order by value desc
+		]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_problemRootSys_c" >
+		<!-- 故障根源系统 -->
+		<select><![CDATA[select b.c800051021 id,b.c800051021 value,b.c800051021 text,b.c800051021 fullname,'0'  from {WF4:Config_Base_AffectSystem} b]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_Source" >
+		<!-- 故障原因定位-->
+		<select><![CDATA[select b.C800051231 id,b.C800051231 value,b.C800051231 text,b.C800051231 fullname,'0'  from {WF4:GDITSM_INCIDENT-1} b  where b.C800051231 is not null  group by C800051231]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_incidentClass1" >
+		<!-- 事件技术一级分类 -->
+		<select><![CDATA[select C800051021 id,C800051021 value,C800051021 text,C800051021 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Tech} where C800051021 is not null group by C800051021]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_incidentClass2" >
+		<!-- 事件技术二级分类 -->
+		<select><![CDATA[select C800051022 id,C800051022 value,C800051022 text,C800051022 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Tech} where C800051022 is not null $customwhere$ group by C800051022]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051021"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_incidentClass3" >
+		<!-- 事件技术三级分类 -->
+		<select><![CDATA[select C800051023 id,C800051023 value,C800051023 text,C800051023 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Tech} where C800051023 is not null $customwhere$  group by C800051023]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051022"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_incidentClass4">
+		<!-- 事件技术四级分类 -->
+		<select><![CDATA[select C800051024 id,C800051024 value,C800051024 text,C800051024 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Tech} where C800051024 is not null $customwhere$  group by C800051024]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051023"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_professClass1" >
+		<!-- 业务一级 -->
+		<select><![CDATA[select C800051017 id,C800051017 value,C800051017 text,C800051017 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Business} where C800051017 is not null group by C800051017]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_professClass2" >
+		<!-- 业务二级 -->
+		<select><![CDATA[select C800051018 id,C800051018 value,C800051018 text,C800051018 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Business} where C800051018 is not null $customwhere$ group by C800051018]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051017"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_professClass3" >
+		<!-- 业务三级 -->
+		<select><![CDATA[select C800051019 id,C800051019 value,C800051019 text,C800051019 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Business} where C800051019 is not null $customwhere$ group by C800051019]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051018"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_professClass4" >
+		<!-- 业务四级 -->
+		<select><![CDATA[select C800051020 id,C800051020 value,C800051020 text,C800051020 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_Business} where C800051020 is not null $customwhere$ group by C800051020]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051019"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_afterIncidentClass1" >
+		<!-- 事后一级分类 -->
+		<select><![CDATA[select C800051021 id,C800051021 value,C800051021 text,C800051021 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_AfterIncident} where C800051021 is not null group by C800051021]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_afterIncidentClass2" >
+		<!-- 事后二级分类 -->
+		<select><![CDATA[select C800051022 id,C800051022 value,C800051022 text,C800051022 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_AfterIncident} where C800051022 is not null $customwhere$ group by C800051022]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051021"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_afterIncidentClass3" >
+		<!-- 事后三级分类 -->
+		<select><![CDATA[select C800051023 id,C800051023 value,C800051023 text,C800051023 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_AfterIncident} where C800051023 is not null $customwhere$  group by C800051023]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051022"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_afterIncidentClass4">
+		<!-- 事后四级分类 -->
+		<select><![CDATA[select C800051024 id,C800051024 value,C800051024 text,C800051024 fullname,'0' pid from {WF4:Config_GDITSM_INCIDENT-1_cChr_AfterIncident} where C800051024 is not null $customwhere$  group by C800051024]]></select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="C800051023"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_belongOrg" >
+		<!-- 所属机构 -->
+		<select><![CDATA[select C800051270 id,C800051270 value,C800051270 text,C800051270 fullname,0 pid from {WF4:GDITSM_INCIDENT-1} where C800051270 is not null group by C800051270]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.incident_basestatus" >
+		<!-- 工单状态 -->
+		<select><![CDATA[select C700000010 id,C700000010 value,C700000010 text,C700000010 fullname,0 pid from {WF4:GDITSM_INCIDENT-1} where C700000010 is not null group by C700000010]]></select>
+	</sqlquery>
+	<!--  dingfangwen 每年的第几周的开始时间  2012.9.13 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.starttime" >
+		<!-- 工单状态 -->
+		<select><![CDATA[
+		select 
+                rownum id,
+       
+      			to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7),
+               'yyyy-mm-dd') fullname,
+               
+               
+       			'第' || ROWNUM || '周' || '(' ||to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7),
+               'YY/MM/DD') || '~' ||
+       			to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7 + 6),
+               'YY/MM/DD') || ')' value,
+               
+               
+               to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7),
+               'yyyy-mm-dd')  text,
+               
+               
+      		   0 pid
+  from dual
+connect by rownum <= to_char(sysdate, 'ww')
+		]]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.endtime" >
+		<!-- 工单状态 -->
+		<select><![CDATA[
+		select 
+                rownum id,
+       
+      			to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7) + 6,
+               'yyyy-mm-dd') fullname,
+               
+               
+       			'第' || ROWNUM || '周' || '(' ||to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7),
+               'YY/MM/DD') || '~' ||
+       			to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7 + 6),
+               'YY/MM/DD') || ')' value,
+               
+               
+               to_char((trunc(sysdate, 'day') - to_char(sysdate, 'ww') * 7 +
+               (ROWNUM) * 7) + 6,
+               'yyyy-mm-dd')  text,
+               
+               
+      		   0 pid
+  from dual
+connect by rownum <= to_char(sysdate, 'ww')
+		]]></select>
+	</sqlquery>
+	
+	
+	<!-- 服务请求 -->
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.cmn_basestatus" >
+		<!-- 工单状态 -->
+		<select><![CDATA[select C700000010 id,C700000010 value,C700000010 text,C700000010 fullname,0 pid from {WF4:RQ_NET_CMN} where C700000010 is not null group by C700000010]]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.cmn_contents" >
+		<!-- 服务目录 -->
+		<select><![CDATA[select C800000017 id,C800000017 value,C800000017 text,C800000017 fullname,0 pid from {WF4:RQ_NET_CMN} where C800000017 is not null group by C800000017]]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.cmn_catalog" >
+		<!-- 服务目录所属单 -->
+		<select><![CDATA[select C800052003 id,C800052003 value,C800052003 text,C800052003 fullname,0 pid from {WF4:RQ_NET_CMN_Config_ServerCatalog} where C800052003 is not null group by C800052003]]></select>
+	</sqlquery>
+	
+	
+	
+	<!-- 变更 -->	
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_basestatus" >
+		<!-- 工单状态 -->
+		<select><![CDATA[select C700000010 id,C700000010 value,C700000010 text,C700000010 fullname,0 pid from {WF4:CG_CG_CCG} where C700000010 is not null group by C700000010]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_appsystem" >
+		<!-- 工单状态 -->
+		<select><![CDATA[select C800051021 id,C800051021 value,C800051021 text,C800051021 fullname,0 pid from {WF4:Config_Base_AffectSystem} where C800051021 is not null group by C800051021]]></select>
+	</sqlquery>
+	
+	
+	<!-- 应用系统查看 -->	
+	<sqlquery name="SQL_SM_DictTreeQueryList.affectsystem_belongOrg" >
+		<!-- 所属分行 -->
+		<select><![CDATA[select C800051017 id,C800051017 value,C800051017 text,C800051017 fullname,0 pid from {WF4:Config_Base_AffectSystem} where C800051017 is not null group by C800051017]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.affectsystem_impactsystem" >
+	    <!-- 受影响系统 -->
+		<select><![CDATA[select C800051021 id,C800051021 value,C800051021 text,C800051021 fullname,0 pid from {WF4:Config_Base_AffectSystem} where C800051021 is not null group by C800051021]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.affectsystem_sysname" >
+	    <!-- 系统名称 -->
+		<select><![CDATA[select c800051021 id,c800051021 value,C800051021 text,C800051021 fullname,0 pid from {WF4:Config_Base_AffectSystem} where c800051017 = '总行系统' and C800051021 is not null group by C800051021]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.affectsystem_riskclass" >
+	    <!-- 灾备级别 -->
+		<select><![CDATA[select c800051023 id,c800051023 value,c800051023 text,c800051023 fullname,0 pid from {WF4:Config_Base_AffectSystem} where c800051017 = '总行系统' and c800051023 is not null group by c800051023]]></select>
+	</sqlquery>
+	
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_risklevel" >
+		<!-- 风险等级-->
+		<select><![CDATA[select c800000014 id,c800000014 value,c800000014 text,c800000014 fullname,0 pid from {WF4:CG_CG_CCG} where c800000014 is not null group by c800000014]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_cgType" >
+		<!-- 变更类型-->
+		<select><![CDATA[select c800000016 id,c800000016 value,c800000016 text,c800000016 fullname,0 pid from {WF4:CG_CG_CCG} where c800000016 is not null group by c800000016]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_psLevel" >
+		<!-- 评审级别-->
+		<select><![CDATA[select C800000009 id,C800000009 value,C800000009 text,C800000009 fullname,0 pid from {WF4:CG_CG_CCG} where C800000009 is not null group by C800000009]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_proType" >
+		<!-- 问题分类-->
+		<select><![CDATA[select c800003004 id,c800003004 value,c800003004 text,c800003004 fullname,0 pid from {WF4:CG_CG_CCG} where c800003004 is not null group by c800003004]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.cgg_changeType" >
+		<!-- 变更分类-->
+		<!--<select><![CDATA[select c536870913 id,c536870913 value,c536870913 text,c536870913 fullname,0 pid from {WF4:Config_CG_CG_CCG_CGCategory} where c536870913 is not null group by c536870913]]></select>-->
+		<select><![CDATA[select  c800000009||'.'||c800000000 id, c800000009||'.'||c800000000 value, c800000009||'.'||c800000000 text, c800000009||'.'||c800000000 fullname, 0  pid from {WF4:CG_GG_RQD_New_Config_RqType_Menu}  where c800000000 is not null group by c800000000,c800000009]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CG_CG_CCG" >
+		<!-- 变更单系统名称-->
+		<select><![CDATA[select c800000002 id,c800000002 value,c800000002 text,c800000002 fullname,0 pid from {WF4:CG_CG_CCG} where c800000002 is not null group by c800000002]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:GDITSM_INCIDENT-1" >
+		<!-- 事件单系统名称-->
+		<select><![CDATA[select c800051185 id,c800051185 value,c800051185 text,c800051185 fullname,0 pid from {WF4:GDITSM_INCIDENT-1} where c800051185 is not null group by c800051185]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CEB_ITSM_Problem_new" >
+		<!-- 新问题单系统名称-->
+		<select><![CDATA[select c810000004 id,c810000004 value,c810000004 text,c810000004 fullname,0 pid from {WF4:CEB_ITSM_Problem_new} where c810000004 is not null group by c810000004]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:RQ_NET_CMN" >
+		<!-- 服务请求系统名称-->
+		<select><![CDATA[select c800051185 id,c800051185 value,c800051185 text,c800051185 fullname,0 pid from {WF4:RQ_NET_CMN} where c800051185 is not null group by c800051185]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CG_CG_RQD" >
+		<!-- 需求单系统名称-->
+		<select><![CDATA[select c800000008 id,c800000008 value,c800000008 text,c800000008 fullname,0 pid from {WF4:CG_CG_RQD} where c800000008 is not null group by c800000008]]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CEB_ITSM_Problem_new_type" >
+		<!-- 问题工单 问题类型-->
+		<select><![CDATA[select c811000000 id,c811000000 value,c811000000 text,c811000000 fullname,0 pid from {WF4:CEB_ITSM_Problem_new} where c811000000 is not null group by c811000000]]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CEB_ITSM_Problem_new_status" >
+		<!-- 问题工单 工单状态-->
+		<select><![CDATA[select C700000010 id,C700000010 value,C700000010 text,C700000010 fullname,0 pid from {WF4:CEB_ITSM_Problem_new} where C700000010 is not null group by C700000010]]></select>
+	</sqlquery>
+	
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CEB_ITSM_Problem_new_tone" >
+		<!-- 问题工单 技术一级-->
+		<select><![CDATA[select c810000009 id,c810000009 value,c810000009 text,c810000009 fullname,0 pid from {WF4:CEB_ITSM_Problem_new} where c810000009 is not null group by c810000009]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CEB_ITSM_Problem_new_ttwo" >
+		<!-- 问题工单 技术二级-->
+		<select><![CDATA[select c810000010 id,c810000010 value,c810000010 text,c810000010 fullname,0 pid from {WF4:CEB_ITSM_Problem_new} where c810000010 is not null group by c810000010]]></select>
+	</sqlquery>
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_WF4:CEB_ITSM_Problem_new_source" >
+		<!-- 问题工单 问题来源-->
+		<select><![CDATA[select c810000003 id,c810000003 value,c810000003 text,c810000003 fullname,0 pid from {WF4:CEB_ITSM_Problem_new} where c810000003 is not null group by c810000003]]></select>
+	</sqlquery>
+	
+	<!-- 变更工单报表根据团队搜索 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.system_ccgReportAsTeam_Two" >
+		<select>
+		<![CDATA[
+		select depid id,depid value,depname text,depname fullname,0 pid 
+		from 
+		    (select distinct depname,depid　
+	          from　bs_t_sm_userdep　t,　bs_t_sm_dep　p
+	         where　p.pid　=　t.depid and　t.depid　in　
+	                    ('730fee0676dd47c8832eb924b2fe725c','60bffb7bedc8433a9c7caa5038019be5',
+	                    '6d049521c8a4408c8c8895e63f30009c','49ede12d447649348bafac3517a24700',
+	                    '8601b29dc88144e2ae7121e228922e19','174bd654c69547a5afea9689c18f5966',
+	                    '54b3b49e3e25450691429ae1eb8bcc6d','d2b81e19d11d4988830c95ebfe0ce704',
+	                    '4c8ee61286bd4c51b557843e6023467d','84d3a32b0d93474b86a8b8590d0c42c0',
+	                    '8bd5991b589d47b2a8c20a19e2822bae','3bc380a27d5343ad9959dad3a8202bcb',
+	                    '8ad94ae47007452bad5c61088a437bd3','2c84fd802b8049d182f44e2aa0bf1b2d',
+	                    'dcb7715f6c304aeab0a76bcdcb71f448')
+	              and　t.userid not in (select userid from bs_t_sm_userdep where depid ='422e6966635448c29f079dda87f74387'))
+        where depname is not null group by depname,depid
+		]]></select>
+	</sqlquery>
+	
+	<!-- 测试管理流程报表资源池配置 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.TestManagerReportGroup" >
+		<select>
+		<![CDATA[
+		select pid id,pid value,depname text,depname fullname,0 pid from bs_t_sm_dep　p
+        where　p.pid　in  ('0de8242c85c74700b19ea0e0cacddf21','711dfeb5fb924ece93a07cf5be8f8290','f858b3bc65554e319ff4637db67b7bcc')
+		]]></select>
+	</sqlquery>
+	
+	<!-- 测试管理流程报表资源池配置,功能组下人员 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.TestPersonReportGroup" >
+		<select>
+		<![CDATA[
+		select pid id,pid value,depname text,depname fullname,0 pid from bs_t_sm_dep　p
+        where　p.parentid　in  ('0de8242c85c74700b19ea0e0cacddf21','711dfeb5fb924ece93a07cf5be8f8290','f858b3bc65554e319ff4637db67b7bcc')
+		]]></select>
+	</sqlquery>
+	
+	<!-- 测试管理流程报表资源池配置,测试人员配置 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.TestStaffList" >
+		<select>
+		<![CDATA[
+		select u.loginname id,u.loginname value,u.fullname text,u.fullname fullname,0 pid from bs_t_sm_user u,bs_t_sm_dep　p,bs_t_sm_userdep ud
+        where u.loginname=ud.loginname and ud.depid=p.pid and　p.pid ='02792c5618864571a7986db15607a858'
+		]]></select>
+	</sqlquery>
+	
+	<!-- 测试管理流程报表资源池配置,测试经理配置 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.TestManagerQueryList" >
+		<select>
+		<![CDATA[
+		select u.loginname id,u.loginname value,u.fullname text,u.fullname fullname,0 pid from bs_t_sm_user u,bs_t_sm_dep　p,bs_t_sm_userdep ud
+        where u.loginname=ud.loginname and ud.depid=p.pid and　p.pid='30c0f6a86d244ab19dd7b6b433fc64c8'
+		]]></select>
+	</sqlquery>
+	
+	<!-- 测试管理流程报表资源池配置,业务经理配置 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.TestBussinessManagerList" >
+		<select>
+		<![CDATA[
+		select u.loginname id,u.loginname value,u.fullname text,u.fullname fullname,0 pid from bs_t_sm_user u,bs_t_sm_dep　p,bs_t_sm_userdep ud
+        where u.loginname=ud.loginname and ud.depid=p.pid and　p.pid='869c1022118e4c92aa95c6490e5a70be'
+		]]></select>
+	</sqlquery>
+	
+	<!-- 测试管理流程报表应用系统列表 -->	
+	<sqlquery name="SQL_SM_DictTreeQueryList.TestFlowAffectSystemList" >
+		<!-- 所属分行 -->
+		<select><![CDATA[select C800051021 id,C800051021 value,C800051021 text,C800051021 fullname,0 pid from {WF4:Config_Base_AffectSystem} where C876871045='是' group by C800051021]]></select>
+	</sqlquery>
+	
+	<!-- 容量指标管理查询指标类型 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.CapacityIndexQuery" >
+		<select>
+		<![CDATA[
+		select pid id,pid value,indtypename text,indtypename fullname,0 pid from BS_T_CM_INDICATORTYPE
+		]]></select>
+	</sqlquery>
+	
+	<!-- 容量指标专家组expert  -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.CapacityExpertQuery" >
+		<select>
+		<![CDATA[
+		select pid id,pid value,depname text,depname fullname,0 pid from BS_T_SM_DEP where parentid='edce57e4347948b7a6baeb11f604c363'
+		]]></select>
+	</sqlquery>
+	
+	<!-- 容量指标管理查询指标类型 -->
+	<sqlquery name="SQL_SM_DictTreeQueryList.IndicatorNameQuery" >
+		<select>
+		<![CDATA[
+		select pid id,pid value,cmname text,cmname fullname,0 pid from BS_T_CM_INDICATOR where isbase=1 $customwhere$
+		]]></select>
+		<customwhere name="customwhere" prepend="or" >
+			<field prepend="and" operator="like"  colname="system"  value="#dictvalue#"/>
+		</customwhere>
+	</sqlquery>
+	
+</sql-group>

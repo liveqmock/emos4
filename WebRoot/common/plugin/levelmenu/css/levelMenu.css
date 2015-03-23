@@ -1,0 +1,81 @@
+.levelDiv {
+	background:#F0FFFF;
+	border: 1px solid #999999;
+	cursor: default;
+	position:absolute;
+	z-index: 100;
+}
+.levelSpan {
+	width:100%;
+	height:20px;
+	cursor: default;
+	border-bottom: 1px solid #DCDCDC;
+}
+.levelSpanOver {
+	background:#00FFFF;
+	height:20px;
+	cursor: default;
+	border-bottom: 1px solid #DCDCDC;
+}
+.levelSpanBottom {
+	width:100%;
+	height:20px;
+	cursor: default;
+}
+.levelSpanBottomOver {
+	background:#00FFFF;
+	width:100%;
+	height:20px;
+	cursor: default;
+}
+.dragSpanUp {
+	width:100%;
+	height:12px;
+	font-size:10px;
+	text-align:center;
+	cursor: default;
+	border-bottom: 2px solid #DCDCDC;
+}
+.dragSpanUpMd {
+	width:100%;
+	height:11px;
+	font-size:10px;
+	text-align:center;
+	cursor: default;
+	border-top: 1px solid #DCDCDC;
+	border-left: 1px solid #FFFAF0;
+	border-bottom: 1px solid #DCDCDC;
+}
+.dragSpanDown {
+	width:100%;
+	height:12px;
+	font-size:10px;
+	text-align:center;
+	cursor: default;
+	border-top: 1px solid #DCDCDC;
+	border-bottom: 1px solid #DCDCDC;
+}
+.dragSpanDownMd {
+	width:100%;
+	height:12px;
+	font-size:10px;
+	text-align:center;
+	cursor: default;
+	border-top: 2px solid #DCDCDC;
+	border-left: 1px solid #FFFAF0;
+}
+.spanText {
+	height:100%;
+	width:100%;
+	margin-top:3px;
+	margin-left:3px;
+	font-size:13px;
+	cursor: default;
+}
+.spanBtn {
+	height:100%;
+	float:right;
+	margin-top:-20px;
+	margin-right:1px;
+	cursor: default;
+}

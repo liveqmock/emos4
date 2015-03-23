@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+
+* { margin: 0px; padding: 0px; }
+body { font-size: 12px; line-height: 18px; color: #333333; background: #FFFFFF; position: relative; }
+h1 { line-height: 50px; }
+p { color: #999999; padding-top: 20px; width: 280px; line-height: 25px; }
+.container { margin: -130px 0 0 -325px; width: 650px; height: 260px; position: absolute; top: 50%; left: 50%; }
+.errorContent { height: 260px; background: url(../images/error_Img01.png) no-repeat left top; padding-left: 250px; }
+.errorContent1 { height: 260px; background: url(../images/error_Img02.png) no-repeat left top; padding-left: 130px; }
+.errorContent2 { height: 260px; background: url(../images/error_Img03.png) no-repeat left top; padding-left: 130px; }
+.red { font-family: "微软雅黑"; font-size: 24px; color: #c71e1e; font-weight: 300; }
+.gray { font-family: "微软雅黑"; font-size: 24px; color: #b6b6b6; font-weight: 300; }

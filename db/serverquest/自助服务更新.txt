@@ -1,0 +1,38 @@
+insert into bs_t_sm_dictype (PID, DTNAME, DTCODE, DICTYPE, STATUS, CREATER, CREATETIME, LASTMODIFIER, LASTMODIFYTIME, REMARK)
+values ('8a9c85174b2a669e014b2a8152c60001', '服务请求_自动关单时间(小时)', 'servicerequest_autoclose_time', '4', 1, '', null, '297e39d1298150e8012981703b700002', 1422347951, '72');
+
+security.properties加入以下内容
+#-----sheet------
+sheet.autoClose=true
+#haomiao
+sheet.autoCloseCheckTime=60000
+
+quartz.xml加入
+	<!-- 自动关单 -->
+	<bean id="closeSheet" class="com.ultrapower.eoms.cdbBusiness.service.CloseSheet" >
+		<property name="dicManagerService" ref="dicManagerService"></property>
+	</bean>
+	<bean id="closeSheetMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="closeSheet"></property>
+		<property name="targetMethod" value="closeSheet"></property>
+		<property name="concurrent" value="false"></property>
+	</bean>	
+	<bean id="closeSheetRule" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref local="closeSheetMethod" />
+		</property>
+		<property name="startDelay">
+			<value>${sheet.autoCloseCheckTime}</value>
+		</property>
+		<property name="repeatInterval">
+			<value>${sheet.autoCloseCheckTime}</value>
+		</property>
+	</bean>
+在id为scheduler的bean的list中加入
+<ref bean ="closeSheetRule"/>
+
+
+web.xml中加入	
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>

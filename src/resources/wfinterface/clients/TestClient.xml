@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="TestClient">
+	<method name="testMethod" class="com.ultrapower.wfinterface.core.test.TestClientImpl">
+		<webservice address="http://localhost:8010/eoms4/services/TestService" operate="test">
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="field5" datatype="6" dicdata="紧急:1;一般:2;二般:3;" argtype="INT" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C001 as field1
+					, C002 as field2
+					, C003 as field5
+				from {WF4:EL_TTM_TTH_Interface}
+				where C700000014 = '1'
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:EL_TTM_TTH_Interface} set C700000014 = '0' where C001 in ($FIELD1$)]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:EL_TTM_TTH_Interface} set C700000014 = '0' where C001 in ($FIELD1$)]]>
+		</exceptionsql>
+		<opdetail>
+			<field name="field1" text="测试1 字段1（字符串）">
+				<xml-colname>Test1_field1</xml-colname>
+				<db-colname>001</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="field2" text="测试1 字段2（数字）">
+				<xml-colname>Test1_field2</xml-colname>
+				<db-colname>002</db-colname>
+				<datatype>2</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue>0</defaultvalue>
+			</field>
+			<field name="field3" text="测试1 字段3（字典）">
+				<xml-colname>Test1_field3</xml-colname>
+				<db-colname>003</db-colname>
+				<datatype>6</datatype>
+				<dictype>2</dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata>1:紧急;2:一般;3:二般;</dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue>2</defaultvalue>
+			</field>
+			<field name="field4" text="测试1 字段4（时间）">
+				<xml-colname>Test1_field4</xml-colname>
+				<db-colname>004</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue>$sys_date$</defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+</client>

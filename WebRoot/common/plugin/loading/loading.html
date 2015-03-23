@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+.loading{
+	position:absolute; top:50%; left:50%; margin:-44px 0px 0px -146px;
+}.loading_border{
+	border:1px #A3C2DD solid; 
+}
+.loading_width{
+	 width:292px; height:88px; 
+}
+.loading_body{
+	width:292px;height:25px; 
+	text-align:center; 
+	font-weight:bold;
+	line-height:25px;
+	font-size:12px
+}
+.loading_left{
+	 border:1px #97BAD8 solid; 
+	 padding:10px;
+}
+</style>
+<script language="javascript">
+		var bar1 = 0;
+		var c = 1;
+		var t;
+		function processBar()
+		{
+			bar1 = bar1 + 2;
+			var bar=document.getElementById("oLoadBar");		
+			bar.style.width = bar1 + "%";
+			if (bar1 < 99) 
+			{
+				setTimeout("processBar()",100);
+			} 
+			else 
+			{
+				bar1 = 0;
+				processBar()
+			}
+		}
+		function timeCount() {
+			document.getElementById("count").innerHTML = c;
+			c = c + 1;
+			t=setTimeout("timeCount()",1000);
+		}
+</script>
+
+</head>
+<body onLoad="processBar();timeCount();">
+	<div class="loading">
+		<div class="loading_width">
+		  <div class="loading_body">页面正在加载中，请稍后...<label id="count">0</label>秒</div>
+		  	<div class="loading_left">
+				<div class="loading_border"><img id="oLoadBar" src="images/loading.gif" width="1" height="6" /></div>
+			</div>
+		 </div>
+	</div>	
+</body>
+</html>

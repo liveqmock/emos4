@@ -1,0 +1,70 @@
+﻿@charset "utf-8";
+#logListContent
+{
+	height:140px;
+	width:370px;
+	float:left;
+	background-color:#f0f4ff;
+	border-top:#BBCCFF 3px solid;
+	border-bottom:#BBCCFF 3px solid;
+	border-left:#BBCCFF 3px solid;
+	padding:2px;
+}
+#logListContent div
+{
+	height:138px;
+	border:#BBCCFF 1px solid;
+	background-color:white;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+#logListContent table
+{
+	width:100%;
+	--border:#BBCCFF 1px solid;
+	--background-color:white;
+}
+#logListContent th
+{
+	border-bottom:#333333 1px dotted;
+	text-align:left;
+	padding:2px 3px 2px 5px;
+}
+#logListContent td
+{
+	padding:2px 3px 2px 5px;
+}
+#logListContent span
+{
+	border-bottom:#333333 1px dotted;
+	margin-right:2px;
+}
+#logListPoint
+{
+	height:150px;
+	width:15px;
+	float:left;
+	overflow:hidden;
+	font-family:Arial;
+	font-size:14px;
+	color:#BBCCFF;
+	position:relative;
+}
+#logListPoint .logListPointTop
+{
+	height:150px;
+	width:15px;
+	background:url(../images/logpoint_top.png) left top;
+}
+#logListPoint .logListPointBottom
+{
+	height:150px;
+	width:15px;
+	background:url(../images/logpoint_bottom.png) left top;
+}
+.tableborder .order_up{
+	color: red;
+}
+.tableborder .order_down{
+	color: green;
+}

@@ -1,0 +1,104 @@
+@CHARSET "UTF-8";
+.bpp_SelectField
+{
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_SelectField table td input
+{
+	float:left;
+	margin-top:3px;
+	border:solid #999999 1px;
+	line-height:150%;
+	height:20px;
+	font-family:宋体;
+}
+.bpp_Field_SelectExtend
+{
+	float:left;
+	height:22px;
+	width:22px;
+	background-color:#eeeeee;
+	background:url(../images/field_menu.gif) center;
+	border:solid #999999 1px;
+	border-left:solid #999999 0px;
+	cursor:pointer;
+	margin:0px;
+	margin-left:-1px;
+	margin-top:3px;
+}
+#ubf_SelectBox
+{
+	position:absolute;
+	display:none;
+}
+#ubf_SelectBox ul
+{
+	background-color:#ffffff;
+	border:solid #999999 1px;
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+#ubf_SelectBox ul li
+{
+	padding:1px 3px 1px 3px;
+	height:18px;
+	cursor:pointer;
+	white-space:nowrap;
+}
+#ubf_SelectBox ul li span
+{
+	float:left;
+	line-height:140%;
+}
+#ubf_SelectBox ul .bpp_SelectItem_sub div
+{
+	float:right;
+	height:100%;
+	background:url(../images/chunk_right.gif) no-repeat right center;
+}
+#ubf_SelectBox ul li:hover
+{
+	height:18px;
+	padding:1px 3px 1px 3px;
+	cursor:pointer;
+	background-color:#eeeeee;
+}
+
+.bpp_SelectBox_Sub
+{
+	position:absolute;
+}
+.bpp_SelectBox_Sub ul
+{
+	background-color:#ffffff;
+	border:solid #999999 1px;
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+.bpp_SelectBox_Sub li
+{
+	padding:1px 3px 1px 3px;
+	height:18px;
+	cursor:pointer;
+	white-space:nowrap;
+}
+.bpp_SelectBox_Sub li span
+{
+	float:left;
+	line-height:140%;
+}
+.bpp_SelectBox_Sub .bpp_SelectItem_sub div
+{
+	float:right;
+	height:100%;
+	background:url(../images/chunk_right.gif) no-repeat right center;
+}
+.bpp_SelectBox_Sub li:hover
+{
+	height:18px;
+	padding:1px 3px 1px 3px;
+	cursor:pointer;
+	background-color:#eeeeee;
+}

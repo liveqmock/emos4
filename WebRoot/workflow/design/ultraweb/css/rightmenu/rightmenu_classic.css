@@ -1,0 +1,52 @@
+﻿#rm_shadow
+{
+	z-index:200;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:196px;
+	background-color:#CCCCCC;
+}
+#rm_back
+{
+	position:relative;
+	margin-top:-4px;
+	margin-left:-6px;
+	margin-right:2px;
+	margin-bottom:2px;
+	padding:2px;
+	width:200px;
+	background-color:#FAFAFA;
+	border:solid 1px #999999;
+}
+.rm_item
+{
+	background-color:#FAFAFA;
+	cursor:default;
+}
+.rm_item_active
+{
+	background-color:#99CCFF;
+	cursor:default;
+}
+.rm_image
+{
+	float:left;
+	height:22px;
+	width:26px;
+	padding:1px 3px 1px 3px;
+}
+.rm_text
+{
+	height:22px;
+	font-size:12px;
+	padding:5px 0px 0px 2px;
+}
+.rm_line
+{
+	height:2px;
+	overflow:hidden;
+	margin:2px 0px 2px 0px;
+	border-top:solid 1px #CCCCCC;
+	border-bottom:solid 1px #FFFFFF;
+}

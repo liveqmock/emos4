@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>文件管理</description> 		
+	</doc>
+	<sqlquery name="SQL_FTR_FileManagement.query" >
+		<select>
+			<![CDATA[
+				select 
+				/*COUNT*/ 
+				    fe.pid field_id
+			       ,fe.filepath ppath
+			       ,fe.filerealname realname
+			       ,fe.filename field_filename
+			       ,fi.theme theme
+			       ,fi.keyword keyword
+			       ,fi.createtime doc_createtime
+			       ,fi.lastmodifytime doc_lastmodifytime
+				/*COUNT*/ 
+				from bs_t_dm_fileentity fe, bs_t_dm_fileinfo fi
+				where fe.fileinfoid = fi.pid
+				$customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend="OR"><![CDATA[ (fi.createtime>=#startTime# and fi.createtime<#endTime#) or (fi.lastmodifytime >=#startTime# and fi.lastmodifytime<#endTime#)]]></sql>
+		</customwhere>
+	</sqlquery>
+</sql-group>

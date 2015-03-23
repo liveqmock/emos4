@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>sunkai</author> 
+		<date>2014.10.22</date> 
+		<description>系统请求列表</description> 		
+	</doc>
+	<sqlquery name="SQL_SERVERQUESTLIST.query" >
+		<select>
+			<![CDATA[ 
+			select /*COUNT*/*/*COUNT*/ from (
+			select t.pid,t.serverquestname,t.dilever,t.parentid,t.serverquestfullname,
+			t.vipflog ,
+			t.audit_0_name,t.audit_1_name,t.audit_2_name,t.audit_3_name
+			 from BS_T_WF_SERVERQUEST t 
+ 			 where t.parentid <>'0'
+ 			 and t.dilever='3'
+ 			-- and t.STATUS='1'
+ 			
+ 			 $customwhere$
+ 			 order by t.ordernum 
+ 			 )
+			]]> 
+		</select>
+		<condition cols="3" labprecent="11" textprecent="20">
+			<text displayname="服务请求名称" name="serverquestname" id="serverquestname"/>
+			<hidden id="dilever" name="dilever"></hidden>
+			<hidden id="serverQuestId" name="serverQuestId"></hidden>
+		</condition>
+		<customwhere name="customwhere" prepend="and">
+			<field prepend="and" operator="=" colname="t.diname" value="#serverquestname#"/>
+			<if prepend="and" exp="'#dilever#'='1'">
+				<success>	
+					<sql prepend="and">
+						<![CDATA[ t.parentid in (select a.pid from BS_T_WF_SERVERQUEST a where a.parentid=#serverQuestId#) ]]>
+					</sql>
+				</success>
+			</if>
+			<if prepend="and" exp="'#dilever#'='2'">
+				<success>
+					<field prepend="and" operator="=" colname="t.parentid" value="#serverQuestId#"/>
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.bpp_Label
+{
+	overflow:hidden;
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_Label table td div
+{
+	margin:9px 3px 0px 0px;
+}
+.bpp_Label table td div span
+{
+	color:#333333;
+}

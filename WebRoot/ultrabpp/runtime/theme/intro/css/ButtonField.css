@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.bpp_BtnField { }
+.bpp_BtnField table
+{
+	margin:0px 5px 0px 5px;
+}
+.bpp_BtnField table td input
+{
+	border:solid #999999 1px;
+	line-height:150%;
+	height:24px;
+}

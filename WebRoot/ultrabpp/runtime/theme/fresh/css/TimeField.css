@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+.bpp_TimeField
+{
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_TimeField table td input
+{
+	float:left;
+	margin-top:3px;
+	border:solid #cccccc 1px;
+	line-height:150%;
+	height:20px;
+	font-family:宋体;
+}

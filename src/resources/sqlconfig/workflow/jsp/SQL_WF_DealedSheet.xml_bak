@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.29</date> 
+		<description>已办工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_DealedSheet_JSP.query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/
+	 		  		*
+                /*COUNT*/
+               		from (select distinct 
+						base.baseid,            --工单编号
+						base.baseworkflowflag,  --工单流程标识
+						base.baseschema,        --工单schema
+						base.basename,          --工单名称
+						base.basesn,            --流水号
+						base.basedealouttime,   --处理时限
+						base.basecreatedate,    --建单时间
+						base.basecreatorfullname,--建单人名
+						base.basestatus,         --状态名
+						base.basepriority,       --紧急程度
+						base.basesummary,        --工单主题
+						base.basefinishdate,     --工单完成时间
+						base.baseclosedate,      --关闭时间
+						base.basetpliD           --模板ID
+               		 from BS_T_WF_BASEINFOR base, bs_t_wf_dealprocess dp	--T155
+							where
+									base.baseid = dp.baseid 
+									and base.baseschema = dp.baseschema
+									and (dp.DEALERID = #sys_loginname#)
+									$customwhere1$
+										order by basecreatedate desc)
+				 ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<select displayname="wf_sheet_type" name="baseSchema" >
+				<sql>select code as baseSchema,name from bs_t_wf_type t</sql>
+			</select>
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator=">="  colname="basecreatedate" datatype="7" value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="basecreatedate" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="basesn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="basesummary"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="base.baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="base.baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+	
+	<sqlquery name="SQL_WF_DealedSheet_JSP.myCreated" >
+		<select>
+			<![CDATA[ 
+				select
+					/*COUNT*/
+		 			  distinct
+							baseid,            --工单编号
+							baseworkflowflag,  --工单流程标识
+							baseschema,        --工单schema
+							basename,          --工单名称
+							basesn,            --流水号
+							basedealouttime,   --处理时限
+							basecreatedate,    --建单时间
+							basecreatorfullname,--建单人名
+							basestatus,         --状态名
+							basepriority,       --紧急程度
+							basesummary,        --工单主题
+							basefinishdate,     --工单完成时间
+							baseclosedate,      --关闭时间
+							basetpliD           --模板ID
+						/*COUNT*/
+	              from BS_T_WF_BASEINFOR base	--T155
+						where
+						baseCreatorLoginName = #sys_loginname#
+						$customwhere1$
+							order by basecreatedate desc
+         			
+				 ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<select displayname="wf_sheet_type" name="baseSchema" >
+				<sql>select code as baseSchema,name from bs_t_wf_type t</sql>
+			</select>
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator=">="  colname="basecreatedate" datatype="7" value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="basecreatedate" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="basesn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="basesummary"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+</sql-group>

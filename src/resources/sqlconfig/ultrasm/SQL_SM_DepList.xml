@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_DepList.query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/ pid, depname, depfullname, deptype, ordernum, status, (select fullname from bs_t_sm_user u where u.loginname = d.depassginee) depassginee, depphone /*COUNT*/
+				  from bs_t_sm_dep d
+				 where 1=1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ length(depdns), ordernum 
+			]]>
+		</select>
+		<condition cols="2" labprecent="20" textprecent="30" >
+			<text displayname="sm_lb_department" name="depname" />
+			<text displayname="sm_lb_fullName" name="depfullname"  />
+			<select displayname="com_lb_status" name="status"  dictype="status" value=""/>
+			<select displayname="sm_lb_depType" name="deptype" dictype="deptype" value=""/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="depname"  value="#depname#" />
+			<field prepend="and" operator="like"  colname="depfullname"  value="#depfullname#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+			<field prepend="and" operator="="  colname="deptype"  value="#deptype#" />
+			<field prepend="and" operator="="  colname="parentid"  value="#parentid#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

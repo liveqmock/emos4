@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName" default-lazy-init="true">
+	<!-- JDBC查询 -->
+	<bean id="depJdbcDao" class="com.ultrapower.eoms.common.core.dao.SimpleJdbcDaoImpl" />
+	
+	<!-- DNS服务_start -->
+	<bean id="dnsManagerService" class="com.ultrapower.eoms.ultrasm.manager.DnsManagerImpl" />
+	<!-- DNS服务_end -->
+
+	<!-- 数据移植_start -->
+	<bean id="dataShiftService" class="com.ultrapower.eoms.ultrasm.manager.DataShiftImpl" />
+	<bean id="dataShiftAction" class="com.ultrapower.eoms.ultrasm.web.DataShiftAction" />
+	<bean id="systemConfig" class="com.ultrapower.eoms.ultrasm.web.SystemConfigAction" />
+	<bean id="batchSynchDataAction" class="com.ultrapower.eoms.ultrasm.web.BatchSynchDataAction" />
+	
+	<bean id="batchSynchData" class="com.ultrapower.eoms.ultrasm.manager.BatchSynchDataImpl" />
+	<bean id="synchDataDown" class="com.ultrapower.eoms.ultrasm.manager.SynchDataDownImpl" />
+	<bean id="synchDataUp" class="com.ultrapower.eoms.ultrasm.manager.SynchDataUpImpl" />
+	<bean id="synchDataToV2" class="com.ultrapower.eoms.ultrasm.manager.SynchDataToV2Impl" />
+	<bean id="synchDataToPasm" class="com.ultrapower.eoms.ultrasm.manager.SynchDataToPasmImpl" />
+	<bean id="synchDataFromPasm" class="com.ultrapower.eoms.ultrasm.manager.SynchDataFromPasmImpl" />
+	<!-- 数据移植_end -->
+
+	<!-- 组织机构_start -->
+	<bean id="userManagerAction" class="com.ultrapower.eoms.ultrasm.web.UserManagerAction" />
+	<bean id="userManagerService" class="com.ultrapower.eoms.ultrasm.manager.UserManagerImpl" />
+	<bean id="depManagerAction" class="com.ultrapower.eoms.ultrasm.web.DepManagerAction" />
+	<bean id="depManagerService" class="com.ultrapower.eoms.ultrasm.manager.DepManagerImpl" />
+	<bean id="depUserRelationAtion" class="com.ultrapower.eoms.ultrasm.web.DepUserRelationManagerAction"/>
+	<bean id="pwdManageService" class="com.ultrapower.eoms.ultrasm.manager.PwdManageImpl" />
+	<bean id="userManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserInfo</value>
+		</property>
+	</bean>
+	<bean id="depInfoDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.DepInfo</value>
+		</property>
+	</bean>
+	<bean id="depManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.DepInfo</value>
+		</property>
+	</bean>
+	<bean id="userDepDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserDep</value>
+		</property>
+	</bean>
+	<bean id="pwdManageDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.PwdManage</value>
+		</property>
+	</bean>
+	<!-- 组织机构_end -->
+	
+	<!-- 菜单管理_start -->
+	<bean id="menuManagerAction" class="com.ultrapower.eoms.ultrasm.web.MenuManagerAction" />
+	<bean id="menuManagerService" class="com.ultrapower.eoms.ultrasm.manager.MenuManagerImpl" />
+	<bean id="menuManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.MenuInfo</value>
+		</property>
+	</bean>
+	<bean id="userMenuDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserMenuTree</value>
+		</property>
+	</bean>
+	<!-- 菜单管理_end -->
+	
+	<!-- 资源管理 start -->
+	<bean id="resourceManagerAction" class="com.ultrapower.eoms.ultrasm.web.ResourceManagerAction" />
+	<bean id="resUrlManagerAction" class="com.ultrapower.eoms.ultrasm.web.ResUrlManagerAction"/>
+	<bean id="resourceManagerService" class="com.ultrapower.eoms.ultrasm.manager.ResourceManagerImpl" />
+	<bean id="resourceDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.Resource</value>
+		</property>
+	</bean>
+	<bean id="resourcePropertyDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.ResProperty</value>
+		</property>
+	</bean>
+	<bean id="resourceUrlManagerService" class="com.ultrapower.eoms.ultrasm.manager.ResourceUrlManagerImpl" />
+	<bean id="resourceUrlDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.ResourceUrl</value>
+		</property>
+	</bean>
+	<!-- 资源管理 end -->
+	
+	<!-- 操作管理_start -->
+	<bean id="operateManagerAction" class="com.ultrapower.eoms.ultrasm.web.OperateManagerAction" />
+	<bean id="operateManagerService" class="com.ultrapower.eoms.ultrasm.manager.OperateManagerImpl" />
+	<bean id="operateDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.Operate</value>
+		</property>
+	</bean>
+	<!-- 操作管理_end -->
+	
+	<!-- 角色管理_start -->
+	<bean id="roleManagerAction" class="com.ultrapower.eoms.ultrasm.web.RoleManagerAction" />
+	<bean id="roleMenuManagerAction" class="com.ultrapower.eoms.ultrasm.web.RoleMenuManagerAction"/>
+	<bean id="roleResOpManagerAction" class="com.ultrapower.eoms.ultrasm.web.RoleResOpManagerAction"/>
+	<bean id="roleOrgManagerAction" class="com.ultrapower.eoms.ultrasm.web.RoleOrgManagerAction"/>
+	<bean id="roleManagerService" class="com.ultrapower.eoms.ultrasm.manager.RoleManagerImpl" />
+	<bean id="roleManagerDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.RoleInfo</value>
+		</property>
+	</bean>
+	<bean id="roleOrgDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.RoleOrg</value>
+		</property>
+	</bean>
+	<bean id="roleMenuDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.RoleMenu</value>
+		</property>
+	</bean>
+	<bean id="roleResOpDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.RoleResOp</value>
+		</property>
+	</bean>
+	<bean id="opDataPrivilegeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.OpDataPrivilege</value>
+		</property>
+	</bean>
+	<bean id="sqlDataPrivilegeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.SqlDataPrivilege</value>
+		</property>
+	</bean>
+	<!-- 角色管理_end -->
+
+	<!-- 权限管理_start -->
+	<bean id="privilegeManagerService" class="com.ultrapower.eoms.ultrasm.manager.PrivilegeManagerImpl" />
+	<!-- 权限管理_end -->
+	
+	<!-- 数据字典_start -->
+	<bean id="dicManagerAction" class="com.ultrapower.eoms.ultrasm.web.DicManagerAction" />
+	<bean id="dicManagerService" class="com.ultrapower.eoms.ultrasm.manager.DicManagerImpl" />
+	<bean id="dicTypeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.DicType</value>
+		</property>
+	</bean>
+	<bean id="dicItemDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.DicItem</value>
+		</property>
+	</bean>
+	<!-- 数据字典_end -->
+	
+	<!-- 节假日时间处理  start-->
+	<bean id="holidayImpl" class="com.ultrapower.eoms.ultraduty.manager.HolidayImpl" />
+	<!-- 节假日时间处理  end-->
+	
+	<!-- 库表维护_start -->
+	<bean id="commonExcelService" class="com.ultrapower.eoms.ultrasm.manager.CommonExcelImpl"/>
+	<bean id="tableManagerService" class="com.ultrapower.eoms.ultrasm.manager.TableManagerImpl"/>
+	<bean id="tableManagerAction" class="com.ultrapower.eoms.ultrasm.web.TableManagerAction"/>
+	<bean id="excelManagerService" class="com.ultrapower.eoms.ultrasm.manager.ExcelManagerImpl"/>
+	<bean id="excelManagerAction" class="com.ultrapower.eoms.ultrasm.web.ExcelManagerAction"/>
+	<bean id="tableDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.TableInfo</value>
+		</property>
+	</bean>
+	<bean id="fieldDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.FieldInfo</value>
+		</property>
+	</bean>
+	<bean id="excelExpDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.ExcelExpCfg</value>
+		</property>
+	</bean>
+	<bean id="excelExpRowDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.ExcelExpCfgRow</value>
+		</property>
+	</bean>
+	<bean id="excelExpFldDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.ExcelExpCfgFld</value>
+		</property>
+	</bean>
+	<!-- 库表维护_end -->
+	
+	<!-- 附件管理_start -->
+	<bean id="attachmentManagerService" class="com.ultrapower.eoms.ultrasm.manager.AttachmentManagerImpl"></bean>
+	<bean id="attachmentDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.Attachment</value>
+		</property>
+	</bean>
+	<!-- 附件管理_end -->
+	
+	<!-- 我的菜单 start -->
+	<bean id="mymenuManagerAction" class="com.ultrapower.eoms.ultrasm.web.MyMenuManagerAction"/>
+	<bean id="mymenuManagerService" class="com.ultrapower.eoms.ultrasm.manager.MyMenuManagerImpl"></bean>
+	<bean id="myMenuDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.MyMenu</value>
+		</property>
+	</bean>
+	<!-- 我的菜单 end -->
+	
+	<!-- 人员模版配置_start -->
+	<bean id="userTemplateService" class="com.ultrapower.eoms.ultrasm.manager.UserTemplateImpl"/>
+	<bean id="userTemplateAction" class="com.ultrapower.eoms.ultrasm.web.UserTemplateAction"/>
+	<bean id="userTemplateDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserTemplate</value>
+		</property>
+	</bean>
+	<bean id="userTemplateTypeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserTemplateType</value>
+		</property>
+	</bean>
+	<bean id="userTemplateDataDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserTemplateData</value>
+		</property>
+	</bean>
+	<bean id="userTemplateShareDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.UserTemplateShare</value>
+		</property>
+	</bean>
+	<!-- 人员模版配置_end -->
+	
+	<!-- 自定义树管理 start-->
+	<bean id="customOrganizeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.CustomOrganize</value>
+		</property>
+	</bean>
+	<bean id="customTreeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+		 	<value>com.ultrapower.eoms.ultrasm.model.FormCustSendTree</value>
+		</property>
+	</bean>
+	<bean id="formCustSendTreeService" class="com.ultrapower.eoms.ultrasm.manager.FormCustSendTreeImpl"></bean>
+	<bean id="formCustSendTreeAction" class="com.ultrapower.eoms.ultrasm.web.FormCustSendTreeAction" />
+	<!-- 自定义树管理 end -->
+	
+	<!-- 接口建单维护 start-->
+	<bean id="bsTCmbcAlarmnoteDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+		 	<value>com.ultrapower.eoms.ultrasm.model.BsTCmbcAlarmnote</value>
+		</property>
+	</bean> 
+	<bean id="bsTCmbcAlarmnoteService" class="com.ultrapower.eoms.ultrasm.manager.BsTCmbcAlarmnoteManagerImpl"></bean>
+	<bean id="bsTCmbcAlarmnoteAction" class="com.ultrapower.eoms.ultrasm.web.BsTCmbcAlarmnoteAction" />
+	<!-- 接口建单维护 end -->
+	
+	<!-- 用户配置搜索条件 -->
+	<bean id="searchConditionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.ultrasm.model.SearchCondition</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 通用业务树 duly 201411 -->
+	<bean id="commonTreeAction" class="com.ultrapower.eoms.common.plugin.commonTree.CommonTreeAction" />
+	<!-- 通用展示树 -->
+	<bean id="commonViewTreeAction" class="com.ultrapower.eoms.common.plugin.commonTree.CommonViewTreeAction" />
+</beans>

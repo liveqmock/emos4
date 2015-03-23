@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="IncidentProcessSheet">
+	<method name="newWorkSheet"
+		class="com.ultrapower.wfinterface.core.extend.IncidentServiceImpl"
+		baseschema="CBD_INCIDENT">
+		<!-- ASSIGNStep01提交处理 -->
+		<operate code="NEXT" actionid="ASSIGNStep01" creator="Demo">提交
+		</operate>
+		<fields>
+			<field name="BaseSummary" text="标题">
+				<xml-colname>BaseSummary</xml-colname>
+				<db-colname>BaseSummary</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentPhenoClass" text="事件现象分类名称">
+				<xml-colname>IncidentPhenoClass</xml-colname>
+				<db-colname>IncidentPhenoClass</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentPhenoClassID" text="现象分类ID">
+				<xml-colname>IncidentPhenoClassID</xml-colname>
+				<db-colname>IncidentPhenoClassID</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="requestOA" text="建单人OA号">
+				<xml-colname>requestOA</xml-colname>
+				<db-colname>requestOA</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>254</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactPersonId" text="联系人OA号">
+				<xml-colname>ContactPersonId</xml-colname>
+				<db-colname>ContactPersonId</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>254</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IcidentSource" text="事件来源">
+				<xml-colname>IcidentSource</xml-colname>
+				<db-colname>IcidentSource</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>254</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentDes" text="事件描述">
+				<xml-colname>IncidentDes</xml-colname>
+				<db-colname>IncidentDes</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>4000</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="OccurrenceTime" text="事件发生时间">
+				<xml-colname>OccurrenceTime</xml-colname>
+				<db-colname>OccurrenceTime</db-colname>
+				<datatype>4</datatype><!-- 流程引擎上有处理，此处直接使用文本型即可 -->
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="Incident_UrgentDgree" text="事件紧急度">
+				<xml-colname>Incident_UrgentDgree</xml-colname>
+				<db-colname>Incident_UrgentDgree</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="Incident_EffectDgree" text="事件影响度">
+				<xml-colname>Incident_EffectDgree</xml-colname>
+				<db-colname>Incident_EffectDgree</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentIdentification" text="事件标识">
+				<xml-colname>IncidentIdentification</xml-colname>
+				<db-colname>IncidentIdentification</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue>内部事件</defaultvalue>
+			</field>
+			<field name="IsMajor" text="是否重大事件">
+				<xml-colname>IsMajor</xml-colname>
+				<db-colname>IsMajor</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>false</isnull>
+				<defaultvalue>否</defaultvalue>
+			</field>
+			<field name="AssociateSystem" text="关联系统">
+				<xml-colname>AssociateSystem</xml-colname>
+				<db-colname>AssociateSystem</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype>
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactPerson" text="联系人">
+				<xml-colname>ContactPerson</xml-colname>
+				<db-colname>ContactPerson</db-colname>
+				<datatype>4</datatype>
+				<length>99</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactPersonSite" text="联系人单位">
+				<xml-colname>ContactPersonSite</xml-colname>
+				<db-colname>ContactPersonSite</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactDepartment" text="联系人部门">
+				<xml-colname>ContactDepartment</xml-colname>
+				<db-colname>ContactDepartment</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactOA" text="联系人OA号">
+				<xml-colname>ContactOA</xml-colname>
+				<db-colname>ContactOA</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactPhone" text="联系人手机">
+				<xml-colname>ContactPhone</xml-colname>
+				<db-colname>ContactPhone</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactPosition" text="联系人职位">
+				<xml-colname>ContactPosition</xml-colname>
+				<db-colname>ContactPosition</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactStation" text="联系人工位">
+				<xml-colname>ContactStation</xml-colname>
+				<db-colname>ContactStation</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ContactTel" text="联系人电话">
+				<xml-colname>ContactTel</xml-colname>
+				<db-colname>ContactTel</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IsVIP" text="VIP等级">
+				<xml-colname>IsVIP</xml-colname>
+				<db-colname>IsVIP</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="viplevel" text="viplevel">
+				<xml-colname>viplevel</xml-colname>
+				<db-colname>viplevel</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="Priority" text="优先级">
+				<xml-colname>Priority</xml-colname>
+				<db-colname>Priority</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentLable" text="事件标签">
+				<xml-colname>IncidentLable</xml-colname>
+				<db-colname>IncidentLable</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="requireDealTime" text="要求服务实施时间">
+				<xml-colname>requireDealTime</xml-colname>
+				<db-colname>requireDealTime</db-colname>
+				<datatype>4</datatype>
+				<length>15</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="cdbDealTeamName" text="处理人团队名">
+				<xml-colname>cdbDealTeamName</xml-colname>
+				<db-colname>cdbDealTeamName</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="cdbDealTeamId" text="处理人团队Id">
+				<xml-colname>cdbDealTeamId</xml-colname>
+				<db-colname>cdbDealTeamId</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="cdbTeamName" text="建单人团队名">
+				<xml-colname>cdbTeamName</xml-colname>
+				<db-colname>cdbTeamName</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="cdbTeamId" text="建单人团队Id">
+				<xml-colname>cdbTeamId</xml-colname>
+				<db-colname>cdbTeamId</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="AcceptanceTimeLimit" text="受理时限">
+				<xml-colname>AcceptanceTimeLimit</xml-colname>
+				<db-colname>AcceptanceTimeLimit</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="AcceptanceTime" text="受理时间">
+				<xml-colname>AcceptanceTime</xml-colname>
+				<db-colname>AcceptanceTime</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="DealTimeLimit" text="处理时限">
+				<xml-colname>DealTimeLimit</xml-colname>
+				<db-colname>DealTimeLimit</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="DealTime" text="处理时间">
+				<xml-colname>DealTime</xml-colname>
+				<db-colname>DealTime</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="BASEACCEPTOUTTIME" text="受理时限">
+				<xml-colname>BASEACCEPTOUTTIME</xml-colname>
+				<db-colname>BASEACCEPTOUTTIME</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="BASEDEALOUTTIME" text="处理时限">
+				<xml-colname>BASEDEALOUTTIME</xml-colname>
+				<db-colname>BASEDEALOUTTIME</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="acceptTime" text="受理时间">
+				<xml-colname>acceptTime</xml-colname>
+				<db-colname>acceptTime</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentSourceClass" text="原因分类">
+				<xml-colname>IncidentSourceClass</xml-colname>
+				<db-colname>IncidentSourceClass</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="RecoveryTime" text="恢复时间">
+				<xml-colname>RecoveryTime</xml-colname>
+				<db-colname>RecoveryTime</db-colname>
+				<datatype>4</datatype>
+				<length>15</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ServiceInterruptionTime" text="服务中断时间(分钟)">
+				<xml-colname>ServiceInterruptionTime</xml-colname>
+				<db-colname>ServiceInterruptionTime</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentPropertie" text="事件性质">
+				<xml-colname>IncidentPropertie</xml-colname>
+				<db-colname>IncidentPropertie</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentSolutionType" text="解决方案类型">
+				<xml-colname>IncidentSolutionType</xml-colname>
+				<db-colname>IncidentSolutionType</db-colname>
+				<datatype>4</datatype>
+				<length>128</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="isThirdpartSupport" text="是否第三方支持">
+				<xml-colname>isThirdpartSupport</xml-colname>
+				<db-colname>isThirdpartSupport</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="reqRepairStartTime" text="报修开始时间">
+				<xml-colname>reqRepairStartTime</xml-colname>
+				<db-colname>reqRepairStartTime</db-colname>
+				<datatype>4</datatype>
+				<length>15</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="repairedEndTime" text="维修结束时间">
+				<xml-colname>repairedEndTime</xml-colname>
+				<db-colname>repairedEndTime</db-colname>
+				<datatype>4</datatype>
+				<length>15</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="timeout_reason" text="超时原因">
+				<xml-colname>timeout_reason</xml-colname>
+				<db-colname>timeout_reason</db-colname>
+				<datatype>4</datatype>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="IncidentReason" text="事件原因">
+				<xml-colname>IncidentReason</xml-colname>
+				<db-colname>IncidentReason</db-colname>
+				<datatype>4</datatype>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="Solution" text="解决方案">
+				<xml-colname>Solution</xml-colname>
+				<db-colname>Solution</db-colname>
+				<datatype>4</datatype>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ProcedureProcessing" text="处理过程">
+				<xml-colname>ProcedureProcessing</xml-colname>
+				<db-colname>ProcedureProcessing</db-colname>
+				<datatype>4</datatype>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="satisfaction_level" text="满意度">
+				<xml-colname>satisfaction_level</xml-colname>
+				<db-colname>satisfaction_level</db-colname>
+				<datatype>4</datatype>
+				<length>2000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="satisfaction_content" text="满意度评价">
+				<xml-colname>satisfaction_content</xml-colname>
+				<db-colname>satisfaction_content</db-colname>
+				<datatype>4</datatype>
+				<length>4000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="connBaseid" text="关联单号">
+				<xml-colname>connBaseid</xml-colname>
+				<db-colname>connBaseid</db-colname>
+				<datatype>4</datatype>
+				<length>254</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="closeUserAcceptTime" text="关单受理时间">
+				<xml-colname>closeUserAcceptTime</xml-colname>
+				<db-colname>closeUserAcceptTime</db-colname>
+				<datatype>4</datatype>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</fields>
+	</method>
+</service>

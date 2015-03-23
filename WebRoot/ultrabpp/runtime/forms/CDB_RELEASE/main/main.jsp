@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../../../theme/taglibs.jsp"%>
+<ubf:PanelGroup name="PG_Main" cell="4" type="tab" visiable="1" showtitle="1">
+	<ubf:Panel name="sheetMainInfo" label="工单信息" visiable="1">
+		<ubf:CharacterField name="baseSummary" label="标题" row="1" cell="4" visiable="1" length="2000" />
+		<ubf:PanelGroup name="sheetMain" cell="4" type="panel" visiable="1" showtitle="1">
+			<ubf:Panel name="requestInfo" label="申请人信息" visiable="1">
+				<ubf:CharacterField name="requestUser" label="请求人" row="1" cell="1" visiable="1" length="100" defaultValue="${displayCxt.userInfo.fullName}"/>
+				<ubf:CharacterField name="requestDept" label="请求人部门" row="1" cell="1" visiable="1" length="100" defaultValue="${displayCxt.userInfo.depName}"/>
+				<ubf:CharacterField name="requestGroup" label="请求人单位" row="1" cell="1" visiable="1" length="100" defaultValue="${displayCxt.userInfo.cdbUnitName}"/>
+				<ubf:CharacterField name="requestOA" label="请求人OA号" row="1" cell="1" visiable="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:CharacterField name="requestEmail" label="请求人邮件" row="1" cell="1" visiable="1" length="100" defaultValue="${displayCxt.userInfo.email}"/>
+				<ubf:CharacterField name="requestMobile" label="请求人手机" row="1" cell="1" visiable="1" length="100" defaultValue="${displayCxt.userInfo.mobile}"/>
+			</ubf:Panel>
+			<ubf:Panel name="baseInfo" label="基本信息" visiable="1">
+				<ubf:HiddenField name="editAcceptTime" label="方案编写受理时间" cell="1" length="20" />
+				<ubf:SelectField name="connBusSystem" label="应用系统" type="table" resource=" bs_t_sm_commontree:fullname:fullname" paras="type='busSystem'" cell="1" visiable="1"  />
+				<ubf:SelectField name="releaseType" label="发布类型" type="collect" resource="重大发布:重大发布" paras="" cell="1" visiable="1" defaultValue="重大发布" />
+				<ubf:SelectField name="releaseState" label="发布状态" type="sysdic" resource="Release" paras="发布状态" cell="1" visiable="1"  />
+				<ubf:TimeField name="planStartTime" label="计划开始时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:TimeField name="planFinishTime" label="计划完成时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:TimeField name="expectationTime" label="期望上线日期" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:CharacterField name="connBaseId" label="关联单号" row="1" cell="1" visiable="1" length="500" />
+				<ubf:SelectField name="release_reason" label="发布原因" type="sysdic" resource="release_reason" paras="" cell="1" visiable="1"  />
+				<ubf:SelectField name="release_type" label="发布类别" type="sysdic" resource="release_type" paras="" cell="1" visiable="1"  />
+				<ubf:SelectField name="risk_level" label="风险程度" type="sysdic" resource="release_riskLevel" paras="" cell="1" visiable="1"  />
+				<ubf:SelectField name="affect_udstream_system" label="对上下游系统影响" type="collect" resource="是:是,否:否" paras="" cell="1" visiable="1"  />
+				<ubf:HiddenField name="affect_system_id" label="影响系统id" cell="1" length="2000" />
+				<ubf:CharacterField name="affect_system" label="影响系统" row="1" cell="1" visiable="1" length="2000" />
+				<ubf:SelectField name="affect_user_end" label="对终端用户的影响" type="collect" resource="是:是,否:否" paras="" cell="1" visiable="1"  />
+				<ubf:CharacterField name="affect_user_end_desc" label="对终端用户影响说明" row="1" cell="2" visiable="1" length="2000" />
+				<ubf:SelectField name="is_sync_backup" label="是否需要灾备同步变更" type="collect" resource="是:是,否:否" paras="" cell="1" visiable="1"  />
+				<ubf:TimeField name="backup_env_chg_time" label="灾备环境变更时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:TimeField name="last_chg_time" label="上次变更时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:CharacterField name="impl_contact" label="实施联系人" row="1" cell="1" visiable="1" length="500" />
+				<ubf:SelectField name="batch_info" label="批次信息" type="table" resource="BS_T_SM_BATCHCONF:batch_no||'['||max(reviewtime)||']':batch_no||'['||max(reviewtime)||']'" paras="1=1 and active= '1' group by batch_no,reviewtime order by reviewtime --" cell="1" visiable="1"  />
+				<ubf:HiddenField name="batch_info_id" label="批次信息id" cell="1" length="100" />
+				<ubf:CharacterField name="releaseReason" label="发布说明" row="3" cell="4" visiable="1" length="3999" />
+				<ubf:CharacterField name="connChangeDesc" label="配置相关信息变更说明" row="3" cell="4" visiable="1" length="4000" />
+				<ubf:CharacterField name="buildCase" label="发布部署方案" row="3" cell="4" visiable="1" length="4000" />
+				<ubf:ViewField name="chgList"  row="8" cell="4" type="frame" visiable="1" url="${ctx}/business/releaseChgList.action?baseid=${displayCxt.fieldMap['BASEID']}&recordViewFieldName=chgList"/>
+			</ubf:Panel>
+			<ubf:Panel name="caseCheckInfo" label="方案验证信息" visiable="1">
+				<ubf:CharacterField name="checkResult" label="验证结果" row="3" cell="4" visiable="1" length="4000" />
+			</ubf:Panel>
+			<ubf:Panel name="reviewInfo" label="回顾信息" visiable="1">
+				<ubf:SelectField name="cmdbReload" label="通知CMDB更新" type="collect" resource="是:是,否:否" paras="" cell="1" visiable="1"  />
+				<ubf:CharacterField name="baseResult" label="基本结论" row="1" cell="1" visiable="1" length="100" />
+				<ubf:CharacterField name="closeUser" label="关闭人" row="1" cell="1" visiable="1" length="100" />
+				<ubf:TimeField name="closeTime" label="关闭时间" row="1" cell="1" visiable="0" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:CharacterField name="closeUserID" label="关闭人登陆名" row="1" cell="1" visiable="0" length="100" />
+			</ubf:Panel>
+			<ubf:Panel name="executeInfo" label="实施及验证信息" visiable="1">
+				<ubf:TimeField name="realStartTime" label="实际开始时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:TimeField name="realFinishTime" label="实际完成时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:CharacterField name="exeRollback" label="实施记录" row="3" cell="4" visiable="1" length="3999" />
+				<ubf:CharacterField name="releaseResultStatus" label="验证结果" row="3" cell="4" visiable="1" length="4000" />
+				<ubf:TimeField name="realAcceptTime" label="实施受理时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:TimeField name="testAcceptTime" label="验证受理时间" row="1" cell="1" visiable="0" format="yyyy-MM-dd HH:mm:ss"  />
+			</ubf:Panel>
+			<ubf:Panel name="attacheList" label="附件列表" visiable="1">
+				<ubf:AttachmentField name="releaseAttache" label="附件" types="*.*" visiable="1">
+					<atta:fileupload id="releaseAttache_tag"
+				 		uploadBtnIsVisible="false" fileTypes="${releaseAttache_types}" uploadable="${releaseAttache_uploadable}"
+						progressIsVisible="true" uploadTableVisible="true" isMultiDownload="true" isAutoUpload="true" downTableVisible="true" isMultiUpload="true"
+						attchmentGroupId="${releaseAttache_relcationCode}" operationParams="0,${releaseAttache_edit},1" uploadDestination="${path}"
+						flashUrl="${ctx}/ultrabpp/runtime/clientframework/component/SpecialField/AttachmentField/js/swfupload.swf" >
+					</atta:fileupload>
+				</ubf:AttachmentField>
+			</ubf:Panel>
+			<ubf:Panel name="dealRecord" label="处理记录" visiable="1">
+				<ubf:ViewField name="dealrecordinfo"  row="5" cell="4" type="frame" visiable="1" url="${ctx}/wfrecord/showWfRecords.action?baseschema=${displayCxt.baseSchema}&baseid=${displayCxt.baseID}&recordViewFieldName=deal_records"/>
+			</ubf:Panel>
+			<ubf:Panel name="hiddenArea" label="隐藏域" visiable="1">
+				<ubf:HiddenField name="reviseUserId" label="修订人" cell="1" length="200" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:HiddenField name="reviseTime" label="修订时间" cell="1" length="200" />
+				<ubf:HiddenField name="caseCheckUserID" label="方案验证人ID" cell="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:TimeField name="caseAcceptTime" label="方案验证受理时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:HiddenField name="caseCheckTime" label="方案验证时间" cell="1" length="100" />
+				<ubf:HiddenField name="auditUserID" label="审批人ID" cell="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:HiddenField name="connBusSystemID" label="关联应用系统ID" cell="1" length="500" />
+				<ubf:HiddenField name="auditTime" label="审批时间" cell="1" length="100" />
+				<ubf:TimeField name="auditAcceptTime" label="审批受理时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:HiddenField name="organizeUserID" label="评审人ID" cell="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:TimeField name="organizeAcceptTime" label="评审受理时间" row="1" cell="1" visiable="1" format="yyyy-MM-dd HH:mm:ss"  />
+				<ubf:HiddenField name="organizeTime" label="评审时间" cell="1" length="100" />
+				<ubf:HiddenField name="finishUserID" label="实施人ID" cell="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:HiddenField name="finishTime" label="实施时间" cell="1" length="100" />
+				<ubf:HiddenField name="testCheckUserID" label="测试验证人" cell="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:HiddenField name="testCheckTime" label="测试验证时间" cell="1" length="100" />
+				<ubf:HiddenField name="reviewUserId" label="回顾人ID" cell="1" length="100" defaultValue="${displayCxt.userInfo.loginName}"/>
+				<ubf:HiddenField name="reviewTime" label="回顾时间" cell="1" length="100" />
+				<ubf:CharacterField name="allAuditTime" label="需要审批次数" row="1" cell="1" visiable="1" length="20" />
+				<ubf:CharacterField name="auditTimes" label="审批次数" row="1" cell="1" visiable="1" length="10" />
+				<ubf:HiddenField name="syncStatus" label="同步状态" cell="1" length="200" defaultValue="0"/>
+			</ubf:Panel>
+		</ubf:PanelGroup>
+	</ubf:Panel>
+	<ubf:Panel name="sheetDealInfo" label="流程记录" visiable="1">
+		<ubf:ViewField name="dealInforList"  row="30" cell="4" type="frame" visiable="1" url="${ctx}/workflow/sheet/query/BaseInfoViewBpp.jsp?baseschema=${displayCxt.baseSchema}&baseid=${displayCxt.baseID}&tplid=${displayCxt.defCode}"/>
+	</ubf:Panel>
+	<ubf:Panel name="sheetRelation" label="关联工单" visiable="1">
+		<ubf:ViewField name="sheetRelations"  row="20" cell="4" type="frame" visiable="1" url="${ctx}/relatesheet/list.action?baseSchema=${displayCxt.fieldMap['BASESCHEMA']}&baseId=${displayCxt.fieldMap['BASEID']}&baseSn=${displayCxt.fieldMap['BASESN']}&relateSchema=PBCCRC_CHANGE,PBCCRC_PROBLEM&taskId=${displayCxt.taskID}&status=${displayCxt.fieldMap['BASESTATUS']}&flagActive=${displayCxt.currentTask.flagActive}&RelateData=1"/>
+	</ubf:Panel>
+</ubf:PanelGroup>

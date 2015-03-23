@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2011-01-24</date> 
+		<description>公告工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF4_EL_UVS_BULT.query" >
+		<select>
+			<![CDATA[
+			select
+			  --base info
+			  /*COUNT*/
+              C1||C700000001  as field_id                                               --docId 
+			  ,C1 			  as baseid                                                 --工单编号
+			  ,C3             as doc_createtime                                         --创建时间
+			  ,C6             as doc_lastmodifytime                                     --最后修改时间
+			  ,C700000002||'('||C700000003||')'||': '||C700000011  as doc_title         --标题
+              ,C700000001     as baseschema                                             --工单schema
+			  ,C700000002     as basename                                               --工单名称
+			  ,C700000003     as basesn                                                 --流水号
+			  ,C700000004     as basecreatorfullname                                    --建单人名
+			  ,C700000005     as basecreatorloginName                                   --建单人登陆名
+			  ,C700000006     as basecreatedate                                         --建单时间
+			  ,C700000008     as basefinishdate                                         --完成时间
+			  ,C700000009     as baseclosedate                                          --关闭时间
+			  ,C700000010     as basestatus                                             --状态名
+			  ,C700000011     as basesummary                                            --主题       
+			  ,C700000018     as basedealouttime                                        --处理时限
+			--,C700000019     as BaseDescrption                                         --工单描述
+			  ,C700000022     as basetplid                                              --模板ID     
+			  ,C700000042     as basecategoryclassname                                  --工单类别名
+			  ,C700000043     as basecategoryclasscode                                  --工单类别
+			  ,C700000100     as BaseCreatorConnectWay                                  --建单人电话
+			  ,C700000101     as basecreatorcorp                                        --建单人单位
+			  ,C700000103     as basecreatordep                                         --建单人部门
+			  ,C710000012	  as formattachrelation                                     --工单附件关系字段
+			  --工单信息
+        	  ,c700000015     as BasePriority                                           --紧急程度
+              ,c800020001     as End_Time                                               --有效期
+              ,c800020005     as BaseIsNeedKnow                                         --是否需要阅知
+              ,c700000019     as BaseDescrption                                         --公告内容
+			/*COUNT*/
+			from {WF4:EL_UVS_BULT}
+			where 1=1
+			$customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend=""><![CDATA[ (C3>=#startTime# and C3<#endTime#) or (C6 >=#startTime# and C6<#endTime#)]]></sql>
+		</customwhere>
+	
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,88 @@
+.ux-combo-icon {
+	width: 16px;
+	height: 16px;
+	float: left;
+	background-position: -1px -1px ! important;
+	background-repeat: no-repeat ! important;
+}
+
+.ux-combo-icon-checked {
+	background: transparent
+		url(../images/default/menu/checked.gif);
+}
+
+.ux-combo-icon-unchecked {
+	background: transparent
+		url(../images/default/menu/unchecked.gif);
+}
+
+.x-ie-shadow {
+	display: none;
+	position: absolute;
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	zoom: 1;
+}
+
+.x-ie-shadow {
+	background-color: white;
+}
+
+.x-combo-list {
+	border: 1px solid;
+	zoom: 1;
+	overflow: hidden;
+	border-color: #98c0f4;
+	background-color: #ddecfe;
+	font: normal 12px tahoma, arial, helvetica, sans-serif;
+}
+
+.x-combo-list-inner {
+	overflow: auto;
+	position: relative; /* for calculating scroll offsets */
+	zoom: 1;
+	overflow-x: hidden;
+	background-color: #fff;
+}
+
+.x-combo-list-hd {
+	border-bottom: 1px solid;
+	padding: 3px;
+	font: bold 11px tahoma, arial, helvetica, sans-serif;
+	color: #15428b;
+	background-image: url(../images/default/layout/panel-title-light-bg.gif)
+		;
+	border-bottom-color: #98c0f4;
+}
+
+.x-resizable-pinned .x-combo-list-inner {
+	border-bottom: 1px solid;
+	border-bottom-color: #98c0f4;
+}
+
+.x-combo-list-item {
+	padding: 2px;
+	border: 1px solid;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-color: #fff;
+}
+
+.x-combo-list .x-combo-selected {
+	border: 1px dotted !important;
+	cursor: pointer;
+	border-color: #a3bae9 !important;
+	background-color: #dfe8f6;
+}
+
+.x-combo-list .x-toolbar {
+	border-top: 1px solid;
+	border-bottom: 0 none;
+	border-top-color: #98c0f4;
+}
+
+.x-combo-list-small {
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+}

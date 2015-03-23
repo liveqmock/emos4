@@ -1,0 +1,39 @@
+.JT_Box
+{
+	overflow:auto;
+	border:solid black 1px;
+}
+
+.JT_Table
+{
+	background-color:#CCCCCC;
+	width:100%;
+}
+
+.JT_HeadTr
+{
+    background-color:#EEEEEE;
+    line-height:120%;
+}
+
+.JT_HeadTd
+{
+	padding-left:5px;
+}
+
+.JT_DataTr
+{
+	background-color:#FEFEFE;
+    line-height:100%;
+    padding-left:5px;
+}
+
+.JT_DataTr_Cross
+{
+	background-color:#FCFCFC;
+}
+
+.JT_DataTd
+{
+	padding-left:5px;
+}

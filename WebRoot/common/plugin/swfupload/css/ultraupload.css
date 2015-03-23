@@ -1,0 +1,172 @@
+.ultra_upload_table td {
+	border-bottom: #D8EAFA solid 1px;
+}
+.ultra_upload_component {
+	margin-top: -16px;
+	margin-left: 3px;
+	margin-right: 3px;
+	font-size: 12px;
+	background: url(../images/backtitle.jpg);
+	height: 26px;
+	width: 99%;
+	margin-left: 6px
+}
+.ultra_btn_mouseout {
+	border: 1px solid #7b8592;
+	background: #ffffff url(../images/button.png) left -549px;
+	width: 26px;
+	height: 20px;
+	line-height: 16px;
+*  line-height: 19px;
+	_line-height: 19px;
+	line-height: 21px\0;
+	padding: 0 10px 0 20px;
+	margin-top: 1px;
+	cursor: pointer;
+}
+.ultra_btn_mouseover {
+	border: 1px solid #7b8592;
+	background: #ffffff url(../images/button.png) left -531px;
+	width: 26px;
+	height: 20px;
+	line-height: 16px;
+*  line-height: 19px;
+	_line-height: 19px;
+	line-height: 21px\0;
+	padding: 0 10px 0 20px;
+	margin-top: 1px;
+	cursor: pointer;
+}
+.Uploadthumbnails {
+	background:#fbfcff;
+	width:99%;
+	font-size:12px;
+	margin-left:6px
+}
+/*-----------progress---------*/
+.progressWrapper {
+	width: 100%;
+	overflow: hidden;
+}
+.progressContainer {
+	margin: 5px;
+	padding: 4px;
+	border: solid 1px #E8E8E8;
+	background-color: #C5D9FF;
+	overflow: hidden;
+}
+.message {
+	margin: 1em 0;
+	padding: 10px 20px;
+	border: solid 1px #FFDD99;
+	background-color: #FFFFCC;
+	overflow: hidden;
+}
+.red {
+	border: solid 1px #B50000;
+	background-color: #FFEBEB;
+}
+.green {
+	border: solid 1px #DDF0DD;
+	background-color: #EBFFEB;
+}
+.blue {
+	border: solid 1px #CEE2F2;
+	background-color: #F0F5FF;
+}
+.progressBarInProgress, .progressBarComplete, .progressBarError {
+	font-size: 0;
+	width: 0%;
+	height: 2px;
+	background-color: blue;
+	margin-top: 2px;
+}
+.progressBarComplete {
+	width: 100%;
+	background-color: green;
+	visibility: hidden;
+}
+.progressBarError {
+	width: 100%;
+	background-color: red;
+	visibility: hidden;
+}
+.progressBarStatus {
+	margin-top: 2px;
+	width: 337px;
+	font-size: 7pt;
+	font-family: Arial;
+	text-align: left;
+	white-space: nowrap;
+}
+a.progressCancel {
+	font-size: 0;
+	display: block;
+	height: 14px;
+	width: 14px;
+	background-image: url(../images/cancelbutton.gif);
+	background-repeat: no-repeat;
+	background-position: -14px 0px;
+	float: right;
+}
+a.progressCancel:hover {
+	background-position: 0px 0px;
+}
+.swfupload {
+	vertical-align: top;
+}
+.tableborder2 td {
+	border:1px solid #ececec;
+	border-collapse:collapse;
+	height:20px;
+	text-align:center;
+	background-color:#ffffff;
+	font-weight:normal;
+}
+.tableborder td {
+	border:1px solid #ececec;
+	border-collapse:collapse;
+	height:20px;
+	padding-left:3px;
+	background-color:#fcfbfb;
+	font-weight:normal;
+}
+.tableborder td.title {
+	text-align:right;
+	width:20%;
+}
+.tableborder td.content {
+	text-align:left;
+	width:30%;
+	background-color:#ffffff;
+}
+.tableborder img {
+	margin-left:3px;
+	cursor:pointer;
+}
+.tableborder th {
+	background:#d2ebfd;
+	height:20px;
+	font-weight:default;
+	border-right:solid 1px #c7defe;
+	border-bottom:#9cd2fa 2px solid;
+	border-top:1px solid #c7defe;
+	border-left:1px solid #c7defe;
+	color:#000;
+	text-align:left;
+	padding-left:3px;
+	line-height:20px;
+}
+.tableborder2 th {
+	background:#d2ebfd;
+	height:20px;
+	font-weight:default;
+	border-right:solid 1px #c7defe;
+	border-bottom:#9cd2fa 2px solid;
+	border-top:1px solid #c7defe;
+	border-left:1px solid #c7defe;
+	color:#000;
+	text-align:center;
+	padding-left:3px;
+	line-height:20px;
+}

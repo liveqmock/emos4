@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */table,td,th{ border-collapse:collapse;}
+.upload { background: #8fbfff }
+.choose_files { /*background:#ffffff url(../images/page_bg.png) repeat-x;*/ height: 30px; font-size: 12px;/*
+background:url(../images/backtitle.jpg);
+*/ }
+.upload_img { width: 98%; background: url(../images/chooseimg.png) no-repeat; margin-left: 10px; padding-left: 25px; padding-top: 0px; }
+.button_choose { height: 25px; }
+.test_uploadfiles { background: #fbfcff; font-size: 12px; width: 100%; border: #D2D2D2 solid 1px; }
+.test_uploadfiles td { border-bottom: #D8EAFA solid 1px; }
+.border_tr { height: 21px; border-bottom: #CC6633; }
+.table_overupload { background: #fbfcff; width: 100%; font-size: 12px; }
+.over_text { color: #FF0000; text-align: center }
+.finish_overload { color: #1e653d }
+.finish_overload1 { height: 18px; text-decoration: none }
+.button_save { font-size: 12px; margin-left: 94.8%; }
+.table_overupload { margin-top: 0px; border: #D2D2D2 solid 1px; text-align: center; }
+.finish { color: #FF0000 }
+.chooseupload_button5 { border: 1px solid #7b8592; background: #ffffff url(../images/button.png) left -511px; width: 52px; height: 20px; line-height: 16px; *line-height:19px;
+_line-height: 19px; line-height: 21px\0; padding: 0 10px 0 20px; margin-top: 1px; cursor: pointer; }
+.chooseupload_button5_hover { border: 1px solid #7b8592; background: #ffffff url(../images/button.png) left -493px; width: 52px; height: 20px; line-height: 16px; *line-height:19px;
+_line-height: 19px; line-height: 21px\0; padding: 0 10px 0 20px; margin-top: 1px; cursor: pointer; }
+.edit_button5 { border: 1px solid #7b8592; background: #ffffff url(../images/button.png) left -549px; width: 26px; height: 20px; line-height: 16px; *line-height:19px;
+_line-height: 19px; line-height: 21px\0; padding: 0 10px 0 20px; margin-top: 1px; cursor: pointer; }
+.edit_button5_hover { border: 1px solid #7b8592; background: #ffffff url(../images/button.png) left -531px; width: 26px; height: 20px; line-height: 16px; *line-height:19px;
+_line-height: 19px; line-height: 21px\0; padding: 0 10px 0 20px; margin-top: 1px; cursor: pointer; }
+.button_save5 { border: 1px solid #7b8592; background: #ffffff url(../images/button.png) left -94px; width: 26px; height: 20px; line-height: 16px; *line-height:19px;
+_line-height: 19px; line-height: 21px\0; padding: 0 10px 0 20px; margin-top: 1px; cursor: pointer; }
+.button_save5_hover { border: 1px solid #7b8592; background: #ffffff url(../images/button.png) left -75px; width: 26px; height: 20px; line-height: 16px; *line-height:19px;
+_line-height: 19px; line-height: 21px\0; padding: 0 10px 0 20px; margin-top: 1px; cursor: pointer; }
+.del { background: url(../images/del.png) no-repeat }
+/*self define RenChenglin*/
+.button_selectfile { cursor: pointer; border: 0px solid #7b8592; background: url(../images/page_button4.png) no-repeat left top; width: 58px; text-align: center; padding: 0; height: 23px; line-height: 23px; }
+.button_selectfile_hover { cursor: pointer; border: 0px solid #7b8592; background: url(../images/page_button4_hover.png) no-repeat left top; width: 58px; text-align: center; padding: 0; height: 23px; line-height: 23px; }
+.button_upload { cursor: pointer; border: 0px solid #7b8592; background: url(../images/page_button4.png) no-repeat left top; width: 58px; text-align: center; padding: 0; height: 23px; line-height: 23px; }
+.button_upload_hover { cursor: pointer; border: 0px solid #7b8592; background: url(../images/page_button4_hover.png) no-repeat left top; width: 58px; text-align: center; padding: 0; height: 23px; line-height: 23px; }
+.button_battchdown { cursor: pointer; border: 0px solid #7b8592; background: url(../images/page_button4.png) no-repeat left top; width: 58px; text-align: center; padding: 0; height: 23px; line-height: 23px; }
+.button_battchdown_hover { cursor: pointer; border: 0px solid #7b8592; background: url(../images/page_button4_hover.png) no-repeat left top; width: 58px; text-align: center; padding: 0; height: 23px; line-height: 23px; }

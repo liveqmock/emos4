@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="notice" extends="eoms"
+		namespace="/notice">
+
+		<action name="createNotice" class="noticeAction"
+			method="createNotice">
+			<result name="success">/notice/editNotice.jsp</result>
+		</action>
+		<action name="editNotice" class="noticeAction"
+			method="editNotice">
+			<result name="success">
+				/notice/editNotice.jsp
+			</result>
+		</action>
+		<action name="viewNotice" class="noticeAction"
+			method="viewNotice">
+			<result name="success">
+				/notice/viewNotice.jsp
+			</result>
+		</action>
+		<action name="saveNotice" class="noticeAction"
+			method="saveNotice">
+			<result name="success">/notice/editNotice.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+		<action name="listNotice" class="noticeAction"
+			method="listNotice">
+			<result name="success">
+				/notice/listNotice.jsp
+			</result>
+		</action>
+		<action name="myListNotice" class="noticeAction"
+			method="myListNotice">
+			<result name="success">
+				/notice/listNotice.jsp
+			</result>
+		</action>
+		
+		<action name="delNotice" class="noticeAction"
+			method="delNotice">
+			<result name="success" type="redirect">
+				/notice/listNotice.action
+			</result>
+		</action>
+		
+		<action name="listDelNotice" class="noticeAction"
+			method="listDelNotice">
+			<result name="success" type="redirect">
+				/notice/listDelNotice.jsp
+			</result>
+		</action>
+		
+		<action name="createNoticeLevel" class="noticeLevelAction"
+			method="createNoticeLevel">
+			<result name="success">/notice/createNoticeLevel.jsp</result>
+		</action>
+		<action name="saveNoticeLevel" class="noticeLevelAction"
+			method="saveNoticeLevel">
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+		<action name="listNoticeLevel" class="noticeLevelAction"
+			method="listNoticeLevel">
+			<result name="success" type="redirectAction">
+				listNotice
+			</result>
+		</action>
+		<action name="myListNoticeLevel" class="noticeLevelAction"
+			method="myListNoticeLevel">
+			<result name="success">
+				/notice/listNoticeLevel.jsp
+			</result>
+		</action>
+		
+		<action name="delNoticeLevel" class="noticeLevelAction"
+			method="delNoticeLevel">
+			<result name="success" type="redirect">
+				/notice/listNoticeLevel.action?noticeLevelStr=${noticeLevelStr}
+			</result>
+		</action>
+		
+		<action name="noticeLevelFrame" class="noticeLevelAction"
+			method="noticeLevelFrame">
+			<result name="success">
+				/notice/noticeLevelFrame.jsp
+			</result>
+		</action>
+		<action name="listNoticeLevel" class="noticeLevelAction"
+			method="listNoticeLevel">
+			<result name="success">
+				/notice/listNoticeLevel.jsp
+			</result>
+		</action>
+		<action name="noticeLevelLeft" class="noticeLevelAction"
+			method="noticeLevelLeft">
+			<result name="success">
+				/notice/noticeLevelLeft.jsp
+			</result>
+		</action>
+		<action name="getLevelTree" class="noticeLevelAction"
+			method="getLevelTree">
+		</action>
+		
+		
+		<action name="noticeViewLogFrame" class="noticeViewLogAction"
+			method="noticeViewLogFrame">
+			<result name="success">
+				/notice/noticeViewLogFrame.jsp
+			</result>
+		</action>
+		<action name="listNoticeViewLog" class="noticeViewLogAction"
+			method="listNoticeViewLog">
+			<result name="success">
+				/notice/listNoticeViewLog.jsp
+			</result>
+		</action>
+		<action name="noticeView" class="noticeViewLogAction"
+			method="noticeView">
+			<result name="success">
+				/notice/noticeView.jsp
+			</result>
+		</action>
+		<action name="dutynoticeView" class="noticeViewLogAction"
+			method="dutynoticeView">
+			<result name="success">
+				/notice/dutynoticeView.jsp
+			</result>
+		</action>
+		<action name="noticeViewLogLeft" class="noticeViewLogAction"
+			method="noticeViewLogLeft">
+			<result name="success">
+				/notice/noticeViewLogLeft.jsp
+			</result>
+		</action>
+		<action name="getViewLogTree" class="noticeViewLogAction"
+			method="getViewLogTree">
+		</action>
+		<action name="popView" class="noticeViewLogAction"
+			method="popView">
+		</action>
+		<action name="unView" class="noticeViewLogAction"
+			method="unView">
+		</action>
+	</package>
+
+</struts>
+

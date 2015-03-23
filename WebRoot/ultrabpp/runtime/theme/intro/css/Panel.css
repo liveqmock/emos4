@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+/* Tab panel START */
+.bpp_TabPanelGroup { }
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header
+{
+	width:100%;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header_front
+{
+	float:left;
+	height:25px;
+	width:0px;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul
+{
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	height:25px;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li
+{
+	float:left;
+	height:100%;
+	background-color:#e0e0e0;
+	line-height:200%;
+	border-top:solid #cccccc 2px;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li a
+{
+	margin:0px 15px 0px 15px;
+	text-decoration:none;
+	color:#555555;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul li a:hover
+{
+	margin:0px 15px 0px 15px;
+	color:#3399cc;
+}
+.bpp_TabPanelGroup .bpp_TabPanelGroup_Header ul .bpp_TabPanelGroup_Header_Active
+{
+	border-top:solid #2094c1 2px;
+	background-color:#eeeeee;
+	background: url(../images/panelheader-bg.png) bottom;
+}
+.bpp_TabPanelGroup_Body
+{
+	float:left;
+	width:100%;
+	border-top:solid #cccccc 1px;
+	border-bottom:solid #999999 1px;
+	background:#ffffff url(../images/panel-border.png) bottom repeat-y;
+}
+/* Tab panel END */
+
+/* Box panel START */
+.bpp_BoxPanelGroup
+{
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item
+{
+	float:left;
+	width:100%;
+	background:#ffffff url(../images/panel-border.png) bottom repeat-y;
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header
+{
+	background:#eeeeee url(../images/panel-border.png) bottom repeat-y;
+	border-top:solid #cccccc 1px;
+	border-bottom:solid #cccccc 1px;
+	height:28px;
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Header div
+{
+	font-size:14px;
+	font-weight:bold;
+	color:#555555;
+	line-height:200%;
+	margin-left:5px;
+}
+.bpp_BoxPanelGroup .bpp_BoxPanelGroup_Item .bpp_BoxPanelGroup_Body
+{
+}
+/* Box panel END */

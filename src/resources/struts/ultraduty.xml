@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+<!-- 节假日管理 START magl -->
+	<package name="dutyHoliday" extends="eoms" namespace="/dutyHoliday">
+		<action name="*" method="{1}" class="holidayAction">
+			<result name="success">/ultraduty/configure/{1}.jsp</result>
+			<result name="custom">/ultraduty/configure/${target}.jsp</result>
+			<result name="redirect" type="redirect">/dutyHoliday/${target}.action?id=${id}</result>
+		</action>
+	</package>
+	<!-- 节假日管理 END magl -->
+</struts>

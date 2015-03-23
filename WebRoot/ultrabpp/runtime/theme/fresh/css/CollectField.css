@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+.bpp_CollectField
+{
+	background:url(../images/field-border.png) right bottom;
+}
+.bpp_CollectField table td ul
+{
+	list-style:none;
+	margin:0px;
+	margin-top:2px;
+	padding:0px;
+	height:20px;
+}
+.bpp_CollectField table td ul li
+{
+	float:left;
+}
+.bpp_CollectField table td ul li td
+{
+	padding-left:0px;
+	padding-right:0px;
+}
+.bpp_CollectField table td ul li input
+{
+	border:0px;
+}
+.bpp_CollectField table td ul li label
+{
+	font-family:宋体;
+	cursor:default;
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<description></description> 		
+	</doc>
+	<sqlquery name="SQL_API_BASEFIELDS.query" >
+		<select>
+			<![CDATA[ 
+	 		select
+				/*COUNT*/
+				fieldname,fieldid,datatype
+				/*COUNT*/
+			from field t
+			where 
+				t.datatype < 20
+			   and t.fieldid > 20
+			   /*and t.fieldid <> '700000001'*/
+			   
+			    $customwhere$
+			 order by t.fieldid
+			]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<if prepend="and" exp="'#BaseFormName#'>''">
+				<success>
+					<sql prepend="and" >
+						<![CDATA[ 
+							t.schemaid = #BaseFormId#
+							 and
+							t.fieldid not in (select C650000003 from {WF4:Config_BaseOwnFieldInfo} b where C650000002 = #BaseFormName# and b.C650000003=t.fieldid) 
+							]]>
+					</sql>
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+
+</sql-group>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>chengyuwei</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_EventHandlerCompList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid,
+				                 componentname, 
+				                 componenttype, 
+				                 compexetype, 
+				                 compexeparam,
+				                 status
+				      /*COUNT*/
+				  from bs_t_usla_evthdercomp
+				 where 1=1 $customwhere$ $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ componentname
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >		
+			<text displayname="wf_componentName" name="componentname"/>	
+			<text displayname="wf_componentType" name="componenttype" />
+			<select displayname="wf_compexetype" name="compexeType"  dictype="dynamicconchecktype" value="" />
+			<select displayname="com_lb_status" name="status"  dictype="status" value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="componentname"  value="#componentname#" />
+			<field prepend="and" operator="like"  colname="componenttype"  value="#componenttype#" />
+			<field prepend="and" operator="=" colname="compexeType" value="#compexeType#"/>
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+	
+	
+	<sqlquery name="SQL_WF_SelEventHandlerComp.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid,
+				                 componentname, 
+				                 componenttype, 
+				                 compexetype, 
+				                 compexeparam,
+				                 status
+				      /*COUNT*/
+				  from bs_t_usla_evthdercomp
+				 where  status='1' $customwhere$ $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ componentname
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >		
+			<text displayname="wf_componentName" name="componentname"/>	
+			<text displayname="wf_componentType" name="componenttype" />
+			<select displayname="wf_compexetype" name="compexeType"  dictype="dynamicconchecktype" value="" />			
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="componentname"  value="#componentname#" />
+			<field prepend="and" operator="like"  colname="componenttype"  value="#componenttype#" />
+			<field prepend="and" operator="=" colname="compexeType" value="#compexeType#"/>			
+		</customwhere>
+	</sqlquery>
+</sql-group>

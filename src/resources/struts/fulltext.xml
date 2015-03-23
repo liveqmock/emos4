@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+        
+<struts>
+	<!-- 全文检索_start -->
+	
+	<!-- 索引类别基本信息、路径、数据源维护 -->
+	<package name="indexCategoryManager" extends="eoms" namespace="/indexCategoryManager">
+		<action name="*" method="{1}" class="indexCategoryAction">
+			<result name="success">/fulltext/maintain/{1}.jsp</result>
+			<result name="custom">/fulltext/maintain/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 索引类别字段信息维护 -->
+	<package name="indexFieldManager" extends="eoms" namespace="/indexFieldManager">
+		<action name="*" method="{1}" class="indexFieldAction">
+			<result name="success">/fulltext/maintain/{1}.jsp</result>
+			<result name="custom">/fulltext/maintain/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 索引系统维护 -->
+	<package name="indexManager" extends="eoms" namespace="/indexManager">
+		<action name="*" method="{1}" class="indexManagerAction">
+			<result name="success">/fulltext/maintain/{1}.jsp</result>
+			<result name="custom">/fulltext/maintain/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 展示模板维护 -->
+	<package name="indexDisplayModel" extends="eoms" namespace="/displayModelManager">
+		<action name="*" method="{1}" class="indexDisplayModelAction">
+			<result name="success">/fulltext/maintain/{1}.jsp</result>
+			<result name="custom">/fulltext/maintain/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 全文检索_end -->
+</struts>
