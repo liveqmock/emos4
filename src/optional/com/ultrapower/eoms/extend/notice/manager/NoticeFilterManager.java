@@ -49,6 +49,7 @@ public class NoticeFilterManager implements NoticeFilterService {
 		if(nfList != null && nfList.size() > 0){
 			nf = nfList.get(0);
 		}
+		
 		return nf;
 	}
 	
