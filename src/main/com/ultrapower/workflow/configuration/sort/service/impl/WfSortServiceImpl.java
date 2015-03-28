@@ -32,7 +32,7 @@
 /*     */   public boolean delWfSort(String id)
 /*     */   {
 /*  38 */     this.sortDao.removeById(id);
-/*  39 */     List list = getWfTypeBySortId(id);
+/*  39 */     List<WfType> list = getWfTypeBySortId(id);
 /*  40 */     for (WfType wf : list) {
 /*  41 */       delWfTypeById(wf.getId());
 /*     */     }

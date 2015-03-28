@@ -396,7 +396,7 @@
 /*     */ 
 /* 440 */     String actionName = WfEngineUtils.getActionName(actionType, inputs);
 /* 441 */     dpModel.setEdProcessAction(WfEngineUtils.getActionName(actionType));
-/* 442 */     dpModel.setInsideFlowsCount(Long.valueOf(WfEngineUtils.parseLong(step.getSubCount())));
+/* 442 */     dpModel.setInsideFlowsCount(Long.valueOf(step.getSubCount()));
 /* 443 */     task.setEdProcessAction(dpModel.getEdProcessAction());
 /* 444 */     task.setInsideFlowsCount(dpModel.getInsideFlowsCount().longValue());
 /* 445 */     dpModel.setActionName(actionName);

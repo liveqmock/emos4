@@ -74,7 +74,7 @@
 /*     */ 
 /*     */   private void init()
 /*     */   {
-/* 104 */     List list = this.infDao.getAll();
+/* 104 */     List<WfInterface> list = this.infDao.getAll();
 /* 105 */     for (WfInterface wfi : list)
 /*     */     {
 /* 107 */       BaseCacheManager.put("WFInterface", wfi.getCode(), wfi);

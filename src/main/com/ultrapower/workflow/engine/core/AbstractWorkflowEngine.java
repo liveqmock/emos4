@@ -1271,7 +1271,7 @@
 /*      */     }
 /*      */ 
 /* 1494 */     DataField joinFlagDF = new DataField();
-/* 1495 */     joinFlagDF.setValue(joinFlag);
+///* 1495 */     joinFlagDF.setValue(joinFlag);
 /* 1496 */     inputs.put("sendToJoin_JoinFlag", joinFlagDF);
 /* 1497 */     return joinFlag;
 /*      */   }
@@ -1595,7 +1595,7 @@
 /* 1876 */             List stepActionInfoList = (List)subflowActionInfoListMap.get(subName);
 /* 1877 */             for (int j = 0; j < stepActionInfoList.size(); j++) {
 /* 1878 */               count++;
-/* 1879 */               List acInfoList = (List)stepActionInfoList.get(j);
+/* 1879 */               List<ActionInfo> acInfoList = (List)stepActionInfoList.get(j);
 /* 1880 */               for (ActionInfo acInfo : acInfoList)
 /*      */               {
 /* 1882 */                 acInfo = acInfo.clone();
@@ -1603,7 +1603,7 @@
 /*      */ 
 /* 1885 */               if (org.apache.commons.lang.StringUtils.isNotBlank(subName)) {
 /* 1886 */                 StartDescriptor startDesc = getWfDesc(subName).getStartDesc();
-/* 1887 */                 StepDescriptor stDesc = getWfDesc(subName).getStepDescriptor(startDesc.getTo());
+/* 1887 */                 stDesc = getWfDesc(subName).getStepDescriptor(startDesc.getTo());
 /* 1888 */                 EngineModel engineModel = null;
 /*      */                 String tmpTaskId;
 /* 1889 */                 if (stDesc != null)
@@ -2428,7 +2428,7 @@
 /*      */   {
 /* 2989 */     List rtn = new ArrayList();
 /*      */ 
-/* 2991 */     List currTaskList = this.currTaskDao.find("from CurrentProcessTask where baseId=?", new Object[] { curTask.getBaseId() });
+/* 2991 */     List<CurrentProcessTask> currTaskList = this.currTaskDao.find("from CurrentProcessTask where baseId=?", new Object[] { curTask.getBaseId() });
 /* 2992 */     StringBuffer stepsql = new StringBuffer("from  WfCurrentStep where ");
 /* 2993 */     StringBuffer condition = new StringBuffer();
 /* 2994 */     Map entryIdAndStepGroup = new HashMap();
@@ -2451,11 +2451,11 @@
 /* 3010 */     if (condition.length() > 0)
 /*      */     {
 /* 3012 */       stepsql.append(condition);
-/* 3013 */       List currentSteps = this.currentDao.find(stepsql.toString(), new Object[0]);
+/* 3013 */       List<WfCurrentStep> currentSteps = this.currentDao.find(stepsql.toString(), new Object[0]);
 /* 3014 */       for (WfCurrentStep cStep : currentSteps) {
 /* 3015 */         String id = cStep.getId();
 /* 3016 */         String type = cStep.getType();
-/* 3017 */         String stepgroup = cStep.getStepGroup();
+/* 3017 */         stepgroup = cStep.getStepGroup();
 /* 3018 */         if (WfEngineUtils.isTransStep(cStep)) {
 /* 3019 */           if ((stepgroup == null) || (stepgroup.length() == 0)) {
 /* 3020 */             cStep.setStepGroup((String)entryIdAndStepGroup.get(id));

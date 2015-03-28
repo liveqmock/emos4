@@ -302,7 +302,7 @@
 /* 311 */     this.actionCode = actionCode;
 /*     */   }
 /*     */ 
-/*     */   public T clone() {
+/*     */   public Object clone() {
 /* 315 */     Object result = null;
 /*     */     try {
 /* 317 */       result = super.clone();
