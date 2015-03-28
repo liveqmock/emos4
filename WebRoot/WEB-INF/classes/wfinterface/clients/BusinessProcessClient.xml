@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="BusinessProcess">
+	<method name="BusinessProcess" class="com.ultrapower.wfinterface.core.test.BusinessProcessClient">
+		
+		<webservice address="http://localhost:8080/eoms4/services/TestService" operate="test">
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="field5" datatype="6" dicdata="紧急:1;一般:2;二般:3;" argtype="INT" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C001 as field1
+					, C002 as field2
+					, C003 as field5
+				from {WF4:EL_TTM_TTH_Interface}
+				where C700000014 = '1'
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:EL_TTM_TTH_Interface} set C700000014 = '0' where C001 in ($FIELD1$)]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:EL_TTM_TTH_Interface} set C700000014 = '0' where C001 in ($FIELD1$)]]>
+		</exceptionsql>
+		
+		<opdetail>
+			<field name="realStartTime" text="实际开始时间">
+				<xml-colname>realStartTime</xml-colname>
+				<db-colname>realStartTime</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="realFinishTime" text="实际完成时间">
+				<xml-colname>realFinishTime</xml-colname>
+				<db-colname>realFinishTime</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue>0</defaultvalue>
+			</field>
+			<field name="exeRollback" text="实施记录">
+				<xml-colname>exeRollback</xml-colname>
+				<db-colname>exeRollback</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>5000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="releaseResultStatus" text="验证结果">
+				<xml-colname>releaseResultStatus</xml-colname>
+				<db-colname>releaseResultStatus</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="releaseState" text="发布状态">
+				<xml-colname>releaseStatus</xml-colname>
+				<db-colname>releaseStatus</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="is_sync_backup" text="是否需要灾备同步变更">
+				<xml-colname>is_sync_backup</xml-colname>
+				<db-colname>is_sync_backup</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="backup_env_chg_time" text="灾备环境变更时间">
+				<xml-colname>backup_env_chg_time</xml-colname>
+				<db-colname>backup_env_chg_time</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="baseId" text="ITSM工单关键字">
+				<xml-colname>baseId</xml-colname>
+				<db-colname>baseId</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="connBaseid" text="关联的变更工单关键字">
+				<xml-colname>connBaseid</xml-colname>
+				<db-colname>connBaseid</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+</client>

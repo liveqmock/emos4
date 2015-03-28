@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_1" type="STEP" title="新建工单" content="建单人" x="77" y="189" sid="s_1" sname="新建" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_2" type="STEP" title="受理" content="受理人" x="280" y="282" sid="s_2" sname="受理" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_3" type="STEP" title="审批" content="审批人" x="481" y="382" sid="s_3" sname="审批" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_4" type="STEP" title="处理" content="处理人" x="682" y="476" sid="s_5" sname="处理" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_5" type="STEP" title="关单" content="建单人" x="877" y="559" sid="s_4" sname="待关闭" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_6" type="END" title="" content="" x="1078" y="639" sid="s_6" sname="已关闭" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="dp_7" type="SPLIT" title="" content="" x="320" y="194" sid="s_2" sname="受理" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="dp_8" type="SPLIT" title="" content="" x="320" y="481" sid="s_2" sname="受理" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="77" y="99" sid="s_1" sname="新建" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_1" bprocess="p_BEGIN" eprocess="dp_1" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_10" bprocess="dp_3" eprocess="dp_2" type="LINK" bpoint="-2" epoint="-1" name="不通过" actionNo="ToNoPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_11" bprocess="dp_3" eprocess="dp_4" type="LINK" bpoint="2" epoint="1" name="通过" actionNo="ToPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_13" bprocess="dp_8" eprocess="dp_1" type="NO" bpoint="-2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_14" bprocess="dp_8" eprocess="dp_2" type="YES" bpoint="-2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_18" bprocess="dp_2" eprocess="dp_1" type="LINK" bpoint="-2" epoint="-1" name="退回" actionNo="ToBackToRequestFromAccept" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_19" bprocess="dp_5" eprocess="dp_4" type="LINK" bpoint="-2" epoint="-1" name="退回" actionNo="ToBackFromClose" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_2" bprocess="dp_1" eprocess="dp_7" type="LINK" bpoint="2" epoint="-2" name="提交请求" actionNo="ToRequest" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_20" bprocess="dp_1" eprocess="dp_6" type="LINK" bpoint="2" epoint="1" name="关单" actionNo="ToCloseFromRequest" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_21" bprocess="dp_2" eprocess="dp_5" type="LINK" bpoint="2" epoint="1" name="处理完成" actionNo="ToDealFinishFromAccept" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_22" bprocess="dp_4" eprocess="dp_5" type="LINK" bpoint="2" epoint="1" name="处理完成" actionNo="ToDealFinishFromDeal" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_23" bprocess="dp_4" eprocess="dp_8" type="LINK" bpoint="-2" epoint="2" name="退回" actionNo="ToBackToAcceptFromDeal" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_24" bprocess="dp_5" eprocess="dp_6" type="LINK" bpoint="2" epoint="1" name="关单" actionNo="ToCloseFromDeal" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_3" bprocess="dp_7" eprocess="dp_2" type="YES" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_4" bprocess="dp_7" eprocess="dp_4" type="NO" bpoint="2" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_7" bprocess="dp_2" eprocess="dp_3" type="LINK" bpoint="2" epoint="1" name="提交审批" actionNo="ToAudit" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_8" bprocess="dp_2" eprocess="dp_4" type="LINK" bpoint="2" epoint="1" name="提交处理" actionNo="ToDealFromAccept" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="新建" width="244" desc="新建"/>  
+    <status id="s_2" index="1" name="受理" width="198" desc="受理"/>  
+    <status id="s_3" index="2" name="审批" width="201" desc="审批"/>  
+    <status id="s_5" index="3" name="处理" width="200" desc="处理"/>  
+    <status id="s_4" index="4" name="待关闭" width="203" desc="待关闭"/>  
+    <status id="s_6" index="5" name="已关闭" width="222" desc="已关闭"/> 
+  </statuses> 
+</design>

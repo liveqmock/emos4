@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+	<ProcessStatus startX="50" startY="80" modelWidth="120" modelHeight="50" arrowLength="100" arrowWidth="1" xSpace="120" rowHeight="40">
+		<PStatus status="已派发">
+			<Color>#0066FF</Color>
+			<Color1>#0099FF</Color1>
+			<InfoText>已派发</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="提交审批">
+			<Color>#0099FF</Color>
+			<Color1>#00BBFF</Color1>
+			<InfoText>提交审批</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="待处理">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>待处理</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="待会审">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>待会审</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="处理中">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>处理中</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="待审批">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>待审批</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="等待审批">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>等待审批</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="审批通过">
+			<Color>#0099FF</Color>
+			<Color1>#0066CC</Color1>
+			<InfoText>审批通过</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已审批">
+			<Color>#0099FF</Color>
+			<Color1>#0066CC</Color1>
+			<InfoText>已审批</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="审批不通过">
+			<Color>#FF0000</Color>
+			<Color1>#CC0000</Color1>
+			<InfoText>审批不通过</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="组织会审">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>组织会审</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已完成">
+			<Color>#00FF00</Color>
+			<Color1>#00CC00</Color1>
+			<InfoText>已完成</InfoText>
+			<ArrowWay>OUT</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="完成本步骤">
+			<Color>#00BB33</Color>
+			<Color1>#00FF66</Color1>
+			<InfoText>已完成</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已确认">
+			<Color>#00CCFF</Color>
+			<Color1>#00AACC</Color1>
+			<InfoText>已确认</InfoText>
+			<ArrowWay>OUT</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已关闭">
+			<Color>#00FF00</Color>
+			<Color1>#00CC00</Color1>
+			<InfoText>已关闭</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已作废">
+			<Color>#FF0000</Color>
+			<Color1>#CC0000</Color1>
+			<InfoText>作废</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>ERROR</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已跳过">
+			<Color>#AAAAAA</Color>
+			<Color1>#777777</Color1>
+			<InfoText>已跳过</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>ERROR</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="等待中">
+			<Color>#0099FF</Color>
+			<Color1>#0066CC</Color1>
+			<InfoText>等待中</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已驳回">
+			<Color>#AAAAAA</Color>
+			<Color1>#777777</Color1>
+			<InfoText>已驳回</InfoText>
+			<ArrowWay>OUT</ArrowWay>
+			<ArrowType>DASHED</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已退回">
+			<Color>#0099FF</Color>
+			<Color1>#0066CC</Color1>
+			<InfoText>已退回</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="被追回">
+			<Color>#CC0000</Color>
+			<Color1>#990000</Color1>
+			<InfoText>被追回</InfoText>
+			<ArrowWay>OUT</ArrowWay>
+			<ArrowType>ERROR</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="挂起中">
+			<Color>#FF0000</Color>
+			<Color1>#CC0000</Color1>
+			<InfoText>挂起中</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="待质检">
+			<Color>#0066FF</Color>
+			<Color1>#0033CC</Color1>
+			<InfoText>待质检</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="质检通过">
+			<Color>#00FF00</Color>
+			<Color1>#00CC00</Color1>
+			<InfoText>质检通过</InfoText>
+			<ArrowWay>OUT</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="质检不通过">
+			<Color>#FF0000</Color>
+			<Color1>#CC0000</Color1>
+			<InfoText>质检不通过</InfoText>
+			<ArrowWay>OUT</ArrowWay>
+			<ArrowType>ERROR</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="待评估">
+			<Color>#0088FF</Color>
+			<Color1>#CC0000</Color1>
+			<InfoText>待评估</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="评估完成">
+			<Color>#00FF00</Color>
+			<Color1>#00CC00</Color1>
+			<InfoText>评估完成</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="已分发">
+			<Color>#FFBE48</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>已分发</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="待确认">
+			<Color>#FF6666</Color>
+			<Color1>#CC3333</Color1>
+			<InfoText>待确认</InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+		<PStatus status="无匹配状态">
+			<Color>#CCCCCC</Color>
+			<Color1>#FFFFFF</Color1>
+			<InfoText></InfoText>
+			<ArrowWay>IN</ArrowWay>
+			<ArrowType>BLOCK</ArrowType>
+			<XSpace>120</XSpace>
+		</PStatus>
+	</ProcessStatus>
+</ROOT>

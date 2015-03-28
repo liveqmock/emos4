@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_2" type="END" title="" content="" x="1013" y="216" sid="s_5" sname="已完成" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="dp_7" type="STEP" title="处理子流程" content="内部处理人" x="428" y="211" sid="s_2" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_9" type="STEP" title="审批子流程" content="审批人" x="729" y="211" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="126" y="83" sid="s_1" sname="草稿" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_16" bprocess="dp_7" eprocess="dp_9" type="LINK" bpoint="2" epoint="-2" name="提交" actionNo="subSubmit" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_17" bprocess="dp_9" eprocess="dp_2" type="LINK" bpoint="2" epoint="-2" name="审批通过" actionNo="subPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_19" bprocess="dp_9" eprocess="dp_7" type="LINK" bpoint="-1" epoint="-1" name="审批不通过" actionNo="subNoPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_20" bprocess="p_BEGIN" eprocess="dp_7" type="LINK" bpoint="-1" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="草稿" width="300" desc="草稿"/>  
+    <status id="s_2" index="1" name="处理中" width="400" desc="处理中"/>  
+    <status id="s_3" index="2" name="审批中" width="300" desc="审批中"/>  
+    <status id="s_5" index="3" name="已完成" width="300" desc="已完成"/>  
+    <status id="s_4" index="4" name="已关闭" width="300" desc="已关闭"/> 
+  </statuses> 
+</design>

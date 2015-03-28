@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fields-config>
+	<field-types>
+		<type name="CompositeField" label="容器类型组件" >
+			<attr name="id" 		label="主键ID" 	type="java.lang.String" edittype="" sourse="" />
+			<attr name="label" 		label="中文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldName" 	label="英文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldType" 	label="字段类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="baseSchema" label="工单类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="visiable" 	label="是否可见" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="orderNum" 	label="排序" 	type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="hasDeploy" 	label="是否部署" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="operate" 	label="部署前操作" type="java.lang.String" edittype="" sourse="" />
+			<attr name="parentID" 	label="上级容器ID" type="java.lang.String" edittype="" sourse="" />
+		</type>
+		<type name="DataField">
+			<attr name="id" label="主键ID" type="java.lang.String" edittype="" sourse="" />
+			<attr name="label" label="中文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldName" label="英文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldType" label="字段类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="baseSchema" label="工单类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="visiable" label="是否可见" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="orderNum" label="排序" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="hasDeploy" label="是否部署" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="operate" label="部署前操作" type="java.lang.String" edittype="" sourse="" />
+			<attr name="parentID" label="上级容器ID" type="java.lang.String" edittype="" sourse="" />
+			<attr name="needSave" label="需要保存" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="defaultValue" label="默认值" type="java.lang.String" edittype="" sourse="" />
+			<attr name="length" label="最大长度" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="colspan" label="占列" type="java.lang.Integer" edittype="" sourse="" />
+		</type>
+		<type name="DisplayField">
+			<attr name="id" label="主键ID" type="java.lang.String" edittype="" sourse="" />
+			<attr name="label" label="中文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldName" label="英文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldType" label="字段类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="baseSchema" label="工单类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="visiable" label="是否可见" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="orderNum" label="排序" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="hasDeploy" label="是否部署" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="operate" label="部署前操作" type="java.lang.String" edittype="" sourse="" />
+			<attr name="parentID" label="上级容器ID" type="java.lang.String" edittype="" sourse="" />
+		</type>
+		<type name="SpecialField">
+			<attr name="id" label="主键ID" type="java.lang.String" edittype="" sourse="" />
+			<attr name="label" label="中文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldName" label="英文名称" type="java.lang.String" edittype="" sourse="" />
+			<attr name="fieldType" label="字段类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="baseSchema" label="工单类型" type="java.lang.String" edittype="" sourse="" />
+			<attr name="visiable" label="是否可见" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="orderNum" label="排序" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="hasDeploy" label="是否部署" type="java.lang.Integer" edittype="" sourse="" />
+			<attr name="operate" label="部署前操作" type="java.lang.String" edittype="" sourse="" />
+			<attr name="parentID" label="上级容器ID" type="java.lang.String" edittype="" sourse="" />
+		</type>
+	</field-types>
+	<fields>
+		<field name="PanelField" label="容 器" fullName="com.ultrapower.eoms.ultrabpp.model.component.compositefield.panel.PanelField" tableName="BS_T_BPP_PANEL" extendsName="CompositeField" extendsLabel="容器类型组件"  orderNum="0"/>
+		<field name="PanelGroupField" label="容器组" fullName="com.ultrapower.eoms.ultrabpp.model.component.compositefield.panelgroup.PanelGroupField" tableName="BS_T_BPP_PANELGROUP" extendsName="CompositeField" extendsLabel="容器类型组件" orderNum="1"/>
+		<field name="CharacterField" label="字符串" fullName="com.ultrapower.eoms.ultrabpp.model.component.datafield.characterfield.CharacterField" tableName="BS_T_BPP_CHARACTER" extendsName="DataField" extendsLabel="数据类型组件" orderNum="2"/>
+		<field name="HiddenField" label="隐藏字段" fullName="com.ultrapower.eoms.ultrabpp.model.component.datafield.hiddenfield.HiddenField" tableName="BS_T_BPP_HIDDEN" extendsName="DataField" extendsLabel="数据类型组件" orderNum="3"/>
+		<field name="SelectField" label="下拉菜单" fullName="com.ultrapower.eoms.ultrabpp.model.component.datafield.selectfield.SelectField" tableName="BS_T_BPP_SELECT" extendsName="DataField" extendsLabel="数据类型组件" orderNum="4"/>
+		<field name="CollectField" label="选择框" fullName="com.ultrapower.eoms.ultrabpp.model.component.datafield.collectfield.CollectField" tableName="BS_T_BPP_COLLECT" extendsName="DataField" extendsLabel="数据类型组件" orderNum="5"/>
+		<field name="TimeField" label="时间选择" fullName="com.ultrapower.eoms.ultrabpp.model.component.datafield.timefield.TimeField" tableName="BS_T_BPP_TIME" extendsName="DataField" extendsLabel="数据类型组件" orderNum="6"/>
+		<field name="BlankField" label="占位格" fullName="com.ultrapower.eoms.ultrabpp.model.component.displayfield.blankfield.BlankField" tableName="BS_T_BPP_BLANK" extendsName="DisplayField" extendsLabel="显示类型组件" orderNum="7"/>
+		<field name="ButtonField" label="按钮域" fullName="com.ultrapower.eoms.ultrabpp.model.component.displayfield.buttonfield.ButtonField" tableName="BS_T_BPP_BUTTON" extendsName="DisplayField" extendsLabel="显示类型组件" orderNum="8"/>
+		<field name="LabelField" label="文本域" fullName="com.ultrapower.eoms.ultrabpp.model.component.displayfield.labelfield.LabelField" tableName="BS_T_BPP_LABEL" extendsName="DisplayField" extendsLabel="显示类型组件" orderNum="9"/>
+		<field name="ViewField" label="视图域" fullName="com.ultrapower.eoms.ultrabpp.model.component.displayfield.viewfield.ViewField" tableName="BS_T_BPP_VIEW" extendsName="DisplayField"  extendsLabel="显示类型组件" orderNum="10"/>
+		<field name="AssignTreeField" label="派发树" fullName="com.ultrapower.eoms.ultrabpp.model.component.specialfield.assigntreefield.AssignTreeField" tableName="BS_T_BPP_ASSIGNTREE"  extendsName="SpecialField" extendsLabel="特殊类型组件" orderNum="11"/>
+		<field name="AttachmentField" label="附件列表" fullName="com.ultrapower.eoms.ultrabpp.model.component.specialfield.attachmentfield.AttachmentField" tableName="BS_T_BPP_ATTACHMENT" extendsName="SpecialField"  extendsLabel="特殊类型组件" orderNum="12"/>
+		<field name="RollbackListField" label="回退列表" fullName="com.ultrapower.eoms.ultrabpp.model.component.specialfield.rollbacklistfield.RollbackListField" tableName="BS_T_BPP_ROLLBACKLIST" extendsName="SpecialField" extendsLabel="特殊类型组件" orderNum="13"/>
+	</fields>
+</fields-config>

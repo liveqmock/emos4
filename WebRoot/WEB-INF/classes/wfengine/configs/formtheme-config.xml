@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<themes>
+	<theme name="classic" type="pc" forder="classic" cell="3" labelWidth="95" mainWidth="960" />
+	<theme name="exp" type="pc" forder="exp" cell="4" labelWidth="95" mainWidth="960" />
+	<theme name="intro" type="pc" forder="intro" cell="4" labelWidth="95" mainWidth="960" />
+	<theme name="fresh" type="pc" forder="fresh" cell="4" labelWidth="95" mainWidth="960" />
+	<theme name="ie6" type="pc" forder="ie6" cell="4" labelWidth="95" mainWidth="960" />
+	<theme name="android" type="android" forder="android" cell="1" labelWidth="95" mainWidth="480" />
+</themes>

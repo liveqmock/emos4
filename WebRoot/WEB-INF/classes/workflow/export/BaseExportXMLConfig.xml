@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- 我的待办，我部门的待办 XML:SQL_MyWaitingDeal.xml -->
+	<export name="WaitingDealSheet">
+		<sqlname>SQL_WF_WaitingDealSheet.query</sqlname>
+		<fields>basesn,assginee,duedate,stdate</fields>
+		<titles>流水号,处理人,处理时限,派单时间</titles>
+	</export>
+</config>

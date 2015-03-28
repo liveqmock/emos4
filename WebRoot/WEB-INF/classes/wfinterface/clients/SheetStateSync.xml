@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="SheetStateSync">
+	<method name="syncSheetState" class="com.ultrapower.wfinterface.clients.sheetstatesync.SyncSheetStateImpl">
+		<webservice address="http://10.142.13.89/SheetStateSync/SheetStateSync3.asmx" operate="syncSheetState" namespace="http://service.eoms.chinamobile.com/SheetStateSync">
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestid
+			       ,C800000007 serialNo
+			       ,C800000008 sheetNo
+			       ,C800000009 sheetStatus
+			       ,C800000010 statusTime
+			       ,C800000011 dealTimeLimit			       
+			  from {WF4:EL_TTM_TTH_To_Interface}
+			  where C800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:EL_TTM_TTH_To_Interface} set C800000015='1',C800000016='1' where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:EL_TTM_TTH_To_Interface} set C800000015='1',C800000016='1' where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail>
+			<field name="serialNo" text="告警ID">
+				<xml-colname>alarmId</xml-colname>
+				<db-colname>800000007</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>			
+			<field name="sheetNo" text="工单号">
+				<xml-colname>sheetNo</xml-colname>
+				<db-colname>800000008</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="sheetStatus" text="工单状态">
+				<xml-colname>sheetStatus</xml-colname>
+				<db-colname>800000009</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>255</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="statusTime" text="状态时间">
+				<xml-colname>statusTime</xml-colname>
+				<db-colname>800000010</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="dealTimeLimit" text="工单处理时限">
+				<xml-colname>dealTimeLimit</xml-colname>
+				<db-colname>800000011</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+</client>

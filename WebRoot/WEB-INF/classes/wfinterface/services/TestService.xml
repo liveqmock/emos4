@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service name="TestService">
+	<method name="testMethod" class="com.ultrapower.wfinterface.core.test.TestServiceImpl" baseschema="WF:EL_TTM_TTH">
+		<operate code="NEXT" actionid="submit" creator="Demo">提交</operate>
+		<fields>
+			<field name="field1" text="测试1 字段1（字符串）">
+				<xml-colname>Test1_field1</xml-colname>
+				<db-colname>001</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>false</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="field2" text="测试1 字段2（数字）">
+				<xml-colname>Test1_field2</xml-colname>
+				<db-colname>002</db-colname>
+				<datatype>2</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>100</length>
+				<isnull>true</isnull>
+				<defaultvalue>0</defaultvalue>
+			</field>
+			<field name="field3" text="测试1 字段3（字典）">
+				<xml-colname>Test1_field3</xml-colname>
+				<db-colname>003</db-colname>
+				<datatype>6</datatype>
+				<dictype>2</dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata>1:紧急;2:一般;3:二般;</dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue>2</defaultvalue>
+			</field>
+			<field name="field4" text="测试1 字段4（时间）">
+				<xml-colname>Test1_field4</xml-colname>
+				<db-colname>004</db-colname>
+				<datatype>7</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue>$sys_date$</defaultvalue>
+			</field>
+		</fields>
+	</method>
+</service>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="CrmClient">
+	<method name="CRM_RC_Reply" class="com.ultrapower.wfinterface.clients.crm.rc.ReplyWorkSheet_RCClientImpl">
+		<webservice address="http://localhost:8010/eoms4/services/CRMProcessSheet" operate="replyWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serviceType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="INT" mode="IN" />
+			<parameter name="sendnumber" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C1 as requestid
+					, C800020201 as sheetType
+					, C800020202 as serviceType
+					, C800020203 as serialNo
+					, C800020204 as serSupplier
+					, C800020206 as serCaller
+					, C800020207 as sendnumber
+					, C800020208 as callerPwd
+					, C800020209 as callTime
+					, C800020211 as opPerson
+					, C800020212 as opCorp
+					, C800020213 as opDepart
+					, C800020214 as opContact
+					, C800020215 as opTime
+					, C800020165 as ndeptContact
+					, C800020166 as ndeptContactPhone
+					, C800020166 as netResCapacity
+					, C800020307 as clientPgmCapacity
+					, C800020172 as investEvaluate
+					, C800020167 as expectFinishdays
+					, '' as isOccupied
+				from {WF4:CRM_RC_CS_To_Interface}
+				where C800020219 = 0
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:CRM_RC_CS_To_Interface} set CC800020219 = 1, C802043009 = 1 where C1 = '#REQUESTID#']]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:CRM_RC_CS_To_Interface} set CC800020219 = 1, C802043009 = 0 where C1 = '#REQUESTID#']]>
+		</exceptionsql>
+		<opdetail>
+			<field name="ndeptContact" text="网络部门联系人">
+				<xml-colname>ndeptContact</xml-colname>
+				<db-colname>800020165</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>25</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="ndeptContactPhone" text="网络部门联系人电话">
+				<xml-colname>ndeptContactPhone</xml-colname>
+				<db-colname>800020166</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>50</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="netResCapacity" text="网络资源能力确认">
+				<xml-colname>netResCapacity</xml-colname>
+				<db-colname>800020306</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="clientPgmCapacity" text="客户端工程能力确认">
+				<xml-colname>clientPgmCapacity</xml-colname>
+				<db-colname>800020307</db-colname>
+				<datatype>4</datatype>
+				<dictype>2</dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>500</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="investEvaluate" text="预计投资">
+				<xml-colname>investEvaluate</xml-colname>
+				<db-colname>800020172</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>254</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="expectFinishdays" text="预计完成天数">
+				<xml-colname>expectFinishdays</xml-colname>
+				<db-colname>800020167</db-colname>
+				<datatype>2</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length></length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="isOccupied" text="是否已预占">
+				<xml-colname>isOccupied</xml-colname>
+				<db-colname>0</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>16</length>
+				<isnull>true</isnull>
+				<defaultvalue>否</defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+</client>

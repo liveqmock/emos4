@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_1" type="STEP" title="受理建单" content="建单人" x="79" y="339" sid="s_1" sname="受理建单" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_2" type="STEP" title="处理中" content="处理人" x="437" y="484" sid="s_2" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_3" type="STEP" title="回顾" content="建单人" x="822" y="384" sid="s_3" sname="待关闭" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_4" type="END" title="" content="" x="1088" y="233" sid="s_5" sname="已关闭" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="79" y="100" sid="s_1" sname="受理建单" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_1" bprocess="p_BEGIN" eprocess="dp_1" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_2" bprocess="dp_1" eprocess="dp_2" type="LINK" bpoint="2" epoint="-2" name="提交处理" actionNo="ASSIGNStep01" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_3" bprocess="dp_2" eprocess="dp_3" type="LINK" bpoint="2" epoint="-1" name="处理完成" actionNo="ToFinishProcessing" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_5" bprocess="dp_3" eprocess="dp_4" type="LINK" bpoint="2" epoint="-1" name="关单" actionNo="ToClose" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_6" bprocess="dp_2" eprocess="dp_1" type="LINK" bpoint="-1" epoint="-1" name="退回" actionNo="SendBackProcessing" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_7" bprocess="dp_3" eprocess="dp_2" type="LINK" bpoint="1" epoint="1" name="退回" actionNo="SendBackReview" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_8" bprocess="dp_1" eprocess="dp_4" type="LINK" bpoint="1" epoint="-2" name="关单" actionNo="ToFinishStep01" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="受理建单" width="300" desc="受理建单"/>  
+    <status id="s_2" index="1" name="处理中" width="400" desc="处理中"/>  
+    <status id="s_3" index="2" name="待关闭" width="300" desc="待关闭"/>  
+    <status id="s_5" index="3" name="已关闭" width="300" desc="已关闭"/> 
+  </statuses> 
+</design>

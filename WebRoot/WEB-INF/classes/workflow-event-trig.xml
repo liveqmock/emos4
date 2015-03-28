@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	描述：流程事件SLA触发规则配置；
+	规范：如下所述；
+		workflowEvent-trigConfig：根结点，只能有1个；
+		form-trig：工单触发规则配置节点，只能有1个；
+		step-common-trig：环节”通用“触发规则配置，只能有1个；
+		trig：表示一种触发规则，可以在”form-trig“和”step-common-trig“中出现多个；
+			”id“属性：触发规则id，属性值必须在整个配置文件中唯一；
+			”name“属性：触发规则名称；
+			”timeOffset“属性：触发规则的事件偏移方式，可选值”before“表示提前提醒，”after“表示超时催办；
+		trig-new：表示触发新建，只能在各个”trig“中出现1个；
+			”eventType“属性：事件类型，可选值”FORM“表示工单，”ACTION“表示动作，”STEP“表示环节；
+			”eventAction“属性：事件动作，可选值”IN“表示流入，”OUT“表示流出，”DO“表示执行；
+			”eventCondition“属性：事件触发条件；
+		trig-destroy：表示触发销毁，只能在各个”trig“中出现1个，其属性同”trig-new“；
+		form-trig-ref：定义一类工单与触发的关联，在”form-trig“中可以出现多个；
+			”formSchema“属性：表示工单schema；
+			”name“属性：表示名称；
+		ref-trig：关联触发，在”form-trig-ref“中可以出现多个；
+			”value“属性：其值表示关联的触发ID。
+-->
+<!DOCTYPE workflowEvent-trigConfig SYSTEM "workflow-event-trig.dtd">
+<workflowEvent-trigConfig>
+	<!-- 工单触发规则定义 -->
+	<form-trig>
+		<!-- 定义触发规则 -->
+		<trig id="form001" name="未超时未受理" timeOffset="before" duetimeField="">
+			<trig-new eventType="FORM" eventAction="OUT" eventCondition="新建"/>
+			<trig-destroy eventType="ACTION" eventAction="DO" eventCondition="受理"/>
+		</trig>
+		<trig id="form002" name="已超时未受理" timeOffset="after" duetimeField="">
+			<trig-new eventType="FORM" eventAction="OUT" eventCondition="新建"/>
+			<trig-destroy eventType="ACTION" eventAction="DO" eventCondition="受理"/>
+		</trig>
+		<trig id="form003" name="未超时未处理" timeOffset="before" duetimeField="">
+			<trig-new eventType="FORM" eventAction="IN" eventCondition="处理中"/>
+			<trig-destroy eventType="FORM" eventAction="IN" eventCondition="已完成"/>
+		</trig>
+		<trig id="form004" name="已超时未处理" timeOffset="after" duetimeField="">
+			<trig-new eventType="FORM" eventAction="IN" eventCondition="处理中"/>
+			<trig-destroy eventType="FORM" eventAction="IN" eventCondition="已完成"/>
+		</trig>
+		
+		<!-- 配置工单触发规则关联 -->
+		<form-trig-ref formSchema="UBP_TEST_FIX" name="测试固定流程">
+			<ref-trig value="form001"/>
+			<ref-trig value="form002"/>
+			<ref-trig value="form003"/>
+		</form-trig-ref>
+		<form-trig-ref formSchema="WF4:EL_TTM_CCH_CMC" name="集团投诉处理">
+			<ref-trig value="form001"/>
+			<ref-trig value="form002"/>
+			<ref-trig value="form003"/>
+			<ref-trig value="form004"/>
+		</form-trig-ref>
+	</form-trig>
+	
+	<!-- 环节“通用”触发规则定义 -->
+	<step-common-trig>
+		<trig id="stepNotOvtNotAcc" name="未超时未受理" timeOffset="before" duetimeField="">
+			<trig-new eventType="STEP" eventAction="IN" eventCondition=""/>
+			<trig-destroy eventType="STEP" eventAction="OUT" eventCondition=""/>
+		</trig>
+		<trig id="stepOvtNotAcc" name="已超时未受理" timeOffset="after" duetimeField="">
+			<trig-new eventType="STEP" eventAction="IN" eventCondition=""/>
+			<trig-destroy eventType="STEP" eventAction="OUT" eventCondition=""/>
+		</trig>
+		<trig id="stepNotOvtNotPro" name="未超时未处理" timeOffset="before" duetimeField="">
+			<trig-new eventType="STEP" eventAction="IN" eventCondition=""/>
+			<trig-destroy eventType="STEP" eventAction="OUT" eventCondition=""/>
+		</trig>
+		<trig id="stepOvtNotPro" name="已超时未处理" timeOffset="after" duetimeField="">
+			<trig-new eventType="STEP" eventAction="IN" eventCondition=""/>
+			<trig-destroy eventType="STEP" eventAction="OUT" eventCondition=""/>
+		</trig>
+	</step-common-trig>
+</workflowEvent-trigConfig>

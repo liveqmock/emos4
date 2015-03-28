@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="BulletinClient">
+	<method name="newBulletin" class="com.ultrapower.wfinterface.clients.bulletin.NewBulletinImpl">
+		<webservice address="http://localhost:8080/eoms4/services/Bulletin" operate="newBulletin">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="title" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="severity" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="type" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="content" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="keyTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="sendCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="sendPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="sendDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="sendContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="sendTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="bulScope" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="bulAudit" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 as requestID
+				   ,C800000004 as sheetType
+			       ,C800000005 as serialNo
+			       ,C800000003 as serSupplier
+			       ,C800000006 as serCaller
+			       ,C800000014 as attachRef
+			       
+			       ,C800000101 as title
+			       ,C800000102 as severity
+			       ,C800000103 as type
+			       ,C800000104 as content
+			       ,C800000105 as keyTime
+			       ,C800000009 as sendCorp
+			       ,C800000010 as sendPerson
+			       ,C800000011 as sendDepart
+			       ,C800000012 as sendContact
+			       ,C800000106 as bulAudit
+			       ,'' as sendTime
+			       ,'' as bulScope
+			       ,C800000014 baseattachid
+			  from {WF4:EL_UVS_BULT_To_Interface}
+			  where C800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:EL_UVS_BULT_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:EL_UVS_BULT_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail></opdetail>
+	</method>
+	<method name="confirmBulletin" class="com.ultrapower.wfinterface.clients.bulletin.ConfirmBulletinImpl">
+		<webservice address="http://localhost:8080/eoms4/services/Bulletin" operate="confirmBulletin">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyTime" datatype="7" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestID
+				   ,C800000004 sheetType
+			       ,C800000005 serialNo
+			       ,C800000003 serSupplier
+			       ,C800000006 serCaller
+			       ,C800000014 attachRef
+			       
+			       ,C800000009 replyCorp
+			       ,C800000010 replyPerson
+			       ,C800000011 replyDepart
+			       ,C800000012 replyContact
+			       ,'' as replyTime
+			       ,C800000014 baseattachid
+			  from {WF4:EL_UVS_BULT_To_Interface}
+			  where C800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:EL_UVS_BULT_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:EL_UVS_BULT_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail>
+		</opdetail>
+	</method>
+	<method name="modifyBulletin" class="com.ultrapower.wfinterface.clients.bulletin.ModifyBulletinImpl">
+		<webservice address="http://localhost:8080/eoms4/services/Bulletin" operate="modifyBulletin">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="bulAdvice" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestID
+				   ,C800000004 sheetType
+			       ,C800000005 serialNo
+			       ,C800000003 serSupplier
+			       ,C800000006 serCaller
+			       ,C800000014 attachRef
+			       
+			       ,C800000009 replyCorp
+			       ,C800000010 replyPerson
+			       ,C800000011 replyDepart
+			       ,C800000012 replyContact
+			       ,C800000106 bulAudit
+			       ,'' as replyTime
+			       ,C800000014 baseattachid
+			  from {WF4:EL_UVS_BULT_To_Interface}
+			  where C800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:EL_UVS_BULT_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:EL_UVS_BULT_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail>
+		</opdetail>
+	</method>
+</client>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="CrmClient">
+	<method name="CRM_ALL_Confirm" class="com.ultrapower.wfinterface.clients.crm.ConfirmWorkSheet_ClientImpl">
+		<webservice address="http://localhost:8010/eoms4/services/CRMProcessSheet" operate="confirmWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serviceType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="INT" mode="IN" />
+			<parameter name="sendnumber" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C1 as requestid
+					, C800020201 as sheetType
+					, C800020202 as serviceType
+					, C800020203 as serialNo
+					, C800020204 as serSupplier
+					, C800020206 as serCaller
+					, C800020207 as sendnumber
+					, C800020208 as callerPwd
+					, C800020209 as callTime
+					, C800020211 as opPerson
+					, C800020212 as opCorp
+					, C800020213 as opDepart
+					, C800020214 as opContact
+					, C800020215 as opTime
+					, C800020033 as opType
+					, C800020034 as opDesc
+				from {WF4:CRM_Common_To_Interface}
+				where C800020219 = 0 and C800020220 = 'confirm'
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 1 where C1 = '#REQUESTID#']]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 0 where C1 = '#REQUESTID#']]>
+		</exceptionsql>
+		<opdetail>
+			<field name="opType" text="操作类型">
+				<xml-colname>opType</xml-colname>
+				<db-colname>800020033</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>64</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="opDesc" text="操作说明">
+				<xml-colname>opDesc</xml-colname>
+				<db-colname>800020034</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+	<method name="CRM_ALL_Withdraw" class="com.ultrapower.wfinterface.clients.crm.WithdrawWorkSheet_ClientImpl">
+		<webservice address="http://localhost:8010/eoms4/services/CRMProcessSheet" operate="withdrawWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serviceType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="INT" mode="IN" />
+			<parameter name="sendnumber" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C1 as requestid
+					, C800020201 as sheetType
+					, C800020202 as serviceType
+					, C800020203 as serialNo
+					, C800020204 as serSupplier
+					, C800020206 as serCaller
+					, C800020207 as sendnumber
+					, C800020208 as callerPwd
+					, C800020209 as callTime
+					, C800020211 as opPerson
+					, C800020212 as opCorp
+					, C800020213 as opDepart
+					, C800020214 as opContact
+					, C800020215 as opTime
+					, C800020033 as opType
+					, C800020034 as opDesc
+				from {WF4:CRM_Common_To_Interface}
+				where C800020219 = 0 and C800020220 = 'withdraw'
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 1 where C1 = '#REQUESTID#']]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 0 where C1 = '#REQUESTID#']]>
+		</exceptionsql>
+		<opdetail>
+			<field name="opType" text="操作类型">
+				<xml-colname>opType</xml-colname>
+				<db-colname>800020033</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>64</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="opDesc" text="操作说明">
+				<xml-colname>opDesc</xml-colname>
+				<db-colname>800020034</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+	<method name="CRM_ALL_Notify" class="com.ultrapower.wfinterface.clients.crm.NotifyWorkSheet_ALL_ClientImpl">
+		<webservice address="http://localhost:8010/eoms4/services/CRMProcessSheet" operate="notifyWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serviceType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="INT" mode="IN" />
+			<parameter name="sendnumber" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C1 as requestid
+					, C800020201 as sheetType
+					, C800020202 as serviceType
+					, C800020203 as serialNo
+					, C800020204 as serSupplier
+					, C800020206 as serCaller
+					, C800020207 as sendnumber
+					, C800020208 as callerPwd
+					, C800020209 as callTime
+					, C800020211 as opPerson
+					, C800020212 as opCorp
+					, C800020213 as opDepart
+					, C800020214 as opContact
+					, C800020215 as opTime
+					, C800020033 as opType
+					, C800020034 as opDesc
+					, C800020035 as isDeferReploy
+				from {WF4:CRM_Common_To_Interface}
+				where C800020219 = 0 and C800020220 = 'notify' and C800020201 != '56' and C800020201 != '57'
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 1 where C1 = '#REQUESTID#']]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 1 where C1 = '#REQUESTID#']]>
+		</exceptionsql>
+		<opdetail>
+			<field name="opType" text="操作类型">
+				<xml-colname>opType</xml-colname>
+				<db-colname>800020033</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>64</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="opDesc" text="操作说明">
+				<xml-colname>opDesc</xml-colname>
+				<db-colname>800020034</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+	<method name="CRM_CCH_Notify" class="com.ultrapower.wfinterface.clients.crm.NotifyWorkSheet_CCH_ClientImpl">
+		<webservice address="http://localhost:8010/eoms4/services/CRMProcessSheet" operate="notifyWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serviceType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="INT" mode="IN" />
+			<parameter name="sendnumber" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="opTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="opDetail" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select * from
+			(
+				select 
+					C1 as requestid
+					, C800020201 as sheetType
+					, C800020202 as serviceType
+					, C800020203 as serialNo
+					, C800020204 as serSupplier
+					, C800020206 as serCaller
+					, C800020207 as sendnumber
+					, C800020208 as callerPwd
+					, C800020209 as callTime
+					, C800020211 as opPerson
+					, C800020212 as opCorp
+					, C800020213 as opDepart
+					, C800020214 as opContact
+					, C800020215 as opTime
+					, C800020033 as opType
+					, C800020034 as opDesc
+					, C800020035 as isDeferReploy
+				from {WF4:CRM_Common_To_Interface}
+				where C800020219 = 0 and C800020220 = 'notify' and (C800020201 = '56' or C800020201 = '57')
+			)
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 1 where C1 = '#REQUESTID#']]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[update {WF4:CRM_Common_To_Interface} set CC800020219 = 1, C802043009 = 0 where C1 = '#REQUESTID#']]>
+		</exceptionsql>
+		<opdetail>
+			<field name="phaseReployDesc" text="阶段回复说明">
+				<xml-colname>phaseReployDesc</xml-colname>
+				<db-colname>800020034</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>1000</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+			<field name="isDeferReploy" text="延期解决标示">
+				<xml-colname>isDeferReploy</xml-colname>
+				<db-colname>800020035</db-colname>
+				<datatype>4</datatype>
+				<dictype></dictype><!-- 1 字典；2 直接配置(1:紧急;2:一般;)；3sql(select value, text from aaaaa where ..) -->
+				<dicdata></dicdata>
+				<length>16</length>
+				<isnull>true</isnull>
+				<defaultvalue></defaultvalue>
+			</field>
+		</opdetail>
+	</method>
+</client>

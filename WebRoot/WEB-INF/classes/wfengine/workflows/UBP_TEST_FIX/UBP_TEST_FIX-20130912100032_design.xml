@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_1" type="STEP" title="分公司A区领导审批" content="分公司领导A" x="386" y="97" sid="s_2" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_2" type="STEP" title="分公司B区领导审批" content="分公司B区领导" x="386" y="212" sid="s_2" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_3" type="SPLIT" title="" content="" x="108" y="163" sid="s_1" sname="草稿" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="dp_4" type="END" title="" content="" x="713" y="162" sid="s_5" sname="已完成" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="68" y="42" sid="s_1" sname="草稿" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_1" bprocess="p_BEGIN" eprocess="dp_3" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_2" bprocess="dp_3" eprocess="dp_1" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_3" bprocess="dp_3" eprocess="dp_2" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_4" bprocess="dp_1" eprocess="dp_4" type="LINK" bpoint="2" epoint="1" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_5" bprocess="dp_2" eprocess="dp_4" type="LINK" bpoint="2" epoint="-1" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="草稿" width="252" desc="草稿"/>  
+    <status id="s_2" index="1" name="处理中" width="400" desc="处理中"/>  
+    <status id="s_5" index="2" name="已完成" width="300" desc="已完成"/> 
+  </statuses> 
+</design>

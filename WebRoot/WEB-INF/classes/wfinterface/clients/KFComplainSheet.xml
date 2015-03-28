@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client name="TestClient">
+	<method name="confirmWorkSheet" class="com.ultrapower.wfinterface.clients.kfcomplainsheet.ConfirmWorkSheetImpl">
+		<webservice address="http://10.142.70.89:8081/csp/pbh/eoms/KfComplainSheetService" operate="confirmWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyTime" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="urgent" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="deadline" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestid
+				   --,C800000004 AS sheetType
+				   ,4  sheetType
+				   ,C800000002 baseschema
+			       ,C800000005 serialNo
+			       ,C800000003 serSupplier
+			       ,C800000006 serCaller
+			       ,C800000014 attachRef
+			       ,C800000009 replyCorp
+			       ,C800000010 replyPerson
+			       ,C800000011 replyDepart
+			       ,C800000012 replyContact
+			       ,C800000013 replyTime
+			       ,C800000017 urgent
+			       ,C800000018 deadline
+			       ,C800000014 baseattachid
+			  from {WF4:TJ_Eoms_Declaration_To_Interface}
+			  where C800000026='confirm' and c800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail></opdetail>
+	</method>
+	<method name="notifyWorkSheet" class="com.ultrapower.wfinterface.clients.kfcomplainsheet.NotifyWorkSheet">
+		<webservice address="http://10.142.70.89:8081/csp/pbh/eoms/KfComplainSheetService" operate="notifyWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="stepResult" datatype="2" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestid
+				   --,C800000004 AS sheetType
+				   ,4  sheetType
+				   ,C800000002 baseschema
+			       ,C800000005 serialNo
+			       ,C800000003 serSupplier
+			       ,C800000006 serCaller
+			       ,C800000014 attachRef
+			       ,C800000009 replyCorp
+			       ,C800000010 replyPerson
+			       ,C800000011 replyDepart
+			       ,C800000012 replyContact
+			       ,C800000013 replyTime
+			       ,C800000017 urgent
+			       ,C800000018 deadline
+			       ,C800000014 baseattachid
+			  from {WF4:TJ_Eoms_Declaration_To_Interface}
+			  where C800000026='notify' and c800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail>
+		</opdetail>
+	</method>
+	<method name="replyWorkSheet" class="com.ultrapower.wfinterface.clients.kfcomplainsheet.ReplyWorkSheetImpl">
+		<webservice address="http://10.142.70.89:8081/csp/pbh/eoms/KfComplainSheetService" operate="replyWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="recoverTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="outOfServiceTime" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="networkType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serviceType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="endResult" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="Records" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestid
+				   --,C800000004 AS sheetType
+				   ,4  sheetType
+				   ,C800000002 baseschema
+			       ,C800000005 serialNo
+			       ,C800000003 serSupplier
+			       ,C800000006 serCaller
+			       ,C800000014 attachRef
+			       ,C800000009 replyCorp
+			       ,C800000010 replyPerson
+			       ,C800000011 replyDepart
+			       ,C800000012 replyContact
+			       ,C800000013 replyTime
+			       ,C800000017 urgent
+			       ,C800000018 deadline
+			       ,C800000014 baseattachid
+			       ,C800000022 networkType
+			       ,C800000023 serviceType
+			       ,C536870964 endResult
+			       ,C800000024 Records
+			  from {WF4:TJ_Eoms_Declaration_To_Interface}
+			  where C800000026='reply' and c800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail>
+		</opdetail>
+	</method>
+	<method name="withdrawWorkSheet" class="com.ultrapower.wfinterface.clients.kfcomplainsheet.WithdrawWorkSheetImpl">
+		<webservice address="http://10.142.70.89:8081/csp/pbh/eoms/KfComplainSheetService" operate="withdrawWorkSheet">
+			<parameter name="sheetType" datatype="2" argtype="INT" mode="IN" />
+			<parameter name="serialNo" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serSupplier" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="serCaller" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="callTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="callerPwd" datatype="4" argtype="STRING" mode="IN" />			
+			<parameter name="attachRef" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyCorp" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyPerson" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyDepart" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyContact" datatype="4" argtype="STRING" mode="IN" />
+			<parameter name="replyTime" datatype="7" argtype="STRING" mode="IN" />
+			<parameter name="withdrawReason" datatype="4" argtype="STRING" mode="IN" />
+		</webservice>
+		<querysql>
+			<![CDATA[
+			select 	C1 requestid
+				   --,C800000004 AS sheetType
+				   ,4  sheetType
+				   ,C800000002 baseschema
+			       ,C800000005 serialNo
+			       ,C800000003 serSupplier
+			       ,C800000006 serCaller
+			       ,C800000014 attachRef
+			       ,C800000009 replyCorp
+			       ,C800000010 replyPerson
+			       ,C800000011 replyDepart
+			       ,C800000012 replyContact
+			       ,C800000013 replyTime
+			       ,C800000017 urgent
+			       ,C800000018 deadline
+			       ,C800000014 baseattachid
+			  from {WF4:TJ_Eoms_Declaration_To_Interface}
+			  where C800000026='withdraw' and c800000015='0'
+			]]>
+		</querysql>
+		<updatesql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=1 where c1='#REQUESTID#' ]]>
+		</updatesql>
+		<exceptionsql>
+			<![CDATA[ update {WF4:TJ_Eoms_Declaration_To_Interface} set C800000015=1,C800000016=0 where c1='#REQUESTID#' ]]>
+		</exceptionsql>
+		<opdetail>
+		</opdetail>
+	</method>
+</client>

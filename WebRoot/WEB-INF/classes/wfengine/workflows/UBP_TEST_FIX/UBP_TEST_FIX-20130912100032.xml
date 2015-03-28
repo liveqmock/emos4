@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workflow> 
+  <start to="dp_3" statusId="s_1"/>  
+  <steps> 
+    <step id="dp_1" stepNo="step0211" stepGroup="" statusId="s_2" desc="分公司A区领导审批" taskPolicy="SHARE" auto="false" acceptOver="0" dealOver="0" type="DEAL"> 
+      <prefuncs> 
+        <func id="0">defaultDefInFunction</func> 
+      </prefuncs>  
+      <actor id="actor" roleID="SCMARole" roleName="分公司领导A" actorType="5" conditionsDesc=""/>  
+      <actions> 
+        <action id="0" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"> 
+          <to endId="dp_4"/> 
+        </action> 
+      </actions>  
+      <metas> 
+        <meta id="0" name="CUSTOMACTIONS"/>  
+        <meta id="1" name="FLAGASSIGN">0</meta>  
+        <meta id="2" name="FLAGCANCEL">0</meta>  
+        <meta id="3" name="FLAGCLOSE">0</meta>  
+        <meta id="4" name="FLAGCOPY">0</meta>  
+        <meta id="5" name="FLAGRECALL">0</meta>  
+        <meta id="6" name="FLAGSAVE">0</meta>  
+        <meta id="7" name="FLAGTOASSISTAUDITING">0</meta>  
+        <meta id="8" name="FLAGTOAUDITING">0</meta>  
+        <meta id="9" name="FLAGTRANSFER">0</meta>  
+        <meta id="10" name="FLAGTURNUP">0</meta> 
+      </metas>  
+      <subflows> 
+        <condition/> 
+      </subflows>  
+      <postfuncs> 
+        <func id="0">defaultDefOutFunction</func> 
+      </postfuncs> 
+    </step>  
+    <step id="dp_2" stepNo="step0212" stepGroup="" statusId="s_2" desc="分公司B区领导审批" taskPolicy="SHARE" auto="false" acceptOver="0" dealOver="0" type="DEAL"> 
+      <prefuncs> 
+        <func id="0">defaultDefInFunction</func> 
+      </prefuncs>  
+      <actor id="actor" roleID="SCMBRole" roleName="分公司B区领导" actorType="5" conditionsDesc=""/>  
+      <actions> 
+        <action id="0" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"> 
+          <to endId="dp_4"/> 
+        </action> 
+      </actions>  
+      <metas> 
+        <meta id="0" name="CUSTOMACTIONS"/>  
+        <meta id="1" name="FLAGASSIGN">0</meta>  
+        <meta id="2" name="FLAGCANCEL">0</meta>  
+        <meta id="3" name="FLAGCLOSE">0</meta>  
+        <meta id="4" name="FLAGCOPY">0</meta>  
+        <meta id="5" name="FLAGRECALL">0</meta>  
+        <meta id="6" name="FLAGSAVE">0</meta>  
+        <meta id="7" name="FLAGTOASSISTAUDITING">0</meta>  
+        <meta id="8" name="FLAGTOAUDITING">0</meta>  
+        <meta id="9" name="FLAGTRANSFER">0</meta>  
+        <meta id="10" name="FLAGTURNUP">0</meta> 
+      </metas>  
+      <subflows> 
+        <condition/> 
+      </subflows>  
+      <postfuncs> 
+        <func id="0">defaultDefOutFunction</func> 
+      </postfuncs> 
+    </step> 
+  </steps>  
+  <splits> 
+    <split id="dp_3" statusId="s_1" desc=""> 
+      <tos> 
+        <to id="0" stepId="dp_1" priority="1" assignTree="" remap="0"/>  
+        <to id="1" stepId="dp_2" priority="1" assignTree="" remap="0"/> 
+      </tos>  
+      <condition conditionClass="" type="script">dp_1:'$AreaSelect$' = 'A区'#dp_2:'$AreaSelect$' = 'B区'</condition> 
+    </split> 
+  </splits>  
+  <joins/>  
+  <ends> 
+    <end id="dp_4" statusId="s_5"/> 
+  </ends>  
+  <statuses> 
+    <status id="s_1" name="草稿"/>  
+    <status id="s_2" name="处理中"/>  
+    <status id="s_5" name="已完成"/> 
+  </statuses> 
+</workflow>

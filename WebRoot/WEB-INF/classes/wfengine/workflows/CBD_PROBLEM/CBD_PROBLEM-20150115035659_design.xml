@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_1" type="STEP" title="新建" content="建单人" x="14" y="137" sid="s_1" sname="新建" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_2" type="STEP" title="分派" content="分派角色" x="199" y="137" sid="s_2" sname="分派" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_3" type="STEP" title="处理" content="处理人" x="369" y="197" sid="s_3" sname="处理" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_4" type="STEP" title="验证" content="建单人" x="559" y="247" sid="s_5" sname="验证" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_5" type="STEP" title="回顾" content="工单处理人" x="759" y="388" sid="s_7" sname="回顾" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_6" type="STEP" title="关单" content="建单人" x="969" y="477" sid="s_6" sname="关单" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_7" type="END" title="" content="" x="1158" y="393" sid="s_4" sname="已关闭" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="14" y="61" sid="s_1" sname="新建" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_1" bprocess="p_BEGIN" eprocess="dp_1" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_10" bprocess="dp_4" eprocess="dp_5" type="LINK" bpoint="2" epoint="1" name="通过" actionNo="ToPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_11" bprocess="dp_4" eprocess="dp_2" type="LINK" bpoint="-1" epoint="-1" name="不通过" actionNo="NoPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_13" bprocess="dp_5" eprocess="dp_4" type="LINK" bpoint="-2" epoint="-1" name="退回" actionNo="ToBack02" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_14" bprocess="dp_6" eprocess="dp_7" type="LINK" bpoint="2" epoint="-1" name="关单" actionNo="Closed" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_15" bprocess="dp_5" eprocess="dp_7" type="LINK" bpoint="2" epoint="-2" name="完成" actionNo="ToFinish02" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_16" bprocess="dp_6" eprocess="dp_2" type="LINK" bpoint="-2" epoint="-1" name="退回" actionNo="ToBack03" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_2" bprocess="dp_1" eprocess="dp_2" type="LINK" bpoint="2" epoint="-2" name="提交问题" actionNo="toSubmit" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_3" bprocess="dp_2" eprocess="dp_3" type="LINK" bpoint="2" epoint="1" name="分派" actionNo="TurnSend" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_4" bprocess="dp_2" eprocess="dp_1" type="LINK" bpoint="-1" epoint="-1" name="退回" actionNo="ToBack" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_5" bprocess="dp_2" eprocess="dp_6" type="LINK" bpoint="1" epoint="1" name="取消" actionNo="ToFinish" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_7" bprocess="dp_2" eprocess="dp_4" type="LINK" bpoint="1" epoint="1" name="完成" actionNo="ToVerify" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_8" bprocess="dp_3" eprocess="dp_2" type="LINK" bpoint="-1" epoint="-1" name="退回" actionNo="ToBack01" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_9" bprocess="dp_3" eprocess="dp_4" type="LINK" bpoint="2" epoint="-2" name="完成" actionNo="ToFinist01" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="新建" width="177" desc="新建"/>  
+    <status id="s_2" index="1" name="分派" width="172" desc="分派"/>  
+    <status id="s_3" index="2" name="处理" width="180" desc="处理"/>  
+    <status id="s_5" index="3" name="验证" width="193" desc="验证"/>  
+    <status id="s_7" index="4" name="回顾" width="197" desc="回顾"/>  
+    <status id="s_6" index="5" name="关单" width="194" desc="关单"/>  
+    <status id="s_4" index="6" name="已关闭" width="300" desc="已关闭"/> 
+  </statuses> 
+</design>

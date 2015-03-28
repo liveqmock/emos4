@@ -1,0 +1,32 @@
+<!ELEMENT workflowEvent-trigConfig (form-trig,step-common-trig)>
+<!ELEMENT form-trig (trig*,form-trig-ref*)>
+<!ELEMENT form-trig-ref (ref-trig*)>
+<!ELEMENT ref-trig EMPTY>
+<!ELEMENT step-common-trig (trig*)>
+<!ELEMENT trig (trig-new,trig-destroy)>
+<!ELEMENT trig-new EMPTY>
+<!ELEMENT trig-destroy EMPTY>
+
+<!ATTLIST trig
+	id ID #REQUIRED
+	name CDATA #REQUIRED
+	timeOffset (before|after) #REQUIRED
+	duetimeField CDATA #IMPLIED
+>
+<!ATTLIST trig-new
+	eventType (FORM|STEP|ACTION) #REQUIRED
+	eventAction (IN|OUT|DO) #REQUIRED
+	eventCondition CDATA #IMPLIED
+>
+<!ATTLIST trig-destroy
+	eventType (FORM|STEP|ACTION) #REQUIRED
+	eventAction (IN|OUT|DO) #REQUIRED
+	eventCondition CDATA #IMPLIED
+>
+<!ATTLIST form-trig-ref
+	formSchema ID #REQUIRED
+	name CDATA #REQUIRED
+>
+<!ATTLIST ref-trig
+	value IDREF #REQUIRED
+>

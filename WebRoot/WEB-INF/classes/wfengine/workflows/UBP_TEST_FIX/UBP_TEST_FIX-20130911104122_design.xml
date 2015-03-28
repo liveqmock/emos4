@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_1" type="STEP" title="草稿" content="起草人" x="22" y="137" sid="s_1" sname="草稿" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_11" type="SPLIT" title="" content="" x="1287" y="427" sid="s_5" sname="处理中" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="dp_19" type="JOIN" title="" content="" x="1782" y="153" sid="s_5" sname="处理中" imageurl="design/images/join.png" modelkey="null"/>  
+    <process id="dp_2" type="STEP" title="审批环节" content="审批人" x="184" y="187" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_22" type="JOIN" title="" content="" x="1632" y="427" sid="s_5" sname="处理中" imageurl="design/images/join.png" modelkey="null"/>  
+    <process id="dp_23" type="STEP" title="复核" content="复核人" x="1862" y="287" sid="s_6" sname="复核中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_25" type="END" title="" content="" x="2170" y="75" sid="s_4" sname="已关闭" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="dp_26" type="STEP" title="归档" content="归档人" x="2012" y="153" sid="s_7" sname="待归档" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_27" type="STEP" title="A处理环节（环节组）" content="A成员" x="1368" y="54" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_28" type="STEP" title="A辅助处理(环节组)" content="A辅助" x="1563" y="54" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_29" type="STEP" title="B处理环节（环节组）" content="B处理" x="1373" y="148" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_3" type="STEP" title="处理组组长环节" content="处理组组长" x="1158" y="287" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_30" type="STEP" title="B辅助处理（环节组）" content="B辅助" x="1563" y="148" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_31" type="STEP" title="C处理环节（环节组）" content="C处理" x="1373" y="229" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_32" type="STEP" title="C辅助处理（环节组）" content="C辅助" x="1563" y="229" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_33" type="STEP" title="A处理环节（所有连线）" content="处理人" x="1400" y="342" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_34" type="STEP" title="B处理环节（所有连线）" content="处理人" x="1400" y="422" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_35" type="STEP" title="B处理环节（所有连线）" content="处理人" x="1400" y="497" sid="s_5" sname="处理中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_36" type="STEP" title="分公司审批" content="分公司领导" x="373" y="185" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_37" type="STEP" title="B处理" content="B处理人" x="779" y="137" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_38" type="STEP" title="C处理" content="C处理人" x="959" y="137" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_4" type="SPLIT" title="" content="" x="224" y="292" sid="s_3" sname="审批中" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="dp_40" type="STEP" title="A处理" content="A处理人" x="580" y="137" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_5" type="SPLIT" title="" content="" x="1280" y="153" sid="s_5" sname="处理中" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="22" y="44" sid="s_1" sname="草稿" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_1" bprocess="p_BEGIN" eprocess="dp_1" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_10" bprocess="dp_3" eprocess="dp_5" type="LINK" bpoint="1" epoint="-2" name="环节组并行分支" actionNo="ToStepGroup" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_12" bprocess="dp_3" eprocess="dp_11" type="LINK" bpoint="-1" epoint="-2" name="全部连线并行分支" actionNo="ToAllLine" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_2" bprocess="dp_1" eprocess="dp_2" type="LINK" bpoint="2" epoint="1" name="提交申请" actionNo="ToInspect" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_26" bprocess="dp_19" eprocess="dp_23" type="LINK" bpoint="2" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_27" bprocess="dp_22" eprocess="dp_23" type="LINK" bpoint="2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_3" bprocess="dp_2" eprocess="dp_4" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_30" bprocess="dp_23" eprocess="dp_26" type="LINK" bpoint="2" epoint="-1" name="复核" actionNo="reCheckPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_31" bprocess="dp_26" eprocess="dp_25" type="LINK" bpoint="2" epoint="-1" name="归档" actionNo="ToClose" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_32" bprocess="dp_23" eprocess="dp_3" type="LINK" bpoint="-2" epoint="2" name="复核退回" actionNo="ToBack" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_33" bprocess="dp_5" eprocess="dp_27" type="LINK" bpoint="1" epoint="-2" name="" actionNo="" linkpri="1" assignTree="APerson" remap="0"/>  
+    <link id="l_34" bprocess="dp_5" eprocess="dp_29" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="BPerson" remap="0"/>  
+    <link id="l_35" bprocess="dp_5" eprocess="dp_31" type="LINK" bpoint="-1" epoint="-2" name="" actionNo="" linkpri="1" assignTree="CPerson" remap="0"/>  
+    <link id="l_36" bprocess="dp_27" eprocess="dp_28" type="LINK" bpoint="2" epoint="-2" name="辅助处理" actionNo="ToAssistPerson" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_37" bprocess="dp_29" eprocess="dp_30" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_38" bprocess="dp_31" eprocess="dp_32" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_4" bprocess="dp_4" eprocess="dp_1" type="LINK" bpoint="-2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_40" bprocess="dp_28" eprocess="dp_19" type="LINK" bpoint="2" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_41" bprocess="dp_32" eprocess="dp_19" type="LINK" bpoint="2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_42" bprocess="dp_30" eprocess="dp_19" type="LINK" bpoint="2" epoint="-2" name="完成" actionNo="ToFinish" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_43" bprocess="dp_11" eprocess="dp_33" type="LINK" bpoint="1" epoint="-2" name="" actionNo="" linkpri="1" assignTree="APerson" remap="0"/>  
+    <link id="l_44" bprocess="dp_11" eprocess="dp_34" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="BPerson" remap="0"/>  
+    <link id="l_45" bprocess="dp_11" eprocess="dp_35" type="LINK" bpoint="-1" epoint="-2" name="" actionNo="" linkpri="1" assignTree="CPerson" remap="0"/>  
+    <link id="l_46" bprocess="dp_33" eprocess="dp_22" type="LINK" bpoint="2" epoint="1" name="完成" actionNo="ToFinish" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_47" bprocess="dp_34" eprocess="dp_22" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_48" bprocess="dp_35" eprocess="dp_22" type="LINK" bpoint="2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_5" bprocess="dp_4" eprocess="dp_3" type="LINK" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_50" bprocess="dp_1" eprocess="dp_36" type="LINK" bpoint="2" epoint="1" name="分公司审批" actionNo="SubCompany" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_51" bprocess="dp_36" eprocess="dp_3" type="LINK" bpoint="-1" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_54" bprocess="dp_37" eprocess="dp_38" type="LINK" bpoint="2" epoint="-2" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_55" bprocess="dp_38" eprocess="dp_3" type="LINK" bpoint="-1" epoint="-2" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_56" bprocess="dp_38" eprocess="dp_37" type="LINK" bpoint="1" epoint="1" name="退回" actionNo="GoBack" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_57" bprocess="dp_1" eprocess="dp_40" type="LINK" bpoint="2" epoint="-2" name="串审" actionNo="MultiAudit" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_58" bprocess="dp_40" eprocess="dp_37" type="LINK" bpoint="2" epoint="-2" name="完成" actionNo="ToClosePage" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="草稿" width="166" desc="草稿"/>  
+    <status id="s_3" index="1" name="审批中" width="974" desc="审批中"/>  
+    <status id="s_5" index="2" name="处理中" width="698" desc="处理中"/>  
+    <status id="s_6" index="3" name="复核中" width="158" desc="复核中"/>  
+    <status id="s_7" index="4" name="待归档" width="160" desc="待归档"/>  
+    <status id="s_4" index="5" name="已关闭" width="152" desc="已关闭"/> 
+  </statuses> 
+</design>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<design type="flex"> 
+  <processes> 
+    <process id="dp_13" type="STEP" title="新建" content="新建" x="20" y="110" sid="s_1" sname="新建" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_15" type="STEP" title="方案验证" content="方案验证" x="357" y="240" sid="s_6" sname="方案验证中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_16" type="STEP" title="审批" content="审批" x="508" y="300" sid="s_3" sname="审批中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_19" type="STEP" title="验证" content="验证" x="982" y="495" sid="s_10" sname="验证中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_20" type="END" title="" content="" x="1151" y="555" sid="s_4" sname="已关闭" imageurl="design/images/end.png" modelkey="null"/>  
+    <process id="dp_21" type="SPLIT" title="" content="" x="548" y="554" sid="s_3" sname="审批中" imageurl="design/images/split.png" modelkey="null" desc=""/>  
+    <process id="dp_22" type="STEP" title="方案编写" content="编写" x="199" y="173" sid="s_2" sname="方案编写中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_23" type="STEP" title="评审" content="评审" x="669" y="344" sid="s_5" sname="评审中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="dp_24" type="STEP" title="实施" content="实施" x="825" y="422" sid="s_9" sname="实施中" imageurl="design/images/step.png" modelkey="eomsModel"/>  
+    <process id="p_BEGIN" type="BEGIN" title="" content="" x="22" y="38" sid="s_1" sname="新建" imageurl="design/images/start.png" modelkey="null"/> 
+  </processes>  
+  <links> 
+    <link id="l_34" bprocess="p_BEGIN" eprocess="dp_13" type="LINK" bpoint="-1" epoint="1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_46" bprocess="dp_21" eprocess="dp_20" type="YES" bpoint="2" epoint="-2" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_50" bprocess="dp_22" eprocess="dp_15" type="LINK" bpoint="2" epoint="1" name="提交验证" actionNo="caseCheck" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_51" bprocess="dp_15" eprocess="dp_22" type="LINK" bpoint="-2" epoint="-1" name="验证不通过" actionNo="check2back" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_52" bprocess="dp_21" eprocess="dp_22" type="NO" bpoint="-2" epoint="-1" name="" actionNo="" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_53" bprocess="dp_15" eprocess="dp_16" type="LINK" bpoint="2" epoint="1" name="验证通过" actionNo="check2audit" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_55" bprocess="dp_16" eprocess="dp_21" type="LINK" bpoint="-1" epoint="1" name="审批不通过" actionNo="auditUnPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_56" bprocess="dp_16" eprocess="dp_23" type="LINK" bpoint="2" epoint="1" name="审批通过" actionNo="auditPassed" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_60" bprocess="dp_23" eprocess="dp_20" type="LINK" bpoint="-1" epoint="-2" name="评审不通过" actionNo="organizeAuditUnpass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_61" bprocess="dp_23" eprocess="dp_24" type="LINK" bpoint="2" epoint="1" name="评审通过" actionNo="organizeAuditPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_62" bprocess="dp_24" eprocess="dp_19" type="LINK" bpoint="2" epoint="1" name="实施完成" actionNo="finished" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_63" bprocess="dp_19" eprocess="dp_24" type="LINK" bpoint="-2" epoint="-1" name="验证不通过" actionNo="testUnPass" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_64" bprocess="dp_19" eprocess="dp_20" type="LINK" bpoint="2" epoint="1" name="验证通过" actionNo="checked" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_65" bprocess="dp_13" eprocess="dp_22" type="LINK" bpoint="2" epoint="1" name="提交" actionNo="submit" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_66" bprocess="dp_22" eprocess="dp_13" type="LINK" bpoint="-2" epoint="-1" name="退回" actionNo="ToBack" linkpri="1" assignTree="" remap="0"/>  
+    <link id="l_67" bprocess="dp_24" eprocess="dp_20" type="LINK" bpoint="-1" epoint="-2" name="实施取消" actionNo="implementCancel" linkpri="1" assignTree="" remap="0"/> 
+  </links>  
+  <statuses> 
+    <status id="s_1" index="0" name="新建" width="173" desc="新建"/>  
+    <status id="s_2" index="1" name="方案编写中" width="164" desc="方案编写中"/>  
+    <status id="s_6" index="2" name="方案验证中" width="160" desc="方案验证中"/>  
+    <status id="s_3" index="3" name="审批中" width="158" desc="审批中"/>  
+    <status id="s_5" index="4" name="评审中" width="159" desc="评审中"/>  
+    <status id="s_9" index="5" name="实施中" width="156" desc="实施中"/>  
+    <status id="s_10" index="6" name="验证中" width="156" desc="验证中"/>  
+    <status id="s_4" index="7" name="已关闭" width="157" desc="已关闭"/> 
+  </statuses> 
+</design>

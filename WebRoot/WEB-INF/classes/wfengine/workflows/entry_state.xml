@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<!-- 公用 -->
+	<action code="NEW" cnname="新建" entryState="草稿" inProcessState="待处理"/>
+	<action code="SAVE" cnname="保存"/>
+	<action code="CHASE" cnname="追回" inProcessState="待处理" outProcessState="已追回"/>
+	<action code="CHASEALL" cnname="追回全部" inProcessState="待处理" outProcessState="已追回全部"/>
+	<action code="ACCEPT" cnname="受理" inProcessState="处理中"/>
+	<action code="ACTIVE" cnname="激活"/>
+	<action code="SUSPEND" cnname="挂起"/>
+	<action code="CANCEL" cnname="作废" entryState="已作废" outProcessState="已作废"/>
+	<action code="TERMINATE" cnname="终止" entryState="已终止" outProcessState="已终止"/>
+	
+	<!-- 自由流程 -->
+	<action code="ASSIGN" cnname="派发" inProcessState="待处理" outProcessState="已派发"/>
+	<action code="APPENDASSIGN" cnname="补派" inProcessState="待处理"/>
+	<action code="REASSIGN" cnname="转派" inProcessState="待处理" outProcessState="已转派"/>
+	<action code="FINISH" cnname="完成" entryState="已完成" inProcessState="待处理" outProcessState="已完成"/>
+	<action code="CONFIRM" cnname="确认" outProcessState="已确认"/>
+	<action code="AUDIT" cnname="提交审批" entryState="待审批" inProcessState="待审批" outProcessState="已提交审批"/>
+	<action code="REAUDIT" cnname="转审" inProcessState="待审批" outProcessState="已审批"/>
+	<action code="AUDITINGPASS" cnname="审批通过" entryState="审批通过" inProcessState="待处理" outProcessState="已审批"/>
+	<action code="AUDITINGNOPASS" cnname="审批不通过" entryState="审批不通过" inProcessState="待处理" outProcessState="已审批"/>
+	<action code="ORGANIZEAUDIT" cnname="组织会审" inProcessState="待会审" outProcessState="已提交会审"/>
+	<action code="ORGANIZEAUDITINGPASS" cnname="会审通过" inProcessState="待审批" outProcessState="已会审"/>
+	<action code="ORGANIZEAUDITINGNOPASS" cnname="会审不通过" inProcessState="待审批" outProcessState="已会审"/>
+	<action code="CLOSE" cnname="归档" entryState="已归档" outProcessState="已归档"/>
+	<action code="REJECT" cnname="驳回" entryState="已驳回" inProcessState="待处理" outProcessState="已驳回"/>
+	<action code="SENDBACK" cnname="退回" entryState="已退回" inProcessState="待处理" outProcessState="已退回"/>
+	<action code="ASSIST" cnname="协办" inProcessState="待处理"/>
+	<action code="MAKECOPY" cnname="抄送" inProcessState="待确认"/>
+	<action code="HASTEN" cnname="催办" isTrans="false"/>
+	<action code="NOTICE" cnname="阶段处理" inProcessState="处理中"/>
+	<action code="SUGGEST" cnname="阶段建议" isTrans="false"/>
+	
+	<!-- 固定流程 -->
+	<action code="NEXT" cnname="下一步"/>
+	<action code="RENEXT" cnname="转派"/>
+</actions>
