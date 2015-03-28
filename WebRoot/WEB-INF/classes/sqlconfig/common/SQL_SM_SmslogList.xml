@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author></author> 
+		<date>2014-11-22</date> 
+		<description>短信发送情况查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SmslogList.query" >
+		<select>
+			<![CDATA[
+			select /*COUNT*/ pid, recordpid, sendetime, sendobj, flag, flowno, smscontent, errorinfo  /*COUNT*/
+  				from bs_t_sm_smslog
+  				where 1=1 $customwhere$
+  				order by sendetime desc
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<date displayname="sm_lb_sendstarttime" name="starttime" />
+			<date displayname="sm_lb_sendendtime" name="endtime" />
+			<text displayname="sm_lb_smgoal" name="goal" />
+			<text displayname="sm_lb_smcontent" name="content" />
+			<text displayname="sm_lb_smsenfflag" name="sendflag" />
+		</condition>
+		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  datatype="7" colname="sendtime"  value="#starttime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="sendtime"  value="#endtime#" />
+			<field prepend="and" operator="like" colname="sendobj" value="#goal#" />
+			<field prepend="and" operator="like" colname="smscontent" value="#content#" />
+			<field prepend="and" operator="=" colname="sendflag" value="#sendflag#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

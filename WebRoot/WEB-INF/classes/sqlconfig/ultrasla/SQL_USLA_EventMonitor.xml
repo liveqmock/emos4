@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>SunHailong</author> 
+		<date>2012-02-16</date> 
+		<description>UltraSla事件动作监控</description> 		
+	</doc>
+	<sqlquery name="SQL_USLA_EventInstance.query">
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ 
+				       handlemark,
+				       eventbaseid,
+				       baseschema,
+				       eventtype,
+				       eventsubject,
+				       eventaction,
+				       eventcondition,
+				       handletype,
+				       operationname,
+				       duetime,
+				       eventstatus,
+				       logrecord
+				       /*COUNT*/
+				  from bs_t_wf_eventinstance
+				 where 1=1
+				   and operationtype = 'SLA'
+				   $customwhere$
+				 order by eventcreatetime desc
+			  ]]> 
+		</select>
+		<condition cols="2" labprecent="15" textprecent="35">		
+			<text displayname="工单类别" name="baseschema"/>
+			<text displayname="工单id" name="eventbaseid"/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="and" operator="=" colname="baseschema" value="#baseschema#"/>
+		    <field prepend="and" operator="=" colname="eventbaseid" value="#eventbaseid#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_EventAction.query">
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, eventid, ruleid, duetime, noticetime, noticedtimes, nextnoticetime, status, actionstatus /*COUNT*/
+				  from bs_t_usla_eventaction
+				 where 1=1
+				 $customwhere$
+				 order by createtime desc
+			  ]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and">
+			<field prepend="and" operator="=" colname="eventid" value="#eventId#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_EventMessage.query" >
+		<select>
+			<![CDATA[
+				 select /*COUNT*/ content, goal, 1, sendflag, infoinputtime, '', '' /*COUNT*/
+				  from bs_t_sm_smsmonitor
+				 where 1=1
+				 $customwhere$
+				 order by sendflag, infoinputtime desc, goal
+			  ]]>
+		</select>
+		<!-- 北京移动的短信表
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ content, goal, scanstatus, sendflag, presendtime, relateid, baseschema /*COUNT*/
+				  from smmonitor
+				 where 1=1
+				 $customwhere$
+				 order by scanstatus, sendflag, presendtime desc, goal
+			  ]]> 
+		</select>
+		 -->
+		<customwhere name="customwhere" prepend="and">
+			<!-- 北京移动的短信表
+			<field prepend="and" operator="=" colname="remark" value="#actionId#"/>
+			 -->
+			<field prepend="and" operator="=" colname="relateid" value="#actionId#"/>
+		</customwhere>
+	</sqlquery>
+</sql-group>

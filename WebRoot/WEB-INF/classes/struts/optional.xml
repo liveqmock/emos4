@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+        
+<struts>
+	<!-- 短信过滤_start -->
+	<package name="noticeFilter" extends="eoms" namespace="/noticeFilter">
+		<action name="*" method="{1}" class="noticeFilterAction">
+			<result name="success">/optional/extend/notice/{1}.jsp</result>
+			<result name="custom">/optional/extend/notice/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 短信过滤_end -->
+	
+	<!-- 工作日历_start -->
+	<package name="workCalendar" extends="eoms" namespace="/workCalendar">
+		<action name="*" method="{1}" class="workCalendarAction">
+			<result name="success">/optional/extend/workcalendar/{1}.jsp</result>
+			<result name="custom">/optional/extend/workcalendar/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 工作日历_end -->
+</struts>

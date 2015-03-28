@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>值班日志</description> 		
+	</doc>
+	<sqlquery name="SQL_FTR_DutyLog.query" >
+		<select>
+			<![CDATA[
+				select
+			    /*COUNT*/
+			        l.pid
+			       ,u.fullname ||' '||to_char(to_date('19700101', 'yyyymmdd') + l.logtime / 86400 + 8 / 24, 'yyyy-mm-dd')||' 值班日期' as title
+			       ,u.fullname
+			       ,l.logconment--记录内容
+			       ,l.logtime--记录时间（秒）
+			       ,l.completeflag --是否完成 1是2否
+			       ,l.type --类型，1：普通日志，2：附加日志，3：作业计划
+			       ,l.logtime as doc_createtime
+				/*COUNT*/
+			   from BS_T_DUTY_LOG l,bs_t_sm_user u 
+			   where l.Userid = u.loginname
+			   $customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend=""><![CDATA[ l.logtime>=#startTime# and l.logtime<#endTime#]]></sql>
+		</customwhere>
+	
+	</sqlquery>
+</sql-group>

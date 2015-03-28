@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>孙海龙</author> 
+		<date>2010-07-20</date> 
+		<description>功能访问量查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_VisitsQueryList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ time, ip, loginname, url /*COUNT*/
+				  from bs_t_sm_fluxstatlog
+				 where 1=1
+				  $customwhere$
+				 /*ORDERBY*/ order by /*ORDERBY*/ time desc
+			]]> 
+		</select>
+		<condition  cols="2" labprecent="15" textprecent="35" >
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+			<text displayname="sm_lb_visitUser" name="loginname" />
+			<text displayname="sm_lb_visitUrl" name="url" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  datatype="7" colname="time"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="time"  value="#endtime#" />
+			<field prepend="and" operator="like"  colname="loginname"  value="#loginname#" />
+			<field prepend="and" operator="like"  colname="url"  value="#url#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

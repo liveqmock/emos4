@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+
+	<bean id="noticeManagerService" class="com.ultrapower.eoms.msextend.notice.manager.NoticeManagerImpl" scope="prototype"></bean>
+	<bean id="noticeLevelService" class="com.ultrapower.eoms.msextend.notice.manager.NoticeLevelImpl" scope="prototype"></bean>
+	<bean id="noticeViewLogService" class="com.ultrapower.eoms.msextend.notice.manager.NoticeViewLogImpl"></bean>
+	<bean id="noticeLevelTreeService" class="com.ultrapower.eoms.msextend.notice.manager.NoticeLevelTreeImpl" scope="prototype"></bean>
+	<bean id="noticeViewLogTreeService" class="com.ultrapower.eoms.msextend.notice.manager.NoticeViewLogTreeImpl" scope="prototype"></bean>
+	
+	<bean id="noticeAction" class="com.ultrapower.eoms.msextend.notice.web.NoticeAction" scope="prototype" />
+	<bean id="noticeLevelAction" class="com.ultrapower.eoms.msextend.notice.web.NoticeLevelAction" scope="prototype" />
+	<bean id="noticeViewLogAction" class="com.ultrapower.eoms.msextend.notice.web.NoticeViewLogAction" scope="prototype" />
+	
+
+	
+	<bean id="noticeInfoDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.notice.model.NoticeInfo</value>
+		</property>
+	</bean>
+	<bean id="noticeLevelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.notice.model.NoticeLevelManage</value>
+		</property>
+	</bean>
+	<bean id="noticeViewLogDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.notice.model.NoticeViewLog</value>
+		</property>
+	</bean>
+
+	
+
+<!-- 
+	<bean id="noticeManagerAddMemoAOP"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.ultrapower.eoms.msextend.notice.service.INoticeService</value>
+		</property>
+		<property name="target">
+			<ref local="noticeManager" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>noticeMemoManagerAdvice</value>
+			</list>
+		</property>
+	</bean>
+ -->
+ 
+ <!-- 以下内容是服务台系统公告功能，liuchuanzu 20110930
+ <bean id="noticeLogDao"
+		class="com.ultrapower.commonsupport.dataaccess.hibernate.impl.HibernateDaoImpl"
+		scope="prototype">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.msextend.notice.model.NoticeViewLog</value>
+		</property>
+	</bean>
+ -->
+</beans>

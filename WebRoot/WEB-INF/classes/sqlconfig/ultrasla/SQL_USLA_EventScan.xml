@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>SunHailong</author> 
+		<date>2011-11-16</date> 
+		<description>UltraSla事件扫描</description> 		
+	</doc>
+	<!-- 事件扫描-eoms表 -->
+	<sqlquery name="SQL_USLA_EventScan.eoms" >
+		<select>
+			<![CDATA[ 
+				select pid					id,
+					   handlemark			eventid,
+					   operationname		ruleids,
+					   duetime				duetime,
+					   defaulthandlertype	defaulttype,
+					   defaulthandlerid		defaultid,
+					   handletype			handletype,
+					   logrecord			logrecord,
+					   eventbaseid			baseid,
+					   baseschema			baseschema
+				  from bs_t_wf_eventinstance
+				 where eventstatus = 0
+				   and operationtype = 'SLA'
+				 order by createtime
+			  ]]> 
+		</select>
+	</sqlquery>
+</sql-group>

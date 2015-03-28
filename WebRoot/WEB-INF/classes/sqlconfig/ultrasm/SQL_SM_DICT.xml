@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_DICT_GROUPQUERY.query" >
+		<select>
+			<![CDATA[ 
+				SELECT pid id,pid value,depname text,depname fullname,parentid pid FROM BS_T_SM_DEP  
+				 where 1=1 
+				  $customwhere$ order by ordernum 
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="in"  colname="pid"  value="#defaultValue#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

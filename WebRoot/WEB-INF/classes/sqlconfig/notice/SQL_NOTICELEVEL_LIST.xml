@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_NOITCELEVEL_List.query" >
+		<select>
+			<![CDATA[
+				SELECT /*COUNT*/
+					 T.PID,
+					 T.NOTICELEVEL,
+					 t.LOGINNAME,
+					 t.USERNAME,
+					 T.CREATETIME,
+					 T.CREATORNAME,
+					 t.DEPNAME,
+					 case when t.RECIVERTYPE = 'U' then '人员' when t.RECIVERTYPE = 'D' then '部门' end RECIVERTYPE
+					/*COUNT*/
+					  FROM (SELECT T.PID          PID,
+					               T.NOTICE_LEVEL NOTICELEVEL,
+					               U.LOGINNAME    LOGINNAME,
+					               U.FULLNAME     USERNAME,
+					               T.CREATETIME   CREATETIME,
+					               T.CREATOR_NAME CREATORNAME,
+					               D.DEPFULLNAME  DEPNAME,
+					               t.NOTICE_LEVEL,
+					                t.RECIVERTYPE 
+					          FROM BS_T_NOTICE_LEVELMANAGE T, BS_T_SM_DEP D, BS_T_SM_USER U
+					         WHERE 1 = 1
+					           AND T.RECIVERID = U.PID
+					           AND U.DEPID = D.PID
+					           AND T.RECIVERTYPE = 'U'
+					        UNION ALL
+					        SELECT T.PID          PID,
+					               T.NOTICE_LEVEL NOTICELEVEL,
+					               D.PID          LOGINNAME,
+					               D.DEPNAME      USERNAME,
+					               T.CREATETIME   CREATETIME,
+					               T.CREATOR_NAME CREATORNAME,
+					               D.DEPFULLNAME  DEPNAME,
+					               t.NOTICE_LEVEL,
+					                t.RECIVERTYPE 
+					          FROM BS_T_NOTICE_LEVELMANAGE T, BS_T_SM_DEP D
+					         WHERE T.RECIVERID = D.PID
+					           AND T.RECIVERTYPE = 'D'
+					           ) t
+					 WHERE 1 = 1
+					 $customwhere$
+				  	$privilege$
+					/*ORDERBY*/ ORDER BY /*ORDERBY*/ LOGINNAME
+			]]>
+		</select>
+		<condition cols="2" labprecent="11" textprecent="22" >
+			<text displayname="名称" name="userName" />
+			<text displayname="部门名称" name="depname" />
+			<date displayname="创建时间起" name="starttime"/>
+			<date displayname="至" name="endtime"/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="t.username"  value="#userName#" />
+			<field prepend="and" operator="like"  colname="t.depname"  value="#depname#" />
+			<field prepend="and" operator=">="  datatype="7" colname="t.CREATETIME"  value="#starttime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="t.CREATETIME"  value="#endtime#" />
+			<field prepend="and" operator="="  colname="t.NOTICE_LEVEL"  value="#noticeLevelStr#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

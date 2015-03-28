@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_NOITCEVIEWLOG_List.query" >
+		<select>
+			<![CDATA[
+					select 
+					/*COUNT*/
+					distinct(PID)       as noticeid     ,
+					CREATOR_NAME as creatorname ,
+					NOTICE_TITLE   as noticetitle   ,
+					NOTICE_CREATETIME as noticecreatetime ,
+					NOTICE_STARTTIME as noticestarttime,
+					NOTICE_LOSTTIME as  noticelosttime,
+					NOTICE_LEVEL  as    noticelevel,
+					BASESN  as          noitcebasesn,
+					notice_status as noticestatus ,
+					noticetype as noticetype,
+					noticescope as noticescope ,
+					noticescopename as noticescopename
+					 /*COUNT*/
+					 from (
+					(select
+					PID                ,
+					CREATOR_NAME ,
+					NOTICE_TITLE      ,
+					NOTICE_CREATETIME ,
+					NOTICE_STARTTIME  ,
+					NOTICE_LOSTTIME   ,
+					NOTICE_LEVEL      ,
+					BASESN            ,
+					notice_status ,
+					NOTICETYPE  noticetype,
+					NOTICESCOPE noticescope ,
+					 (select t.depfullname  from bs_t_sm_dep t   where t.pid =  regexp_substr(noticescopeid,'[^,]+',1,rn)) noticescopename
+					from (
+					select
+					m.PID                ,
+					m.CREATOR_NAME ,
+					m.NOTICE_TITLE      ,
+					m.NOTICE_CREATETIME ,
+					m.NOTICE_STARTTIME  ,
+					m.NOTICE_LOSTTIME   ,
+					m.NOTICE_LEVEL      ,
+					m.BASESN            ,
+					m.notice_status ,
+					m.NOTICESCOPE noticescope ,
+					m.NOTICETYPE  noticetype, 
+					noticescopeid||decode(m.noticescopegroupid,null,noticescopegroupid,','||noticescopeid) as noticescopeid
+					from BS_T_NOTICE_INFO m) t,
+					(select rownum rn from dual connect by rownum <= 100)
+					where regexp_substr(noticescopeid, '[^,]+', 1, rn) is not null)
+					)
+					where 1=1 
+				  $viewwhere$
+				  $customwhere$
+				 /*ORDERBY*/ order by /*ORDERBY*/ NOTICE_CREATETIME desc
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="发布人" name="creatorName" />
+			<text displayname="公告主题" name="noticeTitle"  />
+			<select displayname="公告等级" name="noticeLevel"  dictype="noticeLevel" value=""/>
+			<date displayname="发布时间起" name="createtime"/>
+			<date displayname="至" name="endtime"/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="CREATOR_NAME"  value="#creatorName#" />
+			<field prepend="and" operator="like"  colname="NOTICE_TITLE"  value="#noticeTitle#" />
+			<field prepend="and" operator=">="  datatype="7" colname="NOTICE_STARTTIME"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="NOTICE_STARTTIME"  value="#endtime#" />
+			<!-- 1:未失效，4:已删除 -->
+			<if prepend="and" exp="'#noticeStatus#' = '1'">
+				<success>
+					<field prepend="and" operator="&lt;="  datatype="7" colname="NOTICE_STARTTIME"  value="#sys_datetime#" />
+					<field prepend="and" operator=">="  datatype="7" colname="NOTICE_LOSTTIME"  value="#sys_datetime#" />
+					<field prepend="and" operator="&lt;>"  datatype="4" colname="NOTICE_STATUS"  value="4" />
+				</success>
+			</if>
+			<if prepend="and" exp="'#noticeStatus#' = '4'">
+				<success>
+					<field prepend="and" operator="="  colname="NOTICE_STATUS"  value="#noticeStatus#" />
+				</success>
+			</if>
+		</customwhere>
+		<customwhere name="viewwhere" prepend="AND" >
+			<field prepend="and" operator="="  colname="noticescopename"  value="#noticescopename#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

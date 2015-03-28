@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2011-01-24</date> 
+		<description>故障处理工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF4_EL_TTM_TTH.query" >
+		<select>
+			<![CDATA[
+			select
+			  --base info
+			  /*COUNT*/
+              C1||C700000001  as field_id                                               --docId 
+			  ,C1 			  as baseid                                                 --工单编号
+			  ,C3             as doc_createtime                                         --创建时间
+			  ,C6             as doc_lastmodifytime                                     --最后修改时间
+			  ,C700000002||'('||C700000003||')'||': '||C700000011  as doc_title         --标题
+              ,C700000001     as baseschema                                             --工单schema
+			  ,C700000002     as basename                                               --工单名称
+			  ,C700000003     as basesn                                                 --流水号
+			  ,C700000004     as basecreatorfullname                                    --建单人名
+			  ,C700000005     as basecreatorloginName                                   --建单人登陆名
+			  ,C700000006     as basecreatedate                                         --建单时间
+			  ,C700000008     as basefinishdate                                         --完成时间
+			  ,C700000009     as baseclosedate                                          --关闭时间
+			  ,C700000010     as basestatus                                             --状态名
+			  ,C700000011     as basesummary                                            --主题       
+			  ,C700000018     as basedealouttime                                        --处理时限
+			  ,C700000019     as BaseDescrption                                         --工单描述
+			  ,C700000022     as basetplid                                              --模板ID     
+			  ,C700000042     as basecategoryclassname                                  --工单类别名
+			  ,C700000043     as basecategoryclasscode                                  --工单类别
+			  ,C700000100     as BaseCreatorConnectWay                                  --建单人电话
+			  ,C700000101     as basecreatorcorp                                        --建单人单位
+			  ,C700000103     as basecreatordep                                         --建单人部门
+			  ,C710000012	  as formattachrelation                                     --工单附件关系字段
+			  --special field
+		      ,C800020013     as INC_ResponseLevel                                      --故障响应级别
+		      ,C800020001     as INC_T1DealOutTime                                      --一级处理时限
+		      ,C800020002     as INC_T2DealOutTime                                      --二级处理时限
+		      ,C800020003     as INC_T3DealOutTime                                      --三级处理时限
+		      ,C800020028     as Is_HaveDeal                                            --是否已预处理（字典：1-是，0-否）
+		      ,C800020015     as INC_AssignType                                         --派单方式
+		      ,C800020012     as INC_FindQuomodo                                        --故障发现方式
+		      ,C800020020     as INC_HappenTime                                         --故障发生时间
+		      ,C800020021     as INC_Province                                           --故障省份
+		      ,C800020022     as INC_City                                               --故障地市
+		      ,C800020023     as INC_IsEffectOP                                         --是否影响业务
+		      ,C800020018     as INC_NE_Name                                            --网元名称
+		      ,C800020026     as AlarmLevel                                             --告警级别
+		      ,C800020017     as INC_EquipmentManufacturer                              --故障设备厂商
+		      ,C800020016     as INC_EquipmentType                                      --故障设备类型
+		      ,C800020019     as INC_EquipmentCode                                      --故障设备型号
+		      ,C800020024     as INC_CorrelationBaseID                                  --相关投诉工单号
+		      ,C800020005     as INC_Alarm_SN                                           --告警流水号
+		      ,C800020004     as INC_Alarm_ID                                           --网管告警ID
+		      ,C800020008     as INC_Alarm_Source                                       --告警来源
+		      ,C800020027     as INC_Alarm_direction                                    --告警定位
+		      ,C800020009     as INC_Alarm_LogicType                                    --告警逻辑分类
+		      ,C800020010     as INC_Alarm_LogicSubType                                 --告警逻辑子类
+		      ,C800020006     as INC_Alarm_Status                                       --告警状态
+		      ,C800020007     as INC_Alarm_ClearTime                                    --告警清除时间
+		      ,C800020011     as INC_Alarm_Desc                                         --告警描述
+		      --完成处理开始
+		      ,C800030001     as INC_DealResult                                         --故障处理结果
+		      ,C800030002     as INC_ReasonType                                         --故障原因分类
+		      ,C800030110     as Inc_IsImportantIncident                                --是否重大故障
+		      ,C800030004     as INC_DealGuomodo                                        --处理措施
+		      ,C800030005     as INC_IsDealNetChange                                    --是否实施变更
+		      ,C800030006     as INC_IsFinallyPlan                                      --是否最终解决方案
+		      ,C800030007     as INC_IsApplyCaseBase                                    --是否申请入库
+		      ,C800030008     as INC_ClearINCTime                                       --故障消除时间
+		      ,C800030009     as INC_ClearOPTime                                        --业务恢复时间
+		      ,C800030010     as INC_TakeTime                                           --影响业务时长
+		      ,C800030105     as INC_FinishDealDesc                                     --故障处理描述
+		      --派发与分派
+		      ,C800030121      as ToDealResult                                          --分派理由
+		      ,C800030120      as ToDealDesc                                            --故障处理情况
+		      ,C800030201      as INC_T2PrimaryDealDesc                                 --故障初步处理情况
+			/*COUNT*/
+			from {WF4:EL_TTM_TTH}
+			where 1=1
+			$customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend=""><![CDATA[ (C3>=#startTime# and C3<#endTime#) or (C6 >=#startTime# and C6<#endTime#)]]></sql>
+		</customwhere>
+	
+	</sqlquery>
+</sql-group>

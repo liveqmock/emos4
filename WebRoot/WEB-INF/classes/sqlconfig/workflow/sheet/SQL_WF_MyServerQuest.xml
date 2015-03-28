@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.24</date> 
+		<description>工单进度跟踪-我的服务请求</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_MyServerQuestSheet.query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/
+	 			t.baseschema,
+	 			t.baseid,
+	 		   	t.basesn,
+	 		   	t.basecreatedate,
+	 		   	t.requestuser,--申请人
+	 		   	t.service_category,--服务分类
+	 		   	t.basecreatorloginname,
+	 		   	t.basestatus,
+	 		   	t.isselfhelp,--是否是自助服务工单
+	 		   	BASEACCEPTDATE,--受理时间
+          		BASEACCEPTOUTTIME,--受理时限
+          		BASEFINISHDATE,--处理时间
+          		BASEDEALOUTTIME,--处理时限
+	 		   	t2.duedate,
+	 		   	t2.worksheettitle,
+	 		   	t2.basename,
+	 		   	t2.defname,
+	 		   	t2.entryid,
+	 		   	t2.id as taskid,
+	 		   	t2.processtype
+               
+               /*COUNT*/
+         		from bs_f_cdb_servicerequest t left join bs_t_wf_currenttask t2 on t.baseentryid = t2.entryid
+         			where 
+	 			  		t.basestatus <> '已关闭' and t.basestatus <> '已作废' and (basecreatorloginname = #sys_loginname# or t.requestuserid = #sys_loginname#)
+				 	$customwhere1$
+				 	/*ORDERBY*/order by t.basecreatedate desc/*ORDERBY*/
+			  ]]> 
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_WF_ServerQuestHistory.query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/
+	 			t.baseschema,
+	 			t.basesummary,
+	 			t.baseid,
+	 		   	t.basesn,
+	 		   	t.basecreatedate,
+	 		   	t.requestuser,--申请人
+	 		   	t.service_category,--服务分类
+	 		   	t.basecreatorloginname,
+	 		   	t.basestatus,
+	 		   	t.isselfhelp,--是否是自助服务工单
+	 		   	BASEACCEPTDATE,--受理时间
+          		BASEACCEPTOUTTIME,--受理时限
+          		BASEFINISHDATE,--处理时间
+          		BASEDEALOUTTIME,--处理时限
+	 		   	t2.duedate,
+	 		   	t2.worksheettitle,
+	 		   	t2.basename,
+	 		   	t2.defname,
+	 		   	t2.entryid,
+	 		   	t2.id as taskid,
+	 		   	t2.processtype
+               
+               /*COUNT*/
+         		from bs_f_cdb_servicerequest t left join bs_t_wf_currenttask t2 on t.baseentryid = t2.entryid
+         			where t.basestatus = '已关闭' and (basecreatorloginname = #sys_loginname# or t.requestuserid = #sys_loginname#)
+				 	$customwhere1$
+				 	/*ORDERBY*/order by t.basecreatedate desc/*ORDERBY*/
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="basesummary" />
+			<text displayname="申请人" name="requestuser" id="requestuser"/>
+			<text displayname="wf_sheet_serialnum" name="basesn" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+	    </condition>
+	    <customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator="like"  colname="upper(basesummary)"  value="#basesummary#" />
+			<field prepend="and" operator="like"  colname="requestuser"  value="#requestuser#" />
+			<field prepend="and" operator="like"  colname="basesn"  value="#basesn#" />
+			<field prepend="and" operator=">="  colname="baseCreateDate"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+        	<field prepend="and" operator="&lt;="  colname="baseCreateDate"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+		</customwhere>
+	</sqlquery>
+
+</sql-group>

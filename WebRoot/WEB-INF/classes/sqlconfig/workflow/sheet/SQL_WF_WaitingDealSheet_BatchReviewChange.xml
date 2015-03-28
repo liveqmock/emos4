@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.24</date> 
+		<description>待办工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_WaitingDealSheet_BatchReviewChange.query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/
+	 		   c.id as taskid,
+	 		   c.baseid as baseid,   						--工单编号(C700000000)
+               c.baseSchema      as baseschema,        		--工单schema(C700000001)
+               c.defname		as defname,					--流程版本号
+               c.basename      	as basename,           		--工单名称
+               c.creator        as creator,                 --建单人
+	       c.stepcode      	as stepcode,			--环节号
+               c.entryid as entryid,						--实体ID
+	       c.parententryid	as parententryid,		--父流程实体ID
+               c.serialnum      as basesn,             		--流水号(C700000003)
+               c.entryState	     as basestatus,        		--状态名(C700000010)
+               c.workSheetTitle	 as worksheettitle,       	--主题(C700000011)
+               c.flagActive      as flagactive,        		--活动(C700020020)
+               c.flagAssignType  as flagtype,      			--类型（0：主办；1：协办;2:抄送；3：审批；4：质检）(C700020019)
+               c.processType      as processtype,      		--处理类型(C700020043)
+               
+               c.assignee      as assginee,           		--负责人名称(C700020005)
+               c.assigneeCorp  as assigneecorp,       		--负责对象单位名称(C700020101)
+               c.assigneeDep   as assigneedep,        		--负责对象部门名称(C700020103)
+               c.assignGroup      as groupname,          	--负责的组( C700020007)
+               c.finishTime   as finishdate,       			--完成时间(C700000008)
+               c.dealer      as dealer,             		--执行人(C700020009)
+               c.dealerCorp  as dealercorp,         		--执行人单位(C700020111)
+               c.dealerDep   as dealerdep,          		--执行人部门(C700020113)
+               c.createtime      as stdate,             	--创建/生效时间(C700020015)
+               c.accepttime      as bgdate,             	--领单时间(C700020016)
+               c.processstate    as processstatus,      	--环节状态(C700020011)
+               c.acceptDate      as acceptdate,				--受理时限(C700020013)
+               c.duedate      as duedate,  					--处理时限(C700020014)
+               c.baseCreateTime      as baseCreateTime,  					--工单创建时间
+               c.stepno    as stepno                        --工单环节号
+               
+               /*COUNT*/
+         		from bs_t_wf_currenttask c
+         			where 
+	 			  		c.flagActive in ('1', '17') 
+				 	$customwhere1$
+				 	/*ORDERBY*/order by createtime desc/*ORDERBY*/
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" tquery="true"  />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" tquery="true"/>
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<!-- <select displayname="wf_sheet_type" name="baseSchema">
+				<sql>select code as baseSchema,name from bs_t_wf_type t</sql>
+			</select> -->
+			<hidden name="creator_loginname" id="creator_loginname" />
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator="&lt;=" colname="c.baseCreateTime" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="c.serialnum"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="c.workSheetTitle"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="c.baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<field prepend="and" operator="="  colname="c.entryState"  value="#basestatus#"/><!-- 工单状态-->
+			<field prepend="and" operator="="  colname="c.stepno"  value="#stepno#"/><!-- 工单环节-->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="c.baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+
+			<parentheses  prepend="and" >
+				<parentheses  prepend="and" >
+					<sql prepend="and"><![CDATA[c.acceptTime<1 ]]></sql><!-- 未受理 -->
+					<parentheses  prepend="and" >
+						<!--派给人-->
+						<parentheses  prepend="or" >
+							<field prepend="and" operator="="  colname="c.assigneeid"  value="#sys_loginname#"/><!-- 负责人 = 当前登录人 -->
+							<sql prepend="and"><![CDATA[ c.actortype='USER' ]]></sql>
+						</parentheses>
+
+						<if prepend="or" exp="'#dealGroupSql#'>''">
+							<success>
+								<sql prepend="EXTEND" >
+									<![CDATA[ @dealGroupSql@]]>
+								</sql>
+							</success>
+						</if>
+						
+						<!--派给组(共享或独占)-->
+						<parentheses  prepend="or" >
+							<parentheses  prepend="and" >
+								<sql prepend="and"><![CDATA[ c.actortype='GROUP' and c.dealtype != 'MANAGEMANT' ]]></sql>
+								<parentheses prepend="and" >
+									<field prepend="or" operator="="  colname="c.assignGroupId"  value="#sys_grouppid#"/><!-- 当前登录人所属的组 like 负责组ID(C700020008) -->
+								</parentheses>
+							</parentheses>
+						</parentheses>
+						
+						<!--派给组(管理员管理)-->
+						<if prepend="or" exp="'#managerGroupIdStr#'>''">
+							<success>
+								<parentheses  prepend="and" >
+									<sql prepend="and"><![CDATA[ c.actortype='GROUP' and c.dealtype = 'MANAGEMANT' ]]></sql>
+									<parentheses prepend="and" >
+										<field prepend="or" operator="="  colname="c.assignGroupId"  value="#managerGroupIdStr#"/>
+									</parentheses>
+								</parentheses>
+							</success>
+						</if>
+						
+						<!--派给角色细分(共享或独占)-->
+						<if prepend="or" exp="'#childRoleIdsStr#'>''">
+							<success>
+								<parentheses  prepend="and" >
+									<sql prepend="and"><![CDATA[ c.actortype='ROLE' and c.dealtype != 'MANAGEMANT' ]]></sql>
+									<parentheses  prepend="and" >
+										<field prepend="or" operator="="  colname="c.assignGroupId"  value="#childRoleIdsStr#"/>
+									</parentheses>
+								</parentheses>
+							</success>
+						</if>
+						
+						<!--派给角色细分(管理员管理)-->
+						<if prepend="or" exp="'#managerChildRoleIdsStr#'>''">
+							<success>
+								<parentheses  prepend="and" >
+									<sql prepend="and"><![CDATA[ c.actortype='ROLE' and c.dealtype = 'MANAGEMANT' ]]></sql>
+									<parentheses  prepend="and" >
+										<field prepend="or" operator="="  colname="c.assignGroupId"  value="#managerChildRoleIdsStr#"/>
+									</parentheses>
+								</parentheses>
+							</success>
+						</if>
+						
+						<!-- 查询当前用户的代理工单 -->
+						<if prepend="or" exp="'#dealIdStr#'>''">
+							<success>
+								<parentheses  prepend="and" >
+									<field prepend="or" operator="="  colname="c.assigneeid"  value="#dealIdStr#"/>
+								</parentheses>
+							</success>
+						</if>
+					</parentheses>
+				</parentheses>
+				<parentheses  prepend="or" >
+					<sql prepend="and"><![CDATA[c.acceptTime>0  ]]></sql><!-- 受理时间 > 0 -->
+					<parentheses  prepend="and">
+						<field prepend="and" operator="="  colname="c.dealerid"  value="#sys_loginname#"/><!--处理人 = 当前登录人 -->
+						<field prepend="or" operator="="  colname="c.assigneeid"  value="#sys_loginname#"/><!--负责人 = 当前登录人 -->
+						<field prepend="or" operator="="  colname="c.dealerid"  value="#dealIdStr#"/>
+						<parentheses  prepend="or">
+							<sql prepend="and"><![CDATA[c.dealType = 'SHARE']]></sql><!-- /*处理模式(C700020049)*/ -->
+							<parentheses  prepend="and">
+								<field prepend="or" operator="="  colname="c.assignGroupId"  value="#sys_grouppid#"/><!--当前登录人所属的组 like 处理组ID(C700020008)  -->
+								<field prepend="or" operator="="  colname="c.assignGroupId"  value="#sys_roleid#"/><!--当前登录人所属角色 like 处理组ID(C700020008)  -->
+							</parentheses>	
+						</parentheses>
+					</parentheses>
+				</parentheses>
+			</parentheses>
+		</customwhere>
+		<export>
+			<field colname="basesn" title="wf_sheet_serialnum" type="string" />
+			<field colname="assginee" title="wf_sheet_dearuser" type="string" />
+			<field colname="duedate" title="wf_sheet_dealtime" type="string" />
+			<field colname="stdate" title="wf_sheet_stdate" type="date" />
+			<field colname="basestatus" title="wf_sheet_currentstatus" type="string" />
+			<field colname="basename" title="wf_ownfield_basename" type="string" />
+			<field colname="worksheettitle" title="wf_type_basecategoryschama" type="string" />
+		</export>
+	</sqlquery>
+
+</sql-group>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<bean id="entryDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.engine.store.model.WfEntry</value>
+		</property>
+	</bean>
+	<bean id="currentDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.engine.store.model.WfCurrentStep</value>
+		</property>
+	</bean>
+	<bean id="historyDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.engine.store.model.WfHistoryStep</value>
+		</property>
+	</bean>
+	<bean id="currTaskDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.engine.task.model.CurrentProcessTask</value>
+		</property>
+	</bean>
+	<bean id="hisTaskDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.engine.task.model.HistoryProcessTask</value>
+		</property>
+	</bean>
+	<bean id="factory" class="com.ultrapower.workflow.engine.def.impl.WorkflowFactoryImpl"></bean>
+	
+	<!-- 流程事件定义 start -->
+	<bean id="eventDefineService" class="com.ultrapower.workflow.event.manager.EventDefineImpl"></bean>
+	<bean id="eventDefineDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.event.model.EventDefine</value>
+		</property>
+	</bean>
+	<bean id="eventInstanceService" class="com.ultrapower.workflow.event.manager.EventInstanceImpl"></bean>
+	<bean id="eventInstanceDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.workflow.event.model.EventInstance</value>
+		</property>
+	</bean>
+	<!-- 流程事件定义 end -->
+</beans>

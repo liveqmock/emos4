@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_QuerySimple_001" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/ pid,loginname,fullname,pwd,lastlogintime /*COUNT*/
+	 			  from bs_t_sm_user  
+	 			  where 1=1 $text$
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="登录名" name="loginname"  colspan=""  rowspan=""  isnewline="" displaytype="4" />
+			<text displayname="全名" name="fullname"  colspan=""  rowspan=""  isnewline="" displaytype="4" />
+			<text displayname="密码" name="pwd"  colspan=""  rowspan=""  isnewline="" displaytype="4" />
+			<date displayname="建立日期" name="createtime"  colspan=""  rowspan=""  isnewline="" />
+			<select displayname="是否启用" name="isuser"  colspan=""  rowspan=""  isnewline=""  dictype="status" childrenname="isuser2" />
+			<select displayname="是否启用" name="isuser2"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" />
+			<select displayname="是否启用" name="isuser2"  colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+				<sql><![CDATA[ select id,name from ... ]]></sql>
+			</select>
+			<dialog displayname="登录名" name="loginfullname"  colspan=""  rowspan=""  isnewline="" displaytype="4" onclick="" />
+			<hidden name="loginname" datatype="" />
+		</condition>
+		<customwhere name="text" prepend="and" >
+			<field prepend="and" operator="like"  datatype="" colname="loginname"  value="#loginname#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="createtime"  value="#createtime#" />
+			
+			<sql prepend="and"><![CDATA[ 1=1 ]]></sql>
+			<switch prepend="and" exp="'#loginname#'>''">
+				<case value="true">
+					<field prepend="and" operator=">="  datatype="7" colname="fullname"  value="#d1#" />
+					<field prepend="and" operator="&lt;="  datatype="7" colname="fullname"  value="#d23#" />
+				</case>
+			</switch>
+			<if prepend="and" exp="1=1 and 2=2">
+				<success>
+					<![CDATA[ 2=2 and 3=3 ]]>
+				</success>
+				<else>
+					<field prepend="and" operator="="  datatype="" colname="fullname"  value="#fullname#" />
+				</else>
+			</if>
+		</customwhere>
+	</sqlquery>
+</sql-group>

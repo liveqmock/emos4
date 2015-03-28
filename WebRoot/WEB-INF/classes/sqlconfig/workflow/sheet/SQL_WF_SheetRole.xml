@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.07.01</date> 
+		<description>工单角色维度</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_SheetRole.query" >
+		<select>
+			<![CDATA[ 
+	 		select
+				/*COUNT*/
+				r.roleid as roleid,
+				r.rolecode as rolecode,
+				r.rolename as rolename,
+				r.baseschema as baseschema,
+				r.basename as basename,
+				r.baseversion as baseversion,
+				r.phaseno as phaseno
+				/*COUNT*/
+			from BS_T_WF_WorkflowRole r
+			where 1=1 
+			$customwhere$ order by baseschema,rolecode
+			]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="r.baseversion"  value="#baseVersion#"/><!-- 工单类型 -->	
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_WF_ChildRole.query" >
+		<select>
+			<![CDATA[ 
+	 		select
+			  /*COUNT*/
+			  childroleid
+			  , childrolename
+			  , rolecode
+			  , matchcount
+			  , childroledesc
+			  , dimensionvalue
+			  , charge
+			  , baseversion
+			  /*COUNT*/
+			from BS_T_WF_CHILDROLE cr
+			where 1=1 
+			$customwhere$ order by CHILDROLENAME asc
+			]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="#para_ChildRoleName#" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="cr.rolecode"  value="#roleCode#"/><!-- 角色Code -->
+			<field prepend="and" operator="like"  colname="cr.childrolename"  value="#childRoleName#"/><!-- 角色细分名称 -->
+		</customwhere>
+	</sqlquery>
+</sql-group>

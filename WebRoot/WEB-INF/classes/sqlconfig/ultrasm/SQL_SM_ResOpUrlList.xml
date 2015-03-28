@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_ResOpUrlList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, url, resname, opname, status, remark /*COUNT*/ 
+				  from bs_t_sm_resourceurl  
+				 where 1=1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ resname, opname, url
+			  ]]> 
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_resourceName" name="resname" />
+			<text displayname="sm_lb_operateName" name="opname"  />
+			<select displayname="com_lb_status" name="status" dictype="status" value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="resname"  value="#resname#" />
+			<field prepend="and" operator="like"  colname="opname"  value="#opname#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

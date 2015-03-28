@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author></author> 
+		<date></date> 
+		<description>工作日历列表</description> 		
+	</doc>
+	<sqlquery name="SQL_OPT_WorkCalendarList.query" >
+		<select>
+			<![CDATA[ 
+				select
+				 /*COUNT*/
+				  pid,calendartype,datestring,isholiday,holidaytype
+				 /*COUNT*/
+				  from bs_t_com_workcalendar
+				 where 1=1
+				  $customwhere$
+				 /*ORDERBY*/ order by /*ORDERBY*/ dateseconds desc
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<select displayname="opt_lb_workCalType" name="calendartype"  dictype="workCalendarType" value=""/>
+			<text displayname="opt_lb_workDateStr" name="datestring"/>
+			<select displayname="opt_lb_isHoliday" name="isholiday" dictype="isdefault" value=""/>
+			<select displayname="opt_lb_holidayType" name="holidaytype" dictype="holidayType" value=""/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="calendartype"  value="#calendartype#"/>
+			<field prepend="and" operator="="  colname="datestring"  value="#datestring#"/>
+			<field prepend="and" operator="="  colname="isholiday"  value="#isholiday#"/>
+			<field prepend="and" operator="="  colname="holidaytype"  value="#holidaytype#"/>
+		</customwhere>
+	</sqlquery>
+</sql-group>

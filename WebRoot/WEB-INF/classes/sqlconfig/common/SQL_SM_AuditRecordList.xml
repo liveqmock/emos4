@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>徐发球</author> 
+		<date>2010-07-15</date> 
+		<description>审计日志</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_AuditRecordList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ loginname,ip,module, opertype, description, time /*COUNT*/
+				  from bs_t_sm_operauditlog
+				 where 1=1 $customwhere$
+				 order by time desc
+			]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<date displayname="com_lb_starttime" name="createtime" />
+			<date displayname="com_lb_endtime" name="endtime" />
+			<text displayname="sm_lb_operater" name="loginname" />
+			<select displayname="sm_lb_modolName" name="module"  dictype="AuditLog" childrenname="opertype" value=""/>
+			<select displayname="sm_lb_operateName" name="opertype"  dictype="" value=""/>
+			<text displayname="sm_lb_logInfo" name="description" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">="  datatype="7" colname="time"  value="#createtime#" />
+			<field prepend="and" operator="&lt;="  datatype="7" colname="time"  value="#endtime#" />
+			<field prepend="and" operator="like"  colname="loginname"  value="#loginname#" />
+			<field prepend="and" operator="="  colname="module"  value="#module#" />
+			<field prepend="and" operator="="  colname="opertype"  value="#opertype#" />
+			<field prepend="and" operator="like"  colname="description"  value="#description#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

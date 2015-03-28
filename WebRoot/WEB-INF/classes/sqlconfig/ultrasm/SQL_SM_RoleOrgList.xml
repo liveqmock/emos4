@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_RoleOrgList.query" >
+		<select>
+			<![CDATA[ 
+	 			select /*COUNT*/ pid,rolename,orgname,orgtype,roledns,rolepid /*COUNT*/ from (
+					select
+					 m.pid pid,l.rolename rolename,r.fullname orgname,m.orgtype orgtype,l.roledns roledns,l.pid rolepid 
+					 from bs_t_sm_role l,bs_t_sm_roleorg m,bs_t_sm_user r 
+					 where l.pid=m.roleid and m.orgid=r.pid and m.orgtype=1 and r.status='1'
+					union
+					select
+					 m.pid pid,l.rolename rolename,r.depfullname orgname,m.orgtype orgtype,l.roledns roledns,l.pid rolepid 
+					 from bs_t_sm_role l,bs_t_sm_roleorg m,bs_t_sm_dep r 
+					 where l.pid=m.roleid and m.orgid=r.pid and m.orgtype=2 and r.status='1'
+				) where 1=1 $customwhere$ $privilege$
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_roleName" name="rolename" />
+			<text displayname="sm_lb_orgName" name="orgname"  />
+			<select displayname="sm_lb_orgType" name="orgtype" dictype="orgtype" value=""/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="rolename"  value="#rolename#" />
+			<field prepend="and" operator="like"  colname="orgname"  value="#orgname#" />
+			<field prepend="and" operator="="  colname="orgtype"  value="#orgtype#" />
+			<field prepend="and" operator="leftlike" colname="roledns" value="#roledns#"/>
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_RoleOrgList.theRole_query" >
+		<select>
+			<![CDATA[ 
+	 			select /*COUNT*/ pid,rolename,orgname,orgtype,roledns /*COUNT*/ from (
+					select
+					 m.pid pid,l.rolename rolename,r.fullname orgname,m.orgtype orgtype,l.roledns roledns 
+					 from bs_t_sm_role l,bs_t_sm_roleorg m,bs_t_sm_user r 
+					 where l.pid=m.roleid and m.orgid=r.pid and m.orgtype=1 $theRoleId$
+					union
+					select
+					 m.pid pid,l.rolename rolename,r.depfullname orgname,m.orgtype orgtype,l.roledns roledns 
+					 from bs_t_sm_role l,bs_t_sm_roleorg m,bs_t_sm_dep r 
+					 where l.pid=m.roleid and m.orgid=r.pid and m.orgtype=2 $theRoleId$
+				) where 1=1 $customwhere$
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_orgName" name="orgname"  />
+			<select displayname="sm_lb_orgType" name="orgtype" dictype="orgtype"/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="orgname"  value="#orgname#" />
+			<field prepend="and" operator="="  colname="orgtype"  value="#orgtype#" />
+		</customwhere>
+		<customwhere name="theRoleId" prepend="and">
+			<field prepend="and" operator="=" colname="l.pid" value="#theroleid#"/>
+		</customwhere>
+	</sqlquery>
+</sql-group>

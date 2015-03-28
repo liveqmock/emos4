@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	<!-- 短信过滤开始 -->
+	<bean id="noticeFilterDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>
+				com.ultrapower.eoms.extend.notice.model.NoticeFilter
+			</value>
+		</property>
+	</bean>
+	<bean id="noticeFilterService" class="com.ultrapower.eoms.extend.notice.manager.NoticeFilterManager"/>
+	<bean id="noticeFilterAction" class="com.ultrapower.eoms.extend.notice.web.NoticeFilterAction"/>
+	<!-- 短信过滤结束 -->
+	
+	<!-- 工作日历开始 -->
+	<bean id="workCalendarAction" class="com.ultrapower.eoms.extend.workcalendar.web.WorkCalendarAction"/>
+	<bean id="workCalendarDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>
+				com.ultrapower.eoms.extend.workcalendar.model.WorkCalendar
+			</value>
+		</property>
+	</bean>
+	<bean id="workTimeDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>
+				com.ultrapower.eoms.extend.workcalendar.model.WorkTime
+			</value>
+		</property>
+	</bean>
+	<bean id="workCalendarService" class="com.ultrapower.eoms.extend.workcalendar.manager.WorkCalendarManager"/>
+	<bean id="workTimeService" class="com.ultrapower.eoms.extend.workcalendar.manager.WorkTimeManager"/>
+	<!-- 工作日历结束 -->
+</beans>

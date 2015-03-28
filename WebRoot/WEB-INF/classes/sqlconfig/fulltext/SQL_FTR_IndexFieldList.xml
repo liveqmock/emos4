@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>任成林</author> 
+		<date>2010-12-20</date> 
+		<description>索引字段定义列别</description> 		
+	</doc>
+	<sqlquery name="SQL_FTR_IndexFieldList.query" >
+		<select>
+			<![CDATA[ 
+				select 
+					/*COUNT*/
+					 f.pid
+					,c.displayname as categoryname
+					,f.displayname as fieldname
+					,f.isstore
+					,f.isindex
+					,f.isanalyze
+					,f.isdisplay
+					,f.istitle
+					,f.sourcetype
+					/*COUNT*/
+					from bs_t_ftr_indexfieldcfg f,bs_t_ftr_indexcategory c
+					where f.indextypeid = c.pid
+					$customwhere$ 
+					/*ORDERBY*/order by/*ORDERBY*/ f.indextypeid,f.ordernum
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="ftr_lb_indexCategoryName" name="categoryname" />
+			<text displayname="ftr_lb_fieldDisplayName" name="fieldname" />
+			<select displayname="ftr_lb_isIndex" name="isindex"  dictype="isdefault" value=""/>
+			<select displayname="ftr_lb_sourceType" name="sourcetype"  dictype="FTRSourceType" value=""/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="c.displayname"  value="#categoryname#" />
+			<field prepend="and" operator="like"  colname="f.displayname"  value="#fieldname#" />
+			<field prepend="and" operator="="  colname="f.isindex"  value="#isindex#" />
+			<field prepend="and" operator="="  colname="f.sourcetype"  value="#sourcetype#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+        
+<struts>
+	<!-- 组织机构_start -->
+	<package name="userManager" extends="eoms" namespace="/userManager">
+		<action name="*" method="{1}" class="userManagerAction">
+			<result name="success">/ultrasm/organization/{1}.jsp</result>
+			<result name="common">/ultrasm/common/{1}.jsp</result>
+			<result name="custom">/ultrasm/organization/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+			<result name="close">/common/core/close.jsp</result>
+		</action>
+	</package>
+
+	<package name="depManager" extends="eoms" namespace="/depManager">
+		<action name="*" method="{1}" class="depManagerAction">
+			<result name="success">/ultrasm/organization/{1}.jsp</result>
+			<result name="custom">/ultrasm/organization/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+
+	<package name="depUserRelationManager" extends="eoms" namespace="/depUserRelation">
+		<action name="*" method="{1}" class="depUserRelationAtion">
+			<result name="success">/ultrasm/organization/{1}.jsp</result>
+			<result name="custom">/ultrasm/organization/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 组织机构_end -->
+	
+	<!-- 菜单管理_start -->
+	<package name="menuManager" extends="eoms" namespace="/menuManager">
+		<action name="*" method="{1}" class="menuManagerAction">
+			<result name="success">/ultrasm/menuinfo/{1}.jsp</result>
+			<result name="custom">/ultrasm/menuinfo/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 菜单管理_end -->
+	
+	<!-- 资源管理 start -->
+	<package name="resManager" extends="eoms" namespace="/resManager">
+		<action name="*" method="{1}" class="resourceManagerAction">
+			<result name="success">/ultrasm/resource/{1}.jsp</result>
+			<result name="custom">/ultrasm/resource/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="resUrlManage" extends="eoms" namespace="/resUrlManager">
+		<action name="*" method="{1}" class="resUrlManagerAction">
+			<result name="success">/ultrasm/resource/{1}.jsp</result>
+			<result name="custom">/ultrasm/resource/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 资源管理 end -->
+	
+	<!-- 操作管理_start -->
+	<package name="operateManager" extends="eoms" namespace="/operateManager">
+		<action name="*" method="{1}" class="operateManagerAction">
+			<result name="success">/ultrasm/resource/{1}.jsp</result>
+			<result name="custom">/ultrasm/resource/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 操作管理_end -->
+	
+	<!-- 角色管理_start -->
+	<package name="roleManager" extends="eoms" namespace="/roleManager">
+		<action name="*" method="{1}" class="roleManagerAction">
+			<result name="success">/ultrasm/privilege/{1}.jsp</result>
+			<result name="custom">/ultrasm/privilege/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="roleMenuManager" extends="eoms" namespace="/roleMenuManager">
+		<action name="*" method="{1}" class="roleMenuManagerAction">
+			<result name="success">/ultrasm/privilege/{1}.jsp</result>
+			<result name="custom">/ultrasm/privilege/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="roleResOpManager" extends="eoms" namespace="/roleResOpManager">
+		<action name="*" method="{1}" class="roleResOpManagerAction">
+			<result name="success">/ultrasm/privilege/{1}.jsp</result>
+			<result name="custom">/ultrasm/privilege/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<package name="roleOrgManager" extends="eoms" namespace="/roleOrgManager">
+		<action name="*" method="{1}" class="roleOrgManagerAction">
+			<result name="success">/ultrasm/privilege/{1}.jsp</result>
+			<result name="custom">/ultrasm/privilege/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 角色管理_end -->
+	
+	<!-- 字典管理_start -->
+	<package name="dicManager" extends="eoms" namespace="/dicManager">
+		<action name="*" method="{1}" class="dicManagerAction">
+			<result name="success">/ultrasm/dictionary/{1}.jsp</result>
+			<result name="custom">/ultrasm/dictionary/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 字典管理_end -->
+	
+	<!-- 库表维护_start -->
+	<package name="tableManager" extends="eoms" namespace="/tableManager">
+		<action name="*" method="{1}" class="tableManagerAction">
+			<result name="success">/ultrasm/databasetable/{1}.jsp</result>
+			<result name="custom">/ultrasm/databasetable/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 库表维护_end -->
+	
+	<!-- EXCEL导出配置维护_start -->
+	<package name="excelManager" extends="eoms" namespace="/excelManager">
+		<action name="*" method="{1}" class="excelManagerAction">
+			<result name="success">/ultrasm/databasetable/{1}.jsp</result>
+			<result name="custom">/ultrasm/databasetable/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- EXCEL导出配置维护_end -->
+	
+	<!-- 我的菜单管理 start -->
+	<package name="mymenu" extends="eoms" namespace="/common/portal">
+		<action name="*" method="{1}" class="mymenuManagerAction">
+			<result name="success">/common/portal/frame/{1}.jsp</result>
+			<result name="custom">/common/portal/frame/${target}.jsp</result>
+			<result name="refreshParent">/common/portal/frame/addMyMenufreshParent.jsp</result>
+		</action>
+	</package>
+	<package name="myMenuManager" extends="eoms" namespace="/myMenuManager">
+		<action name="*" method="{1}" class="mymenuManagerAction">
+			<result name="success">/ultrasm/mymenu/{1}.jsp</result>
+			<result name="custom">/ultrasm/mymenu/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 我的菜单管理 end -->
+	
+	<!-- 数据移植_start -->
+	<package name="dataShift" extends="eoms" namespace="/dataShift">
+		<action name="*" method="{1}" class="dataShiftAction">
+			<result name="success">/ultrasm/common/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="systemConfig" extends="eoms" namespace="/systemConfig">
+		<action name="*" method="{1}" class="systemConfig">
+		</action>
+	</package>
+	<package name="batchSynchData" extends="eoms" namespace="/batchSynchData">
+		<action name="*" method="{1}" class="batchSynchDataAction">
+			<result name="success">/ultrasm/synchdata/{1}.jsp</result>
+		</action>
+	</package>
+	<!-- 数据移植_end -->
+	
+	<!-- 自定义树管理  start -->
+	<package name="custSendTree" extends="eoms" namespace="/formCustSendTree">
+		<action name="*" method="{1}" class="formCustSendTreeAction">
+			<result name="success">/ultrasm/common/{1}.jsp</result>
+			<result name="custom">/ultrasm/common/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 自定义树管理 end -->
+	
+	<!-- 人员模版配置_start -->
+	<package name="userTemplate" extends="eoms" namespace="/userTemplate">
+		<action name="*" method="{1}" class="userTemplateAction">
+			<result name="success">/ultrasm/usertemplate/{1}.jsp</result>
+			<result name="custom">/ultrasm/usertemplate/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 人员模版配置_end -->
+	
+	
+	<!-- 接口建单维护_start -->
+	<package name="bsTCmbcAlarmnote" extends="eoms" namespace="/bsTCmbcAlarmnote">
+		<action name="*" method="{1}" class="bsTCmbcAlarmnoteAction">
+			<result name="success">/ultrasm/common/{1}.jsp</result>
+			<result name="custom">/ultrasm/common/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 接口建单维护_end -->
+	
+	
+	<!-- 通用树 duly 201411 -->
+	<package name="commonTree" extends="eoms" namespace="/commonTree">
+		<action name="*" method="{1}" class="commonTreeAction">
+			<result name="success">/common/tree/{1}.jsp</result>
+			<result name="custom">/common/tree/${target}.jsp</result>
+			<result name="refresh">/common/core/freshParent.jsp</result>
+		</action>
+	</package>
+	<!-- 通用展示树 -->
+	<package name="commonViewTree" extends="eoms" namespace="/commonViewTree">
+		<action name="*" method="{1}" class="commonViewTreeAction">
+			<result name="success">/common/tree/{1}.jsp</result>
+			<result name="custom">/common/tree/${target}.jsp</result>
+		</action>
+	</package>
+	<!-- 接口建单维护_end -->
+</struts>

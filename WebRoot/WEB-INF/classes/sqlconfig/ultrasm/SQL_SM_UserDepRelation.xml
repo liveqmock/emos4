@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_UserDepRelation.query">
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, loginname, fullname /*COUNT*/
+				  from bs_t_sm_user  
+				 where 1=1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ loginname
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_loginName" name="loginname" />
+			<text displayname="sm_lb_fullName" name="fullname"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="loginname"  value="#loginname#" />
+			<field prepend="and" operator="like"  colname="fullname"  value="#fullname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

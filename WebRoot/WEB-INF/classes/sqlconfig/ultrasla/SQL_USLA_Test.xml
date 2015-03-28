@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>RenChenglin</author> 
+		<date>2011-11-07</date> 
+		<description>UltraSla测试</description> 		
+	</doc>
+	<sqlquery name="SQL_USLA_Test.query.evtmp" ><!-- 事件临时表查询SQL -->
+		<select>
+			<![CDATA[ 
+				select 
+				/*COUNT*/
+					etp.pid
+					,etp.eventid
+					,etp.ruleids
+					,etp.duetime
+					,etp.defaultuser
+					,etp.defaultgroup
+					,etp.defaultrole
+					,etp.eventparamxml
+				/*COUNT*/
+				from bs_t_usla_eventtemp etp
+				where etp.status = 1 
+					$customwhere$
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_Test.query.pre">
+		<select>
+			<![CDATA[
+				select pid, loginname, fullname, mobile, email from bs_t_sm_user
+				 where 1=1
+				   and depid = #depid#
+			]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_Test.query.after">
+		<select>
+			<![CDATA[
+				select pid, loginname, fullname, mobile, email from bs_t_sm_user
+				 where 1=1
+				   and depid = #depidcomp#
+			]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_Test.query.getUser">
+		<select>
+			<![CDATA[
+				select pid, loginname, fullname, mobile, email from bs_t_sm_user
+				 where loginname in ('xufaqiu','sunhailong')
+			]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_Test.query.getParam">
+		<select>
+			<![CDATA[
+				select '故障' basename, '孙海龙' operateuser from dual
+			]]>
+		</select>
+	</sqlquery>
+	<sqlquery name="SQL_USLA_Test.query.FaultDealGroup">
+		<select>
+			<![CDATA[
+				select pid, loginname, fullname, mobile, email from bs_t_sm_user
+				 where loginname in ('mayanwei','yeyuan')
+			]]>
+		</select>
+	</sqlquery>
+</sql-group>

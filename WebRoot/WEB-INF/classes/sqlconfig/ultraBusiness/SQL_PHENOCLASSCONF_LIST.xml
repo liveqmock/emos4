@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql描述</description> 		
+	</doc>
+	<sqlquery name="SQL_PHENOCLASSCONF_List.query" >
+		<select>
+			<![CDATA[
+				SELECT /*COUNT*/
+					   PID                phenoclassconfid,
+					   DINAME             diname,
+					   DIVALUE			  divalue,
+					   PICID			  picid,
+					   DICFULLNAME		  dicfullname,
+					   PICNAME			  picname,	
+					   CREATETIME		  createtime
+				       /*COUNT*/
+				  FROM BS_T_WF_INCPHENOCLASSCONF T
+				 WHERE 1 = 1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ CREATETIME desc
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="现象分类名称" name="diname" />
+			<text displayname="负责人" name="picname"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		<field prepend="and" operator="like"  colname="DINAME"  value="#diname#" />
+		<field prepend="and" operator="like"  colname="PICNAME"  value="#picname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

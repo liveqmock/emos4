@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName" default-lazy-init="true">
+	<!-- 接口中间表 lza-->
+	<bean id="wfiDatainService" class="com.ultrapower.wfinterface.core.manager.WfiDatainImpl" />
+	<bean id="wfiDatainDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.wfinterface.core.model.WfiDatain</value>
+		</property>
+	</bean>
+	<bean id="wfiDataoutService" class="com.ultrapower.wfinterface.core.manager.WfiDataoutImpl" />
+	<bean id="wfiDataoutDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.wfinterface.core.model.WfiDataout</value>
+		</property>
+	</bean>
+	<!-- 接口附件中间表 lza-->
+	<bean id="wfiTempAttachmentService" class="com.ultrapower.wfinterface.core.manager.WfiTempAttachmentImpl" />
+	<bean id="wfiTempAttachmentDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.wfinterface.core.model.WfiTempAttachment</value>
+		</property>
+	</bean>
+	<bean id="wfInterfaceConfig" class="com.ultrapower.wfinterface.core.manager.DefaultWFInterfaceConfig" />
+	<bean id="wfInterfaceServiceCaller" class="com.ultrapower.wfinterface.core.manager.WebServiceCallerImpl" />
+	
+	<!-- 接口业务规则 -->
+	<bean id="syncStausToOtherSysService" class="com.ultrapower.wfinterface.core.manager.SyncStausToOtherSysImpl" />
+	<bean id="syncStausToOtherSysDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+	</bean>
+	
+</beans>

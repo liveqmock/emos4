@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_EventDefinedList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, baseschema, eventtype, eventsubject, eventaction,eventcondition,handletype,handletypegroupid,operationtype,operationname/*COUNT*/
+				  from bs_t_wf_eventdef
+				 where 1=1 $customwhere$ $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ baseschema, eventtype, handletype
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >		
+			<select displayname="wf_sheet_type" name="baseschema">
+				<sql>select code as baseSchema,name from bs_t_wf_type t</sql>
+			</select>
+			<select displayname="wf_eventType" name="eventtype"  dictype="EventType" value="" />	
+			<text displayname="wf_eventSubject" name="eventsubject" />
+			<select displayname="wf_eventAction" name="eventaction"  dictype="EventAction" value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseschema#" />
+			<field prepend="and" operator="="  colname="eventtype"  value="#eventtype#" />
+			<field prepend="and" operator="like" colname="eventsubject" value="#eventsubject#"/>
+			<field prepend="and" operator="="  colname="eventaction"  value="#eventaction#" />
+		</customwhere>
+	</sqlquery>
+	
+	<sqlquery name="SQL_WF_EventDefinedList.query_selRule" >
+		<select>
+			<![CDATA[ 
+				select 
+					/*COUNT*/ pid ,rulename ,noticetype ,timespan/60  as timespan ,validstarttime ,validendtime /*COUNT*/
+				from bs_t_usla_eventrule
+				where status = 1
+				  and ruletype = 'workflow'
+				 $customwhere$
+				/*ORDERBY*/ order by /*ORDERBY*/ rulename
+			  ]]> 
+		</select>
+		<condition cols="2" labprecent="18" textprecent="32">		
+			<text displayname="wf_ruleName" name="rulename" />
+			<select displayname="wf_noticeType" name="noticetype" dictype="noticetype" value=""/>
+			<date displayname="wf_validStartTime" name="validstarttime"/>
+			<date displayname="wf_validEndTime" name="validendtime"/>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="and" operator="like" colname="rulename" value="#rulename#"/>
+			<field prepend="and" operator="=" colname="noticetype"  value="#noticetype#"/>
+			<field prepend="and" operator=">=" colname="validstarttime" value="#validstarttime#" datatype="7"/>
+			<field prepend="and" operator="&lt;=" colname="validendtime" value="#validendtime#" datatype="7"/>
+		</customwhere>
+	</sqlquery>
+	</sql-group>

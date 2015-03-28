@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName" default-lazy-init="true">
+	<!-- 用户门户_start -->
+	<bean id="portalManagerAction" class="com.ultrapower.eoms.common.portal.web.PortalManagerAction" />
+	<bean id="portalManagerService" class="com.ultrapower.eoms.common.portal.manager.PortalManagerImpl" />
+	<!-- 用户门户_end -->
+	<!-- 用户Session接口扩展实现类配置 -->
+	<bean id="userSessionSystemRoleExt" class="com.ultrapower.eoms.common.portal.manager.UserSessionSystemRoleExt"/>
+	<bean id="userSessionWorkflowExt" class="com.ultrapower.eoms.common.portal.manager.UserSessionWorkflowExt"/>
+</beans>

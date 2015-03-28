@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>案例库</description> 		
+	</doc>
+	<sqlquery name="SQL_FTR_KnowledgeBase.query" >
+		<select>
+			<![CDATA[
+				select 
+				/*COUNT*/ 
+				    RY.pid field_id
+			       ,RY.TITLE title               --标题
+			       ,RY.TYPE type                 --案例库类别，1：网络专题分析2：设备应急方案，3：网管制度 4：厂家维护手册 5：维护经验/监控案例，6：维护经验/故障案例 7：客户投诉案例
+			       ,RY.KEYWORD keyword           --关键字
+			       ,RY.SUMMARY summary           --摘要
+			       ,RY.REMARK remark             --备注
+			       ,RY.USERID userid             --创建人ID
+			       ,RY.CREATETIME doc_createtime --创建时间
+			       ,rp.name name                 --案例库字段名称
+			       ,rpv.value value              --案例库字段值  
+				/*COUNT*/ 
+				from BS_T_REPOSITORY RY, BS_T_REPOSITORY_PROPERTY_VALUE rpv,BS_T_REPOSITORY_PROPERTY rp
+				where rpv.knowledgeid = ry.pid and rpv.propertyid = rp.pid
+				$customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend="OR"><![CDATA[ (RY.CREATETIME>=#startTime# and RY.CREATETIME<#endTime#)]]></sql>
+		</customwhere>
+	</sqlquery>
+</sql-group>

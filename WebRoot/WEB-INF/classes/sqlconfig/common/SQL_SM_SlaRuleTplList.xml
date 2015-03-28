@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-09-01</date> 
+		<description>SLA规则模板管理</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SlaRuleTplList.queryList" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid,
+				       ruletemplatename,
+				       systemtype,
+				       datasource,
+				       status,
+				       ordernum /*COUNT*/
+				  from bs_t_sm_ruletpl 
+		 	    where 1=1 $customwhere$ 
+		 			 order by ordernum
+			  ]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_ruletemname" name="ruletemplatename" value="" />
+			<select displayname="sm_lb_systemtype" name="systemtype" dictype="dictype" value=""/>
+			<text displayname="sm_lb_datasource" name="datasource" value=""/>
+			<select displayname="com_lb_status" name="status"  dictype="status" value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="ruletemplatename"  value="#ruletemplatename#" />
+			<field prepend="and" operator="="  colname="systemtype"  value="#systemtype#" />
+			<field prepend="and" operator="="  colname="datasource"  value="#datasource#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

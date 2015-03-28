@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>SunHailong</author> 
+		<date>2011-05-16</date> 
+		<description>人员模版配置表查询SQL</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_UserTemplate.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, templatename, userdata, depdata, isshare, status, remark /*COUNT*/
+				  from bs_t_sm_usertemplate
+				 where creater = #sys_loginpid#
+				  $customwhere$
+				 /*ORDERBY*/ order by /*ORDERBY*/ ordernum
+			  ]]> 
+		</select>
+		<condition cols="2" labprecent="15" textprecent="35" >
+			<text displayname="sm_lb_templateName" name="templatename" />
+			<select displayname="sm_lb_isShare" name="isshare" dictype="isdefault" value="" />
+			<text displayname="sm_lb_templateDataDep" name="depdata" />
+			<text displayname="sm_lb_templateDataUser" name="userdata" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like" colname="templatename" value="#templatename#" />
+			<field prepend="and" operator="=" colname="isshare" value="#isshare#" />
+			<field prepend="and" operator="like" colname="depdata" value="#depdata#" />
+			<field prepend="and" operator="like" colname="userdata" value="#userdata#" />
+		</customwhere>
+	</sqlquery>
+	<sqlquery name="SQL_SM_UserTemplateType.query.1" ><!-- 工单类别 -->
+		<select>
+			<![CDATA[ 
+				select code as baseschema, name
+				  from bs_t_wf_type t
+				 where 1=1
+				 order by baseschema
+			  ]]> 
+		</select>
+	</sqlquery>
+</sql-group>

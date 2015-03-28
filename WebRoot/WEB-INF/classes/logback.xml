@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<substitutionProperty name="logbackHome" value="../logs" /><!-- 定义输出路径变量 -->  
+	
+	<!-- 按照每天生成日志文件 -->
+	<!-- 控制台输出 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>gb2312</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+
+
+	<!-- All INFO -->
+	<appender name="FILELOG-AllINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+	    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+          <level>INFO</level>
+        </filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/info%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<!-- All ERROR -->
+	<appender name="FILELOG-AllERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+	    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+          <level>ERROR</level>
+        </filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/error%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<!-- 作业计划日志 -->
+	<appender name="FILELOG-ULTRAPLAN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/ultraplan%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+	  
+	<!-- 流程管理日志 -->
+	<appender name="FILELOG-ULTRAFORM" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/ultraform%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 流程相关 -->
+	<appender name="WORKFLOW" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/workflow%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 流程引擎相关 -->
+	<appender name="WFENGINE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/wfengine%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 系统管理日志 -->
+	<appender name="FILELOG-ULTRASM" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/ultrasm%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 值班 -->
+	<appender name="FILELOG-ULTRADUTY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/ultraduty%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 全文检索日志 -->
+	<appender name="FILELOG-FTR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/ftrCoreLogs%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	 <!-- 值班模块包下的日志,输出到FILELOG-ULTRADUTY文件中 -->
+	 <logger name="com.ultrapower.eoms.ultraduty">
+	 	<appender-ref ref="FILELOG-ULTRADUTY"/>
+	 </logger> 
+	
+	 <!-- 流程模块包下的日志,输出到FILELOG-ULTRAPLAN文件中 -->
+	 <logger name="com.ultrapower.eoms.ultraform">
+	 	<appender-ref ref="FILELOG-ULTRAFORM"/>
+	 </logger> 
+	 
+	 <!-- 流程相关 -->
+	 <logger name="com.ultrapower.eoms.workflow">
+	 	<appender-ref ref="WORKFLOW"/>
+	 </logger> 
+	 
+	 <!-- 流程引擎相关 -->
+	 <logger name="com.ultrapower.workflow">
+	 	<appender-ref ref="WFENGINE"/>
+	 </logger> 
+	 
+	  <!-- 系统管理模块包下的日志,输出到FILELOG-ULTRASM文件中 -->
+	  <logger name="com.ultrapower.eoms.ultrasm">
+	 	<appender-ref ref="FILELOG-ULTRASM"/>
+	 </logger> 
+	 
+	 <!-- 作业计划模块包下的日志,输出到FILELOG-KM文件中 -->
+	 <logger name="com.ultrapower.eoms.ultraplan">
+	 	<appender-ref ref="FILELOG-ULTRAPLAN"/>
+	 </logger>
+	 
+	 <!-- 全文检索,输出到FILELOG-FTR文件中 -->
+	 <logger name="com.ultrapower.eoms.fulltext">
+		<appender-ref ref="FILELOG-FTR"/>
+	 </logger>
+	<logger name="org.apache.commons.validator.ValidatorResources" level="ERROR" />
+	<logger name="org.springframework" level="INFO" />
+    <logger name="org.springframework.ui.freemarker" level="INFO" />
+	<logger name="net.sf.ehcache" level="ERROR" />
+	<logger name="com.opensymphony.xwork2" level="ERROR" />
+	<logger name="org.hibernate" level="ERROR" />
+	<logger name="org.hibernate.SQL" level="ERROR" />
+	<logger name="freemark" level="ERROR" />
+	<logger name="java.sql.PreparedStatement" level="ERROR" />  
+    <logger name="org.apache.tomcat" level="ERROR" />  
+	<logger name="org.hibernate.cache" level="ERROR" />
+
+	 <root level="INFO">
+	  	<appender-ref ref="CONSOLE"/>  
+        <appender-ref ref="FILELOG-AllINFO"/>
+        <appender-ref ref="FILELOG-AllERROR"/>
+    </root> 
+</configuration>

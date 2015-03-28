@@ -1,0 +1,56 @@
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<bean type="com.opensymphony.xwork2.ObjectFactory" name="spring"
+		class="com.ultrapower.eoms.common.core.support.StrutsSpringObjectFactory" />
+
+	<package name="eoms" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="bpmStack">
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="actionMappingParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*,^struts\..*</param>
+				</interceptor-ref>
+				<interceptor-ref name="conversionError" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="bpmStack" />
+		<global-results>
+			<result name="input">/common/core/error.jsp</result>
+			<result name="close">/common/core/close.jsp</result>
+			<result name="loadxml">/common/core/loadxml.jsp</result>
+			<result name="check">/common/core/check.jsp</result>
+			<result name="redirect" type="redirect">
+				${target}.action
+			</result>
+			<result name="redirectpar" type="redirect">
+				${target}
+			</result>		
+			<result name="errorMessage">/common/core/errorMessage.jsp</result>	
+		</global-results>
+	</package>
+	<!-- action的配置文件 -->
+	<include file="/struts/demo.xml"/>
+	<include file="/struts/common.xml"></include>
+	<include file="/struts/portal.xml"/>
+	<include file="/struts/ultrasm.xml"/>
+	<include file="/struts/ultraworkflow.xml"/>
+	<include file="/struts/ultraworkflow_jsp.xml"/>
+	<include file="/struts/fulltext.xml"/>
+	<include file="/struts/ultrasla.xml"/>
+	<include file="/struts/optional.xml"/>
+	<include file="/struts/ultrabpp.xml"/>
+	<include file="/struts/ultraBusiness.xml"/>
+	<include file="/struts/notice.xml"/>
+	<include file="/struts/ultraduty.xml"/>
+</struts>
+

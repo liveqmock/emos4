@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>Renchenglin</author> 
+		<date>2010-07-01</date> 
+		<description>Get this list of table</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_TableList.query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/ pid, enname, cnname, tabletype, remark /*COUNT*/
+				  from bs_t_sm_table 
+				 where 1=1
+				  $customwhere$
+				  $privilege$ 
+				 /*ORDERBY*/ order by /*ORDERBY*/ tabletype, enname
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_tbEnname" name="enname" />
+			<text displayname="sm_lb_tbCnname" name="cnname"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="enname"  value="#enname#" />
+			<field prepend="and" operator="like"  colname="cnname"  value="#cnname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

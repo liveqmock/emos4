@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author></author> 
+		<date></date> 
+		<description></description> 		
+	</doc>
+	<sqlquery name="SQL_SM_ExcelList.excelExpCfg_query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/ pid,cfgmark,cfgname,excelname,remark /*COUNT*/
+				  from bs_t_sm_excelexpcfg 
+				 where 1=1
+				  $customwhere$ 
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ cfgmark
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_excelCfgMark" name="cfgmark" />
+			<text displayname="sm_lb_excelCfgName" name="cfgname"  />
+			<text displayname="sm_lb_excelCfgExcelName" name="excelname"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="cfgmark"  value="#cfgmark#" />
+			<field prepend="and" operator="like"  colname="cfgname"  value="#cfgname#" />
+			<field prepend="and" operator="like"  colname="excelname"  value="#excelname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

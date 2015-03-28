@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.07.01</date> 
+		<description>工单角色维度</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_SheetDimension.query" >
+		<select>
+			<![CDATA[ 
+	 		select
+			/*COUNT*/
+			d.DIMENSIONID as id,				--id
+			d.DIMENSIONCODE as dimensioncode,	--维度标识
+			d.DIMENSIONNAME as dimensionname,	--维度中文名
+			d.FIELDID as filedid,				--工单字段ID
+			d.BASESCHEMA as	baseschema,			--工单类别
+			d.BASENAME as basename,				--工单名称
+			d.DICTNAME as dictname,				--字典中文名
+			d.DICTSCHEMA as	dictschema,			--字典表名
+			d.DICTFIELDID as dictfieldid,		--字典中维度字段ID
+			d.DICTFIELDCODE as	dictfieldcode,	--字典中维度字段标识
+			d.DICTFIELDNAME as	dictfieldname	--字典中维度字段中文名
+			/*COUNT*/
+			from BS_T_WF_DIMENSIONS d
+			where 1=1 
+			$customwhere$
+			]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="d.BASESCHEMA"  value="#baseSchema#"/><!-- 工单类型 -->	
+		</customwhere>
+	</sqlquery>
+
+</sql-group>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author></author> 
+		<date></date> 
+		<description>关联工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_RelateSheet.query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/
+	 		   *
+	 		   
+               /*COUNT*/
+         		from 
+         		(  select a.baseid, a.baseschema, a.basename, a.basesn,  a.relatetype, a.relatetime, a.relateusername,b.basesummary
+        from ( 
+         			select 
+         				baseid 			as baseid, 
+         				baseschema 		as baseschema, 
+         				basename 		as basename, 
+         				basesn 			as basesn, 
+         				relatetype 		as relatetype, 
+         				relatetime 		as relatetime, 
+         				relateusername  as relateusername
+         			from bs_t_wf_relation t where t.relatebaseid=#baseId#
+					union
+					select 
+						relatebaseid 			as baseid, 
+         				relatebaseschema 		as baseschema, 
+         				relatebasename 		as basename, 
+         				relatebasesn 			as basesn, 
+         				relatetype 		as relatetype, 
+         				relatetime 		as relatetime, 
+         				relateusername  as relateusername
+					from bs_t_wf_relation t where t.baseid=#baseId#
+					) a  left join 
+          
+          (select baseid,basesummary  from bs_f_cbd_incident 
+           union 
+           select baseid,basesummary  from bs_f_cdb_release
+           union
+           select baseid,basesummary from bs_f_cdb_change 
+           union
+           select baseid,basesummary from bs_f_cdb_servicerequest ) b
+           
+           on a.baseid=b.baseid
+         		) r
+         		 where 1=1 $customwhere$
+				 	order by r.relateTime desc
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_relate_basename" name="relatebasename" tquery="true"  />
+			<text displayname="wf_relate_serialno" name="relateserialno" tquery="true"/>
+			<!-- <select displayname="wf_sheet_type" name="baseSchema">
+				<sql>select code as baseSchema,name from bs_t_wf_type t</sql>
+			</select> -->
+			<hidden name="creator_loginname" id="creator_loginname" />
+		</condition>
+		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="=" colname="basename" datatype="7" value="#relatebasename#"/><!-- 关联工单类型 -->
+			<field prepend="and" operator="="  colname="basesn"  value="#relateserialno#"/><!-- 工单号 -->			
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>EOMS4附件</description> 		
+	</doc>
+	<sqlquery name="SQL_FTR_FormAttachment.query" >
+		<select>
+			<![CDATA[
+				select 
+				/*COUNT*/ 
+				   pid field_id
+				  ,name field_filename
+				  ,realname realname
+				  ,path ppath
+				  ,remark remark
+				  ,attsize attsize
+				  ,createtime doc_createtime
+				  ,lastmodifytime doc_lastmodifytime
+				/*COUNT*/ 
+				from bs_t_sm_attachment
+				where 1=1
+				$customwhere$
+			]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<sql prepend="OR"><![CDATA[ (createtime>=#startTime# and createtime<#endTime#) or (lastmodifytime >=#startTime# and lastmodifytime<#endTime#)]]></sql>
+		</customwhere>
+	
+	</sqlquery>
+</sql-group>

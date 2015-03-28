@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_OperateList.query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/ pid,opname,optype,status /*COUNT*/
+				  from bs_t_sm_operate 
+				 where 1=1 
+				  $customwhere$ 
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ optype, pid
+			]]>
+		</select>
+		<condition cols="2" labprecent="15" textprecent="35" >
+			<text displayname="sm_lb_operateId" name="pid" />
+			<text displayname="sm_lb_operateName" name="opname" />
+			<select displayname="com_lb_status" name="status"  dictype="status" value="" />	
+			<select displayname="sm_lb_operateType" name="operatetype"  dictype="operatetype" value="" />			
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="pid"  value="#pid#" />
+			<field prepend="and" operator="like"  colname="opname"  value="#opname#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+			<field prepend="and" operator="="  colname="status"  value="#operatetype#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.29</date> 
+		<description>已办工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_DealedSheetRelease.query" >
+		<select>
+			<![CDATA[ 
+	 			  select
+	 			  /*COUNT*/
+	 		  	 	base.*,
+					en_concat(case when d.ct_dealer is not null then d.ct_dealer || '(已受理)' when d.ct_assignee is not null then d.ct_assignee || '(未受理)' when d.ct_assigngroup is not null then d.ct_assigngroup || '(未受理)' else '' end ) deal  --当前处理人
+                 /*COUNT*/
+               		from (
+						 	select distinct 
+								jspbase.baseid,            --工单编号
+								jspbase.baseworkflowflag,  --工单流程标识
+								jspbase.baseschema,        --工单schema
+								jspbase.basename,          --工单名称
+								jspbase.basesn,            --流水号
+								jspbase.basedealouttime,   --处理时限
+								jspbase.basecreatedate,    --建单时间
+								jspbase.basecreatorfullname,--建单人名
+								jspbase.basestatus,         --状态名
+								jspbase.basepriority,       --紧急程度
+								jspbase.basesummary,        --工单主题
+								jspbase.basefinishdate,     --工单完成时间
+								jspbase.baseclosedate,      --关闭时间
+								jspbase.baseentryid,		 --工单实例id
+								jspbase.basetpliD           --模板ID
+		               		 from BS_T_BPP_BASEINFOR jspbase, bs_t_wf_dealprocess dp2	--T155
+									where
+											jspbase.baseid = dp2.baseid 
+											and jspbase.baseschema = dp2.baseschema
+											and (dp2.DEALERID = #sys_loginname#)
+						 ) base, 
+						(
+							select
+								baseid ct_baseid,
+								baseschema ct_baseschema,
+								dealer ct_dealer,
+								assignee ct_assignee,
+								assigngroup ct_assigngroup
+							from bs_t_wf_currenttask ct
+						) d
+							where base.baseid=d.ct_baseid(+) and base.baseschema = d.ct_baseschema(+)
+						$customwhere1$
+						group by  base.baseid,
+									base.baseworkflowflag,
+									base.baseschema,
+									base.basename,
+									base.basesn,
+									base.basedealouttime,
+									base.basecreatedate,
+									base.basecreatorfullname,
+									base.basestatus,
+									base.basepriority,
+									base.basesummary,
+									base.basefinishdate,
+									base.baseclosedate,
+									base.baseentryid,
+									base.basetpliD
+						 /*ORDERBY*/ order by basecreatedate desc/*ORDERBY*/
+				 ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<hidden name="baseSchema" />
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator=">="  colname="basecreatedate" datatype="7" value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="basecreatedate" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="basesn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="upper(basesummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+	
+	<sqlquery name="SQL_WF_DealedSheet.myCreatedRelease" >
+		<select>
+			<![CDATA[ 
+				select
+					/*COUNT*/
+		 		  		*
+	                 /*COUNT*/
+           		from (
+						select
+				 			  distinct
+									baseid,            --工单编号
+									baseworkflowflag,  --工单流程标识
+									baseschema,        --工单schema
+									basename,          --工单名称
+									basesn,            --流水号
+									basedealouttime,   --处理时限
+									basecreatedate,    --建单时间
+									basecreatorfullname,--建单人名
+									basestatus,         --状态名
+									basepriority,       --紧急程度
+									basesummary,        --工单主题
+									basefinishdate,     --工单完成时间
+									baseclosedate,      --关闭时间
+									baseentryid,		 --工单实例id
+							--		get_deal(baseid) deal,  --当前处理人
+									basetpliD           --模板ID
+			              from BS_T_BPP_BASEINFOR jspbase	--T155
+								where
+								jspbase.baseCreatorLoginName = #sys_loginname#
+						)
+						where 1=1 and basestatus <> '已作废'
+						$customwhere1$
+						/*ORDERBY*/ order by basecreatedate desc/*ORDERBY*/
+				 ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+			<hidden name="baseSchema" />
+		</condition>
+		<customwhere name="customwhere1" prepend="and" >
+			<field prepend="and" operator=">="  colname="basecreatedate" datatype="7" value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="basecreatedate" datatype="7" value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="basesn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="upper(basesummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseSchema#"/><!-- 工单类型 -->
+			<if prepend="and" exp="'#wfTypeStr#'>''">
+				<success>
+					<field prepend="or" operator="="  colname="baseschema"  value="#wfTypeStr#"/>
+				</success>
+			</if>
+		</customwhere>
+	</sqlquery>
+</sql-group>

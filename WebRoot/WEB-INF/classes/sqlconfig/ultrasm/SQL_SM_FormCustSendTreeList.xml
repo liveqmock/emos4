@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>朱朝辉</author> 
+		<date>2010-9-25</date> 
+		<description>工单派发树列表查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_FormCustSendTreeList.query" >
+		<select>
+			<![CDATA[ 				 
+				 select /*COUNT*/
+				 pid, treename, baseschema, loginname, status, ordernum /*COUNT*/
+				  from bs_t_sm_formcustsendtree 
+				 where 1 = 1 $customwhere$ and loginname = #sys_loginname#
+				 order by ordernum
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_smname" name="treename" />
+			<select displayname="sm_lb_formTypeTree" name="baseschema" value="">
+				<sql><![CDATA[select code as baseSchema,name from bs_t_wf_type]]></sql>
+			</select>
+			<select displayname="com_lb_status" name="status" dictype="status"  value="" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="treename"  value="#treename#" />
+			<field prepend="and" operator="="  colname="baseschema"  value="#baseschema#" />
+			<field prepend="and" operator="="  colname="status"  value="#status#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>liuchuanzu</author> 
+		<date>2010.06.24</date> 
+		<description>工单查询</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_OPERATEFORM.query" >
+		<select>
+			<![CDATA[ 
+				select
+					/*COUNT*/
+					baseid,              --工单编号
+					baseschema,          --工单schema
+					basename,            --工单名称
+					basesn,              --流水号
+					basedealouttime,     --处理时限
+					basesummary,         --主题
+					basecreatorfullname, --建单人名
+					basecreatorloginName, --建单人登陆名
+					basecreatorcorp,     --建单人单位
+					basecreatordep,      --建单人部门
+					basecreatedate,      --建单时间
+					baseclosedate,       --关闭时间
+					basestatus,          --状态名
+					basefinishdate,      --完成时间
+					baseentryid,		 --工单实例id
+					basetplid           --模板ID
+					/*COUNT*/
+				from BS_T_BPP_BASEINFOR base
+				where 1=1
+				$customwhere$
+			order by base.basecreatedate desc
+			]]> 
+		</select>
+		<condition  cols="2" labprecent="11" textprecent="22" >
+			<text displayname="wf_sheet_creator" name="creator" id="creator_name"/>
+			<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<text displayname="wf_sheet_serialnum" name="workSheetSerialnum" />
+			<text displayname="wf_sheet_type" name="baseSchema" />
+			<hidden name="creator_loginname" id="creator_loginname" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<if prepend="and" exp="'#selectstatus#'>''">
+				<success>
+					<sql prepend="and" >
+						<![CDATA[ basestatus = #selectstatus# ]]>
+					</sql>
+				</success>
+			</if>
+			<field prepend="and" operator="="  colname="base.baseCreatorLoginName"  value="#creator_loginname#"/><!-- 建单人 -->
+			<field prepend="and" operator="like"  colname="base.basecreatorfullname"  value="#creator#"/><!-- 建单人姓名 -->
+			<field prepend="and" operator=">="  colname="base.baseCreateDate"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;="  colname="base.baseCreateDate"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+			<field prepend="and" operator="like"  colname="base.baseSn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+			<field prepend="and" operator="like"  colname="base.baseSummary"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="like"  colname="base.baseSchema"  value="#baseSchema#"/><!-- 工单类型 -->
+		</customwhere>
+		<export>
+			<field colname="basename" title="wf_ownfield_basename" type="string" />
+			<field colname="basesn" title="wf_sheet_serialnum" type="string" />
+			<field colname="basedealouttime" title="wf_sheet_dealtime" type="string" />
+			<field colname="basecreatorfullname" title="wf_sheet_creator" type="string" />
+			<field colname="basecreatorcorp" title="wf_baseinfoview_creatorCorp" type="string" />
+			<field colname="basecreatordep" title="wf_baseinfoview_creatorDep" type="string" />
+			<field colname="basecreatedate" title="wf_baseinfoview_createDate" type="date" />
+			<field colname="baseclosedate" title="wf_sheet_closetime" type="date" />
+		</export>
+	</sqlquery>
+
+</sql-group>

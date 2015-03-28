@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>CHENGYUWEI</author> 
+		<date>120711</date> 
+		<description>告警建单维护</description> 		
+	</doc>
+	
+	<sqlquery name="sql_wf_dict.serverquest" >
+		<!-- 受影响系统 -->
+		<select><![CDATA[
+					  select pid id,pid value,t.serverquestname text,t.serverquestfullname fullname,parentid pid from bs_t_wf_serverquest t
+				]]>
+			</select>
+	</sqlquery>
+	
+	
+	
+	
+	
+	
+	
+	
+	<sqlquery name="SQL_SM_BsTCmbcAlarmnote.query" >
+		<select>
+			<![CDATA[
+				select 
+			  /*COUNT*/ 	   pid,            
+						       alarmid,
+						       alarmtitle,
+						       alarmdesc,
+						       alarmsystype,
+						       alarmonetype,
+						       alarmtwotype,
+						       alarmthreetype,
+						       alarmlocal,
+						       alarmhappentime,
+						       alarmstarttime,
+						       dep,
+						       iscreatesheet,
+						       faultlog,
+						       inputtime
+			/*COUNT*/ 
+  						from BS_T_CMBC_ALARMNOTE
+				 		where 1=1
+				 		 $customwhere$
+				 		 order by alarmhappentime desc
+			]]>
+		</select>
+		<condition cols="2" labprecent="11" textprecent="22" >
+			<text displayname="bpp_interface_title" name="alarmtitle" />
+			<select displayname="bpp_interface_isSuccess" name="iscreatesheet"  dictype="alarmFalg" value=""/>
+			<date displayname="opt_lb_startTime" name="alarmhappentime" />
+			<date displayname="opt_lb_endTime" name="alarmhappentime" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+		    <field prepend="and" operator="like"  colname="alarmsystype"  value="#alarmsystype#" />
+		    <field prepend="and" operator="like"  colname="iscreatesheet"  value="#iscreatesheet#" />
+			<field prepend="and" operator="like"  colname="alarmtitle"  value="#alarmtitle#" />
+			<field prepend="and" operator="like"  colname="alarmlocal"  value="#alarmlocal#" />
+			<field prepend="and" operator=">=" colname="alarmhappentime" datatype="7"  value="#alarmhappentime#" /><!-- 发生时间(开始) -->
+			<field prepend="and" operator="&lt;=" colname="alarmhappentime" datatype="7"  value="#alarmhappentime#"  /><!-- 发生时间(开始) -->
+			
+		</customwhere>
+	</sqlquery>
+</sql-group>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>Sql 描述</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_FieldList.query" >
+		<select>
+			<![CDATA[
+				select /*COUNT*/ pid,enname,field,fieldname,fieldtype,remark /*COUNT*/
+				  from bs_t_sm_field
+				 where 1=1
+				  $customwhere$
+				  $privilege$
+				 /*ORDERBY*/ order by /*ORDERBY*/ enname, field
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_fieldEnname" name="field" />
+			<text displayname="sm_lb_fieldCnname" name="fieldname" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="field"  value="#field#" />
+			<field prepend="and" operator="like"  colname="fieldname"  value="#fieldname#" />
+			<field prepend="and" operator="="  colname="enname"  value="#tbenname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

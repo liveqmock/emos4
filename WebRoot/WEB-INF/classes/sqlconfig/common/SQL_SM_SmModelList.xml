@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author></author> 
+		<date>2014-11-22</date> 
+		<description>短信模板查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_SmModelList.query" >
+		<select>
+			<![CDATA[
+			select /*COUNT*/ pid,content,modifytime,modifier,createTime,modelType /*COUNT*/
+  				from BS_T_SM_SMSMODEL
+  				where 1=1 $customwhere$
+  				order by modelType desc
+			]]>
+		</select>
+		<condition cols="3" labprecent="11" textprecent="22" >
+			<text displayname="com_lb_basicInfo" name="modelTypes" />
+		</condition>
+		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like" colname="modelType" value="#modelTypes#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

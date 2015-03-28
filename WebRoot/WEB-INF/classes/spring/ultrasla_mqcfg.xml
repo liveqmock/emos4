@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+	<!-- Embed ActiveMQ Broker_start -->
+	<!-- 
+	<amq:broker brokerName="eoms4Broker" 
+		dataDirectory="D:\\eomsActiveMQData\\data" persistent="true" useJmx="true">
+		<amq:managementContext>
+			<amq:managementContext  connectorPort="60006" jmxDomainName="eoms4BrokerM">
+			</amq:managementContext>
+		</amq:managementContext>
+		<amq:plugins>
+			<amq:simpleAuthenticationPlugin>
+				<amq:users>
+					<amq:authenticationUser username="admin" 
+						password="admin" groups="admins,producers,consumers"/>
+				</amq:users>
+			</amq:simpleAuthenticationPlugin>
+		</amq:plugins>
+		<amq:transportConnectors>
+			<amq:transportConnector name="vmWire" uri="vm://eoms4Broker"/>
+			<amq:transportConnector name="tcpWire" uri="tcp://localhost:60000"/>
+		</amq:transportConnectors>
+	</amq:broker>
+	 -->
+	<!-- Embed ActiveMQ Broker_end -->
+	
+	<!-- ActiveMQ Client Config_start -->
+	<!-- config jms connection -->
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="vm://eoms4Broker" />
+		<property name="userName" value="admin" />
+		<property name="password" value="admin" />
+	</bean>
+	<bean id="pooledJmsConnectionFactory"
+		class="org.apache.activemq.pool.PooledConnectionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+	<!-- config default jsm queue destination -->
+	<bean id="workflowEventDest" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="workflow.event" />
+	</bean>
+	<bean id="testEventDest" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="test.event" />
+	</bean>
+	<!-- config jsm message listener(ML) -->
+	<bean id="workflowEventML" class="com.ultrapower.eoms.ultrasla.util.WFSLAMessageListener">
+		<property name="eventRuleParser" ref="eventRuleParser"/>
+	</bean>
+	<bean id="testEventML" class="com.ultrapower.eoms.ultrasla.mq.test.TestMsgListener"></bean>
+	<!-- config consumer with spring jms DMLC(default message listener container) -->
+	<bean id="workflowEventConsumer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="pooledJmsConnectionFactory" />
+		<property name="destination" ref="workflowEventDest" />
+		<property name="messageListener" ref="workflowEventML" />
+	</bean>
+	<bean id="testEventConsumer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="pooledJmsConnectionFactory" />
+		<property name="destination" ref="testEventDest" />
+		<property name="messageListener" ref="testEventML" />
+	</bean>
+	<!-- config spring JmsTemplate -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="pooledJmsConnectionFactory" />
+	</bean>
+	<!-- config message creator(MsgCtor) -->
+	<bean id="workflowEventMsgCtor" class="com.ultrapower.eoms.ultrasla.util.WorkFlowMessageCreator"></bean>
+	<bean id="testEventMsgCtor" class="com.ultrapower.eoms.ultrasla.mq.test.TestMsgCreator"></bean>
+	<!-- config message producer -->
+	<bean id="wfSLAMessageSender" class="com.ultrapower.eoms.ultrasla.mq.SLAMessageSender">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+		<property name="messageCreator" ref="workflowEventMsgCtor"></property>
+		<property name="messageDest" ref="workflowEventDest"></property>
+	</bean>
+	<bean id="testSLAMessageSender" class="com.ultrapower.eoms.ultrasla.mq.SLAMessageSender">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+		<property name="messageCreator" ref="testEventMsgCtor"></property>
+		<property name="messageDest" ref="testEventDest"></property>
+	</bean>
+	<!-- ActiveMQ Client Config_end -->
+</beans>

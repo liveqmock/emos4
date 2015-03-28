@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>duly</author> 
+		<date>20141101</date> 
+		<description>国家开发银行项目业务SQL查询功能</description> 		
+	</doc>
+	
+	<!-- 变更工单  是否评审配置表 -->
+	<sqlquery name="SQL_CDB_ChangeIsAudit.query" >
+		<select>
+			<![CDATA[ 
+			
+			select /*COUNT*/*/*COUNT*/ FROM (
+				select t.pid,t1.diname system,t2.diname sort from BS_T_WF_CHANGEISAUDIT t,
+					(select t.divalue,t.diname from bs_t_sm_dicitem t where t.dtcode = 'cdb_system') t1,
+					(select t.divalue,t.diname from bs_t_sm_dicitem t where t.dtcode = 'chgSort') t2
+					where t.changeSort = t2.divalue and t.busSystem = t1.divalue
+					)
+					WHERE 1=1 $customwhere$
+					/*ORDERBY*/ order by sort /*ORDERBY*/
+					
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+			<text displayname="变更分类" name="changeSort" />
+			<text displayname="业务系统" name="busSystem"  />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="sort"  value="#changeSort#" />
+			<field prepend="and" operator="like"  colname="system"  value="#busSystem#" />
+		</customwhere>
+	</sqlquery>
+	
+	
+	<!-- 变更工单  处理人配置表 -->
+	<sqlquery name="SQL_CDB_DealUserConfig.query" >
+		<select>
+			<![CDATA[ 
+					select
+					/*COUNT*/ 
+				       *
+				    /*COUNT*/
+				  from bs_t_wf_changeDealUserConfig t
+				  where 1=1 $customwhere$
+					
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+			<text displayname="变更分类" name="changeSort" />
+			<text displayname="处理人" name="dealUseer"  />
+		</condition>		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="changesort"  value="#changeSort#" />
+			<field prepend="or" operator="like"  colname="editUser"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="editUserId"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="auditUsers"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="auditUserIds"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="testUser"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="testUserId"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="excuteUser"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="excuteUserId"  value="#dealUseer#" />
+			<field prepend="or" operator="in"  colname="baseSchema"  value="#baseSchema#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 发布工单  处理人配置表 -->
+	<sqlquery name="SQL_CDB_ReleaseDealUserConfig.query" >
+		<select>
+			<![CDATA[ 
+					select
+					/*COUNT*/ 
+				       *
+				    /*COUNT*/
+				  from bs_t_wf_releaseDealUserConfig t
+				  where 1=1 $customwhere$
+					
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+			<text displayname="应用系统" name="bussystem" />
+			<text displayname="处理人" name="dealUseer"  />
+		</condition>		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="bussystem"  value="#bussystem#" />
+			<field prepend="or" operator="like"  colname="editUser"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="editUserId"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="auditUsers"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="auditUserIds"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="testUser"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="testUserId"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="excuteUser"  value="#dealUseer#" />
+			<field prepend="or" operator="like"  colname="excuteUserId"  value="#dealUseer#" />
+			<field prepend="or" operator="in"  colname="baseSchema"  value="#baseSchema#" />
+		</customwhere>
+	</sqlquery>
+		
+	<!-- 变更工单  获取当前处室的变更分类 -->
+	<sqlquery name="SQL_CDB_MyChangeSort.query" >
+		<select>
+			<![CDATA[ 
+				select 
+					*
+				from bs_t_sm_commontree
+				  where type = 'changeType' $customwhere$
+				  order by fullname
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="type"  value="#type#" />
+			<field prepend="or" operator="like"  colname="propfield_01"  value="#sys_grouppid#" />
+			<field prepend="or" operator="like"  colname="propfield_01"  value="#sys_departmentid#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 服务目录查询   -->
+	<sqlquery name="SQL_CDB_SERVEICE_CATEGORY_S.query" >
+		<select>
+			<![CDATA[ 
+			select distinct(key),value,serverquestfullname,SERVERQUESTNAME,dilever,pid from (
+       			select pid as key,pid,serverquestfullname as value,serverquestfullname,SERVERQUESTNAME,release_scope_text,dilever,
+          		(select depfullname from bs_t_sm_dep where pid = REGEXP_SUBSTR(release_scope_id,'[^,]+',1,l_count)) releaseScopeName
+				from BS_T_WF_SERVERQUEST,(SELECT LEVEL l_count FROM DUAL CONNECT BY LEVEL <= 100)
+				where status = '1' and l_count <= LENGTH(release_scope_id) - LENGTH(REPLACE(release_scope_id, ',')) + 1 
+				$where0$
+			) where 1=1 $customwhere$
+			]]>
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="lower(value)"  value="#paramKey#" /><!-- 搜索关键字 -->
+			<field prepend="and" operator="=" colname="releaseScopeName" value="#releaseScope#"/><!-- 发布范围，release_scope_text是以逗号分隔的字符串，使用REGEXP_SUBSTR将这列转成多行 -->
+		</customwhere>
+		<customwhere name="where0" prepend="and" >
+			<field prepend="and" operator="=" colname="forwho" value="#forwho#"/>
+			<field prepend="and" operator="=" colname="dilever" value="#dilever#"/>
+			<field prepend="and" operator="=" colname="isCommon" value="#isCommon#"/>
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 服务目录树   -->
+	<sqlquery name="SQL_CDB_SERVEICE_CATEGORY.query" >
+		<select>
+			<![CDATA[ 
+				select 
+					pid as key,serverquestfullname as value,serverquestname as name,pid as id,parentid 
+				from BS_T_WF_SERVERQUEST
+				  where status = '1' $customwhere$
+			  ]]>
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="lower(serverquestfullname)"  value="#paramKey#" />
+			<field prepend="and" operator="="  colname="parentid"  value="#parentid#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 应用系统查询   -->
+	<sqlquery name="SQL_CDB_SYSTEM.query" >
+		<select>
+			<![CDATA[ 
+				select * from bs_t_sm_commonTree where type='busSystem' $customwhere$
+			  ]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="pid"  value="#pid#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 现象分类   -->
+	<sqlquery name="SQL_CDB_INCIDENT_PHENOCLASS.query" >
+		<select>
+			<![CDATA[ 
+				select * from bs_t_sm_commonTree where type='incPhenoClass' $customwhere$
+			  ]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="pid"  value="#pid#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 原因分类   -->
+	<sqlquery name="SQL_CDB_INCIDENT_CAUSECLASS.query" >
+		<select>
+			<![CDATA[ 
+				select * from bs_t_sm_commonTree where type='incCauseClass' $customwhere$
+			  ]]> 
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="pid"  value="#pid#" />
+		</customwhere>
+	</sqlquery>
+	
+	
+	
+	<!-- 发布工单 页面显示接口建单的变更工单相关信息   -->
+	<sqlquery name="SQL_CDB_release_interfaceChg.query" >
+		<select>
+			<![CDATA[
+				select * from BS_T_WF_RELEASEINTERFACECHG where baseid=#baseid#
+			  ]]>
+		</select>
+	</sqlquery>
+	
+	<!-- 需要自动关单的服务请求   -->
+	<sqlquery name="SQL_CDB_ServiceRequest_autoclose.query" >
+		<select>
+			<![CDATA[
+				select
+				t.baseid,
+				c.id as taskid,
+				t.submit_request_person,
+				t.submit_request_person_name
+  				from bs_f_cdb_servicerequest t
+  				left join bs_t_wf_currenttask c on t.baseid = c.baseid
+ 				where basestatus = '待关闭' $customwhere$
+			  ]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">"  colname="(date_to_sec(to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS')) - c.basestartdate)"  value="#timetoclose#" />
+		</customwhere>
+	</sqlquery>
+	<!-- 需要自动关单的事件   -->
+	<sqlquery name="SQL_CDB_Incident_autoclose.query" >
+		<select>
+			<![CDATA[
+				select
+		      		t.baseid,
+	        		c.id as taskid,
+	        		c.creator,
+	        		c.creatorname
+	          		from bs_f_cbd_incident t
+	          		left join bs_t_wf_currenttask c on t.baseid = c.baseid
+         		where basestatus = '待关闭' $customwhere$
+			  ]]>
+		</select>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator=">"  colname="(date_to_sec(to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS')) - c.basestartdate)"  value="#timetoclose#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 批次信息配置表 -->
+	<sqlquery name="SQL_CDB_BatchInfo.query" >
+		<select>
+			<![CDATA[ 
+			
+			select /*COUNT*/*/*COUNT*/ FROM (
+				select pid,batch_no,chg_start_time,chg_end_time,reviewtime,latestreviewtime,exec_flag,active,lastaccepttime from BS_T_SM_BATCHCONF)
+					WHERE 1=1 $customwhere$
+					/*ORDERBY*/ order by batch_no /*ORDERBY*/
+					
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+			<text displayname="批次号" name="batch_no" />
+			<select displayname="是否活动" name="active">
+				<sql>select '1' as id, '活动' as text from dual union all select '0' as id, '非活动' as text from dual</sql>
+			</select>
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="batch_no"  value="#batch_no#" />
+			 <field prepend="and" operator="="  colname="active"  value="#active#"/>
+		</customwhere>
+	</sqlquery>
+	<!-- 变更分类 -->
+	<sqlquery name="SQL_CDB_ChgSort.query" >
+		<select>
+			<![CDATA[ 
+				select * from bs_t_sm_commonTree where type='changeType' $customwhere$
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="="  colname="pid"  value="#pid#" />
+		</customwhere>
+	</sqlquery>
+	
+	<!-- 发布类别 -->
+	<sqlquery name="SQL_CDB_Release_type.query" >
+		<select>
+			<![CDATA[ 
+			
+			select /*COUNT*/
+			a.pid id ,DINAME name,a.dicfullname fullname,a.parentid pid
+			/*COUNT*/  from bs_t_sm_dicitem a 
+			where a.dtid=(select pid  from bs_t_sm_dictype where dtcode='release_type')
+			 $customwhere$
+					/*ORDERBY*/ order by a.dicfullname /*ORDERBY*/
+					
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22">
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			 <field prepend="and" operator="="  colname="parentid"  value="#parentid#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

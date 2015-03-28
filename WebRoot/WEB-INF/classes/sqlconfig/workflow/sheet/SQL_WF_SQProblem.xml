@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+  <doc>
+    <author>liuchuanzu</author> 
+    <date>2014.12.24</date> 
+    <description>问题工单查询</description>     
+  </doc>
+  <sqlquery name="SQL_WF_SQProblem.query" >
+    <select>
+      <![CDATA[ 
+select /*COUNT*/*/*COUNT*/ from 
+      (
+      select 
+      t.*,
+      (case acceptTimeout
+      when '是' then 1
+      else 0
+      end) as acceptTimeoutSign,
+      (case dealTimeout
+      when '是' then 1
+      else 0
+      end) as dealTimeoutSign,
+      (select dep.depname from bs_t_sm_userdep userdep,bs_t_sm_dep dep where userdep.depid = dep.pid and userdep.loginname = t.dealuserloginname and dep.deptype = '4' and rownum = 1) dealuserteam,
+      (select fullname from bs_t_sm_user where loginname = dealuserloginname) dealuser,
+      (select substr(depfullname,instr(depfullname,'.',1,2)+1,length(depfullname)) from( select depfullname,loginname from bs_t_sm_dep dep,bs_t_sm_user usr where dep.pid = usr.depid) where loginname = dealuserloginname) dealuserdept,
+      (select dep.depname from bs_t_sm_userdep userdep,bs_t_sm_dep dep where userdep.depid = dep.pid and userdep.loginname = t.basecreatorloginName and dep.deptype = '4' and rownum = 1) basecreatorteam
+      from(select base.baseid, --工单编号
+                       base.baseschema, --工单schema
+                       base.basename, --工单名称
+                       base.basesn, --流水号
+                       base.basesummary, --主题
+                       base.basecreatorfullname, --建单人名
+                       base.basecreatorloginName, --建单人登陆名
+                       base.basecreatorcorp, --建单人单位
+                       base.basecreatordep, --建单人部门
+                       base.basecreatordepid, --建单人部门id
+                       base.basecreatedate, --建单时间
+                       base.baseclosedate, --关闭时间
+                       base.basestatus, --状态名
+                       (case when base.basestatus='已作废' then '已作废工单' else '未作废工单' end) sheetstatus, --是否作废工单
+                       base.baseentryid, --工单实例id
+                       base.basetplid, --模板ID
+                       assigneeid,
+                       assigneedepid,
+                       contactoa, -- OA (loginname)
+                       (case
+                         when dealer is not null then
+                          dealer || '(已受理)'
+                         when assignee is not null then
+                          assignee || '(未受理)'
+                         when assigngroup is not null then
+                          assigngroup || '(未受理)'
+                         else
+                          ''
+                       end) deal, --当前处理人
+                       base.BASEACCEPTDATE, --受理时间
+                       base.BASEACCEPTOUTTIME, --受理时限
+                       Get_StrArrayStrOfIndex(pro.ProPhenoClass, '.', 0) as PhenoClass1, --现象分类
+                       Get_StrArrayStrOfIndex(pro.ProPhenoClass, '.', 1) as PhenoClass2,
+                       Get_StrArrayStrOfIndex(pro.ProPhenoClass, '.', 2) as PhenoClass3,
+                       Get_StrArrayStrOfIndex(pro.ProReason, '.', 0) as SourceClass1, --原因分类
+                       Get_StrArrayStrOfIndex(pro.ProReason, '.', 1) as SourceClass2,
+                       Get_StrArrayStrOfIndex(pro.ProReason, '.', 2) as SourceClass3,
+                       Get_StrArrayStrOfIndex(pro.ProReason, '.', 3) as SourceClass4,
+            
+         			   pro.contactperson, --申报人
+         			   pro.ContactPersonSite, --申报人单位
+                       pro.ContactDepartment, --申报人部门
+                       pro.ProSource ,--问题来源
+                       pro.cdbTeamName, --建单人团队名
+                       pro.cdbTeamId, --建单人团队id
+                       pro.ProDescription,-- 问题描述
+                       pro.ProEffectDgree,-- 问题影响度
+                       pro.ProUrgentDgree,-- 问题紧急度
+                       pro.Priority,-- 优先级
+                       pro.ForecastResolutionTime,-- 预计解决时间
+                       pro.ResolutionTime,-- 解决时间
+                       pro.ProReasonAnalysis,-- 原因分析
+                       pro.ProSolutions,-- 解决方案
+                       pro.SolvingProcess,-- 解决过程
+                       pro.ProProcessDesc,-- 处理过程总结
+                       
+                       
+                       pro.processorsname,--处理人
+                       (select a.depname from bs_t_sm_user a where a.loginname=pro.processors)  processorsdep,--处理人部门
+                       pro.cdbdealteamname,--处理人团队
+                       pro.prophenoclass,--现象分类
+                       pro.proreason,--原因分类
+                       
+                       case
+                         when base.basestatus = '已关闭' and
+                              (select stepno
+                                 from (select stepno, baseid
+                                         from bs_t_wf_dealprocess
+                                        where baseschema = 'CBD_PROBLEM'
+                                        order by stdate desc) r
+                                where r.baseid = base.baseid
+                                  and rownum = 1) = 'step01' then
+                          (select dealerid
+                             from (select dealerid, baseid
+                                     from bs_t_wf_dealprocess
+                                    where baseschema = 'CBD_PROBLEM'
+                                      and stepno = 'step01'
+                                    order by stdate desc) r
+                            where r.baseid = base.baseid
+                              and rownum = 1)
+                         else
+                          (select dealerid
+                             from (select dealerid, baseid
+                                     from bs_t_wf_dealprocess
+                                    where baseschema = 'CBD_PROBLEM'
+                                      and stepno = 'step02'
+                                    order by stdate desc) r
+                            where r.baseid = base.baseid
+                              and rownum = 1)
+                       end as dealuserloginname, --解决人登录名
+                       case
+                         when (case
+                                when base.BASEACCEPTDATE = '0' then
+                                 case
+                                   when base.BASEACCEPTOUTTIME = '0' then
+                                    0
+                                   else
+                                    DATE_TO_SEC(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+                                 end
+                                else
+                                 to_number(base.BASEACCEPTDATE)
+                              end) -
+                              decode(base.BASEACCEPTOUTTIME,
+                                     null,
+                                     0,
+                                     TO_NUMBER(base.BASEACCEPTOUTTIME)) > 0 then
+                          '是'
+                         else
+                          '否'
+                       end as acceptTimeout,
+                       base.BASEFINISHDATE, --处理时间
+                       base.BASEDEALOUTTIME, --处理时限
+                       case
+                         when (case
+                                when base.BASEFINISHDATE = '0' then
+                                 case
+                                   when base.BASEDEALOUTTIME = '0' then
+                                    0
+                                   else
+                                    DATE_TO_SEC(TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+                                 end
+                                else
+                                 to_number(base.BASEFINISHDATE)
+                              end) -
+                              decode(base.BASEDEALOUTTIME,
+                                     null,
+                                     0,
+                                     TO_NUMBER(base.BASEDEALOUTTIME)) > 0 then
+                          '是'
+                         else
+                          '否'
+                       end as dealTimeout
+                  from BS_T_BPP_BASEINFOR  base,
+                       bs_t_wf_currenttask ct,
+                       bs_f_cbd_problem   pro
+                 where base.baseSchema = 'CBD_PROBLEM'
+                   and base.baseid = ct.baseid(+)
+                   and base.baseschema = ct.baseschema(+)
+                   and base.baseid = pro.baseid(+)
+                /*ORDERBY*/
+                 order by base.basecreatedate desc /*ORDERBY*/
+      ) t 
+        ) where 1=1 $customwhere$
+     
+      ]]> 
+    </select>
+    <condition  cols="3" labprecent="11" textprecent="22" >  
+       <text displayname="建单人" name="basecreatorfullname"  id="creator_name" />
+         <text displayname="建单团队" name="cdbTeamName"  id="cdbTeamName"/>
+         <text displayname="建单处室 " name="basecreatordep"  id="creator_dep"/>
+         
+           <text displayname="处理人" name="processorsname"  id="dealername"/>
+           <text displayname="处理团队" name="cdbdealteamname"  id="cdbdealTeamName"/>
+            <text displayname="处理处室 " name="processorsdep"  id="dealGroup"/>
+             <text displayname="申报人" name="contactperson" id="contactperson"/>
+             <!-- <text displayname="申报部门" name="ContactDepartment" id="ContactDepartment"/> --> 
+             <text displayname="wf_sheet_serialnum" name="workSheetSerialnum" /> 
+              <text displayname="wf_sheet_title" name="workSheetTitle" />
+               <text displayname="工单状态" name="basestatus" id="basestatus" onclick="selectStatus()"/>
+
+              <text displayname="现象分类" name="prophenoclass" id="prophenoclass" onclick="openPhenoClassTree(false,'prophenoclass')"/>
+               <text displayname="原因分类" name="proreason" id="proreason" onclick="openCauseClassTree(false,'proreason')"/>
+               <date displayname="wf_sheet_createstarttime" name="createstarttime" />
+     		 <date displayname="wf_sheet_createendtime" name="createendtime" />
+                
+        <select displayname="工单是否作废" name="sheetstatus" id="sheetstatus" colspan=""  rowspan=""  isnewline=""  dictype="" childrenname="" >
+	 	<sql><![CDATA[ SELECT '已作废工单' ID, '已作废工单' NAME   FROM DUAL UNION ALL SELECT '未作废工单' ID, '未作废工单' NAME   FROM DUAL ]]></sql>
+		 </select>
+      <hidden name="baseSchema" />      
+      <hidden name="creator_loginname" id="creator_loginname" />
+      <hidden name="dealer_loginname" id="dealer_loginname" />
+      <hidden name="dealGroup_id" id="dealGroup_id" /> 
+      <hidden name="creator_dep_id" id="creator_dep_id" /> 
+      <hidden name="cdbTeamId" id="cdbTeamId" /> 
+    
+    </condition>
+    <customwhere name="customwhere" prepend="and" >
+      <if prepend="and" exp="'#selectstatus#'>''">
+        <success>
+          <sql prepend="and" >
+            <![CDATA[ basestatus = #selectstatus# ]]>
+          </sql>
+        </success>
+      </if>
+        <field prepend="and" operator="like"  colname="baseSn"  value="#workSheetSerialnum#"/><!-- 流水号 -->
+    	<field prepend="and" operator="like"  colname="upper(baseSummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+   	    <field prepend="and" operator=">="  colname="baseCreateDate"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+   		<field prepend="and" operator="&lt;="  colname="baseCreateDate"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+   		
+   		<field prepend="and" operator="like" colname="basecreatorfullname" value="#basecreatorfullname#"/> <!--建单人 -->
+   		<field prepend="and" operator="like" colname="basecreatordep" value="#basecreatordep#"/> <!--建单部门 -->
+   		<field prepend="and" operator="="  colname="basecreatordepid"  value="#creator_dep_id#"/><!-- 建单部门id --> 
+   		<field prepend="and" operator="like" colname="basecreatorteam" value="#basecreatorteam#"/> <!--建单团队 -->
+   		<field prepend="and" operator="=" colname="basestatus" value="#basestatus#"/> <!--工单状态 -->
+		<field prepend="and" operator="=" colname="sheetstatus" value="#sheetstatus#"/> <!--工单是否作废 -->
+   		<field prepend="and" operator="like" colname="processorsname" value="#processorsname#"/> <!--处理人-->
+   		<field prepend="and" operator="like" colname="processorsdep" value="#processorsdep#"/> <!--处理人部门 -->
+   		<field prepend="and" operator="like" colname="cdbdealteamname" value="#cdbdealteamname#"/> <!--处理人团队 -->
+   		<field prepend="and" operator="like" colname="prophenoclass" value="#prophenoclass#"/> <!--现象分类-->
+   		<field prepend="and" operator="like" colname="proreason" value="#proreason#"/> <!--原因分类-->
+   		<field prepend="and" operator="like" colname="contactperson" value="#contactperson#"/> <!--申报人-->
+   		 <!--<field prepend="and" operator="like" colname="ContactDepartment" value="#ContactDepartment#"/>申报人部门 -->
+    </customwhere>
+    <export>
+    <field colname="basecreatorfullname" title="wf_sheet_problem_creatorfullname" type="string" />
+	<field colname="basecreatordep" title="wf_sheet_problem_creatordep" type="string" />
+	<field colname="basecreatedate" title="wf_sheet_problem_createdate" type="date" />
+	<field colname="baseclosedate" title="wf_sheet_problem_closedate" type="date" />
+	<field colname="basestatus" title="wf_sheet_problem_status" type="string" />
+	<field colname="basesummary" title="wf_sheet_problem_summary" type="string" />
+	<field colname="contactperson" title="wf_sheet_problem_contactperson" type="string" />
+	<field colname="ContactPersonSite" title="wf_sheet_problem_ContactPersonSite" type="string" />
+	<field colname="ContactDepartment" title="wf_sheet_problem_ContactDepartment" type="string" />
+	<field colname="ProSource" title="wf_sheet_problem_ProSource" type="string" />
+	<field colname="ProDescription" title="wf_sheet_problem_ProDescription" type="string" />
+	<field colname="ProEffectDgree" title="wf_sheet_problem_ProEffectDgree" type="string" />
+	<field colname="ProUrgentDgree" title="wf_sheet_problem_ProUrgentDgree" type="string" />
+	<field colname="Priority" title="wf_sheet_problem_Priority" type="string" />
+	<field colname="ProPhenoClass" title="wf_sheet_problem_ProPhenoClass" type="string" />
+	<field colname="ForecastResolutionTime" title="wf_sheet_problem_ForecastTime" type="date" />
+	<field colname="ProReason" title="wf_sheet_problem_ProReason" type="string" />
+	<field colname="ResolutionTime" title="wf_sheet_problem_ResolutionTime" type="date" />
+	<field colname="ProReasonAnalysis" title="wf_sheet_problem_ProReasonAnalysis" type="string" />
+	<field colname="ProSolutions" title="wf_sheet_problem_ProSolutions" type="string" />
+	<field colname="SolvingProcess" title="wf_sheet_problem_SolvingProcess" type="string" />
+	<field colname="ProProcessDesc" title="wf_sheet_problem_ProProcessDesc" type="string" />
+    </export>
+  </sqlquery>
+</sql-group>

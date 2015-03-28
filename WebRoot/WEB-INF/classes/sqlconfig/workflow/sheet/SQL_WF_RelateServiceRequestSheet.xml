@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author></author> 
+		<date></date> 
+		<description>关联服务请求工单</description> 		
+	</doc>
+	<sqlquery name="SQL_WF_RelateServiceRequestSheet.query" >
+		<select>
+			<![CDATA[ 
+						select
+	 			  /*COUNT*/
+	 		   *
+	 		   
+               /*COUNT*/
+         		from 
+         		(
+	select baseschema, basename,baseId, basesn, requestuser ,a.basesummary,a.basestatus,basecreatedate , baseclosedate,
+	TO_CHAR(a.basecreatedate / ( 60 * 60 * 24) + TO_DATE('1970-01-01 08:00:00', 'YYYY-MM-DD HH:MI:SS'), 'YYYY-MM-DD HH:MI:SS') AS    createdate,
+     (case when a.baseclosedate is null or a.baseclosedate =0  then ''
+     else 
+     TO_CHAR(a.baseclosedate / ( 60 * 60 * 24) +TO_DATE('1970-01-01 08:00:00', 'YYYY-MM-DD HH:MI:SS'), 'YYYY-MM-DD HH:MI:SS') end ) closedate 
+		from bs_f_cdb_servicerequest a
+	 			where baseId not in (select baseid  from bs_t_wf_relation where relatebaseid=#relationBaseID# or baseid=#relationBaseID#
+	 								union 
+	 								select relatebaseid  from bs_t_wf_relation where relatebaseid=#relationBaseID# or baseid=#relationBaseID#)
+	 			and baseId!=#relationBaseID# )
+	 			where 1=1
+	 			$customwhere$
+	 			order by basesn desc
+			  ]]> 
+		</select>
+				<condition  cols="3" labprecent="11" textprecent="22" >
+				<text displayname="wf_sheet_title" name="workSheetTitle" />
+			<!--<text displayname="wf_relate_basename" name="relatebasename" tquery="true"  />-->
+			<text displayname="wf_relate_serialno" name="relateserialno" tquery="true"/>
+			<text displayname="wf_sheet_currentstatus" name="basestatus" tquery="true"/>
+			<date displayname="wf_sheet_createstarttime" name="createstarttime" />
+			<date displayname="wf_sheet_createendtime" name="createendtime" />
+		</condition>
+		
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="upper(basesummary)"  value="#workSheetTitle#"/><!-- 工单主题 -->
+			<field prepend="and" operator="="  colname="basesn"  value="#relateserialno#"/><!-- 工单号 -->	
+			<field prepend="and" operator="="  colname="basestatus"  value="#basestatus#"/><!-- 工单状态 -->
+			<field prepend="and" operator=">="  colname="basecreatedate"  datatype="7"  value="#createstarttime#"/><!-- 建单时间(开始) -->
+			<field prepend="and" operator="&lt;="  colname="basecreatedate"  datatype="7"  value="#createendtime#"/><!-- 建单时间(结束) -->
+		</customwhere>
+	</sqlquery>
+	
+</sql-group>

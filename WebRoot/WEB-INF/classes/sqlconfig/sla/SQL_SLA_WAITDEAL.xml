@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>作者</author> 
+		<date>时间</date> 
+		<description>SLA事例</description> 		
+	</doc>
+	<sqlquery name="SQL_SLA_WAITDEAL.query" >
+		<select>
+			<![CDATA[
+	 			  select
+	 			  /*COUNT*/
+	 		   id as taskid,
+	 		   baseid as baseid,   						--工单编号(C700000000)
+               baseSchema      as baseschema,        		--工单schema(C700000001)
+               defname		as defname,					--流程版本号
+               basename      	as basename,           		--工单名称
+               entryid as entryid,						--实体ID
+               serialnum      as basesn,             		--流水号(C700000003)
+               entryState	     as basestatus,        		--状态名(C700000010)
+               workSheetTitle	 as worksheettitle,       	--主题(C700000011)
+               flagActive      as flagactive,        		--活动(C700020020)
+               flagAssignType  as flagtype,      			--类型（0：主办；1：协办;2:抄送；3：审批；4：质检）(C700020019)
+               processType      as processtype,      		--处理类型(C700020043)
+               
+               assignee      as assginee,           		--负责人名称(C700020005)
+               assigneeCorp  as assigneecorp,       		--负责对象单位名称(C700020101)
+               assigneeDep   as assigneedep,        		--负责对象部门名称(C700020103)
+               assignGroup      as groupname,          	--负责的组( C700020007)
+               finishTime   as finishdate,       			--完成时间(C700000008)
+               dealer      as dealer,             		--执行人(C700020009)
+               dealerCorp  as dealercorp,         		--执行人单位(C700020111)
+               dealerDep   as dealerdep,          		--执行人部门(C700020113)
+               createtime      as stdate,             	--创建/生效时间(C700020015)
+               accepttime      as bgdate,             	--领单时间(C700020016)
+               processstate    as processstatus,      	--环节状态(C700020011)
+               acceptDate      as acceptdate,				--受理时限(C700020013)
+               duedate      as duedate  					--处理时限(C700020014)
+               
+               /*COUNT*/
+         		from bs_t_wf_currenttask
+         			where 
+	 			  		flagActive = 1 
+			]]>
+		</select>
+	</sqlquery>
+</sql-group>

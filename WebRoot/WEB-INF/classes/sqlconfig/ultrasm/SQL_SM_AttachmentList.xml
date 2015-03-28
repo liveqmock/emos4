@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-group>
+	<doc>
+		<author>孙海龙</author> 
+		<date>2010-6-24</date> 
+		<description>附件信息查询</description> 		
+	</doc>
+	<sqlquery name="SQL_SM_AttachmentList.query" >
+		<select>
+			<![CDATA[ 
+				select /*COUNT*/ pid, name, type, path, realname /*COUNT*/
+				  from bs_t_sm_attachment
+				 where 1=1
+				  $customwhere$
+				 /*ORDERBY*/ order by /*ORDERBY*/ createtime desc
+			  ]]> 
+		</select>
+		<condition  cols="3" labprecent="11" textprecent="22" >
+			<text displayname="sm_lb_attachmentName" name="name" />
+			<text displayname="sm_lb_attachmentPath" name="path" />
+			<text displayname="sm_lb_attachmentRealname" name="realname" />
+		</condition>
+		<customwhere name="customwhere" prepend="and" >
+			<field prepend="and" operator="like"  colname="name"  value="#name#" />
+			<field prepend="and" operator="like"  colname="path"  value="#path#" />
+			<field prepend="and" operator="like"  colname="realname"  value="#realname#" />
+		</customwhere>
+	</sqlquery>
+</sql-group>

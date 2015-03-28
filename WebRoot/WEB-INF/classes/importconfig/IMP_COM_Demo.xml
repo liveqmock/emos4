@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	属性说明：
+	属性后包含(*)的说明此属性必须配置
+	relation的属性
+		relationship:配置关联关系 功能：当存在一对多时将会将这个“一”的表中进行去重
+		格式：  表1[:字段1][,字段2][,....字段N];表2[:字段1][,字段2][,....字段N][;....表N[:字段1][,字段2][,....字段N]]
+		举例:  bs_t_sm_user : loginname , fullname ; bs_t_sm_userdep
+	table的属性
+		name(*):将数据插入的数据库表名
+		startrow:EXCEL中包含标题行的开始导入行(若没配置则默认从0行开始)
+		startcol:EXCEL中开始导入列(若没配置则默认从0列开始)
+		type:类型 xml类型 和 页面配置(暂时只提供xml配置)
+		createguid:是否给此表添加主键ID(自动生成UUID) 如果配置true则自动生成一个ID存入此数据库表中
+		guidname:此数据库表中主键ID的字段名. (建立在createguid属性上的,当createguid="true" 则此属性才会被使用)
+	field的元素
+		fieldname(*):数据库字段名
+		isunique:此字段是否启用唯一标识验证 如果验证则配置true 默认为false
+		excelcolname(*):EXCEL中列标题名
+		datatype:1.字符串 2.数值 3.日期 4.数据字典 5.SQL类型字典 6.手动配置字典 8.关联字段类型(若不配置默认为1.字符串)
+		datainfo:当datatype取值不同时datainfo也代表不同的意义,和导出配置页面的数据类型一样
+				 datatype=1 datainfo可为空不需要做处理
+				 datatype=2 datainfo存储此字段保留小数位数 直接截取不做四舍五入
+				 datatype=3 datainfo存储日期格式 如yyyy-MM-dd HH:mm:ss
+				 datatype=4 datainfo存储数据字典类型
+				 datatype=5 datainfo存储SQL语句 格式:select id,name from *** where *** 其中id和name不是固定的2个字段名 只是位置固定的2个字段 前面存放ID后面存放字典显示值
+				 datatype=6 datainfo存储固定格式的字典信息 格式 1:启用;2:停用  1:紧急;2:重要;3:一般
+				 datatype=8 datainfo存放关联字段信息 格式 表名.字段名  如：bs_t_sm_user.pid
+		datalength(*):此字段存储数字 即：数据长度 因为数据库表字段都会设定一个长度,所以在此也需要配置一个长度 在导入时会做长度验证
+		isnull:是否可为空 如果此字段不能为空则需要配置false 默认为true
+		defaultvalue:默认数据 如果导入时数据为空则将默认数据替换导入到数据库中
+		
+		对于datatype和datainfo举例说明如下:
+		datatype=4	datainfo=status
+		datatype=5	datainfo=select divalue, diname from bs_t_sm_dicitem where dtcode = 'status'
+		datatype=6	datainfo=1:启用;0:停用
+		这三种处理的结果是一样的,也就是说在特定的时候用不同的数据类型配置
+ -->
+<importxml>
+	<relation relationship="bs_t_sm_user:loginname,fullname;bs_t_sm_userdep"></relation>
+	<table name="bs_t_sm_user" startrow="0" startcol="0" type="xml" createguid="true" guidname="pid">
+		<field>
+			<fieldname>loginname</fieldname>
+			<isunique>true</isunique>
+			<excelcolname>登录名</excelcolname>
+			<datatype>1</datatype>
+			<datainfo></datainfo>
+			<datalength>20</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>fullname</fieldname>
+			<isunique>false</isunique>
+			<excelcolname>全名</excelcolname>
+			<datatype>1</datatype>
+			<datainfo></datainfo>
+			<datalength>20</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>status</fieldname>
+			<isunique></isunique>
+			<excelcolname>状态</excelcolname>
+			<datatype>4</datatype>
+			<datainfo>status</datainfo>
+			<datalength>20</datalength>
+			<isnull>false</isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>lastlogintime</fieldname>
+			<isunique></isunique>
+			<excelcolname>最后登陆时间</excelcolname>
+			<datatype>3</datatype>
+			<datainfo>yyyy-MM-dd HH:mm:ss</datainfo>
+			<datalength>20</datalength>
+			<isnull></isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+	</table>
+	<table name="bs_t_sm_userdep" createguid="true" guidname="pid">
+		<field>
+			<fieldname>userid</fieldname>
+			<isunique></isunique>
+			<excelcolname></excelcolname>
+			<datatype>8</datatype>
+			<datainfo>bs_t_sm_user.pid</datainfo>
+			<datalength></datalength>
+			<isnull></isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>username</fieldname>
+			<isunique></isunique>
+			<excelcolname></excelcolname>
+			<datatype>8</datatype>
+			<datainfo>bs_t_sm_user.fullname</datainfo>
+			<datalength></datalength>
+			<isnull></isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+		<field>
+			<fieldname>ordernum</fieldname>
+			<isunique></isunique>
+			<excelcolname>排序值1</excelcolname>
+			<datatype>2</datatype>
+			<datainfo></datainfo>
+			<datalength>5</datalength>
+			<isnull></isnull>
+			<defaultvalue></defaultvalue>
+		</field>
+	</table>
+</importxml>

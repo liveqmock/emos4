@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   default-autowire="byName" default-lazy-init="true">
+	   
+	<bean id="dictTreeAction" class="com.ultrapower.eoms.common.tag.dictTree.DictTreeAction" />
+	<bean id="leftMenuTree" class="com.ultrapower.eoms.common.core.component.tree.web.LeftMenuTreeAction"/>
+	<bean id="organizaTreeAction" class="com.ultrapower.eoms.common.core.component.tree.web.OrganizaTreeAction" />
+	<bean id="privilegeTreeAction" class="com.ultrapower.eoms.common.core.component.tree.web.PrivilegeTreeAction" />
+	<bean id="organizaTreeV2Action" class="com.ultrapower.eoms.common.core.component.tree.web.OrganizaTreeV2Action" />
+	<bean id="userDepTree" class="com.ultrapower.eoms.common.core.component.tree.web.UserDepTreeAction" />
+	<bean id="menuTree" class="com.ultrapower.eoms.common.core.component.tree.web.MenuTreeAction" />
+	<bean id="roleTree" class="com.ultrapower.eoms.common.core.component.tree.web.RoleTreeAction" />
+	<bean id="dicTree" class="com.ultrapower.eoms.common.core.component.tree.web.DictionaryTreeAction" />
+	<bean id="myMenuTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.MyMenuTreeImpl" />
+	<bean id="myMenuTreeAction" class="com.ultrapower.eoms.common.core.component.tree.web.MyMenuTreeAction" />
+	<bean id="tableTree" class="com.ultrapower.eoms.common.core.component.tree.web.TableTreeAction" />
+	<bean id="usermenuDtree" class="com.ultrapower.eoms.common.core.component.tree.manager.UserDepTreeImpl" />
+	<bean id="leftMenuTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.LeftMenuTreeImpl"/>
+	<bean id="cacheAction" class="com.ultrapower.eoms.common.core.component.cache.web.CacheAction" />
+	<bean id="bidirectSelectTree" class="com.ultrapower.eoms.common.core.component.tree.web.BidirectSelectTree" />
+	<!-- 值班室的值班组 
+	<bean id="orgGroup" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationGroupTreeImpl" />-->
+	<!-- 值班室的值班组内人员 
+	<bean id="orgUser" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationUserTreeImpl" />-->
+	<!-- 值班室的班次 
+	<bean id="orgShift" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationShiftTreeImpl" />-->
+	<!-- ftp客户端，有状态，不能共用，所以必须加上scope属性值为prototype -->	
+	<bean id="ftpClient" class="com.ultrapower.eoms.common.core.util.ftpclient.FtpClientSftp" scope="prototype"/>
+	<!-- 附件struts2的Action实例 -->
+	<bean id="attachmentManagerAction" class="com.ultrapower.eoms.common.plugin.swfupload.core.AttachmentManagerAction" scope="prototype"/>
+	<!-- 员工值班室列表 
+	<bean id="userOrg" class="com.ultrapower.eoms.common.core.component.tree.manager.UserOrganizationTreeImpl" />-->
+	<!-- 值班室表单列表 
+	<bean id="orgForm" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationFormTreeImpl" />-->
+	<!-- 计划质检 
+	<bean id="dutycheck" class="com.ultrapower.eoms.common.core.component.tree.manager.PlanCheckUserTreeImpl" />-->
+	<!-- 值班室集合 
+	<bean id="orgMap" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationMapImpl" />-->
+	<!-- 根据类型取得数据字典数据集合 -->
+	<bean id="orgDicItem" class="com.ultrapower.eoms.common.core.component.tree.manager.DicItemListImpl" />
+	<!-- 表单/常识树 
+	<bean id="dutyTree" class="com.ultrapower.eoms.common.core.component.tree.manager.DutyTreeImpl" />-->
+	
+	<!-- 员工管理值班室列表 
+	<bean id="userManageOrg" class="com.ultrapower.eoms.common.core.component.tree.manager.UserManageOrganizationTreeImpl" />-->
+	<!-- 值班室情况表单列表 
+	<bean id="orgManageForm" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationManageFormTreeImpl" />-->
+	
+	<!-- 值班管理列表 
+	<bean id="orgCalendar" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationCalendarTreeImpl" />-->
+	<!-- 值班管理表单列表 
+	<bean id="orgCalendarForm" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationCalendarFormTreeImpl" />-->
+	<!-- 值班日志质检表单列表 
+	<bean id="orgCheckForm" class="com.ultrapower.eoms.common.core.component.tree.manager.OrganizationCheckFormTreeImpl" />-->
+	
+	<!-- 短信模块 begin -->
+	<bean id="smDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.Smsmonitor</value>
+		</property>
+	</bean>
+	<bean id="smLogDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmsmonitorLog</value>
+		</property>
+	</bean>
+	<bean id="smOrderDutyDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmsOrderDuty</value>
+		</property>
+	</bean>
+	<bean id="smOrderFormDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmsOrderForm</value>
+		</property>
+	</bean>
+	<bean id="smOrderPlanDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmsOrderPlan</value>
+		</property>
+	</bean>
+	<bean id="smsBaseItemDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmsBaseItem</value>
+		</property>
+	</bean>
+	<bean id="smsBaseItemCfgDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmsBaseItemCfg</value>
+		</property>
+	</bean>
+	<bean id="smmonitorDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.SmMonitor</value>
+		</property>
+	</bean>
+	<bean id="bjMobileSmsService" class="com.ultrapower.eoms.common.core.component.sms.manager.BjMobileSmsImpl"/>
+	<bean id="orderDutyService" class="com.ultrapower.eoms.common.core.component.sms.manager.SmOrderDutyImpl"></bean>
+	<bean id="orderFormService" class="com.ultrapower.eoms.common.core.component.sms.manager.SmOrderFormImpl"/>
+	<bean id="orderPlanService" class="com.ultrapower.eoms.common.core.component.sms.manager.SmOrderPlanImpl"></bean>
+	<bean id="insidesm" class="com.ultrapower.eoms.common.core.component.sms.manager.InsideSmsImpl" />
+	<bean id="insideSmsAction" class="com.ultrapower.eoms.common.core.component.sms.web.InsideSmsManagerAction"></bean>
+	<bean id="sendsmAction" class="com.ultrapower.eoms.common.core.component.sms.web.SmSendServerMainAction"></bean>
+	<bean id="orderDutyAction" class="com.ultrapower.eoms.common.core.component.sms.web.SmOrderDutyAction"></bean>
+	<bean id="orderFormAction" class="com.ultrapower.eoms.common.core.component.sms.web.SmOrderFormAction"/>
+	<bean id="orderPlanAction" class="com.ultrapower.eoms.common.core.component.sms.web.SmOrderPlanAction"></bean>
+	
+	<bean id="smslogDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.Smslog</value>
+		</property>
+	</bean>
+	<bean id="smslogService" class="com.ultrapower.eoms.common.core.component.sms.manager.SmslogImpl"></bean>
+	
+	<bean id="smsModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.Smsmodel</value>
+		</property>
+	</bean>
+	<bean id="smsModelService" class="com.ultrapower.eoms.common.core.component.sms.manager.SmsModelImpl"></bean>
+	<bean id="smsModelAction" class="com.ultrapower.eoms.common.core.component.sms.web.SmsModelAction"></bean>
+	<!-- 短信模块 end -->
+	
+	<!-- mail send begin -->
+	<bean id="sendmailAction" class="com.ultrapower.eoms.common.core.component.sms.web.MailSendServerMainAction"></bean>
+	<bean id="maillogDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.Maillog</value>
+		</property>
+	</bean>
+	<bean id="maillogService" class="com.ultrapower.eoms.common.core.component.sms.manager.MaillogImpl"></bean>
+	<bean id="mailModelDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sms.model.Mailmodel</value>
+		</property>
+	</bean>
+	<bean id="mailModelService" class="com.ultrapower.eoms.common.core.component.sms.manager.MailModelImpl"></bean>
+	<bean id="mailModelAction" class="com.ultrapower.eoms.common.core.component.sms.web.MailModelAction"></bean>
+	<!-- mail send end -->
+	
+	<!-- SLA begin -->
+	<bean id="slaRuleTplDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sla.model.SlaRuleTpl</value>
+		</property>
+	</bean>
+	<bean id="slaTplPropertyDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sla.model.SlaTplProperty</value>
+		</property>
+	</bean>
+	<bean id="slaSmActionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sla.model.SlaSmAction</value>
+		</property>
+	</bean>
+	<bean id="slaMailActionDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sla.model.SlaMailAction</value>
+		</property>
+	</bean>
+	<bean id="slaRuleDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sla.model.SlaRule</value>
+		</property>
+	</bean>
+	<bean id="slaRulePropertyDao" class="com.ultrapower.eoms.common.core.dao.HibernateDaoImpl">
+		<property name="entityClass">
+			<value>com.ultrapower.eoms.common.core.component.sla.model.SlaRuleProperty</value>
+		</property>
+	</bean>
+	<bean id="slaRuleTplService" class="com.ultrapower.eoms.common.core.component.sla.manager.SlaRuleTplImpl"></bean>
+	<bean id="slaRuleService" class="com.ultrapower.eoms.common.core.component.sla.manager.SlaRuleImpl"/>
+	<bean id="slaSmActionService" class="com.ultrapower.eoms.common.core.component.sla.manager.SlaSmActionImpl"></bean>
+	<bean id="slaMailActionService" class="com.ultrapower.eoms.common.core.component.sla.manager.SlaMailActionImpl"/>
+	<bean id="slaActionManagerAction" class="com.ultrapower.eoms.common.core.component.sla.web.SlaActionManagerAction"></bean>
+	<bean id="slaRuleTplAction" class="com.ultrapower.eoms.common.core.component.sla.web.SlaRuleTplAction"></bean>
+	<bean id="slaMailDealAction" class="com.ultrapower.eoms.common.core.component.sla.web.SlaMailDealAction"></bean>
+	<!-- SLA end -->
+	<!-- 案例 -->
+	<bean id="sortTypeTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.RepositorySortTypeTreeImpl" />
+	<bean id="complaintTypeTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.RepositoryComplaintTypeTreeImpl" />
+	<!-- 任务预约 -->
+	<bean id="taskTypeSheetTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.TaskTypeSheetTreeImpl" />
+	<bean id="taskTypeTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.TaskTypeTreeImpl" />
+	<bean id="taskTypeSearchTreeService" class="com.ultrapower.eoms.common.core.component.tree.manager.TaskTypeSearchTreeImpl" />
+	<!-- pasm 信息同步 -->
+	<bean id="synchInfoPasm" class="com.ultrapower.eoms.common.external.manager.EomsInfoDownPasmImpl" />
+	<bean id="dataSynchAction" class="com.ultrapower.eoms.common.external.web.DataSynchAction" />
+
+	<!-- 业务规则树 -->
+	<bean id="businessOrgTreeAction" class="com.ultrapower.eoms.common.core.component.tree.web.BusinessOrgTreeAction" />
+	
+	<bean id="autoInputAction" class="com.ultrapower.eoms.common.plugin.autosearch.AutoInputAction" />
+</beans>
