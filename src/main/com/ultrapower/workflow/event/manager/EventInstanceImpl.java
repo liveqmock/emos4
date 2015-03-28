@@ -61,7 +61,7 @@
 /*  88 */         destroy.setHandletype(oldHandleType);
 /*  89 */         destroy.setCreatetime(Long.valueOf(currentTime));
 /*  90 */         destroy.setUpdatetime(Long.valueOf(currentTime));
-/*  91 */         destroy.setEventstatus(Long.valueOf(Long.parseLong(eventstatus)));
+/*  91 */         destroy.setEventstatus(Long.valueOf((eventstatus)));
 /*  92 */         this.eventInstanceDao.saveOrUpdate(destroy);
 /*     */       } catch (CloneNotSupportedException e) {
 /*  94 */         e.printStackTrace();
@@ -180,7 +180,7 @@
 /* 218 */     instance.setDefaulthandlerid(defaulterHanderId);
 /* 219 */     instance.setHandlemark(handlemark);
 /* 220 */     instance.setEventinstanceid(handlemark);
-/* 221 */     instance.setEventstatus(Long.valueOf(Long.parseLong(eventstatus)));
+/* 221 */     instance.setEventstatus(Long.valueOf(eventstatus));
 /* 222 */     instance.setDuetime(Long.valueOf(dueTime));
 /* 223 */     this.eventInstanceDao.save(instance);
 /*     */   }
