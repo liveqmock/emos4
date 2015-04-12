@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class entity-name="BPP_BASEINFOR" table="BS_T_BPP_BASEINFOR">
+        <id name="BASEID" type="string">
+            <generator class="assigned"/>
+        </id>
+        <property name="BASESCHEMA" type="string"/>
+        <property name="BASENAME" type="string"/>
+        <property name="BASESN" type="string"/>
+        <property name="BASEENTRYID" type="string"/>
+        <property name="BASECREATEDATE" type="long"/>
+        <property name="BASESENDDATE" type="long"/>
+        <property name="BASEACCEPTDATE" type="long"/>
+        <property name="BASEFINISHDATE" type="long"/>
+        <property name="BASECLOSEDATE" type="long"/>
+        <property name="BASESUMMARY" type="string"/>
+        <property name="BASESTATUS" type="string"/>
+        <property name="BASEITEMS" type="string"/>
+        <property name="BASEPRIORITY" type="string"/>
+        <property name="BASEACCEPTOUTTIME" type="long"/>
+        <property name="BASEDEALOUTTIME" type="long"/>
+        <property name="BASEDESCRIPTION" type="string"/>
+        <property name="BASECLOSESATISFY" type="string"/>
+        <property name="BASETPLID" type="string"/>
+        <property name="BASEISARCHIVE" type="string"/>
+        <property name="BASEISTRUECLOSE" type="string"/>
+        <property name="BASEWORKFLOWFLAG" type="long"/>
+        <property name="BASECATAGORYNAME" type="string"/>
+        <property name="BASECATAGORYID" type="string"/>
+        <property name="BASECREATORFULLNAME" type="string"/>
+        <property name="BASECREATORLOGINNAME" type="string"/>
+        <property name="BASECREATORCONNECTWAY" type="string"/>
+        <property name="BASECREATORDEP" type="string"/>
+        <property name="BASECREATORDEPID" type="string"/>
+        <property name="BASECREATORCORP" type="string"/>
+        <property name="BASECREATORCORPID" type="string"/>
+        <property name="BASECREATORDN" type="string"/>
+        <property name="BASECREATORDNID" type="string"/>
+        <property name="BASEATTACHGUID" type="string"/>
+    </class>
+</hibernate-mapping>

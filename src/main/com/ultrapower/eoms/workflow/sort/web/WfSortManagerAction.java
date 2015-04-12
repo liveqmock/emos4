@@ -511,7 +511,7 @@ public class WfSortManagerAction extends BaseAction
      */
     public String toEditOrAddWfType()
     {
-	if (wfTypeId == null)
+ 	if (wfTypeId == null)
 	{
 	    wfType = new WfType();
 	    wfType.setId(null);

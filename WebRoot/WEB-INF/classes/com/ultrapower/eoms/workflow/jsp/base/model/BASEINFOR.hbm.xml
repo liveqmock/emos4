@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class entity-name="BASEINFOR" table="BS_T_WF_BASEINFOR">
+        <id name="baseId" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="baseSchema" type="string"/>
+        <property name="baseName" type="string"/>
+        <property name="baseSn" type="string"/>
+        <property name="baseEntryId" type="string"/>
+        <property name="baseCreateDate" type="long"/>
+        <property name="baseSendDate" type="long"/>
+        <property name="baseAcceptDate" type="long"/>
+        <property name="baseFinishDate" type="long"/>
+        <property name="baseCloseDate" type="long"/>
+        <property name="baseSummary" type="string"/>
+        <property name="baseStatus" type="string"/>
+        <property name="baseItems" type="string"/>
+        <property name="basePriority" type="string"/>
+        <property name="baseAcceptOutTime" type="long"/>
+        <property name="baseDealOutTime" type="long"/>
+        <property name="baseDescription" type="string"/>
+        <property name="baseCloseSatisfy" type="string"/>
+        <property name="baseTplId" type="string"/>
+        <property name="baseIsArchive" type="string"/>
+        <property name="baseIsTrueClose" type="string"/>
+        <property name="baseWorkflowFlag" type="long"/>
+        <property name="baseCatagoryName" type="string"/>
+        <property name="baseCatagoryId" type="string"/>
+        <property name="baseCreatorFullName" type="string"/>
+        <property name="baseCreatorLoginName" type="string"/>
+        <property name="baseCreatorConnectWay" type="string"/>
+        <property name="baseCreatorDep" type="string"/>
+        <property name="baseCreatorDepId" type="string"/>
+        <property name="baseCreatorCorp" type="string"/>
+        <property name="baseCreatorCorpId" type="string"/>
+        <property name="baseCreatorDN" type="string"/>
+        <property name="baseCreatorDNId" type="string"/>
+        <property name="baseAttachGUID" type="string"/>
+    </class>
+</hibernate-mapping>

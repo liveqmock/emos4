@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class entity-name="SAMPLE_MODLOG" table="BS_T_WF_P_SAMPLE_MODLOG">
+        <id name="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="baseId" type="string"/>
+        <property name="baseSchema" type="string"/>
+        <property name="phaseNo" type="string"/>
+        <property name="fieldId" type="string"/>
+        <property name="fieldCode" type="string"/>
+        <property name="fieldType" type="string"/>
+        <property name="fieldValue" type="string"/>
+        <property name="modifyDate" type="long"/>
+        <property name="dealerId" type="string"/>
+        <property name="dealer" type="string"/>
+        <property name="taskId" type="string"/>
+        <property name="actionType" type="string"/>
+        <property name="actionName" type="string"/>
+    </class>
+</hibernate-mapping>
